@@ -432,25 +432,44 @@
     </div>
 
     <!-- Report Top Header Card -->
-    <div class="bg-white/90 backdrop-blur-md border border-white/80 rounded-3xl p-6 text-center relative overflow-hidden shadow-xl shadow-slate-200/60">
+    <div class="bg-white/90 backdrop-blur-md border border-white/80 rounded-3xl p-6 sm:p-7 text-center relative overflow-hidden shadow-xl shadow-slate-200/60">
       <div class="absolute -top-12 -right-12 w-44 h-44 bg-rose-200/40 rounded-full blur-2xl pointer-events-none"></div>
       <div class="absolute -bottom-12 -left-12 w-44 h-44 bg-indigo-200/40 rounded-full blur-2xl pointer-events-none"></div>
       
-      <div class="inline-block px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 text-xs font-bold mb-3 border border-indigo-200/80 shadow-xs">
-        종합 테스트 완료 리포트
+      <!-- Tier Badge -->
+      <div id="reportTierBadge" class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black shadow-xs mb-3 border bg-indigo-50 border-indigo-200 text-indigo-700">
+        👑 1티어 (상위 ~2%)
       </div>
-      <h2 id="reportTierTitle" class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-purple-600 to-indigo-700 mb-2">
-        전문 디자이너급 색감각
+
+      <!-- Animal Emoji Avatar -->
+      <div class="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-3 flex items-center justify-center">
+        <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-amber-200 via-rose-200 to-indigo-200 blur-lg opacity-70 animate-pulse"></div>
+        <div id="reportAnimalAvatarBg" class="relative w-full h-full rounded-3xl bg-white/95 border border-slate-200 shadow-md flex items-center justify-center text-4xl sm:text-5xl select-none">
+          <span id="reportAnimalEmoji">🦐</span>
+        </div>
+      </div>
+
+      <!-- Sub-label & Animal Title -->
+      <div class="text-[11px] font-bold text-slate-400 mb-0.5 tracking-wider uppercase">나의 색각 동물 페르소나</div>
+      <h2 id="reportTierTitle" class="text-2xl sm:text-3xl font-black text-slate-900 mb-1.5 tracking-tight">
+        경이로운 분해능의 갯가재
       </h2>
-      <p id="reportTierDescription" class="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-        미세한 색조 차이를 즉각적으로 캐치하는 정밀한 시지각을 보유하고 있습니다.
+
+      <!-- Animal Key Trait Subtitle -->
+      <p id="reportAnimalSubtitle" class="text-xs sm:text-sm font-bold text-indigo-600 mb-3.5 px-2">
+        "색수용체 16개로 원편광·자외선까지 분해하는 바다의 신"
       </p>
 
+      <!-- Rich 3~4 Line Ecological / Color Description Card -->
+      <div class="bg-slate-50/90 rounded-2xl p-4 sm:p-5 border border-slate-200/80 text-left max-w-lg mx-auto shadow-inner mb-4">
+        <p id="reportTierDescription" class="text-xs sm:text-sm text-slate-700 leading-relaxed whitespace-pre-line font-medium"></p>
+      </div>
+
       <!-- Big Percentile Badge -->
-      <div class="mt-5 inline-flex items-baseline gap-1.5 px-5 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 shadow-sm">
+      <div class="inline-flex items-baseline gap-1.5 px-5 py-2.5 rounded-2xl bg-white border border-slate-200 shadow-sm">
         <span class="text-xs text-slate-500 font-semibold">당신의 색감 순위:</span>
         <span class="text-sm font-bold text-indigo-600">상위</span>
-        <span id="reportPercentile" class="text-3xl font-black text-slate-900 mono tracking-tight">4.8%</span>
+        <span id="reportPercentile" class="text-3xl font-black text-rose-600 mono tracking-tight">1.8%</span>
       </div>
     </div>
 
@@ -611,22 +630,31 @@
         </div>
 
         <!-- Tier & Percentile Spotlight -->
-        <div class="mb-4 relative z-10">
-          <div class="inline-block px-3 py-0.5 rounded-full bg-slate-900/5 text-slate-600 text-[10px] font-bold mb-2 border border-slate-200/60">
-            종합 테스트 인증서
+        <div class="mb-3.5 relative z-10">
+          <div id="cardTierBadge" class="inline-block px-3 py-0.5 rounded-full text-[10px] font-bold mb-2 border border-amber-300 bg-amber-100 text-amber-800 shadow-2xs">
+            👑 1티어 (상위 ~2%)
           </div>
-          <h3 id="cardTierTitle" class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mb-1">
-            전문 디자이너급 색감각
-          </h3>
-          <p id="cardTierSubtitle" class="text-[11px] sm:text-xs text-slate-600 mb-3 px-2 line-clamp-2">
-            미세한 색조 차이를 즉각적으로 캐치하는 정밀한 시지각을 보유하고 있습니다.
+
+          <div class="flex items-center justify-center gap-2 mb-1">
+            <span id="cardAnimalEmoji" class="text-3xl">🦐</span>
+            <h3 id="cardTierTitle" class="text-lg sm:text-xl font-black text-slate-900 tracking-tight">
+              경이로운 분해능의 갯가재
+            </h3>
+          </div>
+
+          <p id="cardTierSubtitle" class="text-[11px] text-indigo-600 font-bold mb-2 px-2">
+            "색수용체 16개로 원편광·자외선까지 분해하는 바다의 신"
+          </p>
+
+          <p id="cardAnimalDesc" class="text-[10px] sm:text-[11px] text-slate-600 mb-3 px-3 leading-relaxed">
+            인간보다 5배 많은 16개의 색각 수용체를 지닌 바다의 초월적 시각 지배자! 미세한 1스텝 오차까지 꿰뚫어 보는 절대색감입니다.
           </p>
 
           <!-- Percentile Highlight Pill -->
-          <div class="inline-flex items-baseline gap-1.5 px-4 py-2 rounded-2xl bg-white border border-slate-200 shadow-sm">
+          <div class="inline-flex items-baseline gap-1.5 px-4 py-1.5 rounded-2xl bg-white border border-slate-200 shadow-xs">
             <span class="text-xs text-slate-500 font-semibold">나의 색감 순위:</span>
             <span class="text-xs font-bold text-indigo-600">상위</span>
-            <span id="cardPercentile" class="mono text-2xl font-black text-rose-600">4.8%</span>
+            <span id="cardPercentile" class="mono text-2xl font-black text-rose-600">1.8%</span>
           </div>
         </div>
 
@@ -876,6 +904,9 @@
     let roundStartTime = 0;
     let testStartTime = 0;
     let roundsData = []; // Array of round results
+    let currentAssignedAnimal = null;
+    let lastAssignedAnimal = null;
+    let sharedAnimalIndex = null;
 
     let targetColor = { c1: 0, c2: 0, c3: 0 };
     let userColor = { c1: 0, c2: 0, c3: 0 };
@@ -897,6 +928,7 @@
     }
 
     function goToLobby() {
+      sharedAnimalIndex = null;
       document.getElementById('roundResultModal').classList.add('hidden');
       document.getElementById('shareCardModal').classList.add('hidden');
       try {
@@ -1240,6 +1272,175 @@
       }
     }
 
+    // --- Animal Color Vision Persona Tiers (15 Animals across 5 Tiers) ---
+    const ANIMAL_TIERS = [
+      {
+        tierLevel: 1,
+        tierName: "초월적 색각자",
+        tierBadge: "👑 1티어 (상위 ~2%)",
+        themeGrad: "from-amber-500 via-rose-500 to-indigo-600",
+        badgeClass: "bg-amber-100 text-amber-800 border-amber-300",
+        animals: [
+          {
+            name: "갯가재 (사마귀새우)",
+            emoji: "🦐",
+            title: "경이로운 분해능의 갯가재 (사마귀새우)",
+            subtitle: "색수용체 16개로 원편광·자외선까지 분해하는 바다의 신",
+            cardDesc: "인간보다 5배 많은 16개의 색각 수용체를 지닌 바다의 초월적 시각 지배자! 미세한 1스텝 오차까지 꿰뚫어 보는 절대색감입니다.",
+            desc: "인간(3개)보다 무려 5배 이상 많은 16개의 색각 수용체로 바닷속을 지배하는 초월적 시각의 신입니다.\n가시광선은 물론 자외선과 전자기파의 비틀림(원편광)까지 분해해 감지하는 우주급 시각 해상도를 자랑합니다.\n당신의 눈은 미세한 1스텝의 채도와 명도 오차까지 픽셀 단위로 정확히 꿰뚫어 보았습니다.\n인간의 한계를 아득히 넘어선 절대색감으로, 당장 초정밀 디스플레이 검수나 조색 장인에 비견되는 눈입니다!"
+          },
+          {
+            name: "금붕어 / 잉어",
+            emoji: "🐠",
+            title: "4색각 시각 천재 금붕어",
+            subtitle: "4색각으로 적외선 영역까지 엿보는 어류계의 시각 천재",
+            cardDesc: "RGB에 더해 자외선·적외선까지 4개 수용체로 빛의 파장을 감지하는 어류계 시각 천재! 스펙트럼 자체를 지배하는 색채 마스터입니다.",
+            desc: "빨강·초록·파랑(RGB)에 더해 자외선까지 4개 원추세포로 빛의 파장을 감지하는 어류계의 시각 천재입니다.\n탁한 물속에서도 보이지 않는 적외선 파장과 자외선 굴절광을 명확히 분별해 먹이를 낚아챕니다.\n당신은 어떤 복잡한 3원색 혼합 조건에서도 베이스 컬러의 비율을 직관적으로 분해하고 완벽히 재현했습니다.\n인간계 평균을 가볍게 뛰어넘어 빛과 물감의 스펙트럼 자체를 지배하는 비범한 절대색각의 소유자입니다!"
+          },
+          {
+            name: "푸른어치",
+            emoji: "🪶",
+            title: "자외선 깃털을 읽는 푸른어치",
+            subtitle: "깃털의 미세한 자외선 반사광까지 꿰뚫어 보는 조류계의 눈",
+            cardDesc: "나뭇잎 사이로 부서지는 미세한 자외선 스펙트럼과 깃털의 나노 반사광을 판별하는 조류계의 눈! 완벽한 시각 조화를 포착합니다.",
+            desc: "나뭇잎 사이로 부서지는 미세한 자외선 스펙트럼과 깃털의 나노 반사광을 판별하는 조류계의 절대 시각입니다.\n인간의 눈에는 단순한 푸른색으로 보이는 깃털에서도 수만 가지 미묘한 파장 차이를 즉각 분석해냅니다.\n당신은 단 한 치의 오차도 허용하지 않는 매서운 눈으로 고난도 배색 문제를 완벽하게 짚어냈습니다.\n색채 예술과 디자인의 최정점에서 직관과 본능만으로 완벽한 조화를 창조해낼 수 있는 시각 재능입니다!"
+          }
+        ]
+      },
+      {
+        tierLevel: 2,
+        tierName: "초정밀 색각자",
+        tierBadge: "🦋 2티어 (상위 2~10%)",
+        themeGrad: "from-purple-600 via-indigo-600 to-blue-600",
+        badgeClass: "bg-purple-100 text-purple-800 border-purple-300",
+        animals: [
+          {
+            name: "제비나비",
+            emoji: "🦋",
+            title: "꿀샘의 비밀을 읽는 제비나비",
+            subtitle: "5~6개 색수용체로 꿀샘의 자외선 문양을 식별",
+            cardDesc: "5~6종의 색각 수용체로 꽃잎 속 자외선 문양을 식별하는 정밀 감별사! 전문가급의 뛰어난 삼원색 분해 감각을 증명했습니다.",
+            desc: "인간보다 많은 5~6종의 색각 수용체를 통해 꽃잎 깊숙이 숨겨진 꿀샘의 자외선 활주로를 식별합니다.\n바람에 흩날리는 야외 환경에서도 목표 색상의 순도와 미세한 채도 변화를 흐트러짐 없이 포착합니다.\n당신은 복합적인 삼원색 혼합 조건에서도 오차 없이 목표색의 핵심 성분을 척척 분리해냈습니다.\n전문 그래픽 디자이너나 컬러리스트로서 최상위권의 정밀한 색채 판별력을 가졌음을 입증했습니다!"
+          },
+          {
+            name: "비둘기",
+            emoji: "🕊️",
+            title: "스펙트럼의 비행 안내자 비둘기",
+            subtitle: "지자기와 미세한 파장의 스펙트럼을 읽는 비행 안내자",
+            cardDesc: "5종류 원추세포와 특수 유적 필터로 수백만 가지 파장을 구별하는 항법사! 미세한 톤 앤 매너 조율에 최적화된 눈입니다.",
+            desc: "5종류의 원추세포와 특수한 유적(oil droplet) 필터로 수백만 가지 파장의 미세 스펙트럼을 구별합니다.\n수천 킬로미터 떨어진 귀소길에서도 하늘과 대지의 미묘한 색채 변화를 나침반 삼아 흔들림 없이 날아갑니다.\n당신은 색의 농도와 비율 차이를 매우 빠른 직관과 높은 정확도로 거침없이 파악했습니다.\n정교한 톤 앤 매너 조율과 브랜드 컬러 감수에서 탁월한 역량을 발휘할 수 있는 우수한 눈입니다!"
+          },
+          {
+            name: "카멜레온",
+            emoji: "🦎",
+            title: "360도 입체 색채 추적자 카멜레온",
+            subtitle: "양 눈 독립 360도 회전 시야와 정밀 입체 색채 추적",
+            cardDesc: "양 눈 360도 독립 회전과 나노결정 격자로 주변 색을 동기화하는 대가! 색의 입체적 대비와 배색 조화를 남다르게 읽어냅니다.",
+            desc: "양쪽 눈을 독립적으로 360도 회전시키며 주변 환경의 색과 빛을 실시간으로 스캔하고 동기화합니다.\n피부 속 나노결정 격자를 조절해 주변 색을 즉각 시뮬레이션할 정도로 색채 인지에 극도로 민감합니다.\n당신은 슬라이더를 조작하며 목표 색상에 극도로 근접한 비율을 기민하고 섬세하게 찾아냈습니다.\n색의 상대적 대비와 배색 조화를 남들보다 훨씬 입체적이고 다각도로 인지하는 능력자입니다!"
+          }
+        ]
+      },
+      {
+        tierLevel: 3,
+        tierName: "영장류 우등생",
+        tierBadge: "🐒 3티어 (상위 10~40%)",
+        themeGrad: "from-emerald-600 via-teal-600 to-cyan-600",
+        badgeClass: "bg-emerald-100 text-emerald-800 border-emerald-300",
+        animals: [
+          {
+            name: "침팬지 / 오랑우탄",
+            emoji: "🐒",
+            title: "잘 익은 열매를 찾는 침팬지",
+            subtitle: "3원색(RGB)으로 숲속의 잘 익은 과일을 귀신같이 탐색",
+            cardDesc: "완전 3색각(RGB)으로 울창한 정글 속 붉은 과일을 정확히 찾는 우등생! 일상과 디자인 감각의 훌륭한 균형을 갖추었습니다.",
+            desc: "인간과 동일한 완전 3색각(RGB) 시각을 진화시켜 울창한 초록 숲에서도 붉게 익은 과일을 귀신같이 찾아냅니다.\n생존과 직결된 자연의 색채 질서를 온몸으로 이해하고 능숙하게 활용하는 자연계의 우등생입니다.\n당신은 빛과 물감의 기본 삼원색 메커니즘을 훌륭하게 이해하고 안정적인 고득점을 기록했습니다.\n일상생활과 패션 스타일링, 시각 디자인에서 뛰어난 색 감각과 센스를 뽐낼 수 있는 균형 잡힌 눈입니다!"
+          },
+          {
+            name: "투라코 (새)",
+            emoji: "🦜",
+            title: "고유 색소를 빚는 투라코",
+            subtitle: "깃털 자체에 유일무이한 고유 녹색/적색 색소를 합성",
+            cardDesc: "순수 붉은색과 초록색 고유 색소를 직접 합성하는 숲의 예술가! 색의 혼합비와 원리를 직관적으로 이해하고 있습니다.",
+            desc: "자연계에서 유일하게 구리 기반의 순수 붉은색(투라신)과 초록색(투라코베르딘) 색소를 깃털에 합성합니다.\n빛의 간섭이 아닌 진짜 물리적 색소를 다루는 만큼 색의 믹싱과 농도에 탁월한 본능을 타고났습니다.\n당신은 가산혼합과 감산혼합의 혼합비를 정확히 이해하고 차분하게 색을 완성해갔습니다.\n조색 훈련과 경험을 조금만 더 쌓는다면 상위 초정밀 색각자로 껑충 도약할 잠재력이 풍부합니다!"
+          },
+          {
+            name: "꿀벌",
+            emoji: "🐝",
+            title: "꽃의 비밀 유도선을 쫓는 꿀벌",
+            subtitle: "3색각(자외선-청-녹)으로 꽃들의 비밀 유도선을 추적",
+            cardDesc: "자외선·파랑·초록의 3색각으로 꽃잎의 비밀 활주로를 추적하는 비행사! 색상의 전체 톤과 배합 뉘앙스를 실용적으로 읽어냅니다.",
+            desc: "빨간색 대신 자외선·파랑·초록의 3색각을 통해 인간이 보지 못하는 꽃잎 위의 비밀 활주로를 봅니다.\n빠른 비행 속에서도 자신이 찾고자 하는 꽃의 시각적 패턴과 색상 비율을 정확히 선별합니다.\n당신은 전체적인 색상의 톤과 뉘앙스를 재빠르게 캐치해 문제들을 훌륭하게 풀어냈습니다.\n색채의 명암과 기본 톤 배합에서 매우 실용적이고 안정적인 안목을 지니고 있습니다!"
+          }
+        ]
+      },
+      {
+        tierLevel: 4,
+        tierName: "야간/동체시력 특화",
+        tierBadge: "🐅 4티어 (상위 40~75%)",
+        themeGrad: "from-amber-600 via-orange-600 to-red-600",
+        badgeClass: "bg-amber-100 text-amber-900 border-amber-300",
+        animals: [
+          {
+            name: "호랑이",
+            emoji: "🐅",
+            title: "밀림의 위장 마스터 호랑이",
+            subtitle: "적록색각 이상이지만 주황 털로 초식동물 시야를 완벽 교란",
+            cardDesc: "적록색각 이상이지만 주황 털로 초식동물 시야를 완벽 교란하는 맹수! 색의 디테일보다 실루엣과 분위기를 캐치하는 눈입니다.",
+            desc: "녹색과 붉은색을 뚜렷이 구별하지 못하는 2색각 시야지만, 이를 역이용해 초식동물의 눈을 완벽히 속입니다.\n초식동물 눈에는 주황색 호랑이가 풀숲과 똑같은 녹색 실루엣으로 보여 완벽한 위장 기습이 가능합니다.\n당신은 미세한 색조 뉘앙스 분별에선 약간 헷갈렸지만, 명도와 전체적 실루엣 파악에 강점을 보였습니다.\n색의 디테일보다 전체적인 분위기와 형태, 움직임을 캐치하는 직관력이 더욱 돋보이는 눈입니다!"
+          },
+          {
+            name: "시베리안 허스키 (개)",
+            emoji: "🐺",
+            title: "눈보라를 뚫는 시베리안 허스키",
+            subtitle: "빨강은 못 봐도 어둠 속 명암비와 눈보라 속 동체시력 최강",
+            cardDesc: "어둠 속 명암비와 눈보라 속 동체시력 최강의 설원 러너! 색채의 미세 조정보다 윤곽과 명암비 직관이 강점입니다.",
+            desc: "파랑과 노랑 중심의 2색각 시야라 붉은색 계열은 구별하기 어렵지만, 막대세포가 발달해 어둠에 매우 강합니다.\n눈보라가 몰아치는 극지방에서도 1초에 수십 번 흔들리는 지형의 명암 굴곡을 정확히 읽어냅니다.\n당신은 특정 색상 조합이나 미세한 틴트 차이에서 살짝 고전했으나 전체 흐름을 놓치지 않았습니다.\n색채의 미세 조정보다는 실루엣과 대비, 빠른 직관으로 사물을 파악하는 스타일입니다!"
+          },
+          {
+            name: "치타",
+            emoji: "🐆",
+            title: "고속 셔터의 눈 치타",
+            subtitle: "색채 감각 대신 초당 수십 번의 궤적을 쫓는 고속 셔터의 눈",
+            cardDesc: "초원을 질주하며 초당 수십 번의 궤적을 낚아채는 고속 셔터의 눈! 뚜렷한 대비와 형태를 즉각적으로 낚아챕니다.",
+            desc: "아프리카 초원을 시속 100km로 질주하며 미세한 색감 대신 타겟의 고속 궤적을 망막에 맺히게 합니다.\n색의 화려함보다는 타겟의 윤곽선과 상대적인 밝기 변화를 누구보다 기민하게 낚아챕니다.\n당신은 색의 섬세한 스펙트럼보다는 명확하고 대비가 뚜렷한 색상에 반응하는 편입니다.\n슬라이더를 조금 더 천천히 비교하며 관찰하면 다음 테스트에서 훨씬 높은 점수를 얻을 수 있습니다!"
+          }
+        ]
+      },
+      {
+        tierLevel: 5,
+        tierName: "형태·명암 몰빵형",
+        tierBadge: "🦈 5티어 (하위 25%)",
+        themeGrad: "from-slate-700 via-cyan-800 to-slate-900",
+        badgeClass: "bg-slate-100 text-slate-800 border-slate-300",
+        animals: [
+          {
+            name: "백상아리",
+            emoji: "🦈",
+            title: "심해의 지배자 백상아리",
+            subtitle: "색수용체가 1종류뿐인 흑백 시각이지만 바다의 절대 포식자",
+            cardDesc: "원추세포 1종류로 세상을 흑백 명암과 실루엣으로만 보는 포식자! 색보단 명도와 윤곽 파악에 스탯이 몰려 있습니다.",
+            desc: "원추세포가 1종류뿐이라 세상을 오직 흑백 명암과 실루엣으로만 바라보는 바다의 사냥꾼입니다.\n푸른 바다 아래서 알록달록한 색채는 사치일 뿐, 수면 위 먹잇감의 그림자 명암비 하나로 사냥합니다.\n당신의 눈은 알록달록한 색상 채도 차이보다는 명도와 형태 판별에 특화되어 있을 수 있습니다.\n빛의 가산혼합(RGB)과 물감의 감산혼합(CMY) 원리를 조금만 이해하고 재도전하면 극적인 반전이 가능합니다!"
+          },
+          {
+            name: "올빼미 / 부엉이",
+            emoji: "🦉",
+            title: "달빛 사냥꾼 올빼미",
+            subtitle: "색은 포기하고 막대세포(명암)에 올인해 달빛 한 줄기로 사냥",
+            cardDesc: "막대세포에 모든 스탯을 몰빵해 달빛 한 줄기로 사냥하는 밤의 제왕! 색 감각 훈련을 통해 빠르게 진화할 수 있습니다.",
+            desc: "색을 감지하는 원추세포를 대폭 줄이고 명암을 감지하는 막대세포에 모든 스탯을 몰빵한 밤의 제왕입니다.\n달빛 한 줄기조차 없는 칠흑 같은 어둠 속에서도 100m 밖 쥐의 미세한 그림자 움직임을 낚아챕니다.\n당신은 색의 혼합 비율을 미세하게 맞추는 데 다소 어려움을 겪었지만, 이는 색에 둔감한 올빼미의 눈이기 때문입니다!\n색 감각은 훈련할수록 빠르게 진화하므로, 힌트를 활용해 다시 한번 도전해보세요!"
+          },
+          {
+            name: "바다사자 / 물개",
+            emoji: "🦭",
+            title: "심해 탐험가 바다사자",
+            subtitle: "빛이 닿지 않는 심해에서 색 대신 실루엣과 수염 감각으로 포착",
+            cardDesc: "빛 없는 심해에서 색 대신 실루엣과 수염 감각으로 형태를 스캔하는 다이버! 조색 원리를 익힌 후 재도전해보세요.",
+            desc: "햇빛이 닿지 않는 깊은 바닷속으로 잠수하는 해양 포유류로, 색채에 의존하지 않고 감각을 총동원합니다.\n흐릿한 수중 시야 대신 예민한 수염의 수류 감각과 거대한 동공으로 형태를 스캔합니다.\n당신은 이번 테스트에서 빛과 물감의 슬라이더 혼합 법칙에 조금 낯설었을 수 있습니다.\n각 색상 슬라이더가 섞일 때 어떤 색으로 변하는지 찬찬히 눈에 익힌 뒤 다시 도전해 보세요!"
+          }
+        ]
+      }
+    ];
+
     // --- Shareable URL Encoding & Decoding ---
     function encodeResultsToUrl() {
       try {
@@ -1249,6 +1450,7 @@
           d: selectedMax,
           h: totalHintsUsed,
           t: totalSeconds,
+          a: currentAssignedAnimal ? currentAssignedAnimal.animalIdx : 0,
           q: roundsData.map(r => [
             r.target.c1, r.target.c2, r.target.c3,
             r.user.c1, r.user.c2, r.user.c3
@@ -1293,6 +1495,7 @@
         totalHintsUsed = data.h || 0;
         const elapsedSecs = data.t || 60;
         testStartTime = Date.now() - (elapsedSecs * 1000);
+        sharedAnimalIndex = (typeof data.a === 'number') ? data.a : null;
 
         roundsData = data.q.map((row, idx) => {
           const target = { c1: row[0], c2: row[1], c3: row[2] };
@@ -1335,10 +1538,6 @@
         document.getElementById('sharedNoticeBanner').classList.add('hidden');
         document.getElementById('reportLobbyBtnText').innerText = '다시 도전하기';
         document.getElementById('unifiedShareBtnText').innerText = '공유하기';
-        try {
-          const shareUrl = encodeResultsToUrl();
-          window.history.replaceState(null, '', shareUrl);
-        } catch (e) {}
       } else {
         document.getElementById('sharedNoticeBanner').classList.remove('hidden');
         document.getElementById('reportLobbyBtnText').innerText = '👉 나도 테스트해보기';
@@ -1372,33 +1571,81 @@
       const cdfVal = normalCDF(zScore);
       const topPercentileVal = Math.max(0.1, Math.min(99.9, Math.round((1 - cdfVal) * 1000) / 10));
 
-      // 3. Strict Tier Evaluation based on effectiveScore
-      let tierTitle = '';
-      let tierDesc = '';
-      if (effectiveScore >= 94) {
-        tierTitle = '👑 신의 눈 (절대색감 보유자)';
-        tierDesc = '인간 모니터 수준의 비범한 시지각! 미세한 단 1배율의 차이까지 정확히 포착합니다.';
-      } else if (effectiveScore >= 87) {
-        tierTitle = '🎨 마스터 아티스트 (전문가급 색채 감각)';
-        tierDesc = '전문 디자이너 및 조색사 수준의 정밀한 색채 감각과 분별력을 자랑합니다.';
-      } else if (effectiveScore >= 77) {
-        tierTitle = '✨ 숙련된 조색가 (우수한 인지력)';
-        tierDesc = '평균을 상회하는 뛰어난 색채 감각으로 빛과 물감의 원리를 직관적으로 다룹니다.';
-      } else if (effectiveScore >= 64) {
-        tierTitle = '👀 평범한 표준 눈 (일반적인 시각 감각)';
-        tierDesc = '일상생활의 시각 정보를 정확하게 인지하는 건강하고 대중적인 표준 색감각입니다.';
-      } else if (effectiveScore >= 50) {
-        tierTitle = '💧 둔감한 색감 (미세 톤 훈련 필요)';
-        tierDesc = '강한 원색은 잘 구분하지만, 미세한 채도나 명도 차이에서 혼선이 발생합니다.';
+      // 3. Animal Tier Mapping based on Top Percentile
+      // 👑 1티어: 상위 ~2%
+      // 🦋 2티어: 상위 2~10%
+      // 🐒 3티어: 상위 10~40%
+      // 🐅 4티어: 상위 40~75%
+      // 🦈 5티어: 하위 25% (상위 75~100%)
+      let tierIdx = 0;
+      if (topPercentileVal <= 2.0) {
+        tierIdx = 0;
+      } else if (topPercentileVal <= 10.0) {
+        tierIdx = 1;
+      } else if (topPercentileVal <= 40.0) {
+        tierIdx = 2;
+      } else if (topPercentileVal <= 75.0) {
+        tierIdx = 3;
       } else {
-        tierTitle = '🔍 색상 방랑자 (감각 훈련 시급!)';
-        tierDesc = '빛의 가산혼합 또는 물감의 감산혼합 원리를 익히면 빠르게 점수를 높일 수 있습니다!';
+        tierIdx = 4;
       }
 
-      // Render Text
-      document.getElementById('reportTierTitle').innerText = tierTitle;
-      document.getElementById('reportTierDescription').innerText = tierDesc;
-      document.getElementById('reportPercentile').innerText = `${topPercentileVal}%`;
+      const tierObj = ANIMAL_TIERS[tierIdx];
+      let animalIdx = 0;
+
+      if (isSharedView && sharedAnimalIndex !== null && sharedAnimalIndex >= 0 && sharedAnimalIndex < tierObj.animals.length) {
+        // Shared URL View: Preserve the exact animal received by the sender
+        animalIdx = sharedAnimalIndex;
+      } else {
+        // Multi-play Randomization: If user plays again and gets the same tier, pick a different animal candidate!
+        const totalCandidates = tierObj.animals.length;
+        if (lastAssignedAnimal && lastAssignedAnimal.tierIdx === tierIdx && totalCandidates > 1) {
+          const others = [];
+          for (let i = 0; i < totalCandidates; i++) {
+            if (i !== lastAssignedAnimal.animalIdx) others.push(i);
+          }
+          animalIdx = others[Math.floor(Math.random() * others.length)];
+        } else {
+          animalIdx = Math.floor(Math.random() * totalCandidates);
+        }
+      }
+
+      currentAssignedAnimal = {
+        tierIdx,
+        animalIdx,
+        tier: tierObj,
+        animal: tierObj.animals[animalIdx]
+      };
+      lastAssignedAnimal = currentAssignedAnimal;
+
+      // Update URL with newly assigned animal persona
+      if (!isSharedView) {
+        try {
+          const shareUrl = encodeResultsToUrl();
+          window.history.replaceState(null, '', shareUrl);
+        } catch (e) {}
+      }
+
+      // Render Animal Persona Card Elements
+      const tierBadgeEl = document.getElementById('reportTierBadge');
+      if (tierBadgeEl) {
+        tierBadgeEl.className = `inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black shadow-xs mb-3.5 border ${tierObj.badgeClass}`;
+        tierBadgeEl.innerText = tierObj.tierBadge;
+      }
+      const animalEmojiEl = document.getElementById('reportAnimalEmoji');
+      if (animalEmojiEl) animalEmojiEl.innerText = currentAssignedAnimal.animal.emoji;
+
+      const tierTitleEl = document.getElementById('reportTierTitle');
+      if (tierTitleEl) tierTitleEl.innerText = currentAssignedAnimal.animal.title;
+
+      const animalSubEl = document.getElementById('reportAnimalSubtitle');
+      if (animalSubEl) animalSubEl.innerText = `"${currentAssignedAnimal.animal.subtitle}"`;
+
+      const tierDescEl = document.getElementById('reportTierDescription');
+      if (tierDescEl) tierDescEl.innerText = currentAssignedAnimal.animal.desc;
+
+      const percentileEl = document.getElementById('reportPercentile');
+      if (percentileEl) percentileEl.innerText = `${topPercentileVal}%`;
 
       document.getElementById('statAvgAccuracy').innerText = `${avgAccuracy}%`;
       document.getElementById('statPerfectCount').innerText = `${perfectHits} / ${TOTAL_ROUNDS}`;
@@ -1556,7 +1803,8 @@
       ctx.stroke();
 
       // Pin Label above marker
-      const labelText = `당신: 상위 ${topPercentile}% (${Math.round(userScore)}점)`;
+      const animalEmoji = currentAssignedAnimal ? currentAssignedAnimal.animal.emoji + ' ' : '';
+      const labelText = `당신 (${animalEmoji}상위 ${topPercentile}% · ${Math.round(userScore)}점)`;
       ctx.font = 'bold 11px Pretendard, sans-serif';
       const labelWidth = ctx.measureText(labelText).width;
 
@@ -1587,12 +1835,17 @@
     async function shareUnified() {
       const shareUrl = encodeResultsToUrl();
       const rank = document.getElementById('reportPercentile') ? document.getElementById('reportPercentile').innerText : '상위권';
-      const tier = document.getElementById('reportTierTitle') ? document.getElementById('reportTierTitle').innerText : '색 인지능력 검사';
+      const animal = currentAssignedAnimal ? currentAssignedAnimal.animal : null;
+      const tier = currentAssignedAnimal ? currentAssignedAnimal.tier : null;
+      const animalName = animal ? animal.title : '초정밀 색각자';
+      const animalEmoji = animal ? animal.emoji : '🎯';
+      const tierBadge = tier ? tier.tierBadge : '종합 리포트';
+      const subtitle = animal ? animal.subtitle : '';
       const btnText = document.getElementById('unifiedShareBtnText');
 
       const shareData = {
-        title: `[색감 감각 테스트] 나의 결과: ${tier}`,
-        text: `내 색 인지 감각은 상위 ${rank}! (${tier})\n테스트 결과 확인하고 나도 도전해보기:\n${shareUrl}`,
+        title: `[색감 테스트] 내 색각 동물: ${animalEmoji} ${animalName}`,
+        text: `내 색 인지 감각은 상위 ${rank}! 🐾\n동물 유형: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n\n결과 확인하고 나도 테스트해보기:\n${shareUrl}`,
         url: shareUrl
       };
 
@@ -1641,8 +1894,24 @@
       const modeCfg = modeConfigs[selectedMode];
       document.getElementById('cardModeBadge').innerText = `${modeCfg.badge.split(' ')[1]} (${selectedMode.toUpperCase()}) • ${diffConfigs[selectedMax].name}`;
 
-      document.getElementById('cardTierTitle').innerText = document.getElementById('reportTierTitle').innerText;
-      document.getElementById('cardTierSubtitle').innerText = document.getElementById('reportTierDescription').innerText;
+      if (currentAssignedAnimal) {
+        const cardTierBadge = document.getElementById('cardTierBadge');
+        if (cardTierBadge) {
+          cardTierBadge.className = `inline-block px-3 py-0.5 rounded-full text-[10px] font-bold mb-2 border ${currentAssignedAnimal.tier.badgeClass}`;
+          cardTierBadge.innerText = currentAssignedAnimal.tier.tierBadge;
+        }
+        const cardEmoji = document.getElementById('cardAnimalEmoji');
+        if (cardEmoji) cardEmoji.innerText = currentAssignedAnimal.animal.emoji;
+
+        const cardTitle = document.getElementById('cardTierTitle');
+        if (cardTitle) cardTitle.innerText = currentAssignedAnimal.animal.title;
+
+        const cardSub = document.getElementById('cardTierSubtitle');
+        if (cardSub) cardSub.innerText = `"${currentAssignedAnimal.animal.subtitle}"`;
+
+        const cardDesc = document.getElementById('cardAnimalDesc');
+        if (cardDesc) cardDesc.innerText = currentAssignedAnimal.animal.cardDesc;
+      }
       document.getElementById('cardPercentile').innerText = document.getElementById('reportPercentile').innerText;
 
       document.getElementById('cardStatAvg').innerText = document.getElementById('statAvgAccuracy').innerText;
@@ -1731,9 +2000,14 @@
           const file = new File([blob], 'ColorLab_Result.png', { type: 'image/png' });
           const shareUrl = encodeResultsToUrl();
 
+          const animalName = currentAssignedAnimal ? currentAssignedAnimal.animal.title : '결과';
+          const animalEmoji = currentAssignedAnimal ? currentAssignedAnimal.animal.emoji : '🎯';
+          const tierBadge = currentAssignedAnimal ? currentAssignedAnimal.tier.tierBadge : '';
+          const subtitle = currentAssignedAnimal ? currentAssignedAnimal.animal.subtitle : '';
+
           const shareData = {
-            title: '나의 색 인지능력 테스트 결과',
-            text: `[색감 감각 테스트: Color Lab]\n결과: ${document.getElementById('cardTierTitle').innerText} (상위 ${document.getElementById('cardPercentile').innerText})\n내 결과 확인하기:\n${shareUrl}`,
+            title: `[색감 테스트] 내 색각 동물: ${animalEmoji} ${animalName}`,
+            text: `[색감 감각 테스트: Color Lab]\n동물 페르소나: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n색감 순위: 상위 ${document.getElementById('cardPercentile').innerText}!\n\n내 결과 확인하기:\n${shareUrl}`,
             files: [file]
           };
 
@@ -1779,12 +2053,15 @@
     function copyShareText() {
       const avg = document.getElementById('statAvgAccuracy').innerText;
       const rank = document.getElementById('reportPercentile').innerText;
-      const tier = document.getElementById('reportTierTitle').innerText;
+      const animalName = currentAssignedAnimal ? currentAssignedAnimal.animal.title : document.getElementById('reportTierTitle').innerText;
+      const animalEmoji = currentAssignedAnimal ? currentAssignedAnimal.animal.emoji : '🎯';
+      const tierBadge = currentAssignedAnimal ? currentAssignedAnimal.tier.tierBadge : '';
+      const subtitle = currentAssignedAnimal ? currentAssignedAnimal.animal.subtitle : '';
       const hints = document.getElementById('statTotalHints').innerText;
       const mode = selectedMode === 'rgb' ? '빛 모드 (RGB)' : '물감 모드 (CMY)';
       const shareUrl = encodeResultsToUrl();
 
-      const text = `🎨 [색감 감각 테스트: Color Lab]\n모드: ${mode} (${diffConfigs[selectedMax].name})\n결과: ${tier}\n평균 일치율: ${avg} | 상위 ${rank}\n힌트 사용: ${hints}\n\n👉 내 결과 확인 & 나도 도전하기:\n${shareUrl}`;
+      const text = `🎨 [색감 감각 테스트: Color Lab]\n동물 페르소나: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n모드: ${mode} (${diffConfigs[selectedMax].name})\n평균 일치율: ${avg} | 상위 ${rank}\n힌트 사용: ${hints}\n\n👉 내 결과 확인 & 나도 도전하기:\n${shareUrl}`;
 
       // Fallback-safe clipboard copy
       const tempInput = document.createElement('textarea');
