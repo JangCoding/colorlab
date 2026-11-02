@@ -207,6 +207,24 @@
     </div>
   </header>
 
+    <!-- Top Main Navigation Bar -->
+  <nav class="w-full max-w-xl mx-auto px-4 pt-3 pb-1 flex justify-center select-none z-20">
+    <div class="inline-flex p-1 bg-white/80 backdrop-blur-md rounded-2xl border border-white/80 shadow-xs gap-1 text-xs sm:text-sm font-bold">
+      <button type="button" onclick="switchNavTab('test')" id="navTabTest" class="px-3.5 py-1.5 rounded-xl transition-all bg-indigo-600 text-white shadow-xs flex items-center gap-1.5 touch-manipulation cursor-pointer">
+        <span>🎯</span>
+        <span>색감 테스트</span>
+      </button>
+      <button type="button" onclick="switchNavTab('sandbox')" id="navTabSandbox" class="px-3.5 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
+        <span>🎨</span>
+        <span>자유 조색</span>
+      </button>
+      <button type="button" onclick="switchNavTab('trivia')" id="navTabTrivia" class="px-3.5 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
+        <span>🐾</span>
+        <span>토막상식</span>
+      </button>
+    </div>
+  </nav>
+
   <!-- SCREEN 1: Game Setup / Lobby -->
   <main id="screenLobby" class="w-full max-w-2xl mx-auto px-4 py-8 flex-1 flex flex-col justify-center">
     <div class="text-center mb-8">
@@ -311,6 +329,24 @@
           </div>
         </label>
       </div>
+    </div>
+
+        <!-- Mode Discovery Shortcut Cards -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
+      <button type="button" onclick="switchNavTab('sandbox')" class="p-3.5 rounded-2xl bg-white/75 hover:bg-white border border-slate-200/90 hover:border-indigo-300 text-left transition-all shadow-xs flex items-center gap-3 group touch-manipulation cursor-pointer">
+        <div class="w-10 h-10 rounded-xl bg-indigo-50 group-hover:bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl transition-all shrink-0">🎨</div>
+        <div>
+          <div class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-indigo-600 transition-colors">자유 조색 샌드박스</div>
+          <div class="text-[11px] text-slate-500">문제 없이 마음껏 색을 배합해보기</div>
+        </div>
+      </button>
+      <button type="button" onclick="switchNavTab('trivia')" class="p-3.5 rounded-2xl bg-white/75 hover:bg-white border border-slate-200/90 hover:border-emerald-300 text-left transition-all shadow-xs flex items-center gap-3 group touch-manipulation cursor-pointer">
+        <div class="w-10 h-10 rounded-xl bg-emerald-50 group-hover:bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl transition-all shrink-0">🐾</div>
+        <div>
+          <div class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-emerald-600 transition-colors">동물 색채 토막상식</div>
+          <div class="text-[11px] text-slate-500">15가지 동물들의 신비한 시각 이야기</div>
+        </div>
+      </button>
     </div>
 
     <!-- Start Button -->
@@ -578,6 +614,210 @@
         <span id="reportLobbyBtnText">다시 도전하기</span>
       </button>
     </div>
+  </main>
+
+    <!-- SCREEN 4: Free Color Sandbox (자유 조색 모드) -->
+  <main id="screenSandbox" class="hidden w-full max-w-2xl mx-auto px-4 py-6 sm:py-8 flex-1 flex flex-col gap-5">
+    
+    <!-- Sandbox Header -->
+    <div class="text-center">
+      <div class="inline-block px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 border border-indigo-200/80 text-xs font-semibold mb-2 shadow-xs">
+        🎨 자유 조색 모드
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight mb-1.5">
+        자유 조색 샌드박스
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+        난이도와 모드를 자유롭게 바꾸며 빛과 물감의 배합 원리를 마음껏 실험해보세요.
+      </p>
+    </div>
+
+    <!-- Mode & Difficulty Controls Card -->
+    <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-4 sm:p-5 shadow-lg shadow-slate-200/50 space-y-4">
+      
+      <!-- 1. Mode Switch (RGB vs CMY) -->
+      <div>
+        <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-2">혼합 방식 선택</label>
+        <div class="grid grid-cols-2 gap-2.5">
+          <button type="button" onclick="setSandboxMode('rgb')" id="sandboxModeBtnRgb" class="py-2.5 px-3 rounded-xl border-2 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 border-indigo-500 bg-indigo-50 text-indigo-800 shadow-xs touch-manipulation cursor-pointer">
+            <span class="text-base">💡</span>
+            <span>빛 모드 (RGB)</span>
+          </button>
+          <button type="button" onclick="setSandboxMode('cmy')" id="sandboxModeBtnCmy" class="py-2.5 px-3 rounded-xl border-2 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 border-slate-200 bg-white text-slate-600 hover:bg-slate-50 touch-manipulation cursor-pointer">
+            <span class="text-base">🎨</span>
+            <span>물감 모드 (CMY)</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- 2. Difficulty (Steps) Switch -->
+      <div>
+        <div class="flex items-center justify-between mb-2">
+          <label class="text-xs font-bold uppercase tracking-wider text-slate-500">난이도 배율 (단계)</label>
+          <span id="sandboxDiffDesc" class="text-xs text-indigo-600 font-semibold">0 ~ 3 배율 (4단계, 총 64가지 조합)</span>
+        </div>
+        <div class="grid grid-cols-5 gap-1.5">
+          <button type="button" onclick="setSandboxMax(1)" id="sandboxDiff-1" class="py-2.5 px-1 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer">0~1</button>
+          <button type="button" onclick="setSandboxMax(3)" id="sandboxDiff-3" class="py-2.5 px-1 rounded-xl text-center font-bold text-xs border transition-all border-indigo-400 bg-indigo-100 text-indigo-800 shadow-sm touch-manipulation cursor-pointer">0~3</button>
+          <button type="button" onclick="setSandboxMax(5)" id="sandboxDiff-5" class="py-2.5 px-1 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer">0~5</button>
+          <button type="button" onclick="setSandboxMax(7)" id="sandboxDiff-7" class="py-2.5 px-1 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer">0~7</button>
+          <button type="button" onclick="setSandboxMax(10)" id="sandboxDiff-10" class="py-2.5 px-1 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer">0~10</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- My Mixed Color Swatch Card -->
+    <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-4 sm:p-5 shadow-lg shadow-slate-200/50 flex flex-col items-center">
+      <div id="sandboxColorBox" class="w-full aspect-[2/1] sm:aspect-[7/3] rounded-2xl border-2 border-slate-200 shadow-inner flex flex-col items-center justify-center transition-all duration-200 relative overflow-hidden mb-3">
+        <!-- Floating Color Code Pill -->
+        <div class="px-4 py-2 rounded-2xl bg-slate-900/80 backdrop-blur-md text-white shadow-lg flex items-center gap-2.5 select-none">
+          <span id="sandboxHexText" class="mono font-black text-base sm:text-lg tracking-wider">#000000</span>
+          <button type="button" onclick="copySandboxHex()" id="sandboxCopyBtn" class="px-2 py-0.5 rounded-lg bg-white/20 hover:bg-white/30 text-xs font-bold transition-all active:scale-95 touch-manipulation cursor-pointer">복사</button>
+        </div>
+      </div>
+
+      <!-- Detail Value Chips -->
+      <div class="flex flex-wrap items-center justify-center gap-2 text-xs">
+        <span class="px-3 py-1 rounded-xl bg-slate-100 border border-slate-200 font-mono text-slate-700 font-bold" id="sandboxRgbText">rgb(0, 0, 0)</span>
+        <span class="px-3 py-1 rounded-xl bg-slate-100 border border-slate-200 font-mono text-slate-700 font-bold" id="sandboxChannelsText">R:0 G:0 B:0</span>
+      </div>
+    </div>
+
+    <!-- Sliders Card (3 Channels) -->
+    <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-4 sm:p-5 shadow-lg shadow-slate-200/50 flex flex-col gap-4">
+      
+      <!-- Sandbox Channel 1 -->
+      <div class="space-y-1.5">
+        <div class="flex justify-between items-center text-xs sm:text-sm">
+          <span id="sbCh1Label" class="font-bold flex items-center gap-1.5 text-rose-600">
+            <span id="sbCh1Dot" class="w-3 h-3 rounded-full bg-rose-500 shadow-xs"></span>
+            <span id="sbCh1Title">RED (빨강)</span>
+          </span>
+          <span class="mono font-bold text-sm sm:text-base text-slate-700" id="sbCh1ValDisplay">0 / 3</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="stepSandboxChannel(1, -1)" id="sbCh1Minus" class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200 shadow-xs select-none touch-manipulation cursor-pointer">-</button>
+          <div id="sbCh1ChipsContainer" class="flex-1 relative flex items-stretch h-10 sm:h-11 p-1 bg-slate-100/90 rounded-xl border border-slate-200/90 gap-0.5 sm:gap-1 select-none touch-none shadow-inner cursor-pointer" role="slider" aria-label="샌드박스 1번 채널 슬라이더"></div>
+          <button type="button" onclick="stepSandboxChannel(1, 1)" id="sbCh1Plus" class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200 shadow-xs select-none touch-manipulation cursor-pointer">+</button>
+        </div>
+      </div>
+
+      <!-- Sandbox Channel 2 -->
+      <div class="space-y-1.5">
+        <div class="flex justify-between items-center text-xs sm:text-sm">
+          <span id="sbCh2Label" class="font-bold flex items-center gap-1.5 text-emerald-600">
+            <span id="sbCh2Dot" class="w-3 h-3 rounded-full bg-emerald-500 shadow-xs"></span>
+            <span id="sbCh2Title">GREEN (초록)</span>
+          </span>
+          <span class="mono font-bold text-sm sm:text-base text-slate-700" id="sbCh2ValDisplay">0 / 3</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="stepSandboxChannel(2, -1)" id="sbCh2Minus" class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200 shadow-xs select-none touch-manipulation cursor-pointer">-</button>
+          <div id="sbCh2ChipsContainer" class="flex-1 relative flex items-stretch h-10 sm:h-11 p-1 bg-slate-100/90 rounded-xl border border-slate-200/90 gap-0.5 sm:gap-1 select-none touch-none shadow-inner cursor-pointer" role="slider" aria-label="샌드박스 2번 채널 슬라이더"></div>
+          <button type="button" onclick="stepSandboxChannel(2, 1)" id="sbCh2Plus" class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200 shadow-xs select-none touch-manipulation cursor-pointer">+</button>
+        </div>
+      </div>
+
+      <!-- Sandbox Channel 3 -->
+      <div class="space-y-1.5">
+        <div class="flex justify-between items-center text-xs sm:text-sm">
+          <span id="sbCh3Label" class="font-bold flex items-center gap-1.5 text-blue-600">
+            <span id="sbCh3Dot" class="w-3 h-3 rounded-full bg-blue-500 shadow-xs"></span>
+            <span id="sbCh3Title">BLUE (파랑)</span>
+          </span>
+          <span class="mono font-bold text-sm sm:text-base text-slate-700" id="sbCh3ValDisplay">0 / 3</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="stepSandboxChannel(3, -1)" id="sbCh3Minus" class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200 shadow-xs select-none touch-manipulation cursor-pointer">-</button>
+          <div id="sbCh3ChipsContainer" class="flex-1 relative flex items-stretch h-10 sm:h-11 p-1 bg-slate-100/90 rounded-xl border border-slate-200/90 gap-0.5 sm:gap-1 select-none touch-none shadow-inner cursor-pointer" role="slider" aria-label="샌드박스 3번 채널 슬라이더"></div>
+          <button type="button" onclick="stepSandboxChannel(3, 1)" id="sbCh3Plus" class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200 shadow-xs select-none touch-manipulation cursor-pointer">+</button>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Quick Actions Bar -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+      <button type="button" onclick="randomizeSandboxColor()" class="py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 shadow-xs touch-manipulation cursor-pointer">
+        <span>🎲 랜덤 색상</span>
+      </button>
+      <button type="button" onclick="resetSandboxColor()" class="py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 shadow-xs touch-manipulation cursor-pointer">
+        <span>🔄 초기화</span>
+      </button>
+      <button type="button" onclick="startTestFromSandbox()" class="col-span-2 sm:col-span-1 py-3 px-3 rounded-xl font-extrabold text-xs sm:text-sm bg-gradient-to-r from-rose-500 via-purple-500 to-indigo-600 hover:brightness-105 active:scale-98 text-white shadow-md shadow-indigo-300/40 transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
+        <span>🎯 이 모드로 테스트</span>
+      </button>
+    </div>
+
+  </main>
+
+  <!-- SCREEN 5: Animal Color Vision Trivia Deck (토막상식 탭) -->
+  <main id="screenTrivia" class="hidden w-full max-w-xl mx-auto px-4 py-6 sm:py-8 flex-1 flex flex-col justify-center gap-5">
+    
+    <!-- Trivia Header -->
+    <div class="text-center">
+      <div class="inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200/80 text-xs font-semibold mb-2 shadow-xs">
+        🐾 신비한 동물의 시각 이야기
+      </div>
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight mb-1.5">
+        동물 색채 토막상식 도감
+      </h2>
+      <p class="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
+        인간의 눈을 뛰어넘어 자외선·원편광·적외선까지 보는 동물들의 놀라운 눈 이야기!
+      </p>
+    </div>
+
+    <!-- Active Trivia Card -->
+    <div class="bg-white/90 backdrop-blur-md border border-white/80 rounded-3xl p-6 sm:p-8 text-center relative overflow-hidden shadow-xl shadow-slate-200/60 transition-all">
+      <div class="absolute -top-10 -right-10 w-36 h-36 bg-emerald-200/40 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute -bottom-10 -left-10 w-36 h-36 bg-amber-200/40 rounded-full blur-2xl pointer-events-none"></div>
+
+      <!-- Top Badge & Progress Counter -->
+      <div class="flex items-center justify-between mb-5 relative z-10">
+        <span id="triviaCardTag" class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-100 text-emerald-800 border border-emerald-200 shadow-2xs">
+          🦋 나비의 4원색 시각
+        </span>
+        <span id="triviaCardCounter" class="text-xs mono font-black text-slate-400">
+          1 / 15
+        </span>
+      </div>
+
+      <!-- Animal Big Emoji -->
+      <div class="relative w-20 h-20 sm:w-24 sm:h-24 mx-auto mb-4 flex items-center justify-center">
+        <div class="absolute inset-0 rounded-3xl bg-gradient-to-tr from-emerald-200 via-teal-200 to-indigo-200 blur-lg opacity-70"></div>
+        <div class="relative w-full h-full rounded-3xl bg-white border border-slate-200 shadow-md flex items-center justify-center text-4xl sm:text-5xl select-none">
+          <span id="triviaCardEmoji">🦋</span>
+        </div>
+      </div>
+
+      <!-- Fact Text -->
+      <div class="relative z-10 mb-6 max-w-md mx-auto">
+        <p id="triviaCardBody" class="text-sm sm:text-base text-slate-700 leading-relaxed font-medium">
+          나비는 4~5종류 이상의 원추세포가 있어 인간이 못 보는 자외선까지 봅니다. 덕분에 꽃잎에 숨겨진 비밀 유도 무늬를 보며 날아다녀요!
+        </p>
+      </div>
+
+      <!-- Navigation Arrows & Random -->
+      <div class="grid grid-cols-3 gap-2 relative z-10">
+        <button type="button" onclick="prevTrivia()" class="py-3 px-2 rounded-xl font-bold text-xs sm:text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-95 transition-all flex items-center justify-center gap-1 shadow-xs touch-manipulation cursor-pointer">
+          <span>◀ 이전</span>
+        </button>
+        <button type="button" onclick="randomTrivia()" class="py-3 px-2 rounded-xl font-bold text-xs sm:text-sm bg-emerald-50 hover:bg-emerald-100 text-emerald-800 border border-emerald-200 active:scale-95 transition-all flex items-center justify-center gap-1 shadow-xs touch-manipulation cursor-pointer">
+          <span>🎲 랜덤</span>
+        </button>
+        <button type="button" onclick="nextTrivia()" class="py-3 px-2 rounded-xl font-bold text-xs sm:text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-95 transition-all flex items-center justify-center gap-1 shadow-xs touch-manipulation cursor-pointer">
+          <span>다음 ▶</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- 15 Dots Quick Jump Bar -->
+    <div id="triviaDotsBar" class="flex flex-wrap items-center justify-center gap-1.5 py-2">
+      <!-- 15 dots rendered by JS -->
+    </div>
+
   </main>
 
   <!-- MODAL 1: Round Result Popup Modal -->
@@ -962,12 +1202,26 @@
     let targetColor = { c1: 0, c2: 0, c3: 0 };
     let userColor = { c1: 0, c2: 0, c3: 0 };
 
-    // --- Screen Navigation ---
+    // Sandbox State Variables
+    let sandboxMode = 'rgb';
+    let sandboxMax = 3;
+    let sandboxColor = { c1: 0, c2: 0, c3: 0 };
+    let sandboxInitialized = false;
+
+    // Trivia Viewer State Variables
+    let triviaViewerIndex = 0;
+    let triviaViewerInitialized = false;
+
+    // --- Screen Navigation & Tabs ---
+    const allScreenIds = ['screenLobby', 'screenGame', 'screenReport', 'screenSandbox', 'screenTrivia'];
+
     function showScreen(screenId) {
-      document.getElementById('screenLobby').classList.add('hidden');
-      document.getElementById('screenGame').classList.add('hidden');
-      document.getElementById('screenReport').classList.add('hidden');
-      document.getElementById(screenId).classList.remove('hidden');
+      allScreenIds.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.classList.add('hidden');
+      });
+      const target = document.getElementById(screenId);
+      if (target) target.classList.remove('hidden');
 
       const statsBar = document.getElementById('headerGameStats');
       if (screenId === 'screenGame') {
@@ -975,8 +1229,423 @@
       } else {
         statsBar.classList.add('hidden');
       }
+      updateNavTabUI(screenId);
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
+
+    function updateNavTabUI(screenId) {
+      const tabTest = document.getElementById('navTabTest');
+      const tabSandbox = document.getElementById('navTabSandbox');
+      const tabTrivia = document.getElementById('navTabTrivia');
+      if (!tabTest || !tabSandbox || !tabTrivia) return;
+
+      const activeClass = 'px-3.5 py-1.5 rounded-xl transition-all bg-indigo-600 text-white shadow-xs flex items-center gap-1.5 touch-manipulation cursor-pointer';
+      const inactiveClass = 'px-3.5 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer';
+
+      if (screenId === 'screenSandbox') {
+        tabTest.className = inactiveClass;
+        tabSandbox.className = activeClass;
+        tabTrivia.className = inactiveClass;
+      } else if (screenId === 'screenTrivia') {
+        tabTest.className = inactiveClass;
+        tabSandbox.className = inactiveClass;
+        tabTrivia.className = activeClass;
+      } else {
+        tabTest.className = activeClass;
+        tabSandbox.className = inactiveClass;
+        tabTrivia.className = inactiveClass;
+      }
+    }
+
+    function switchNavTab(tab) {
+      playTone(500, 'sine', 0.04);
+      if (tab === 'test') {
+        const gameEl = document.getElementById('screenGame');
+        const reportEl = document.getElementById('screenReport');
+        if (roundsData.length > 0 && currentRoundIndex <= TOTAL_ROUNDS && gameEl && !gameEl.classList.contains('hidden')) {
+          showScreen('screenGame');
+        } else if (roundsData.length === TOTAL_ROUNDS && reportEl && !reportEl.classList.contains('hidden')) {
+          showScreen('screenReport');
+        } else {
+          showScreen('screenLobby');
+        }
+      } else if (tab === 'sandbox') {
+        initSandbox();
+        showScreen('screenSandbox');
+      } else if (tab === 'trivia') {
+        initTriviaViewer();
+        showScreen('screenTrivia');
+      }
+    }
+
+    // --- Sandbox (Free Color Mixing) Logic ---
+    function initSandbox() {
+      applySandboxChannelThemes();
+      renderSandboxSliders();
+      updateSandboxDisplay();
+      sandboxInitialized = true;
+    }
+
+    function setSandboxMode(mode) {
+      sandboxMode = mode;
+      playTone(460, 'sine', 0.04);
+
+      const rgbBtn = document.getElementById('sandboxModeBtnRgb');
+      const cmyBtn = document.getElementById('sandboxModeBtnCmy');
+
+      if (mode === 'rgb') {
+        rgbBtn.className = 'py-2.5 px-3 rounded-xl border-2 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 border-indigo-500 bg-indigo-50 text-indigo-800 shadow-xs touch-manipulation cursor-pointer';
+        cmyBtn.className = 'py-2.5 px-3 rounded-xl border-2 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 border-slate-200 bg-white text-slate-600 hover:bg-slate-50 touch-manipulation cursor-pointer';
+      } else {
+        cmyBtn.className = 'py-2.5 px-3 rounded-xl border-2 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 border-fuchsia-500 bg-fuchsia-50 text-fuchsia-800 shadow-xs touch-manipulation cursor-pointer';
+        rgbBtn.className = 'py-2.5 px-3 rounded-xl border-2 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 border-slate-200 bg-white text-slate-600 hover:bg-slate-50 touch-manipulation cursor-pointer';
+      }
+
+      applySandboxChannelThemes();
+      renderSandboxSliders();
+      updateSandboxDisplay();
+    }
+
+    function setSandboxMax(lvl) {
+      sandboxMax = lvl;
+      playTone(520, 'sine', 0.04);
+
+      // Clamp current values to new max
+      sandboxColor.c1 = Math.min(sandboxMax, sandboxColor.c1);
+      sandboxColor.c2 = Math.min(sandboxMax, sandboxColor.c2);
+      sandboxColor.c3 = Math.min(sandboxMax, sandboxColor.c3);
+
+      // Update diff buttons UI
+      [1, 3, 5, 7, 10].forEach(k => {
+        const btn = document.getElementById(`sandboxDiff-${k}`);
+        if (!btn) return;
+        if (k === lvl) {
+          btn.className = `py-2.5 px-1 rounded-xl text-center font-bold text-xs border transition-all ${diffConfigs[k].color} shadow-sm touch-manipulation cursor-pointer`;
+        } else {
+          btn.className = 'py-2.5 px-1 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer';
+        }
+      });
+      document.getElementById('sandboxDiffDesc').innerText = diffConfigs[lvl].desc;
+
+      renderSandboxSliders();
+      updateSandboxDisplay();
+    }
+
+    function applySandboxChannelThemes() {
+      const cfg = modeConfigs[sandboxMode];
+      [1, 2, 3].forEach(idx => {
+        const ch = cfg[`c${idx}`];
+        const label = document.getElementById(`sbCh${idx}Label`);
+        if (label) label.className = `font-bold flex items-center gap-1.5 ${ch.colorClass}`;
+        const dot = document.getElementById(`sbCh${idx}Dot`);
+        if (dot) dot.className = `w-3 h-3 rounded-full ${ch.dot} shadow-xs`;
+        const title = document.getElementById(`sbCh${idx}Title`);
+        if (title) title.innerText = `${ch.name} (${ch.kr})`;
+
+        const minusBtn = document.getElementById(`sbCh${idx}Minus`);
+        const plusBtn = document.getElementById(`sbCh${idx}Plus`);
+        if (minusBtn) minusBtn.className = `w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border ${ch.btnBg} shadow-xs select-none touch-manipulation cursor-pointer`;
+        if (plusBtn) plusBtn.className = `w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border ${ch.btnBg} shadow-xs select-none touch-manipulation cursor-pointer`;
+      });
+    }
+
+    function renderSandboxSliders() {
+      const cfg = modeConfigs[sandboxMode];
+      const fontSizeClass = sandboxMax > 5 ? 'text-[11px] sm:text-xs' : 'text-xs sm:text-sm';
+
+      [1, 2, 3].forEach(chNum => {
+        const container = document.getElementById(`sbCh${chNum}ChipsContainer`);
+        if (!container) return;
+        container.innerHTML = '';
+        container.setAttribute('aria-valuemin', '0');
+        container.setAttribute('aria-valuemax', sandboxMax);
+        container.setAttribute('aria-valuenow', sandboxColor[`c${chNum}`]);
+
+        const activeStyles = cfg[`c${chNum}`].chipActive;
+
+        for (let i = 0; i <= sandboxMax; i++) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.id = `sbchip-c${chNum}-${i}`;
+          btn.dataset.step = i;
+          btn.innerText = i;
+          if (sandboxColor[`c${chNum}`] === i) {
+            btn.className = `flex-1 h-full rounded-md sm:rounded-lg flex items-center justify-center font-black ${fontSizeClass} transition-all shadow-sm ${activeStyles} scale-[1.02] z-10 touch-manipulation cursor-pointer select-none active:scale-95`;
+          } else {
+            btn.className = `flex-1 h-full rounded-md sm:rounded-lg flex items-center justify-center font-bold ${fontSizeClass} transition-all text-slate-500 bg-white/80 hover:bg-white hover:text-slate-800 shadow-2xs touch-manipulation cursor-pointer select-none active:scale-95`;
+          }
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            setSandboxChannel(chNum, i, true);
+          };
+          container.appendChild(btn);
+        }
+
+        attachSandboxSliderEvents(container, chNum);
+      });
+    }
+
+    function attachSandboxSliderEvents(container, chNum) {
+      let isDragging = false;
+
+      function getValFromPointerEvent(e) {
+        const targetBtn = e.target.closest('[data-step]');
+        if (targetBtn && targetBtn.parentElement === container) {
+          return parseInt(targetBtn.dataset.step, 10);
+        }
+        const rect = container.getBoundingClientRect();
+        if (rect.width <= 0) return 0;
+        const x = e.clientX - rect.left;
+        const ratio = Math.max(0, Math.min(0.9999, x / rect.width));
+        const totalCells = sandboxMax + 1;
+        return Math.max(0, Math.min(sandboxMax, Math.floor(ratio * totalCells)));
+      }
+
+      container.onpointerdown = (e) => {
+        isDragging = true;
+        try { container.setPointerCapture(e.pointerId); } catch(err) {}
+        const val = getValFromPointerEvent(e);
+        setSandboxChannel(chNum, val, true);
+      };
+
+      container.onpointermove = (e) => {
+        if (!isDragging) return;
+        const val = getValFromPointerEvent(e);
+        if (val !== sandboxColor[`c${chNum}`]) {
+          setSandboxChannel(chNum, val, true);
+        }
+      };
+
+      container.onpointerup = (e) => {
+        if (isDragging) {
+          isDragging = false;
+          try { container.releasePointerCapture(e.pointerId); } catch(err) {}
+        }
+      };
+
+      container.onpointercancel = (e) => {
+        if (isDragging) {
+          isDragging = false;
+          try { container.releasePointerCapture(e.pointerId); } catch(err) {}
+        }
+      };
+
+      container.tabIndex = 0;
+      container.onkeydown = (e) => {
+        if (e.key === 'ArrowRight' || e.key === 'ArrowUp') {
+          e.preventDefault();
+          stepSandboxChannel(chNum, 1);
+        } else if (e.key === 'ArrowLeft' || e.key === 'ArrowDown') {
+          e.preventDefault();
+          stepSandboxChannel(chNum, -1);
+        }
+      };
+    }
+
+    function setSandboxChannel(chNum, val, forceSound = false) {
+      if (val < 0) val = 0;
+      if (val > sandboxMax) val = sandboxMax;
+      const prev = sandboxColor[`c${chNum}`];
+      sandboxColor[`c${chNum}`] = val;
+
+      if (forceSound || val !== prev) {
+        playTone(280 + (val * 35), 'sine', 0.04, 0.04);
+      }
+      updateSandboxDisplay();
+      highlightSandboxChips();
+    }
+
+    function stepSandboxChannel(chNum, delta) {
+      setSandboxChannel(chNum, sandboxColor[`c${chNum}`] + delta, true);
+    }
+
+    function highlightSandboxChips() {
+      const cfg = modeConfigs[sandboxMode];
+      const fontSizeClass = sandboxMax > 5 ? 'text-[11px] sm:text-xs' : 'text-xs sm:text-sm';
+
+      [1, 2, 3].forEach(chNum => {
+        const container = document.getElementById(`sbCh${chNum}ChipsContainer`);
+        if (container) {
+          container.setAttribute('aria-valuenow', sandboxColor[`c${chNum}`]);
+        }
+        const activeStyles = cfg[`c${chNum}`].chipActive;
+        for (let i = 0; i <= sandboxMax; i++) {
+          const chip = document.getElementById(`sbchip-c${chNum}-${i}`);
+          if (!chip) continue;
+          if (sandboxColor[`c${chNum}`] === i) {
+            chip.className = `flex-1 h-full rounded-md sm:rounded-lg flex items-center justify-center font-black ${fontSizeClass} transition-all shadow-sm ${activeStyles} scale-[1.02] z-10 touch-manipulation cursor-pointer select-none active:scale-95`;
+          } else {
+            chip.className = `flex-1 h-full rounded-md sm:rounded-lg flex items-center justify-center font-bold ${fontSizeClass} transition-all text-slate-500 bg-white/80 hover:bg-white hover:text-slate-800 shadow-2xs touch-manipulation cursor-pointer select-none active:scale-95`;
+          }
+        }
+      });
+    }
+
+    function rgbToHex(r, g, b) {
+      const toHex = (n) => n.toString(16).padStart(2, '0').toUpperCase();
+      return `#${toHex(r)}${toHex(g)}${toHex(b)}`;
+    }
+
+    function updateSandboxDisplay() {
+      const rgb = computeRgb(sandboxColor, sandboxMax, sandboxMode);
+      const hex = rgbToHex(rgb.r, rgb.g, rgb.b);
+      const rgbStr = formatRgbStr(rgb);
+
+      const box = document.getElementById('sandboxColorBox');
+      if (box) box.style.backgroundColor = rgbStr;
+
+      const hexElem = document.getElementById('sandboxHexText');
+      if (hexElem) hexElem.innerText = hex;
+
+      const rgbElem = document.getElementById('sandboxRgbText');
+      if (rgbElem) rgbElem.innerText = rgbStr;
+
+      const cfg = modeConfigs[sandboxMode];
+      const ch1Name = cfg.c1.name[0];
+      const ch2Name = cfg.c2.name[0];
+      const ch3Name = cfg.c3.name[0];
+
+      const chText = document.getElementById('sandboxChannelsText');
+      if (chText) {
+        chText.innerText = `${ch1Name}:${sandboxColor.c1}  ${ch2Name}:${sandboxColor.c2}  ${ch3Name}:${sandboxColor.c3} (/${sandboxMax})`;
+      }
+
+      const d1 = document.getElementById('sbCh1ValDisplay');
+      const d2 = document.getElementById('sbCh2ValDisplay');
+      const d3 = document.getElementById('sbCh3ValDisplay');
+      if (d1) d1.innerText = `${sandboxColor.c1} / ${sandboxMax}`;
+      if (d2) d2.innerText = `${sandboxColor.c2} / ${sandboxMax}`;
+      if (d3) d3.innerText = `${sandboxColor.c3} / ${sandboxMax}`;
+    }
+
+    function copySandboxHex() {
+      const hex = document.getElementById('sandboxHexText').innerText;
+      const btn = document.getElementById('sandboxCopyBtn');
+      try {
+        navigator.clipboard.writeText(hex).then(() => {
+          playTone(700, 'sine', 0.08);
+          btn.innerText = '복사됨!';
+          setTimeout(() => { btn.innerText = '복사'; }, 1800);
+        });
+      } catch (e) {
+        const temp = document.createElement('textarea');
+        temp.value = hex;
+        document.body.appendChild(temp);
+        temp.select();
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        btn.innerText = '복사됨!';
+        setTimeout(() => { btn.innerText = '복사'; }, 1800);
+      }
+    }
+
+    function randomizeSandboxColor() {
+      playTone(580, 'triangle', 0.1);
+      sandboxColor = {
+        c1: Math.floor(Math.random() * (sandboxMax + 1)),
+        c2: Math.floor(Math.random() * (sandboxMax + 1)),
+        c3: Math.floor(Math.random() * (sandboxMax + 1))
+      };
+      updateSandboxDisplay();
+      highlightSandboxChips();
+    }
+
+    function resetSandboxColor() {
+      playTone(320, 'sine', 0.08);
+      sandboxColor = { c1: 0, c2: 0, c3: 0 };
+      updateSandboxDisplay();
+      highlightSandboxChips();
+    }
+
+    function startTestFromSandbox() {
+      selectLobbyMode(sandboxMode);
+      selectLobbyDiff(sandboxMax);
+      showScreen('screenLobby');
+    }
+
+    // --- Trivia Viewer Logic ---
+    function initTriviaViewer() {
+      renderTriviaDots();
+      renderTriviaCard();
+      triviaViewerInitialized = true;
+    }
+
+    function renderTriviaDots() {
+      const bar = document.getElementById('triviaDotsBar');
+      if (!bar) return;
+      bar.innerHTML = '';
+      animalTriviaList.forEach((_, idx) => {
+        const dot = document.createElement('button');
+        dot.type = 'button';
+        dot.className = `w-2.5 h-2.5 rounded-full transition-all ${idx === triviaViewerIndex ? 'bg-emerald-600 scale-125 ring-2 ring-emerald-300' : 'bg-slate-300 hover:bg-slate-400'}`;
+        dot.title = `${idx + 1}번째 상식 보기`;
+        dot.onclick = () => jumpTrivia(idx);
+        bar.appendChild(dot);
+      });
+    }
+
+    function renderTriviaCard() {
+      const item = animalTriviaList[triviaViewerIndex];
+      if (!item) return;
+
+      const tagElem = document.getElementById('triviaCardTag');
+      if (tagElem) tagElem.innerText = item.tag;
+
+      const counterElem = document.getElementById('triviaCardCounter');
+      if (counterElem) counterElem.innerText = `${triviaViewerIndex + 1} / ${animalTriviaList.length}`;
+
+      // Extract emoji from tag or use default
+      const emojiMatch = item.tag.match(/[\p{Emoji_Presentation}\p{Extended_Pictographic}]/u);
+      const emojiElem = document.getElementById('triviaCardEmoji');
+      if (emojiElem) emojiElem.innerText = emojiMatch ? emojiMatch[0] : '🐾';
+
+      const bodyElem = document.getElementById('triviaCardBody');
+      if (bodyElem) bodyElem.innerText = item.fact;
+
+      // Update dots
+      const bar = document.getElementById('triviaDotsBar');
+      if (bar) {
+        const dots = bar.children;
+        for (let i = 0; i < dots.length; i++) {
+          dots[i].className = `w-2.5 h-2.5 rounded-full transition-all ${i === triviaViewerIndex ? 'bg-emerald-600 scale-125 ring-2 ring-emerald-300' : 'bg-slate-300 hover:bg-slate-400'}`;
+        }
+      }
+    }
+
+    function nextTrivia() {
+      playTone(520, 'sine', 0.04);
+      triviaViewerIndex = (triviaViewerIndex + 1) % animalTriviaList.length;
+      renderTriviaCard();
+    }
+
+    function prevTrivia() {
+      playTone(480, 'sine', 0.04);
+      triviaViewerIndex = (triviaViewerIndex - 1 + animalTriviaList.length) % animalTriviaList.length;
+      renderTriviaCard();
+    }
+
+    function randomTrivia() {
+      playTone(600, 'triangle', 0.08);
+      let nextIdx = Math.floor(Math.random() * animalTriviaList.length);
+      if (nextIdx === triviaViewerIndex) nextIdx = (nextIdx + 1) % animalTriviaList.length;
+      triviaViewerIndex = nextIdx;
+      renderTriviaCard();
+    }
+
+    function jumpTrivia(idx) {
+      playTone(500, 'sine', 0.04);
+      triviaViewerIndex = idx;
+      renderTriviaCard();
+    }
+
+    // Keyboard navigation for trivia
+    window.addEventListener('keydown', (e) => {
+      const triviaScreen = document.getElementById('screenTrivia');
+      if (triviaScreen && !triviaScreen.classList.contains('hidden')) {
+        if (e.key === 'ArrowRight') nextTrivia();
+        if (e.key === 'ArrowLeft') prevTrivia();
+      }
+    });
 
     function goToLobby() {
       sharedAnimalIndex = null;
