@@ -3,11 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>색감 감각 테스트: Color Lab</title>
+
+  <!-- Primary Meta Tags -->
+  <title>나의 색 인지능력 테스트 | Color Perception Lab</title>
+  <meta name="title" content="나의 색 인지능력 테스트 | Color Perception Lab">
+  <meta name="description" content="빛(RGB)과 물감(CMY)의 원리로 풀어보는 색 감각 테스트! 목표 색상을 직접 조색하고 정규분포 기반 상위 몇 %인지 확인해보세요.">
+  <meta name="keywords" content="색감테스트, 색인지능력, RGB, CMY, 조색테스트, 색채감각, 퍼스널컬러, 정규분포, 심리테스트">
+  <meta name="author" content="Color Lab">
+  <meta name="theme-color" content="#fef7f2">
+
+  <!-- Open Graph / Facebook / KakaoTalk -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://colorlab.app/">
+  <meta property="og:title" content="나의 색 인지능력 테스트 | Color Perception Lab">
+  <meta property="og:description" content="빛과 물감의 원리로 풀어보는 색 감각 테스트! 당신은 상위 몇 %일까요?">
+  <meta property="og:image" content="./og-preview.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="나의 색 인지능력 테스트 Color Lab">
+  <meta property="og:site_name" content="Color Perception Lab">
+  <meta property="og:locale" content="ko_KR">
+
+  <!-- Twitter / X -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://colorlab.app/">
+  <meta property="twitter:title" content="나의 색 인지능력 테스트 | Color Perception Lab">
+  <meta property="twitter:description" content="빛과 물감의 원리로 풀어보는 색 감각 테스트! 당신은 상위 몇 %일까요?">
+  <meta property="twitter:image" content="./og-preview.png">
+
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- Canvas Confetti -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <!-- html2canvas for Instagram/Kakao Card Generation -->
+  <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
+
   <!-- Google Fonts -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,23 +54,43 @@
       height: 4px;
     }
     .chips-scroll::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.05);
+      background: rgba(0, 0, 0, 0.04);
       border-radius: 9999px;
     }
     .chips-scroll::-webkit-scrollbar-thumb {
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(0, 0, 0, 0.15);
       border-radius: 9999px;
     }
     @keyframes pulse-subtle {
       0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.85; transform: scale(1.03); }
+      50% { opacity: 0.92; transform: scale(1.02); }
     }
     .animate-pulse-subtle {
       animation: pulse-subtle 2s infinite ease-in-out;
     }
+    @keyframes float-slow {
+      0%, 100% { transform: translateY(0px) scale(1); }
+      50% { transform: translateY(-12px) scale(1.04); }
+    }
+    .animate-float-1 {
+      animation: float-slow 8s infinite ease-in-out;
+    }
+    .animate-float-2 {
+      animation: float-slow 10s infinite ease-in-out reverse;
+    }
+    .animate-float-3 {
+      animation: float-slow 12s infinite ease-in-out 2s;
+    }
   </style>
 </head>
-<body class="bg-slate-950 text-slate-100 min-h-screen flex flex-col justify-between selection:bg-indigo-500 selection:text-white">
+<body id="bodyRoot" class="min-h-screen text-slate-800 flex flex-col justify-between selection:bg-rose-400 selection:text-white transition-colors duration-700 relative overflow-x-hidden">
+
+  <!-- Ambient Light Gradient Background Blobs -->
+  <div id="ambientContainer" class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+    <div id="ambientBlob1" class="absolute -top-24 -left-24 w-96 h-96 rounded-full blur-3xl opacity-50 animate-float-1 transition-all duration-1000"></div>
+    <div id="ambientBlob2" class="absolute top-1/3 -right-24 w-[28rem] h-[28rem] rounded-full blur-3xl opacity-45 animate-float-2 transition-all duration-1000"></div>
+    <div id="ambientBlob3" class="absolute -bottom-24 left-1/4 w-[32rem] h-[32rem] rounded-full blur-3xl opacity-40 animate-float-3 transition-all duration-1000"></div>
+  </div>
 
   <!-- Audio Synthesizer Logic -->
   <script>
@@ -106,33 +157,41 @@
   </script>
 
   <!-- Global Header -->
-  <header class="w-full border-b border-slate-800/80 bg-slate-900/80 backdrop-blur-md sticky top-0 z-40">
+  <header class="w-full border-b border-white/60 bg-white/75 backdrop-blur-md sticky top-0 z-40 shadow-xs">
     <div class="max-w-3xl mx-auto px-4 py-3 flex items-center justify-between">
-      <div class="flex items-center gap-2.5 cursor-pointer" onclick="goToLobby()">
-        <div id="headerLogo" class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-400 via-rose-500 to-indigo-500 flex items-center justify-center shadow-lg shadow-indigo-500/20 text-base">
+      <div class="flex items-center gap-2.5 cursor-pointer select-none" onclick="goToLobby()">
+        <div id="headerLogo" class="w-8 h-8 rounded-xl bg-gradient-to-tr from-amber-400 via-rose-400 to-indigo-500 flex items-center justify-center shadow-md shadow-rose-300/40 text-base text-white">
           🎯
         </div>
         <div>
-          <h1 class="font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-white via-slate-100 to-slate-400 bg-clip-text text-transparent">
+          <h1 class="font-extrabold text-base sm:text-lg tracking-tight bg-gradient-to-r from-slate-900 via-slate-800 to-slate-600 bg-clip-text text-transparent">
             색감 감각 테스트
           </h1>
-          <p id="headerSubtitle" class="text-[10px] text-slate-400 font-medium">Color Perception Lab</p>
+          <p id="headerSubtitle" class="text-[10px] text-slate-500 font-medium">Color Perception Lab</p>
         </div>
       </div>
 
       <div class="flex items-center gap-2">
-        <button onclick="toggleSound()" class="w-8 h-8 rounded-xl bg-slate-800 hover:bg-slate-700 border border-slate-700/60 flex items-center justify-center text-sm transition-all" title="효과음 토글">
+        <!-- Theme Switcher Button -->
+        <button onclick="cycleTheme()" class="px-2.5 py-1.5 rounded-xl bg-white/90 hover:bg-white border border-slate-200/90 shadow-xs text-xs font-semibold flex items-center gap-1.5 text-slate-700 transition-all active:scale-95 hover:border-slate-300" title="클릭할 때마다 다른 파스텔 그라데이션 테마로 변경됩니다">
+          <span>🎨</span>
+          <span id="themeNameTag" class="hidden sm:inline text-[11px] font-medium text-slate-600">테마 변경</span>
+        </button>
+
+        <!-- Sound Toggle Button -->
+        <button onclick="toggleSound()" class="w-8 h-8 rounded-xl bg-white/90 hover:bg-white border border-slate-200/90 shadow-xs flex items-center justify-center text-sm transition-all active:scale-95 hover:border-slate-300" title="효과음 켜기/끄기">
           <span id="soundIcon">🔊</span>
         </button>
+
         <!-- In-game Badges (hidden in Lobby/Report) -->
         <div id="headerGameStats" class="hidden flex items-center gap-2">
-          <div class="px-2.5 py-1 rounded-full bg-slate-800/90 border border-slate-700/60 text-xs font-semibold">
-            <span class="text-indigo-400">문제</span>
-            <span id="roundIndicator" class="mono text-white font-bold ml-1">1 / 10</span>
+          <div class="px-2.5 py-1 rounded-full bg-white/90 border border-slate-200 text-xs font-semibold shadow-xs">
+            <span class="text-indigo-600">문제</span>
+            <span id="roundIndicator" class="mono text-slate-800 font-bold ml-1">1 / 10</span>
           </div>
-          <div class="px-2.5 py-1 rounded-full bg-slate-800/90 border border-slate-700/60 text-xs font-semibold">
-            <span class="text-amber-400">💡 힌트</span>
-            <span id="roundHintsCount" class="mono text-white font-bold ml-1">0회</span>
+          <div class="px-2.5 py-1 rounded-full bg-white/90 border border-slate-200 text-xs font-semibold shadow-xs">
+            <span class="text-amber-600">💡 힌트</span>
+            <span id="roundHintsCount" class="mono text-slate-800 font-bold ml-1">0회</span>
           </div>
         </div>
       </div>
@@ -140,49 +199,49 @@
   </header>
 
   <!-- SCREEN 1: Game Setup / Lobby -->
-  <main id="screenLobby" class="w-full max-w-2xl mx-auto px-4 py-6 flex-1 flex flex-col justify-center">
+  <main id="screenLobby" class="w-full max-w-2xl mx-auto px-4 py-8 flex-1 flex flex-col justify-center">
     <div class="text-center mb-8">
-      <div class="inline-block px-3 py-1 rounded-full bg-indigo-500/10 border border-indigo-500/30 text-indigo-400 text-xs font-semibold mb-3">
+      <div id="heroBadge" class="inline-block px-3 py-1 rounded-full bg-rose-100 text-rose-700 border border-rose-200/80 text-xs font-semibold mb-3 shadow-xs">
         🎨 나의 색 감각 역량 측정하기
       </div>
-      <h2 class="text-2xl sm:text-3xl font-black text-white tracking-tight mb-2">
+      <h2 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight mb-2">
         당신의 색 인지 감각은 상위 몇 %일까요?
       </h2>
-      <p class="text-sm text-slate-400 max-w-md mx-auto leading-relaxed">
+      <p class="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
         목표 색상과 똑같은 색을 조색해보세요. 총 10문제를 풀고 나면 실제 인구 통계 기반의 정규분포 곡선 분석 리포트를 제공합니다.
       </p>
     </div>
 
     <!-- Step 1: Mode Select -->
-    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-5 shadow-xl">
-      <label class="block text-xs font-bold uppercase tracking-wider text-slate-400 mb-3 flex items-center gap-1.5">
-        <span class="w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs">1</span>
+    <div class="bg-white/80 backdrop-blur-md border border-white/80 rounded-2xl p-4 sm:p-5 mb-5 shadow-lg shadow-slate-200/50">
+      <label class="block text-xs font-bold uppercase tracking-wider text-slate-500 mb-3 flex items-center gap-1.5">
+        <span class="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">1</span>
         혼합 방식 선택
       </label>
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
         <!-- RGB Option -->
-        <button type="button" onclick="selectLobbyMode('rgb')" id="lobbyBtnRgb" class="p-4 rounded-xl border-2 text-left transition-all border-indigo-500 bg-indigo-500/15 relative overflow-hidden group">
+        <button type="button" onclick="selectLobbyMode('rgb')" id="lobbyBtnRgb" class="p-4 rounded-xl border-2 text-left transition-all border-indigo-400 bg-indigo-50/70 shadow-sm relative overflow-hidden group">
           <div class="flex items-center justify-between mb-2">
             <span class="text-xl">💡</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-400/20 text-indigo-300 font-semibold">디지털/화면</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-200/80 text-indigo-800 font-bold">디지털/화면</span>
           </div>
-          <div class="font-bold text-white text-base mb-1">빛 모드 (RGB)</div>
-          <p class="text-xs text-slate-300 leading-relaxed mb-2">가산혼합: 빨강·초록·파랑 빛을 더해 흰색을 만듭니다.</p>
-          <div class="text-[11px] mono text-slate-400 flex justify-between pt-2 border-t border-slate-700/50">
+          <div class="font-bold text-slate-800 text-base mb-1">빛 모드 (RGB)</div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-2">가산혼합: 빨강·초록·파랑 빛을 더해 흰색을 만듭니다.</p>
+          <div class="text-[11px] mono text-slate-500 flex justify-between pt-2 border-t border-slate-200/80">
             <span>0: 검은색</span>
             <span>Max: 눈부신 흰색</span>
           </div>
         </button>
 
         <!-- CMY Option -->
-        <button type="button" onclick="selectLobbyMode('cmy')" id="lobbyBtnCmy" class="p-4 rounded-xl border-2 text-left transition-all border-slate-800 bg-slate-900/40 hover:border-slate-700 relative overflow-hidden group">
+        <button type="button" onclick="selectLobbyMode('cmy')" id="lobbyBtnCmy" class="p-4 rounded-xl border-2 text-left transition-all border-slate-200 bg-white/70 hover:border-slate-300 relative overflow-hidden group">
           <div class="flex items-center justify-between mb-2">
             <span class="text-xl">🎨</span>
-            <span class="text-[10px] px-2 py-0.5 rounded-full bg-fuchsia-400/20 text-fuchsia-300 font-semibold">물감/인쇄</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-fuchsia-100 text-fuchsia-800 font-bold">물감/인쇄</span>
           </div>
-          <div class="font-bold text-white text-base mb-1">물감 모드 (CMY)</div>
-          <p class="text-xs text-slate-300 leading-relaxed mb-2">감산혼합: 청록·자홍·노랑 잉크를 섞어 검정을 만듭니다.</p>
-          <div class="text-[11px] mono text-slate-400 flex justify-between pt-2 border-t border-slate-700/50">
+          <div class="font-bold text-slate-800 text-base mb-1">물감 모드 (CMY)</div>
+          <p class="text-xs text-slate-600 leading-relaxed mb-2">감산혼합: 청록·자홍·노랑 잉크를 섞어 검정을 만듭니다.</p>
+          <div class="text-[11px] mono text-slate-500 flex justify-between pt-2 border-t border-slate-200/80">
             <span>0: 흰 도화지</span>
             <span>Max: 칠흑의 먹물</span>
           </div>
@@ -191,32 +250,32 @@
     </div>
 
     <!-- Step 2: Difficulty Select -->
-    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 mb-6 shadow-xl">
+    <div class="bg-white/80 backdrop-blur-md border border-white/80 rounded-2xl p-4 sm:p-5 mb-6 shadow-lg shadow-slate-200/50">
       <div class="flex items-center justify-between mb-3">
-        <label class="text-xs font-bold uppercase tracking-wider text-slate-400 flex items-center gap-1.5">
-          <span class="w-5 h-5 rounded-full bg-indigo-500/20 text-indigo-400 flex items-center justify-center text-xs">2</span>
+        <label class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
+          <span class="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">2</span>
           난이도 배율 선택
         </label>
-        <span id="lobbyDiffDetail" class="text-xs text-indigo-400 font-medium">0 ~ 3 배율 (4단계, 64가지 조합)</span>
+        <span id="lobbyDiffDetail" class="text-xs text-indigo-600 font-semibold">0 ~ 3 배율 (4단계, 64가지 조합)</span>
       </div>
       <div class="grid grid-cols-5 gap-1.5 sm:gap-2">
-        <button type="button" onclick="selectLobbyDiff(1)" id="lobbyDiff-1" class="lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-slate-800 bg-slate-800/40 text-slate-400">
+        <button type="button" onclick="selectLobbyDiff(1)" id="lobbyDiff-1" class="lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white shadow-xs">
           응애
           <span class="block text-[10px] font-normal opacity-75 mt-0.5">0~1</span>
         </button>
-        <button type="button" onclick="selectLobbyDiff(3)" id="lobbyDiff-3" class="lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-indigo-500 bg-indigo-500/20 text-indigo-300 shadow-md">
+        <button type="button" onclick="selectLobbyDiff(3)" id="lobbyDiff-3" class="lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-indigo-400 bg-indigo-100 text-indigo-800 shadow-sm">
           초보
           <span class="block text-[10px] font-normal opacity-75 mt-0.5">0~3</span>
         </button>
-        <button type="button" onclick="selectLobbyDiff(5)" id="lobbyDiff-5" class="lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-slate-800 bg-slate-800/40 text-slate-400">
+        <button type="button" onclick="selectLobbyDiff(5)" id="lobbyDiff-5" class="lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white shadow-xs">
           중수
           <span class="block text-[10px] font-normal opacity-75 mt-0.5">0~5</span>
         </button>
-        <button type="button" onclick="selectLobbyDiff(7)" id="lobbyDiff-7" class="lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-slate-800 bg-slate-800/40 text-slate-400">
+        <button type="button" onclick="selectLobbyDiff(7)" id="lobbyDiff-7" class="lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white shadow-xs">
           고수
           <span class="block text-[10px] font-normal opacity-75 mt-0.5">0~7</span>
         </button>
-        <button type="button" onclick="selectLobbyDiff(10)" id="lobbyDiff-10" class="lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-slate-800 bg-slate-800/40 text-slate-400">
+        <button type="button" onclick="selectLobbyDiff(10)" id="lobbyDiff-10" class="lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white shadow-xs">
           초고수
           <span class="block text-[10px] font-normal opacity-75 mt-0.5">0~10</span>
         </button>
@@ -224,113 +283,113 @@
     </div>
 
     <!-- Start Button -->
-    <button onclick="startGameTest()" class="w-full py-4 rounded-xl font-black text-lg bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 hover:brightness-110 active:scale-[0.99] text-white shadow-xl shadow-indigo-500/25 transition-all flex items-center justify-center gap-2">
+    <button onclick="startGameTest()" class="w-full py-4 rounded-xl font-black text-lg bg-gradient-to-r from-rose-500 via-purple-500 to-indigo-600 hover:brightness-105 active:scale-[0.99] text-white shadow-xl shadow-indigo-300/40 transition-all flex items-center justify-center gap-2">
       <span>테스트 시작하기 (총 10문제)</span>
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
     </button>
   </main>
 
   <!-- SCREEN 2: Gameplay Test Screen (10 Rounds) -->
-  <main id="screenGame" class="hidden w-full max-w-3xl mx-auto px-4 py-4 sm:py-5 flex-1 flex flex-col gap-4">
+  <main id="screenGame" class="hidden w-full max-w-3xl mx-auto px-4 py-4 sm:py-6 flex-1 flex flex-col gap-4">
     
     <!-- Game Progress & Metadata Bar -->
-    <div class="flex items-center justify-between text-xs bg-slate-900/70 border border-slate-800 rounded-2xl px-4 py-2.5">
+    <div class="flex items-center justify-between text-xs bg-white/80 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-2.5 shadow-sm">
       <div class="flex items-center gap-2">
-        <span id="gameModeBadge" class="px-2 py-0.5 rounded-full font-bold bg-indigo-500/20 text-indigo-300">💡 빛 모드 (RGB)</span>
-        <span id="gameDiffBadge" class="px-2 py-0.5 rounded-full font-bold bg-slate-800 text-slate-300">초보 (0~3)</span>
+        <span id="gameModeBadge" class="px-2.5 py-0.5 rounded-full font-bold bg-indigo-100 text-indigo-700 border border-indigo-200">💡 빛 모드 (RGB)</span>
+        <span id="gameDiffBadge" class="px-2.5 py-0.5 rounded-full font-bold bg-slate-100 text-slate-700 border border-slate-200">초보 (0~3)</span>
       </div>
       <!-- Real-time Preview Toggle -->
       <label class="flex items-center gap-2 cursor-pointer select-none">
-        <span class="text-slate-400 font-medium">실시간 미리보기</span>
+        <span class="text-slate-600 font-medium">실시간 미리보기</span>
         <div class="relative">
           <input type="checkbox" id="previewToggle" checked class="sr-only peer" onchange="togglePreview()">
-          <div class="w-8 h-4 bg-slate-700 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-indigo-600"></div>
+          <div class="w-8 h-4 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-indigo-600"></div>
         </div>
       </label>
     </div>
 
     <!-- Dual Swatches Canvas Display -->
-    <div class="bg-slate-900/70 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl">
+    <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-4 sm:p-5 shadow-lg shadow-slate-200/50">
       <div class="grid grid-cols-2 gap-3 sm:gap-5">
         <!-- Target Color -->
         <div class="flex flex-col items-center">
-          <div id="targetColorBox" class="w-full aspect-[4/3] rounded-2xl border-2 border-slate-700/80 shadow-inner flex flex-col items-center justify-center transition-all duration-300 relative overflow-hidden">
-            <span class="absolute top-2 left-2 text-[11px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-full bg-black/60 text-white backdrop-blur-md">Target</span>
+          <div id="targetColorBox" class="w-full aspect-[4/3] rounded-2xl border-2 border-slate-200 shadow-inner flex flex-col items-center justify-center transition-all duration-300 relative overflow-hidden">
+            <span class="absolute top-2 left-2 text-[11px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-slate-900/70 text-white backdrop-blur-md shadow-xs">Target</span>
           </div>
-          <span class="text-xs font-bold text-slate-300 mt-2">목표 색상</span>
+          <span class="text-xs font-bold text-slate-700 mt-2">목표 색상</span>
         </div>
 
         <!-- My Mixed Color -->
         <div class="flex flex-col items-center">
-          <div id="currentColorBox" class="w-full aspect-[4/3] rounded-2xl border-2 border-slate-700/80 shadow-inner flex flex-col items-center justify-center transition-all duration-300 relative overflow-hidden">
-            <span class="absolute top-2 left-2 text-[11px] font-semibold tracking-wider uppercase px-2 py-0.5 rounded-full bg-black/60 text-white backdrop-blur-md">My Mix</span>
+          <div id="currentColorBox" class="w-full aspect-[4/3] rounded-2xl border-2 border-slate-200 shadow-inner flex flex-col items-center justify-center transition-all duration-300 relative overflow-hidden">
+            <span class="absolute top-2 left-2 text-[11px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-slate-900/70 text-white backdrop-blur-md shadow-xs">My Mix</span>
             <!-- Blind Mask Overlay -->
-            <div id="blindMask" class="hidden absolute inset-0 bg-slate-800/95 flex flex-col items-center justify-center text-slate-400 backdrop-blur-sm">
+            <div id="blindMask" class="hidden absolute inset-0 bg-slate-100/95 flex flex-col items-center justify-center text-slate-500 backdrop-blur-sm">
               <span class="text-2xl mb-1">🙈</span>
-              <span class="text-xs font-bold">블라인드 조색 중</span>
+              <span class="text-xs font-bold text-slate-600">블라인드 조색 중</span>
             </div>
           </div>
-          <span class="text-xs font-bold text-slate-300 mt-2">내가 만든 색</span>
+          <span class="text-xs font-bold text-slate-700 mt-2">내가 만든 색</span>
         </div>
       </div>
 
       <!-- Hint Banner Toast (Dynamic) -->
-      <div id="hintToast" class="hidden mt-4 p-3 rounded-xl bg-amber-500/15 border border-amber-500/30 text-amber-200 text-xs sm:text-sm font-semibold flex items-center justify-between animate-pulse-subtle">
+      <div id="hintToast" class="hidden mt-4 p-3 rounded-xl bg-amber-50 border border-amber-300 text-amber-900 text-xs sm:text-sm font-semibold flex items-center justify-between shadow-sm animate-pulse-subtle">
         <div class="flex items-center gap-2">
           <span class="text-base">💡</span>
           <span id="hintToastText">힌트 내용이 여기에 표시됩니다.</span>
         </div>
-        <button onclick="dismissHintToast()" class="text-amber-400 hover:text-white text-xs px-2 py-0.5 rounded bg-black/30">닫기</button>
+        <button onclick="dismissHintToast()" class="text-amber-800 hover:text-slate-900 text-xs px-2 py-0.5 rounded bg-amber-200/70 font-bold">닫기</button>
       </div>
     </div>
 
     <!-- Sliders / Controls (3 Channels) -->
-    <div class="bg-slate-900/60 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-lg flex flex-col gap-4">
+    <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-4 sm:p-5 shadow-lg shadow-slate-200/50 flex flex-col gap-4">
       <!-- Channel 1 -->
       <div class="space-y-1.5">
         <div class="flex justify-between items-center text-xs sm:text-sm">
-          <span id="ch1Label" class="font-bold flex items-center gap-1.5 text-rose-400">
-            <span id="ch1Dot" class="w-3 h-3 rounded-full bg-rose-500"></span>
+          <span id="ch1Label" class="font-bold flex items-center gap-1.5 text-rose-600">
+            <span id="ch1Dot" class="w-3 h-3 rounded-full bg-rose-500 shadow-xs"></span>
             <span id="ch1Title">RED (빨강)</span>
           </span>
-          <span class="mono font-bold text-sm sm:text-base text-slate-200" id="ch1ValueDisplay">0</span>
+          <span class="mono font-bold text-sm sm:text-base text-slate-700" id="ch1ValueDisplay">0</span>
         </div>
         <div class="flex items-center gap-2">
-          <button onclick="stepChannel(1, -1)" id="ch1Minus" class="w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 border-rose-800/50">-</button>
+          <button onclick="stepChannel(1, -1)" id="ch1Minus" class="w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200 shadow-xs">-</button>
           <div id="ch1ChipsContainer" class="flex-1 flex gap-1.5 overflow-x-auto py-1 chips-scroll"></div>
-          <button onclick="stepChannel(1, 1)" id="ch1Plus" class="w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 border-rose-800/50">+</button>
+          <button onclick="stepChannel(1, 1)" id="ch1Plus" class="w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200 shadow-xs">+</button>
         </div>
       </div>
 
       <!-- Channel 2 -->
       <div class="space-y-1.5">
         <div class="flex justify-between items-center text-xs sm:text-sm">
-          <span id="ch2Label" class="font-bold flex items-center gap-1.5 text-emerald-400">
-            <span id="ch2Dot" class="w-3 h-3 rounded-full bg-emerald-500"></span>
+          <span id="ch2Label" class="font-bold flex items-center gap-1.5 text-emerald-600">
+            <span id="ch2Dot" class="w-3 h-3 rounded-full bg-emerald-500 shadow-xs"></span>
             <span id="ch2Title">GREEN (초록)</span>
           </span>
-          <span class="mono font-bold text-sm sm:text-base text-slate-200" id="ch2ValueDisplay">0</span>
+          <span class="mono font-bold text-sm sm:text-base text-slate-700" id="ch2ValueDisplay">0</span>
         </div>
         <div class="flex items-center gap-2">
-          <button onclick="stepChannel(2, -1)" id="ch2Minus" class="w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border bg-emerald-950/60 hover:bg-emerald-900/80 text-emerald-300 border-emerald-800/50">-</button>
+          <button onclick="stepChannel(2, -1)" id="ch2Minus" class="w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200 shadow-xs">-</button>
           <div id="ch2ChipsContainer" class="flex-1 flex gap-1.5 overflow-x-auto py-1 chips-scroll"></div>
-          <button onclick="stepChannel(2, 1)" id="ch2Plus" class="w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border bg-emerald-950/60 hover:bg-emerald-900/80 text-emerald-300 border-emerald-800/50">+</button>
+          <button onclick="stepChannel(2, 1)" id="ch2Plus" class="w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200 shadow-xs">+</button>
         </div>
       </div>
 
       <!-- Channel 3 -->
       <div class="space-y-1.5">
         <div class="flex justify-between items-center text-xs sm:text-sm">
-          <span id="ch3Label" class="font-bold flex items-center gap-1.5 text-sky-400">
-            <span id="ch3Dot" class="w-3 h-3 rounded-full bg-sky-500"></span>
+          <span id="ch3Label" class="font-bold flex items-center gap-1.5 text-blue-600">
+            <span id="ch3Dot" class="w-3 h-3 rounded-full bg-blue-500 shadow-xs"></span>
             <span id="ch3Title">BLUE (파랑)</span>
           </span>
-          <span class="mono font-bold text-sm sm:text-base text-slate-200" id="ch3ValueDisplay">0</span>
+          <span class="mono font-bold text-sm sm:text-base text-slate-700" id="ch3ValueDisplay">0</span>
         </div>
         <div class="flex items-center gap-2">
-          <button onclick="stepChannel(3, -1)" id="ch3Minus" class="w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border bg-sky-950/60 hover:bg-sky-900/80 text-sky-300 border-sky-800/50">-</button>
+          <button onclick="stepChannel(3, -1)" id="ch3Minus" class="w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200 shadow-xs">-</button>
           <div id="ch3ChipsContainer" class="flex-1 flex gap-1.5 overflow-x-auto py-1 chips-scroll"></div>
-          <button onclick="stepChannel(3, 1)" id="ch3Plus" class="w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border bg-sky-950/60 hover:bg-sky-900/80 text-sky-300 border-sky-800/50">+</button>
+          <button onclick="stepChannel(3, 1)" id="ch3Plus" class="w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200 shadow-xs">+</button>
         </div>
       </div>
     </div>
@@ -338,12 +397,12 @@
     <!-- Bottom Actions: Hint & Submit -->
     <div class="grid grid-cols-3 gap-3">
       <!-- Hint Button -->
-      <button onclick="requestHint()" class="col-span-1 py-3.5 px-3 rounded-xl font-bold text-xs sm:text-sm bg-slate-800 hover:bg-slate-700 border border-amber-500/30 text-amber-300 active:scale-98 transition-all flex items-center justify-center gap-1.5 shadow-md">
+      <button onclick="requestHint()" class="col-span-1 py-3.5 px-3 rounded-xl font-bold text-xs sm:text-sm bg-white hover:bg-amber-50 border border-amber-300 text-amber-800 active:scale-98 transition-all flex items-center justify-center gap-1.5 shadow-sm">
         <span>💡 힌트 받기</span>
       </button>
 
       <!-- Submit Button -->
-      <button onclick="submitRound()" class="col-span-2 py-3.5 px-4 rounded-xl font-extrabold text-sm sm:text-base bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white shadow-lg shadow-indigo-500/25 active:scale-98 transition-all hover:brightness-110 flex items-center justify-center gap-2">
+      <button onclick="submitRound()" class="col-span-2 py-3.5 px-4 rounded-xl font-extrabold text-sm sm:text-base bg-gradient-to-r from-rose-500 via-purple-500 to-indigo-600 text-white shadow-lg shadow-indigo-300/40 active:scale-98 transition-all hover:brightness-105 flex items-center justify-center gap-2">
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"></path></svg>
         <span>정답 확인하기</span>
       </button>
@@ -354,133 +413,141 @@
   <main id="screenReport" class="hidden w-full max-w-3xl mx-auto px-4 py-6 flex-1 flex flex-col gap-5">
     
     <!-- Report Top Header Card -->
-    <div class="bg-gradient-to-br from-slate-900 via-slate-900/90 to-indigo-950/40 border border-slate-800 rounded-3xl p-6 text-center relative overflow-hidden shadow-2xl">
-      <div class="absolute -top-12 -right-12 w-40 h-40 bg-indigo-500/10 rounded-full blur-3xl pointer-events-none"></div>
+    <div class="bg-white/90 backdrop-blur-md border border-white/80 rounded-3xl p-6 text-center relative overflow-hidden shadow-xl shadow-slate-200/60">
+      <div class="absolute -top-12 -right-12 w-44 h-44 bg-rose-200/40 rounded-full blur-2xl pointer-events-none"></div>
+      <div class="absolute -bottom-12 -left-12 w-44 h-44 bg-indigo-200/40 rounded-full blur-2xl pointer-events-none"></div>
       
-      <div class="inline-block px-3 py-1 rounded-full bg-indigo-500/20 text-indigo-300 text-xs font-bold mb-3">
+      <div class="inline-block px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 text-xs font-bold mb-3 border border-indigo-200/80 shadow-xs">
         종합 테스트 완료 리포트
       </div>
-      <h2 id="reportTierTitle" class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-indigo-200 to-pink-300 mb-2">
+      <h2 id="reportTierTitle" class="text-3xl sm:text-4xl font-black text-transparent bg-clip-text bg-gradient-to-r from-rose-600 via-purple-600 to-indigo-700 mb-2">
         전문 디자이너급 색감각
       </h2>
-      <p id="reportTierDescription" class="text-sm text-slate-300 max-w-md mx-auto leading-relaxed">
+      <p id="reportTierDescription" class="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
         미세한 색조 차이를 즉각적으로 캐치하는 정밀한 시지각을 보유하고 있습니다.
       </p>
 
       <!-- Big Percentile Badge -->
-      <div class="mt-5 inline-flex items-baseline gap-1.5 px-5 py-2.5 rounded-2xl bg-slate-800/80 border border-slate-700/80 shadow-lg">
-        <span class="text-xs text-slate-400 font-semibold">당신의 색감 순위:</span>
-        <span class="text-sm font-bold text-indigo-400">상위</span>
-        <span id="reportPercentile" class="text-3xl font-black text-white mono tracking-tight">4.8%</span>
+      <div class="mt-5 inline-flex items-baseline gap-1.5 px-5 py-2.5 rounded-2xl bg-slate-50 border border-slate-200 shadow-sm">
+        <span class="text-xs text-slate-500 font-semibold">당신의 색감 순위:</span>
+        <span class="text-sm font-bold text-indigo-600">상위</span>
+        <span id="reportPercentile" class="text-3xl font-black text-slate-900 mono tracking-tight">4.8%</span>
       </div>
     </div>
 
     <!-- Summary 4 Statistics Cards -->
     <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
-      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 text-center">
-        <span class="text-[11px] text-slate-400 block mb-1">평균 일치율</span>
-        <span id="statAvgAccuracy" class="mono text-xl sm:text-2xl font-black text-emerald-400">92.4%</span>
+      <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 text-center shadow-sm">
+        <span class="text-[11px] text-slate-500 block mb-1">평균 일치율</span>
+        <span id="statAvgAccuracy" class="mono text-xl sm:text-2xl font-black text-emerald-600">92.4%</span>
       </div>
-      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 text-center">
-        <span class="text-[11px] text-slate-400 block mb-1">100% 정답 개수</span>
-        <span id="statPerfectCount" class="mono text-xl sm:text-2xl font-black text-amber-400">4 / 10</span>
+      <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 text-center shadow-sm">
+        <span class="text-[11px] text-slate-500 block mb-1">100% 정답 개수</span>
+        <span id="statPerfectCount" class="mono text-xl sm:text-2xl font-black text-amber-600">4 / 10</span>
       </div>
-      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 text-center">
-        <span class="text-[11px] text-slate-400 block mb-1">힌트 사용 횟수</span>
-        <span id="statTotalHints" class="mono text-xl sm:text-2xl font-black text-indigo-400">3회</span>
+      <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 text-center shadow-sm">
+        <span class="text-[11px] text-slate-500 block mb-1">힌트 사용 횟수</span>
+        <span id="statTotalHints" class="mono text-xl sm:text-2xl font-black text-indigo-600">3회</span>
       </div>
-      <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-3.5 text-center">
-        <span class="text-[11px] text-slate-400 block mb-1">소요 시간</span>
-        <span id="statTimeSpent" class="mono text-xl sm:text-2xl font-black text-slate-200">1분 42초</span>
+      <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 text-center shadow-sm">
+        <span class="text-[11px] text-slate-500 block mb-1">소요 시간</span>
+        <span id="statTimeSpent" class="mono text-xl sm:text-2xl font-black text-slate-800">1분 42초</span>
       </div>
     </div>
 
     <!-- Color Perception Normal Distribution Chart -->
-    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 sm:p-5 shadow-xl">
+    <div class="bg-white/90 backdrop-blur-md border border-white/80 rounded-2xl p-4 sm:p-5 shadow-lg shadow-slate-200/50">
       <div class="flex items-center justify-between mb-2">
-        <h3 class="text-sm sm:text-base font-bold text-white flex items-center gap-2">
+        <h3 class="text-sm sm:text-base font-bold text-slate-800 flex items-center gap-2">
           <span>📊 색 인지능력 분포표 (정규분포)</span>
         </h3>
-        <span class="text-[11px] text-slate-400 mono">모집단 μ=72%, σ=12%</span>
+        <span class="text-[11px] text-slate-500 mono">모집단 μ=72%, σ=12%</span>
       </div>
-      <p class="text-xs text-slate-400 mb-3 leading-relaxed">
+      <p class="text-xs text-slate-500 mb-3 leading-relaxed">
         일반인 표본 데이터를 정규분포(Bell Curve)로 모델링하여 계산했습니다. 힌트 사용 시 페널티(-1.5%/회)가 보정되어 최종 점수에 반영됩니다.
       </p>
 
       <!-- Chart Canvas Container -->
-      <div class="w-full relative bg-slate-950/60 rounded-xl p-2 border border-slate-800">
+      <div class="w-full relative bg-slate-50/80 rounded-xl p-2 border border-slate-200">
         <canvas id="bellCurveCanvas" class="w-full h-44 sm:h-52 block"></canvas>
       </div>
     </div>
 
     <!-- Round by Round Log Table -->
-    <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-4 shadow-xl">
-      <h3 class="text-sm font-bold text-white mb-3">10문제 상세 결과표</h3>
+    <div class="bg-white/90 backdrop-blur-md border border-white/80 rounded-2xl p-4 shadow-lg shadow-slate-200/50">
+      <h3 class="text-sm font-bold text-slate-800 mb-3">10문제 상세 결과표</h3>
       <div id="roundsSummaryGrid" class="grid grid-cols-2 sm:grid-cols-5 gap-2 text-xs">
         <!-- Rendered by JS -->
       </div>
     </div>
 
-    <!-- Final Action Buttons -->
-    <div class="grid grid-cols-2 gap-3 pb-4">
-      <button onclick="copyShareText()" id="shareBtn" class="py-3.5 px-4 rounded-xl font-bold text-sm bg-slate-800 hover:bg-slate-700 border border-slate-700 text-slate-200 active:scale-98 transition-all flex items-center justify-center gap-2">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
-        <span id="shareBtnText">결과 복사하기</span>
+    <!-- Final Action Buttons: Image Card Share, Text Copy, Retest -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pb-4">
+      <!-- 1. Instagram / Kakao Card Share (Hero Action) -->
+      <button onclick="openShareCardModal()" id="cardShareBtn" class="py-3.5 px-3 rounded-xl font-extrabold text-sm bg-gradient-to-r from-rose-500 via-purple-500 to-indigo-600 hover:brightness-105 active:scale-98 text-white shadow-lg shadow-indigo-300/40 transition-all flex items-center justify-center gap-2">
+        <span>📸 인스타/카톡 카드 저장</span>
       </button>
 
-      <button onclick="goToLobby()" class="py-3.5 px-4 rounded-xl font-extrabold text-sm bg-gradient-to-r from-indigo-500 to-pink-500 hover:brightness-110 active:scale-98 text-white shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2">
+      <!-- 2. Clipboard Text Copy -->
+      <button onclick="copyShareText()" id="shareBtn" class="py-3.5 px-3 rounded-xl font-bold text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-2 shadow-sm">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
+        <span id="shareBtnText">텍스트 결과 복사</span>
+      </button>
+
+      <!-- 3. Retest / Lobby -->
+      <button onclick="goToLobby()" class="py-3.5 px-3 rounded-xl font-bold text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-2 shadow-sm">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
         <span>다시 도전하기</span>
       </button>
     </div>
   </main>
 
-  <!-- Round Result Popup Modal -->
-  <div id="roundResultModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
-    <div class="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 w-full max-w-sm sm:max-w-md shadow-2xl text-center transform transition-all animate-in fade-in zoom-in duration-200">
+  <!-- MODAL 1: Round Result Popup Modal -->
+  <div id="roundResultModal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white/95 border border-white/80 rounded-3xl p-5 sm:p-6 w-full max-w-sm sm:max-w-md shadow-2xl text-center transform transition-all animate-in fade-in zoom-in duration-200">
       
-      <div id="modalScoreBadge" class="text-3xl sm:text-4xl font-black mb-1">
+      <div id="modalScoreBadge" class="text-3xl sm:text-4xl font-black mb-1 text-emerald-600">
         100% 일치!
       </div>
-      <p id="modalSubtext" class="text-xs sm:text-sm text-slate-300 mb-4">
+      <p id="modalSubtext" class="text-xs sm:text-sm text-slate-600 mb-4">
         완벽하게 동일한 색상을 만들어냈습니다!
       </p>
 
       <!-- Visual Color Comparison in Modal -->
       <div class="grid grid-cols-2 gap-3 mb-4">
         <div class="flex flex-col items-center">
-          <div id="modalTargetBox" class="w-full h-16 rounded-xl border border-slate-700 shadow-inner"></div>
-          <span class="text-[11px] text-slate-400 mt-1 font-semibold">목표 색상</span>
-          <span id="modalTargetValues" class="mono text-xs font-bold text-amber-300 mt-0.5">R:2 G:1 B:3</span>
+          <div id="modalTargetBox" class="w-full h-16 rounded-xl border border-slate-200 shadow-inner"></div>
+          <span class="text-[11px] text-slate-500 mt-1 font-semibold">목표 색상</span>
+          <span id="modalTargetValues" class="mono text-xs font-bold text-amber-700 mt-0.5">R:2 G:1 B:3</span>
         </div>
         <div class="flex flex-col items-center">
-          <div id="modalUserBox" class="w-full h-16 rounded-xl border border-slate-700 shadow-inner"></div>
-          <span class="text-[11px] text-slate-400 mt-1 font-semibold">내 조색</span>
-          <span id="modalUserValues" class="mono text-xs font-bold text-sky-300 mt-0.5">R:2 G:1 B:2</span>
+          <div id="modalUserBox" class="w-full h-16 rounded-xl border border-slate-200 shadow-inner"></div>
+          <span class="text-[11px] text-slate-500 mt-1 font-semibold">내 조색</span>
+          <span id="modalUserValues" class="mono text-xs font-bold text-indigo-700 mt-0.5">R:2 G:1 B:2</span>
         </div>
       </div>
 
       <!-- Diff Breakdown details -->
-      <div id="modalDiffBreakdown" class="bg-slate-950/60 rounded-xl p-2.5 text-xs text-slate-300 mb-5 border border-slate-800/80">
+      <div id="modalDiffBreakdown" class="bg-slate-50 rounded-xl p-2.5 text-xs text-slate-600 mb-4 border border-slate-200">
         <!-- Diff text -->
       </div>
 
       <!-- Animal Color Vision Trivia Card -->
-      <div id="modalTriviaCard" class="bg-gradient-to-r from-emerald-950/40 via-slate-950/60 to-indigo-950/40 border border-emerald-500/20 rounded-2xl p-3 text-left mb-5 shadow-md">
+      <div id="modalTriviaCard" class="bg-emerald-50/80 border border-emerald-200 rounded-2xl p-3 text-left mb-5 shadow-xs">
         <div class="flex items-center gap-1.5 mb-1.5">
-          <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/20 text-emerald-300 font-bold flex items-center gap-1">
+          <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-200/70 text-emerald-800 font-bold flex items-center gap-1">
             <span>🐾</span>
             <span>색채 토막상식</span>
           </span>
-          <span id="triviaAnimalTag" class="text-[11px] font-semibold text-slate-400"></span>
+          <span id="triviaAnimalTag" class="text-[11px] font-semibold text-slate-600"></span>
         </div>
-        <p id="triviaFactText" class="text-xs text-slate-200 leading-relaxed font-normal">
+        <p id="triviaFactText" class="text-xs text-slate-700 leading-relaxed font-normal">
           <!-- Trivia text inserted here -->
         </p>
       </div>
 
       <!-- Next Round / View Report Button inside popup -->
-      <button onclick="advanceNextRound()" id="modalNextBtn" class="w-full py-3.5 rounded-xl font-black text-base bg-gradient-to-r from-indigo-500 to-pink-500 hover:brightness-110 active:scale-98 text-white shadow-lg shadow-indigo-500/25 transition-all flex items-center justify-center gap-2">
+      <button onclick="advanceNextRound()" id="modalNextBtn" class="w-full py-3.5 rounded-xl font-black text-base bg-gradient-to-r from-rose-500 via-purple-500 to-indigo-600 hover:brightness-105 active:scale-98 text-white shadow-lg shadow-indigo-300/40 transition-all flex items-center justify-center gap-2">
         <span id="modalNextBtnText">다음 문제로 이동 (2/10)</span>
         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
       </button>
@@ -488,20 +555,210 @@
     </div>
   </div>
 
+  <!-- MODAL 2: Instagram Story & Feed Square Card Share Modal -->
+  <div id="shareCardModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-3xl p-5 sm:p-6 w-full max-w-md shadow-2xl text-center transform transition-all animate-in fade-in zoom-in duration-200 my-auto">
+      
+      <!-- Modal Header -->
+      <div class="flex items-center justify-between mb-4">
+        <h3 class="text-base font-extrabold text-slate-800 flex items-center gap-2">
+          <span>📸</span>
+          <span>결과 카드 공유 & 다운로드</span>
+        </h3>
+        <button onclick="closeShareCardModal()" class="w-8 h-8 rounded-full bg-slate-100 hover:bg-slate-200 text-slate-500 flex items-center justify-center text-sm font-bold transition-all">✕</button>
+      </div>
+
+      <p class="text-xs text-slate-500 mb-4 text-left">
+        인스타그램 스토리, 피드 및 카카오톡 단톡방에 올리기 좋은 <strong>고화질 인증 카드 이미지</strong>입니다.
+      </p>
+
+      <!-- The Exportable Card Container (Rendered to PNG via html2canvas) -->
+      <div id="shareCardExportContainer" class="p-5 sm:p-6 rounded-3xl border border-slate-200 shadow-md text-center relative overflow-hidden mb-5 text-slate-800" style="background: linear-gradient(145deg, #fff7f2 0%, #ffffff 40%, #f4f7fe 100%);">
+        
+        <!-- Ambient subtle background decor for exported card -->
+        <div class="absolute -top-16 -right-16 w-36 h-36 bg-rose-200/50 rounded-full blur-2xl pointer-events-none"></div>
+        <div class="absolute -bottom-16 -left-16 w-36 h-36 bg-indigo-200/50 rounded-full blur-2xl pointer-events-none"></div>
+
+        <!-- Card Top Branding Bar -->
+        <div class="flex items-center justify-between mb-4 border-b border-slate-200/80 pb-3 relative z-10">
+          <div class="flex items-center gap-2">
+            <div class="w-7 h-7 rounded-xl bg-gradient-to-tr from-amber-400 via-rose-400 to-indigo-500 flex items-center justify-center text-sm text-white shadow-xs">🎯</div>
+            <div class="text-left">
+              <div class="text-xs font-black tracking-tight text-slate-800 leading-tight">색감 감각 테스트</div>
+              <div class="text-[9px] text-slate-500 font-medium leading-tight">Color Perception Lab</div>
+            </div>
+          </div>
+          <span id="cardModeBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 border border-indigo-200/80 shadow-xs">빛 모드 (RGB)</span>
+        </div>
+
+        <!-- Tier & Percentile Spotlight -->
+        <div class="mb-4 relative z-10">
+          <div class="inline-block px-3 py-0.5 rounded-full bg-slate-900/5 text-slate-600 text-[10px] font-bold mb-2 border border-slate-200/60">
+            종합 테스트 인증서
+          </div>
+          <h3 id="cardTierTitle" class="text-xl sm:text-2xl font-black text-slate-900 tracking-tight mb-1">
+            전문 디자이너급 색감각
+          </h3>
+          <p id="cardTierSubtitle" class="text-[11px] sm:text-xs text-slate-600 mb-3 px-2 line-clamp-2">
+            미세한 색조 차이를 즉각적으로 캐치하는 정밀한 시지각을 보유하고 있습니다.
+          </p>
+
+          <!-- Percentile Highlight Pill -->
+          <div class="inline-flex items-baseline gap-1.5 px-4 py-2 rounded-2xl bg-white border border-slate-200 shadow-sm">
+            <span class="text-xs text-slate-500 font-semibold">나의 색감 순위:</span>
+            <span class="text-xs font-bold text-indigo-600">상위</span>
+            <span id="cardPercentile" class="mono text-2xl font-black text-rose-600">4.8%</span>
+          </div>
+        </div>
+
+        <!-- 3 Stat Badges -->
+        <div class="grid grid-cols-3 gap-2 mb-4 relative z-10">
+          <div class="bg-white/90 border border-slate-200/80 rounded-xl p-2 text-center shadow-xs">
+            <span class="text-[10px] text-slate-500 block">평균 일치율</span>
+            <span id="cardStatAvg" class="mono text-sm font-black text-emerald-600">92.4%</span>
+          </div>
+          <div class="bg-white/90 border border-slate-200/80 rounded-xl p-2 text-center shadow-xs">
+            <span class="text-[10px] text-slate-500 block">퍼펙트 정답</span>
+            <span id="cardStatPerfect" class="mono text-sm font-black text-amber-600">4 / 10</span>
+          </div>
+          <div class="bg-white/90 border border-slate-200/80 rounded-xl p-2 text-center shadow-xs">
+            <span class="text-[10px] text-slate-500 block">힌트 사용</span>
+            <span id="cardStatHints" class="mono text-sm font-black text-indigo-600">3회</span>
+          </div>
+        </div>
+
+        <!-- 10-Question Mini Palette Strip -->
+        <div class="mb-3 bg-white/80 border border-slate-200/80 rounded-xl p-2.5 shadow-xs relative z-10">
+          <div class="flex items-center justify-between text-[10px] text-slate-500 font-semibold mb-1.5">
+            <span>10문제 조색 팔레트 기록</span>
+            <span class="text-[9px] text-slate-400">목표 vs 내 조색</span>
+          </div>
+          <div id="cardPaletteGrid" class="grid grid-cols-5 gap-1.5">
+            <!-- 10 rounds color comparison rendered by JS -->
+          </div>
+        </div>
+
+        <!-- Card Footer -->
+        <div class="pt-2 border-t border-slate-200/60 flex items-center justify-between text-[10px] text-slate-400 relative z-10">
+          <span>#ColorLab #색감테스트 #색인지</span>
+          <span class="font-semibold text-indigo-600">colorlab.app</span>
+        </div>
+      </div>
+
+      <!-- Action Buttons inside Share Modal -->
+      <div class="grid grid-cols-2 gap-2.5">
+        <button onclick="downloadShareCardImage()" id="downloadCardBtn" class="py-3 px-3 rounded-xl font-extrabold text-xs sm:text-sm bg-gradient-to-r from-rose-500 to-indigo-600 text-white shadow-md shadow-indigo-200 hover:brightness-105 active:scale-98 transition-all flex items-center justify-center gap-1.5">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          <span>이미지 저장 (PNG)</span>
+        </button>
+
+        <button onclick="shareCardNative()" id="nativeShareCardBtn" class="py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 border border-slate-200">
+          <span>📱 바로 공유하기</span>
+        </button>
+      </div>
+
+    </div>
+  </div>
+
   <!-- Footer -->
-  <footer class="w-full border-t border-slate-800/80 py-3 text-center text-xs text-slate-500">
+  <footer class="w-full border-t border-slate-200/60 py-3 text-center text-xs text-slate-500">
     <span id="footerNote">색감 감각 테스트: Color Lab • 정규분포 색 인지능력 분석기</span>
   </footer>
 
   <!-- Application Logic -->
   <script>
+    // --- Light Pastel Themes Palette Presets ---
+    const themes = [
+      {
+        id: 'peach',
+        name: '선셋 피치 (Sunset Peach)',
+        bodyBg: '#fef7f2',
+        blobs: ['bg-rose-300/40', 'bg-amber-300/35', 'bg-pink-300/35'],
+        heroBadge: 'bg-rose-100 text-rose-700 border-rose-200/80',
+        logoGrad: 'from-amber-400 via-rose-400 to-pink-500'
+      },
+      {
+        id: 'mint',
+        name: '민트 브리즈 (Mint & Emerald)',
+        bodyBg: '#f2fbf7',
+        blobs: ['bg-emerald-300/35', 'bg-teal-300/35', 'bg-sky-200/40'],
+        heroBadge: 'bg-emerald-100 text-emerald-800 border-emerald-200/80',
+        logoGrad: 'from-teal-400 via-emerald-400 to-cyan-500'
+      },
+      {
+        id: 'sky',
+        name: '파스텔 오션 (Sky & Lavender)',
+        bodyBg: '#f4f8fe',
+        blobs: ['bg-sky-300/40', 'bg-indigo-300/30', 'bg-blue-300/35'],
+        heroBadge: 'bg-sky-100 text-sky-800 border-sky-200/80',
+        logoGrad: 'from-sky-400 via-indigo-400 to-blue-500'
+      },
+      {
+        id: 'berry',
+        name: '베리 마카롱 (Berry & Lilac)',
+        bodyBg: '#faf4fb',
+        blobs: ['bg-fuchsia-300/35', 'bg-pink-300/40', 'bg-purple-300/35'],
+        heroBadge: 'bg-purple-100 text-purple-800 border-purple-200/80',
+        logoGrad: 'from-pink-400 via-fuchsia-400 to-purple-500'
+      },
+      {
+        id: 'citrus',
+        name: '허니 레몬 (Honey & Lime)',
+        bodyBg: '#fdfbf1',
+        blobs: ['bg-yellow-300/40', 'bg-lime-300/35', 'bg-amber-300/35'],
+        heroBadge: 'bg-amber-100 text-amber-900 border-amber-200/80',
+        logoGrad: 'from-amber-400 via-yellow-400 to-emerald-400'
+      },
+      {
+        id: 'lavender',
+        name: '라벤더 클라우드 (Lavender Cloud)',
+        bodyBg: '#f7f5fd',
+        blobs: ['bg-indigo-300/35', 'bg-violet-300/35', 'bg-rose-200/40'],
+        heroBadge: 'bg-violet-100 text-violet-800 border-violet-200/80',
+        logoGrad: 'from-violet-400 via-purple-400 to-indigo-500'
+      }
+    ];
+
+    let currentThemeIndex = 0;
+
+    function applyTheme(themeIdx) {
+      currentThemeIndex = (themeIdx + themes.length) % themes.length;
+      const theme = themes[currentThemeIndex];
+
+      // Update Body Background
+      document.body.style.backgroundColor = theme.bodyBg;
+
+      // Update Floating Background Blobs
+      const b1 = document.getElementById('ambientBlob1');
+      const b2 = document.getElementById('ambientBlob2');
+      const b3 = document.getElementById('ambientBlob3');
+      if (b1) b1.className = `absolute -top-24 -left-24 w-96 h-96 rounded-full blur-3xl opacity-50 animate-float-1 transition-all duration-1000 ${theme.blobs[0]}`;
+      if (b2) b2.className = `absolute top-1/3 -right-24 w-[28rem] h-[28rem] rounded-full blur-3xl opacity-45 animate-float-2 transition-all duration-1000 ${theme.blobs[1]}`;
+      if (b3) b3.className = `absolute -bottom-24 left-1/4 w-[32rem] h-[32rem] rounded-full blur-3xl opacity-40 animate-float-3 transition-all duration-1000 ${theme.blobs[2]}`;
+
+      // Update Header Theme Badge & Hero Badge
+      const themeTag = document.getElementById('themeNameTag');
+      if (themeTag) themeTag.innerText = theme.name.split(' ')[0];
+
+      const heroBadge = document.getElementById('heroBadge');
+      if (heroBadge) heroBadge.className = `inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3 shadow-xs ${theme.heroBadge}`;
+
+      const headerLogo = document.getElementById('headerLogo');
+      if (headerLogo) headerLogo.className = `w-8 h-8 rounded-xl bg-gradient-to-tr ${theme.logoGrad} flex items-center justify-center shadow-md text-base text-white`;
+    }
+
+    function cycleTheme() {
+      playTone(580, 'sine', 0.05);
+      applyTheme(currentThemeIndex + 1);
+    }
+
     // Constants & Configuration
     const TOTAL_ROUNDS = 10;
     const POPULATION_MEAN = 72; // Average accuracy % of general population
     const POPULATION_SD = 12;   // Standard deviation %
     const HINT_PENALTY = 1.5;   // Score deduction per hint for percentile calc
 
-    // Animal Color Vision Trivia Pool (15 Fascinating Scientific Facts)
+    // Animal Color Vision Trivia Pool (15 Scientific Facts)
     const animalTriviaList = [
       {
         tag: "🦋 나비의 4원색 시각",
@@ -568,27 +825,27 @@
     let unusedTriviaPool = [];
 
     const diffConfigs = {
-      1: { name: '응애', desc: '0 ~ 1 배율 (2단계, 총 8가지 조합)', color: 'border-emerald-500 bg-emerald-500/20 text-emerald-300' },
-      3: { name: '초보', desc: '0 ~ 3 배율 (4단계, 총 64가지 조합)', color: 'border-indigo-500 bg-indigo-500/20 text-indigo-300' },
-      5: { name: '중수', desc: '0 ~ 5 배율 (6단계, 총 216가지 조합)', color: 'border-yellow-500 bg-yellow-500/20 text-yellow-300' },
-      7: { name: '고수', desc: '0 ~ 7 배율 (8단계, 총 512가지 조합)', color: 'border-orange-500 bg-orange-500/20 text-orange-300' },
-      10: { name: '초고수', desc: '0 ~ 10 배율 (11단계, 총 1,331가지 조합)', color: 'border-rose-500 bg-rose-500/20 text-rose-300' }
+      1: { name: '응애', desc: '0 ~ 1 배율 (2단계, 총 8가지 조합)', color: 'border-emerald-400 bg-emerald-100 text-emerald-800' },
+      3: { name: '초보', desc: '0 ~ 3 배율 (4단계, 총 64가지 조합)', color: 'border-indigo-400 bg-indigo-100 text-indigo-800' },
+      5: { name: '중수', desc: '0 ~ 5 배율 (6단계, 총 216가지 조합)', color: 'border-amber-400 bg-amber-100 text-amber-800' },
+      7: { name: '고수', desc: '0 ~ 7 배율 (8단계, 총 512가지 조합)', color: 'border-orange-400 bg-orange-100 text-orange-800' },
+      10: { name: '초고수', desc: '0 ~ 10 배율 (11단계, 총 1,331가지 조합)', color: 'border-rose-400 bg-rose-100 text-rose-800' }
     };
 
     const modeConfigs = {
       rgb: {
         badge: '💡 빛 모드 (RGB)',
         headerSub: 'RGB 가산혼합 모드',
-        c1: { name: 'RED', kr: '빨강', colorClass: 'text-rose-400', dot: 'bg-rose-500', btnBg: 'bg-rose-950/60 hover:bg-rose-900/80 text-rose-300 border-rose-800/50', chipActive: 'bg-rose-500/25 border-rose-500 text-rose-200' },
-        c2: { name: 'GREEN', kr: '초록', colorClass: 'text-emerald-400', dot: 'bg-emerald-500', btnBg: 'bg-emerald-950/60 hover:bg-emerald-900/80 text-emerald-300 border-emerald-800/50', chipActive: 'bg-emerald-500/25 border-emerald-500 text-emerald-200' },
-        c3: { name: 'BLUE', kr: '파랑', colorClass: 'text-sky-400', dot: 'bg-sky-500', btnBg: 'bg-sky-950/60 hover:bg-sky-900/80 text-sky-300 border-sky-800/50', chipActive: 'bg-sky-500/25 border-sky-500 text-sky-200' }
+        c1: { name: 'RED', kr: '빨강', colorClass: 'text-rose-600', dot: 'bg-rose-500', btnBg: 'bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200', chipActive: 'bg-rose-500 text-white border-rose-600 shadow-sm' },
+        c2: { name: 'GREEN', kr: '초록', colorClass: 'text-emerald-600', dot: 'bg-emerald-500', btnBg: 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200', chipActive: 'bg-emerald-500 text-white border-emerald-600 shadow-sm' },
+        c3: { name: 'BLUE', kr: '파랑', colorClass: 'text-blue-600', dot: 'bg-blue-500', btnBg: 'bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200', chipActive: 'bg-blue-500 text-white border-blue-600 shadow-sm' }
       },
       cmy: {
         badge: '🎨 물감 모드 (CMY)',
         headerSub: 'CMY 감산혼합 모드',
-        c1: { name: 'CYAN', kr: '청록', colorClass: 'text-cyan-400', dot: 'bg-cyan-400', btnBg: 'bg-cyan-950/60 hover:bg-cyan-900/80 text-cyan-300 border-cyan-800/50', chipActive: 'bg-cyan-500/25 border-cyan-400 text-cyan-200' },
-        c2: { name: 'MAGENTA', kr: '자홍', colorClass: 'text-fuchsia-400', dot: 'bg-fuchsia-500', btnBg: 'bg-fuchsia-950/60 hover:bg-fuchsia-900/80 text-fuchsia-300 border-fuchsia-800/50', chipActive: 'bg-fuchsia-500/25 border-fuchsia-400 text-fuchsia-200' },
-        c3: { name: 'YELLOW', kr: '노랑', colorClass: 'text-yellow-400', dot: 'bg-yellow-400', btnBg: 'bg-yellow-950/60 hover:bg-yellow-900/80 text-yellow-300 border-yellow-800/50', chipActive: 'bg-yellow-500/25 border-yellow-400 text-yellow-200' }
+        c1: { name: 'CYAN', kr: '청록', colorClass: 'text-cyan-600', dot: 'bg-cyan-500', btnBg: 'bg-cyan-50 hover:bg-cyan-100 text-cyan-700 border-cyan-200', chipActive: 'bg-cyan-500 text-white border-cyan-600 shadow-sm' },
+        c2: { name: 'MAGENTA', kr: '자홍', colorClass: 'text-fuchsia-600', dot: 'bg-fuchsia-500', btnBg: 'bg-fuchsia-50 hover:bg-fuchsia-100 text-fuchsia-700 border-fuchsia-200', chipActive: 'bg-fuchsia-500 text-white border-fuchsia-600 shadow-sm' },
+        c3: { name: 'YELLOW', kr: '노랑', colorClass: 'text-amber-600', dot: 'bg-amber-400', btnBg: 'bg-amber-50 hover:bg-amber-100 text-amber-800 border-amber-200', chipActive: 'bg-amber-500 text-white border-amber-600 shadow-sm' }
       }
     };
 
@@ -622,6 +879,7 @@
 
     function goToLobby() {
       document.getElementById('roundResultModal').classList.add('hidden');
+      document.getElementById('shareCardModal').classList.add('hidden');
       showScreen('screenLobby');
     }
 
@@ -634,11 +892,11 @@
       const cmyBtn = document.getElementById('lobbyBtnCmy');
 
       if (mode === 'rgb') {
-        rgbBtn.className = 'p-4 rounded-xl border-2 text-left transition-all border-indigo-500 bg-indigo-500/15 relative overflow-hidden group shadow-md';
-        cmyBtn.className = 'p-4 rounded-xl border-2 text-left transition-all border-slate-800 bg-slate-900/40 hover:border-slate-700 relative overflow-hidden group';
+        rgbBtn.className = 'p-4 rounded-xl border-2 text-left transition-all border-indigo-400 bg-indigo-50/70 shadow-sm relative overflow-hidden group';
+        cmyBtn.className = 'p-4 rounded-xl border-2 text-left transition-all border-slate-200 bg-white/70 hover:border-slate-300 relative overflow-hidden group';
       } else {
-        cmyBtn.className = 'p-4 rounded-xl border-2 text-left transition-all border-fuchsia-500 bg-fuchsia-500/15 relative overflow-hidden group shadow-md';
-        rgbBtn.className = 'p-4 rounded-xl border-2 text-left transition-all border-slate-800 bg-slate-900/40 hover:border-slate-700 relative overflow-hidden group';
+        cmyBtn.className = 'p-4 rounded-xl border-2 text-left transition-all border-fuchsia-400 bg-fuchsia-50/70 shadow-sm relative overflow-hidden group';
+        rgbBtn.className = 'p-4 rounded-xl border-2 text-left transition-all border-slate-200 bg-white/70 hover:border-slate-300 relative overflow-hidden group';
       }
     }
 
@@ -647,12 +905,12 @@
       playTone(520, 'sine', 0.05);
 
       document.querySelectorAll('.lobby-diff-btn').forEach(btn => {
-        btn.className = 'lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-slate-800 bg-slate-800/40 text-slate-400 hover:bg-slate-800';
+        btn.className = 'lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white shadow-xs';
       });
 
       const activeBtn = document.getElementById(`lobbyDiff-${lvl}`);
       if (activeBtn) {
-        activeBtn.className = `lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all ${diffConfigs[lvl].color} shadow-md`;
+        activeBtn.className = `lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all ${diffConfigs[lvl].color} shadow-sm`;
       }
       document.getElementById('lobbyDiffDetail').innerText = diffConfigs[lvl].desc;
     }
@@ -686,7 +944,7 @@
       roundsData = [];
       testStartTime = Date.now();
 
-      // Shuffle trivia pool so 10 rounds get 10 fresh trivia facts
+      // Shuffle trivia pool so 10 rounds get fresh trivia facts
       unusedTriviaPool = [...animalTriviaList].sort(() => Math.random() - 0.5);
 
       // Setup UI Badges
@@ -709,13 +967,13 @@
         const ch = cfg[`c${idx}`];
         const label = document.getElementById(`ch${idx}Label`);
         label.className = `font-bold flex items-center gap-1.5 ${ch.colorClass}`;
-        document.getElementById(`ch${idx}Dot`).className = `w-3 h-3 rounded-full ${ch.dot}`;
+        document.getElementById(`ch${idx}Dot`).className = `w-3 h-3 rounded-full ${ch.dot} shadow-xs`;
         document.getElementById(`ch${idx}Title`).innerText = `${ch.name} (${ch.kr})`;
 
         const minusBtn = document.getElementById(`ch${idx}Minus`);
         const plusBtn = document.getElementById(`ch${idx}Plus`);
-        minusBtn.className = `w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border ${ch.btnBg}`;
-        plusBtn.className = `w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border ${ch.btnBg}`;
+        minusBtn.className = `w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border ${ch.btnBg} shadow-xs`;
+        plusBtn.className = `w-9 h-9 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg border ${ch.btnBg} shadow-xs`;
       });
     }
 
@@ -735,7 +993,7 @@
           btn.className = `min-w-[30px] sm:min-w-[34px] h-8 px-1.5 rounded-lg text-xs font-bold transition-all border flex items-center justify-center ${
             userColor[`c${chNum}`] === i
               ? `${activeStyles} shadow-sm scale-105`
-              : 'border-slate-800 bg-slate-800/50 text-slate-400 hover:bg-slate-800'
+              : 'border-slate-200 bg-white text-slate-600 hover:bg-slate-100 shadow-xs'
           }`;
           btn.onclick = () => setChannelValue(chNum, i);
           container.appendChild(btn);
@@ -748,7 +1006,7 @@
       roundStartTime = Date.now();
       dismissHintToast();
 
-      // Generate random target distinct from pure black or white occasionally
+      // Generate random target
       targetColor = {
         c1: Math.floor(Math.random() * (selectedMax + 1)),
         c2: Math.floor(Math.random() * (selectedMax + 1)),
@@ -794,7 +1052,7 @@
           if (userColor[`c${chNum}`] === i) {
             chip.className = `min-w-[30px] sm:min-w-[34px] h-8 px-1.5 rounded-lg text-xs font-bold transition-all border flex items-center justify-center shadow-sm ${activeStyles} scale-105`;
           } else {
-            chip.className = 'min-w-[30px] sm:min-w-[34px] h-8 px-1.5 rounded-lg text-xs font-bold transition-all border flex items-center justify-center border-slate-800 bg-slate-800/50 text-slate-400 hover:bg-slate-800';
+            chip.className = 'min-w-[30px] sm:min-w-[34px] h-8 px-1.5 rounded-lg text-xs font-bold transition-all border flex items-center justify-center border-slate-200 bg-white text-slate-600 hover:bg-slate-100 shadow-xs';
           }
         }
       });
@@ -841,13 +1099,11 @@
       if (wrongChannels.length === 0) {
         textElem.innerHTML = `현재 <strong>모든 색상이 완벽하게 일치</strong>합니다! 바로 [정답 확인]을 누르세요.`;
       } else {
-        // Pick random wrong channel
         const pick = wrongChannels[Math.floor(Math.random() * wrongChannels.length)];
         const isLight = selectedMode === 'rgb';
         const noun = isLight ? '빛' : '물감';
         const absDiff = Math.abs(pick.diff);
 
-        // Qualitative hint without leaking exact step numbers
         if (pick.diff > 0) {
           if (absDiff <= 2) {
             textElem.innerHTML = `[<strong>${pick.name}</strong>] ${noun}이 <strong>조금 많아요</strong>! 살짝 줄여보세요.`;
@@ -916,7 +1172,7 @@
       const d3 = userColor.c3 - targetColor.c3;
       const fmt = (d) => (d === 0 ? '일치' : (d > 0 ? `+${d}` : `${d}`));
 
-      diffDetails.innerHTML = `오차 분석: <span class="font-mono text-slate-200">${labels[0]}(${fmt(d1)}), ${labels[1]}(${fmt(d2)}), ${labels[2]}(${fmt(d3)})</span>`;
+      diffDetails.innerHTML = `오차 분석: <span class="font-mono text-slate-800 font-bold">${labels[0]}(${fmt(d1)}), ${labels[1]}(${fmt(d2)}), ${labels[2]}(${fmt(d3)})</span>`;
 
       // Pick a non-repeating Animal Color Trivia for this round
       if (unusedTriviaPool.length === 0) {
@@ -927,12 +1183,12 @@
       document.getElementById('triviaFactText').innerText = roundTrivia.fact;
 
       if (isPerfect) {
-        scoreBadge.className = 'text-3xl sm:text-4xl font-black mb-1 text-emerald-400';
+        scoreBadge.className = 'text-3xl sm:text-4xl font-black mb-1 text-emerald-600';
         scoreBadge.innerText = '🎉 100% 퍼펙트!';
         subtext.innerText = '목표 색상과 한 치의 오차도 없이 일치합니다!';
         playSuccessChord();
       } else {
-        scoreBadge.className = `text-3xl sm:text-4xl font-black mb-1 ${accuracy >= 85 ? 'text-amber-400' : 'text-rose-400'}`;
+        scoreBadge.className = `text-3xl sm:text-4xl font-black mb-1 ${accuracy >= 85 ? 'text-amber-600' : 'text-rose-600'}`;
         scoreBadge.innerText = `${accuracy}% 일치`;
         subtext.innerText = accuracy >= 85 ? '아주 근접했습니다! 훌륭한 색감각입니다.' : '조금 아쉽네요! 다음 문제에서 만회해 보세요.';
         playTone(280, 'sawtooth', 0.1);
@@ -975,7 +1231,6 @@
       const timeSpentStr = mins > 0 ? `${mins}분 ${secs}초` : `${secs}초`;
 
       // 2. Normal Distribution Percentile with hint penalty
-      // Effective score penalized by hints
       const effectiveScore = Math.max(10, Math.min(100, Math.round((avgAccuracy - (totalHintsUsed * HINT_PENALTY)) * 10) / 10));
       
       // Standard Z-Score: z = (x - mean) / sd
@@ -989,8 +1244,7 @@
         return z >= 0 ? 1 - poly : poly;
       }
 
-      // Top Percentile: e.g. Score > Mean means top X% is smaller (e.g., top 3%)
-      // If CDF is 0.98 (98% of people below user), user is in top 2.0%
+      // Top Percentile: e.g. CDF 0.98 -> Top 2.0%
       const cdfVal = normalCDF(zScore);
       const topPercentileVal = Math.max(0.1, Math.min(99.9, Math.round((1 - cdfVal) * 1000) / 10));
 
@@ -1032,17 +1286,17 @@
       summaryGrid.innerHTML = '';
       roundsData.forEach(r => {
         const item = document.createElement('div');
-        item.className = 'bg-slate-950/70 border border-slate-800 rounded-xl p-2.5 text-center flex flex-col justify-between';
+        item.className = 'bg-slate-50 border border-slate-200/90 rounded-xl p-2.5 text-center flex flex-col justify-between shadow-xs';
         item.innerHTML = `
-          <div class="flex items-center justify-between text-[11px] text-slate-400 mb-1">
+          <div class="flex items-center justify-between text-[11px] text-slate-500 mb-1">
             <span>Q${r.round}</span>
-            <span class="font-bold ${r.isPerfect ? 'text-emerald-400' : 'text-slate-300'}">${r.accuracy}%</span>
+            <span class="font-bold ${r.isPerfect ? 'text-emerald-600' : 'text-slate-700'}">${r.accuracy}%</span>
           </div>
-          <div class="flex h-5 rounded-md overflow-hidden border border-slate-700/60 my-1">
+          <div class="flex h-5 rounded-md overflow-hidden border border-slate-300 my-1 shadow-inner">
             <div class="w-1/2 h-full" style="background-color: ${formatRgbStr(r.targetRgb)}" title="목표"></div>
             <div class="w-1/2 h-full" style="background-color: ${formatRgbStr(r.userRgb)}" title="내 제출"></div>
           </div>
-          <span class="text-[10px] mono text-slate-400">${r.isPerfect ? '⭐ 퍼펙트' : '오차 있음'}</span>
+          <span class="text-[10px] mono text-slate-500 font-semibold">${r.isPerfect ? '⭐ 퍼펙트' : '오차 있음'}</span>
         `;
         summaryGrid.appendChild(item);
       });
@@ -1065,7 +1319,7 @@
       }
     }
 
-    // --- Bell Curve Normal Distribution Chart on Canvas ---
+    // --- Bell Curve Normal Distribution Chart on Canvas (Light Mode) ---
     function drawBellCurveChart(userScore, topPercentile) {
       const canvas = document.getElementById('bellCurveCanvas');
       if (!canvas) return;
@@ -1080,13 +1334,12 @@
 
       const width = rect.width;
       const height = rect.height;
-      const padding = { top: 30, right: 25, bottom: 30, left: 25 };
+      const padding = { top: 32, right: 25, bottom: 28, left: 25 };
       const chartW = width - padding.left - padding.right;
       const chartH = height - padding.top - padding.bottom;
 
       ctx.clearRect(0, 0, width, height);
 
-      // Score range 20 to 100
       const minX = 25;
       const maxX = 100;
 
@@ -1100,14 +1353,14 @@
       const toScreenY = (y) => padding.top + chartH - (y / maxGaussian) * chartH;
 
       // 1. Draw Baseline & Grid
-      ctx.strokeStyle = '#334155';
+      ctx.strokeStyle = '#cbd5e1';
       ctx.lineWidth = 1;
       ctx.beginPath();
       ctx.moveTo(padding.left, padding.top + chartH);
       ctx.lineTo(padding.left + chartW, padding.top + chartH);
       ctx.stroke();
 
-      // 2. Draw Population Normal Distribution Curve (Smooth line)
+      // 2. Draw Population Normal Distribution Curve
       const points = [];
       const steps = 140;
       for (let i = 0; i <= steps; i++) {
@@ -1118,7 +1371,7 @@
 
       // Draw Gradient Fill under the curve
       const gradient = ctx.createLinearGradient(0, padding.top, 0, padding.top + chartH);
-      gradient.addColorStop(0, 'rgba(99, 102, 241, 0.45)');
+      gradient.addColorStop(0, 'rgba(99, 102, 241, 0.28)');
       gradient.addColorStop(1, 'rgba(99, 102, 241, 0.02)');
 
       ctx.beginPath();
@@ -1135,13 +1388,13 @@
         if (idx === 0) ctx.moveTo(pt.x, pt.y);
         else ctx.lineTo(pt.x, pt.y);
       });
-      ctx.strokeStyle = '#818cf8';
+      ctx.strokeStyle = '#6366f1';
       ctx.lineWidth = 2.5;
       ctx.stroke();
 
       // 3. Mark Population Mean (72%)
       const meanX = toScreenX(POPULATION_MEAN);
-      ctx.strokeStyle = '#64748b';
+      ctx.strokeStyle = '#94a3b8';
       ctx.setLineDash([4, 4]);
       ctx.beginPath();
       ctx.moveTo(meanX, padding.top + 10);
@@ -1149,7 +1402,7 @@
       ctx.stroke();
       ctx.setLineDash([]);
 
-      ctx.fillStyle = '#94a3b8';
+      ctx.fillStyle = '#64748b';
       ctx.font = '10px Pretendard, sans-serif';
       ctx.textAlign = 'center';
       ctx.fillText('일반인 평균 (72%)', meanX, padding.top + chartH + 18);
@@ -1169,7 +1422,7 @@
 
       // Outer glow circle
       ctx.beginPath();
-      ctx.arc(userScreenX, userScreenY, 6.5, 0, Math.PI * 2);
+      ctx.arc(userScreenX, userScreenY, 6, 0, Math.PI * 2);
       ctx.fillStyle = '#ec4899';
       ctx.fill();
       ctx.strokeStyle = '#ffffff';
@@ -1177,7 +1430,7 @@
       ctx.stroke();
 
       // Pin Label above marker
-      const labelText = `당신의 위치: 상위 ${topPercentile}% (${Math.round(userScore)}점)`;
+      const labelText = `당신: 상위 ${topPercentile}% (${Math.round(userScore)}점)`;
       ctx.font = 'bold 11px Pretendard, sans-serif';
       const labelWidth = ctx.measureText(labelText).width;
 
@@ -1186,9 +1439,9 @@
       if (badgeX + (labelWidth / 2) > padding.left + chartW) badgeX = padding.left + chartW - (labelWidth / 2) - 5;
 
       // Badge pill background
-      ctx.fillStyle = '#1e1b4b';
+      ctx.fillStyle = '#ffffff';
       ctx.strokeStyle = '#ec4899';
-      ctx.lineWidth = 1.2;
+      ctx.lineWidth = 1.5;
       const pillW = labelWidth + 14;
       const pillH = 22;
       const pillY = Math.max(10, userScreenY - 32);
@@ -1199,12 +1452,139 @@
       ctx.stroke();
 
       // Text inside pill
-      ctx.fillStyle = '#fdf2f8';
+      ctx.fillStyle = '#be185d';
       ctx.textAlign = 'center';
       ctx.fillText(labelText, badgeX, pillY + 15);
     }
 
-    // --- Share / Copy Summary ---
+    // --- Instagram Story & Feed Share Card Logic ---
+    function openShareCardModal() {
+      const modal = document.getElementById('shareCardModal');
+      if (!modal) return;
+
+      const modeCfg = modeConfigs[selectedMode];
+      document.getElementById('cardModeBadge').innerText = `${modeCfg.badge.split(' ')[1]} (${selectedMode.toUpperCase()}) • ${diffConfigs[selectedMax].name}`;
+
+      document.getElementById('cardTierTitle').innerText = document.getElementById('reportTierTitle').innerText;
+      document.getElementById('cardTierSubtitle').innerText = document.getElementById('reportTierDescription').innerText;
+      document.getElementById('cardPercentile').innerText = document.getElementById('reportPercentile').innerText;
+
+      document.getElementById('cardStatAvg').innerText = document.getElementById('statAvgAccuracy').innerText;
+      document.getElementById('cardStatPerfect').innerText = document.getElementById('statPerfectCount').innerText;
+      document.getElementById('cardStatHints').innerText = document.getElementById('statTotalHints').innerText;
+
+      // Render 10 palette mini items inside share card
+      const paletteGrid = document.getElementById('cardPaletteGrid');
+      paletteGrid.innerHTML = '';
+      roundsData.forEach(r => {
+        const item = document.createElement('div');
+        item.className = 'flex flex-col items-center bg-white rounded-lg p-1 border border-slate-200/80 shadow-xs';
+        item.innerHTML = `
+          <div class="flex h-3 w-full rounded overflow-hidden border border-slate-300 shadow-inner">
+            <div class="w-1/2 h-full" style="background-color: ${formatRgbStr(r.targetRgb)}" title="목표"></div>
+            <div class="w-1/2 h-full" style="background-color: ${formatRgbStr(r.userRgb)}" title="내 제출"></div>
+          </div>
+          <span class="text-[9px] mono font-bold text-slate-700 mt-0.5 leading-none">${r.accuracy}%</span>
+        `;
+        paletteGrid.appendChild(item);
+      });
+
+      playTone(550, 'sine', 0.06);
+      modal.classList.remove('hidden');
+    }
+
+    function closeShareCardModal() {
+      document.getElementById('shareCardModal').classList.add('hidden');
+    }
+
+    // Download High-Res Image Card via html2canvas
+    async function downloadShareCardImage() {
+      const btn = document.getElementById('downloadCardBtn');
+      const origHtml = btn.innerHTML;
+      btn.innerHTML = '<span>⏳ 이미지 생성 중...</span>';
+      btn.disabled = true;
+
+      try {
+        const cardEl = document.getElementById('shareCardExportContainer');
+        const canvas = await html2canvas(cardEl, {
+          scale: 3, // Ultra crisp resolution (Retina/Print ready)
+          useCORS: true,
+          backgroundColor: '#ffffff',
+          logging: false
+        });
+
+        const imageUri = canvas.toDataURL('image/png');
+        const link = document.createElement('a');
+        link.download = `ColorLab_색감테스트_결과.png`;
+        link.href = imageUri;
+        link.click();
+
+        playSuccessChord();
+        btn.innerHTML = '<span>✅ 저장 완료!</span>';
+        setTimeout(() => {
+          btn.innerHTML = origHtml;
+          btn.disabled = false;
+        }, 2200);
+      } catch (err) {
+        console.error('Failed to export image card:', err);
+        btn.innerHTML = '<span>❌ 저장 실패</span>';
+        setTimeout(() => {
+          btn.innerHTML = origHtml;
+          btn.disabled = false;
+        }, 2200);
+      }
+    }
+
+    // Native Web Share API (Direct sharing to KakaoTalk, Instagram, etc. on mobile)
+    async function shareCardNative() {
+      const btn = document.getElementById('nativeShareCardBtn');
+      const origHtml = btn.innerHTML;
+      btn.innerHTML = '<span>⏳ 공유 준비...</span>';
+
+      try {
+        const cardEl = document.getElementById('shareCardExportContainer');
+        const canvas = await html2canvas(cardEl, {
+          scale: 2.5,
+          useCORS: true,
+          backgroundColor: '#ffffff',
+          logging: false
+        });
+
+        canvas.toBlob(async (blob) => {
+          if (!blob) throw new Error('Blob conversion failed');
+          const file = new File([blob], 'ColorLab_Result.png', { type: 'image/png' });
+
+          const shareData = {
+            title: '나의 색 인지능력 테스트 결과',
+            text: `[색감 감각 테스트: Color Lab]\n결과: ${document.getElementById('cardTierTitle').innerText} (상위 ${document.getElementById('cardPercentile').innerText})\n나의 색 인지능력을 테스트해보세요!`,
+            files: [file]
+          };
+
+          if (navigator.canShare && navigator.canShare({ files: [file] })) {
+            await navigator.share(shareData);
+            btn.innerHTML = origHtml;
+          } else if (navigator.share) {
+            await navigator.share({
+              title: shareData.title,
+              text: shareData.text,
+              url: window.location.href
+            });
+            btn.innerHTML = origHtml;
+          } else {
+            // Desktop fallback: copy text
+            copyShareText();
+            btn.innerHTML = '<span>✅ 텍스트 복사됨!</span>';
+            setTimeout(() => { btn.innerHTML = origHtml; }, 2000);
+          }
+        }, 'image/png');
+      } catch (err) {
+        copyShareText();
+        btn.innerHTML = '<span>✅ 텍스트 복사됨!</span>';
+        setTimeout(() => { btn.innerHTML = origHtml; }, 2000);
+      }
+    }
+
+    // --- Share / Copy Summary Text ---
     function copyShareText() {
       const avg = document.getElementById('statAvgAccuracy').innerText;
       const rank = document.getElementById('reportPercentile').innerText;
@@ -1212,7 +1592,7 @@
       const hints = document.getElementById('statTotalHints').innerText;
       const mode = selectedMode === 'rgb' ? '빛 모드 (RGB)' : '물감 모드 (CMY)';
 
-      const text = `🎨 [색감 감각 테스트: Color Lab]\n모드: ${mode} (${diffConfigs[selectedMax].name})\n결과: ${tier}\n평균 일치율: ${avg} | 상위 ${rank}\n힌트 사용: ${hints}\n나의 색 인지능력을 테스트해보세요!`;
+      const text = `🎨 [색감 감각 테스트: Color Lab]\n모드: ${mode} (${diffConfigs[selectedMax].name})\n결과: ${tier}\n평균 일치율: ${avg} | 상위 ${rank}\n힌트 사용: ${hints}\n👉 지금 바로 도전해보세요: ${window.location.href}`;
 
       // Fallback-safe clipboard copy
       const tempInput = document.createElement('textarea');
@@ -1224,7 +1604,7 @@
         document.getElementById('shareBtnText').innerText = '✅ 복사 완료!';
         playTone(700, 'sine', 0.1);
         setTimeout(() => {
-          document.getElementById('shareBtnText').innerText = '결과 복사하기';
+          document.getElementById('shareBtnText').innerText = '텍스트 결과 복사';
         }, 2000);
       } catch (e) {}
       document.body.removeChild(tempInput);
@@ -1241,8 +1621,11 @@
       }
     });
 
-    // Initial Load
+    // Initial Load - Random light theme selected every time page opens
     window.onload = function() {
+      const randTheme = Math.floor(Math.random() * themes.length);
+      applyTheme(randTheme);
+
       selectLobbyMode('rgb');
       selectLobbyDiff(3);
       showScreen('screenLobby');
