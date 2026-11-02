@@ -234,7 +234,7 @@
           <p class="text-xs text-slate-600 leading-relaxed mb-2">가산혼합: 빨강·초록·파랑 빛을 더해 흰색을 만듭니다.</p>
           <div class="text-[11px] mono text-slate-500 flex justify-between pt-2 border-t border-slate-200/80">
             <span>0: 검은색</span>
-            <span>Max: 눈부신 흰색</span>
+            <span>Max: 흰색</span>
           </div>
         </button>
 
@@ -248,7 +248,7 @@
           <p class="text-xs text-slate-600 leading-relaxed mb-2">감산혼합: 청록·자홍·노랑 잉크를 섞어 검정을 만듭니다.</p>
           <div class="text-[11px] mono text-slate-500 flex justify-between pt-2 border-t border-slate-200/80">
             <span>0: 흰 도화지</span>
-            <span>Max: 칠흑의 먹물</span>
+            <span>Max: 먹물</span>
           </div>
         </button>
       </div>
@@ -297,7 +297,7 @@
                 <span class="text-[10px] font-black px-1.5 py-0.5 rounded-full bg-rose-100 text-rose-700 border border-rose-200">HARD</span>
               </div>
               <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">
-                10문제 전체 실시간 미리보기 차단! (미체크 시: 1~7번 미리보기 + <strong>마지막 3문제 자동 블라인드</strong>)
+                10문제 전체 실시간 미리보기를 차단합니다.
               </p>
             </div>
           </div>
@@ -956,6 +956,7 @@
     let lastAssignedAnimal = null;
     let sharedAnimalIndex = null;
     let isFullBlindMode = false;
+    let testTargetColors = [];
 
     let targetColor = { c1: 0, c2: 0, c3: 0 };
     let userColor = { c1: 0, c2: 0, c3: 0 };
@@ -1048,6 +1049,71 @@
       return `rgb(${rgb.r}, ${rgb.g}, ${rgb.b})`;
     }
 
+    // --- Diverse Non-repeating Target Colors Generator ---
+    function generateDiverseTargetColors(count, maxVal) {
+      const totalCombos = Math.pow(maxVal + 1, 3);
+
+      if (totalCombos <= count) {
+        // When combinations are small (e.g. selectedMax = 1 has 8 combinations for 10 rounds)
+        const allColors = [];
+        for (let c1 = 0; c1 <= maxVal; c1++) {
+          for (let c2 = 0; c2 <= maxVal; c2++) {
+            for (let c3 = 0; c3 <= maxVal; c3++) {
+              allColors.push({ c1, c2, c3 });
+            }
+          }
+        }
+        // Shuffle
+        for (let i = allColors.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [allColors[i], allColors[j]] = [allColors[j], allColors[i]];
+        }
+        // Fill up to count with non-consecutive picks
+        while (allColors.length < count) {
+          const prev = allColors[allColors.length - 1];
+          const candidates = allColors.slice(0, totalCombos).filter(c => c.c1 !== prev.c1 || c.c2 !== prev.c2 || c.c3 !== prev.c3);
+          allColors.push({ ...candidates[Math.floor(Math.random() * candidates.length)] });
+        }
+        return allColors.slice(0, count);
+      }
+
+      // For maxVal >= 3 (64 ~ 1331 combinations):
+      // Generate 10 strictly unique colors with good visual diversity
+      const usedKeys = new Set();
+      const result = [];
+
+      let attempts = 0;
+      while (result.length < count && attempts < 1000) {
+        attempts++;
+        const c1 = Math.floor(Math.random() * (maxVal + 1));
+        const c2 = Math.floor(Math.random() * (maxVal + 1));
+        const c3 = Math.floor(Math.random() * (maxVal + 1));
+        const key = `${c1},${c2},${c3}`;
+
+        if (usedKeys.has(key)) continue;
+
+        // Visual spacing from immediately preceding color
+        if (result.length > 0 && attempts < 300) {
+          const prev = result[result.length - 1];
+          const diff = Math.abs(c1 - prev.c1) + Math.abs(c2 - prev.c2) + Math.abs(c3 - prev.c3);
+          if (diff < 2) continue;
+        }
+
+        usedKeys.add(key);
+        result.push({ c1, c2, c3 });
+      }
+
+      // Fallback if needed
+      while (result.length < count) {
+        const c1 = Math.floor(Math.random() * (maxVal + 1));
+        const c2 = Math.floor(Math.random() * (maxVal + 1));
+        const c3 = Math.floor(Math.random() * (maxVal + 1));
+        result.push({ c1, c2, c3 });
+      }
+
+      return result;
+    }
+
     // --- Start Test ---
     function startGameTest() {
       const chk = document.getElementById('lobbyFullBlindCheck');
@@ -1058,6 +1124,9 @@
       totalHintsUsed = 0;
       roundsData = [];
       testStartTime = Date.now();
+
+      // Pre-generate 10 diverse non-repeating target colors
+      testTargetColors = generateDiverseTargetColors(TOTAL_ROUNDS, selectedMax);
 
       // Shuffle trivia pool so 10 rounds get fresh trivia facts
       unusedTriviaPool = [...animalTriviaList].sort(() => Math.random() - 0.5);
@@ -1133,12 +1202,16 @@
 
       const isBlindRound = isFullBlindMode || (roundIdx >= 8);
 
-      // Generate random target
-      targetColor = {
-        c1: Math.floor(Math.random() * (selectedMax + 1)),
-        c2: Math.floor(Math.random() * (selectedMax + 1)),
-        c3: Math.floor(Math.random() * (selectedMax + 1))
-      };
+      // Pick pre-generated non-repeating diverse target color
+      if (testTargetColors && testTargetColors[roundIdx - 1]) {
+        targetColor = { ...testTargetColors[roundIdx - 1] };
+      } else {
+        targetColor = {
+          c1: Math.floor(Math.random() * (selectedMax + 1)),
+          c2: Math.floor(Math.random() * (selectedMax + 1)),
+          c3: Math.floor(Math.random() * (selectedMax + 1))
+        };
+      }
 
       // Reset user values to 0
       userColor = { c1: 0, c2: 0, c3: 0 };
