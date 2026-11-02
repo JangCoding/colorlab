@@ -1174,23 +1174,23 @@
         <div class="space-y-2 text-xs">
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
             <span class="font-bold text-slate-700">🌱 Day 1: 촘촘한 풀숲</span>
-            <span class="text-slate-500">8×8 · 2×2 호랑이 · 정지</span>
+            <span class="text-slate-500">8×8 · 2×2 호랑이 · 0.5초마다 자주 이동</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
             <span class="font-bold text-slate-700">🐇 Day 2: 토끼의 출현</span>
-            <span class="text-slate-500">8×8 · 2×2 호랑이 + 토끼 1마리</span>
+            <span class="text-slate-500">8×8 · 2×2 호랑이 · 0.75초마다 이동 + 토끼</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
             <span class="font-bold text-slate-700">🐿️ Day 3: 분주한 대나무 숲</span>
-            <span class="text-slate-500">9×9 · 토끼 1마리 + 다람쥐 1마리</span>
+            <span class="text-slate-500">9×9 · 1×2/2×1 호랑이 (2칸) · 1.1초 이동</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
             <span class="font-bold text-slate-700">🍃 Day 4: 착시의 안개 언덕</span>
-            <span class="text-slate-500">10×10 · 동물 3마리 + 바람 2곳</span>
+            <span class="text-slate-500">10×10 · 1×2/2×1 호랑이 (2칸) · 1.6초 이동</span>
           </div>
           <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-between">
             <span class="font-black text-amber-900">🔥 Day 5: 황혼의 아수라장</span>
-            <span class="font-bold text-amber-700">10×10 / 1×1 호랑이 + 동물·바람 6곳!</span>
+            <span class="font-bold text-amber-700">10×10 · 1×1 호랑이 (단 1칸!) · 2.2초 은밀 이동</span>
           </div>
         </div>
 
@@ -4255,39 +4255,39 @@
         day: 1,
         name: '촘촘한 풀숲',
         grid: 8,
-        tigerSize: 2,
-        moveMs: 0,
+        shape: '2x2',
+        moveMs: 500, // Moves frequently so motion detection easily spots it
         decoys: [{ type: 'wind', moveMs: 800 }],
-        desc: '8×8 촘촘한 풀숲에 숨은 호랑이'
+        desc: '8×8 풀숲 / 2×2 호랑이 (0.5초마다 자주 이동)'
       },
       {
         day: 2,
         name: '토끼의 출현',
         grid: 8,
-        tigerSize: 2,
-        moveMs: 1100,
-        decoys: [{ type: 'rabbit', moveMs: 950 }],
-        desc: '슬그머니 기어오는 호랑이와 깡총대는 산토끼'
+        shape: '2x2',
+        moveMs: 750,
+        decoys: [{ type: 'rabbit', moveMs: 900 }],
+        desc: '8×8 풀숲 / 2×2 호랑이 (0.75초마다 이동) + 산토끼'
       },
       {
         day: 3,
         name: '분주한 대나무 숲',
         grid: 9,
-        tigerSize: 2,
-        moveMs: 950,
+        shape: '1x2_or_2x1',
+        moveMs: 1100,
         decoys: [
           { type: 'rabbit', moveMs: 900 },
           { type: 'squirrel', moveMs: 800 },
           { type: 'wind', moveMs: 700 }
         ],
-        desc: '9×9 넓어진 숲에서 토끼와 다람쥐의 교란'
+        desc: '9×9 대나무 숲 / 2칸 호랑이 (1.1초마다 이동)'
       },
       {
         day: 4,
         name: '착시의 안개 언덕',
         grid: 10,
-        tigerSize: 2,
-        moveMs: 750,
+        shape: '1x2_or_2x1',
+        moveMs: 1600,
         decoys: [
           { type: 'rabbit', moveMs: 850 },
           { type: 'rabbit', moveMs: 900 },
@@ -4295,14 +4295,14 @@
           { type: 'wind', moveMs: 650 },
           { type: 'wind', moveMs: 700 }
         ],
-        desc: '10×10 그리드 속 사방에서 일렁이는 풀숲!'
+        desc: '10×10 언덕 / 2칸 호랑이 (1.6초마다 잠복 이동)'
       },
       {
         day: 5,
         name: '황혼의 아수라장',
         grid: 10,
-        tigerSize: 1,
-        moveMs: 600,
+        shape: '1x1',
+        moveMs: 2200, // Stealthy, moves rarely
         decoys: [
           { type: 'rabbit', moveMs: 750 },
           { type: 'rabbit', moveMs: 800 },
@@ -4311,7 +4311,7 @@
           { type: 'wind', moveMs: 600 },
           { type: 'wind', moveMs: 650 }
         ],
-        desc: '단 1칸! 맹수의 살기를 낚아채야 살아남는다!'
+        desc: '단 1칸! 2.2초마다 은밀하게 움직이는 최종 보스'
       }
     ];
 
@@ -4350,10 +4350,11 @@
       decoyIntervals: [],
       timerRemainMs: 5000,
       gridSize: 8,
-      tigerSize: 2,
+      tigerHeight: 2,
+      tigerWidth: 2,
       tigerR: 1,
       tigerC: 1,
-      decoys: [], // [{ id, type, r, c, name, emoji, humanBg, deerBg, moveMs }]
+      decoys: [],
       isHumanVision: false,
       lastOutcome: 'survived',
       toastTimeout: null,
@@ -4370,7 +4371,6 @@
       tigerState.status = 'intro';
       document.getElementById('tigerViewIntro').classList.remove('hidden');
       document.getElementById('tigerViewGame').classList.add('hidden');
-      document.getElementById('tigerRoundReviewBar')?.classList.add('hidden');
       document.getElementById('tigerRoundReviewBar')?.classList.add('hidden');
       document.getElementById('tigerDeerHint')?.classList.remove('hidden');
       document.getElementById('tigerViewFinalResult').classList.add('hidden');
@@ -4390,18 +4390,35 @@
 
       const cfg = TIGER_DAYS[dayNum - 1];
       tigerState.gridSize = cfg.grid;
-      tigerState.tigerSize = cfg.tigerSize;
+
+      // 1~2 레벨: 2x2, 3~4 레벨: 가로1 세로2 or 가로2 세로1, 5 레벨: 1x1
+      if (cfg.shape === '2x2') {
+        tigerState.tigerHeight = 2;
+        tigerState.tigerWidth = 2;
+      } else if (cfg.shape === '1x2_or_2x1') {
+        if (Math.random() < 0.5) {
+          tigerState.tigerHeight = 1;
+          tigerState.tigerWidth = 2; // 가로2 세로1
+        } else {
+          tigerState.tigerHeight = 2; // 가로1 세로2
+          tigerState.tigerWidth = 1;
+        }
+      } else {
+        tigerState.tigerHeight = 1;
+        tigerState.tigerWidth = 1; // 1x1
+      }
 
       // Pick random initial anchor for tiger
-      const maxAnchor = cfg.grid - cfg.tigerSize;
-      tigerState.tigerR = Math.floor(Math.random() * (maxAnchor + 1));
-      tigerState.tigerC = Math.floor(Math.random() * (maxAnchor + 1));
+      const maxAnchorR = cfg.grid - tigerState.tigerHeight;
+      const maxAnchorC = cfg.grid - tigerState.tigerWidth;
+      tigerState.tigerR = Math.floor(Math.random() * (maxAnchorR + 1));
+      tigerState.tigerC = Math.floor(Math.random() * (maxAnchorC + 1));
 
-      // Spawn Decoys
+      // Spawn Decoys (non-overlapping)
       tigerState.decoys = [];
       const occupiedCoords = new Set();
-      for (let r = 0; r < cfg.tigerSize; r++) {
-        for (let c = 0; c < cfg.tigerSize; c++) {
+      for (let r = 0; r < tigerState.tigerHeight; r++) {
+        for (let c = 0; c < tigerState.tigerWidth; c++) {
           occupiedCoords.add(`${tigerState.tigerR + r},${tigerState.tigerC + c}`);
         }
       }
@@ -4443,8 +4460,10 @@
       document.getElementById('tigerDayBadge').innerText = `📅 Day ${dayNum} / 5`;
       document.getElementById('tigerStageTitle').innerText = cfg.name;
 
-      // Render Deer Vision Grid
-      renderTigerGrid(false);
+      // Build DOM buttons ONCE per round (Prevents DOM recreation from cancelling clicks)
+      buildTigerGridDOM();
+      // Apply initial Deer Vision styles
+      renderTigerGridStyles(false);
 
       // Start 5-second countdown timer
       tigerState.timerRemainMs = 5000;
@@ -4489,10 +4508,98 @@
       });
     }
 
+    function buildTigerGridDOM() {
+      const container = document.getElementById('tigerGridContainer');
+      if (!container) return;
+
+      const n = tigerState.gridSize;
+      container.style.display = 'grid';
+      container.style.gridTemplateColumns = `repeat(${n}, minmax(0, 1fr))`;
+      container.style.gridTemplateRows = `repeat(${n}, minmax(0, 1fr))`;
+      container.style.gap = n >= 10 ? '2px' : '3px';
+      container.innerHTML = '';
+
+      // Direct Event Delegation on container for instant, 100% reliable tap/click registration
+      container.onpointerdown = (e) => {
+        if (tigerState.status !== 'playing') return;
+        const cell = e.target.closest('[data-r]');
+        if (!cell) return;
+        const r = parseInt(cell.dataset.r, 10);
+        const c = parseInt(cell.dataset.c, 10);
+        handleTigerCellInteraction(r, c);
+      };
+
+      for (let r = 0; r < n; r++) {
+        for (let c = 0; c < n; c++) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.id = `tigerCell_${r}_${c}`;
+          btn.dataset.r = r;
+          btn.dataset.c = c;
+          btn.className = 'w-full h-full rounded-md sm:rounded-lg transition-colors duration-75 relative overflow-hidden select-none border border-black/10 cursor-pointer touch-manipulation active:scale-90';
+          btn.style.aspectRatio = '1 / 1';
+          container.appendChild(btn);
+        }
+      }
+    }
+
+    function renderTigerGridStyles(showHumanVision = false) {
+      const n = tigerState.gridSize;
+      const tigerCells = new Set();
+      for (let r = 0; r < tigerState.tigerHeight; r++) {
+        for (let c = 0; c < tigerState.tigerWidth; c++) {
+          tigerCells.add(`${tigerState.tigerR + r},${tigerState.tigerC + c}`);
+        }
+      }
+
+      const decoyMap = new Map();
+      tigerState.decoys.forEach(d => {
+        decoyMap.set(`${d.r},${d.c}`, d);
+      });
+
+      for (let r = 0; r < n; r++) {
+        for (let c = 0; c < n; c++) {
+          const btn = document.getElementById(`tigerCell_${r}_${c}`);
+          if (!btn) continue;
+          const coordKey = `${r},${c}`;
+          const isTiger = tigerCells.has(coordKey);
+          const decoy = decoyMap.get(coordKey);
+
+          if (showHumanVision) {
+            btn.classList.remove('cursor-pointer', 'active:scale-90');
+            if (isTiger) {
+              btn.style.backgroundColor = 'rgb(249, 115, 22)';
+              btn.classList.add('ring-2', 'ring-orange-400');
+              btn.innerHTML = '<span class="absolute inset-0 flex items-center justify-center text-[10px] sm:text-sm font-black text-white drop-shadow">🐅</span>';
+            } else if (decoy) {
+              btn.style.backgroundColor = decoy.humanBg;
+              btn.classList.remove('ring-2', 'ring-orange-400');
+              btn.innerHTML = `<span class="absolute inset-0 flex items-center justify-center text-[10px] sm:text-xs drop-shadow">${decoy.emoji}</span>`;
+            } else {
+              btn.style.backgroundColor = 'rgb(34, 150, 60)';
+              btn.classList.remove('ring-2', 'ring-orange-400');
+              btn.innerHTML = '';
+            }
+          } else {
+            // Deer Dichromat Vision (buttons remain untouched in DOM, only colors update)
+            btn.innerHTML = '';
+            btn.classList.remove('ring-2', 'ring-orange-400');
+            if (isTiger) {
+              btn.style.backgroundColor = 'rgb(134, 127, 56)';
+            } else if (decoy) {
+              btn.style.backgroundColor = decoy.deerBg;
+            } else {
+              const noise = ((r * 7 + c * 13) % 7) - 3;
+              btn.style.backgroundColor = `rgb(${126 + noise}, ${124 + noise}, ${68 + noise})`;
+            }
+          }
+        }
+      }
+    }
+
     function moveTigerStep() {
       if (tigerState.status !== 'playing') return;
       const n = tigerState.gridSize;
-      const sz = tigerState.tigerSize;
       const dirs = [
         [-1, 0], [1, 0], [0, -1], [0, 1],
         [-1, -1], [1, 1], [-1, 1], [1, -1]
@@ -4500,14 +4607,14 @@
       const valid = dirs.filter(([dr, dc]) => {
         const nr = tigerState.tigerR + dr;
         const nc = tigerState.tigerC + dc;
-        return nr >= 0 && nr <= (n - sz) && nc >= 0 && nc <= (n - sz);
+        return nr >= 0 && nr <= (n - tigerState.tigerHeight) && nc >= 0 && nc <= (n - tigerState.tigerWidth);
       });
 
       if (valid.length > 0) {
         const [dr, dc] = valid[Math.floor(Math.random() * valid.length)];
         tigerState.tigerR += dr;
         tigerState.tigerC += dc;
-        renderTigerGrid(false);
+        renderTigerGridStyles(false);
       }
     }
 
@@ -4525,7 +4632,45 @@
         const [dr, dc] = valid[Math.floor(Math.random() * valid.length)];
         decoy.r += dr;
         decoy.c += dc;
-        renderTigerGrid(false);
+        renderTigerGridStyles(false);
+      }
+    }
+
+    let lastTigerInteractTime = 0;
+    function handleTigerCellInteraction(r, c) {
+      if (tigerState.status !== 'playing') return;
+      const now = Date.now();
+      if (now - lastTigerInteractTime < 80) return; // Prevent double trigger
+      lastTigerInteractTime = now;
+
+      const isTiger = (
+        r >= tigerState.tigerR &&
+        r < tigerState.tigerR + tigerState.tigerHeight &&
+        c >= tigerState.tigerC &&
+        c < tigerState.tigerC + tigerState.tigerWidth
+      );
+
+      if (isTiger) {
+        // Player successfully spotted and touched the tiger!
+        clearTigerGameTimers();
+        onTigerSurvived();
+      } else {
+        const decoy = tigerState.decoys.find(d => d.r === r && d.c === c);
+        if (decoy) {
+          if (decoy.type === 'wind') {
+            playTone(280, 'sine', 0.1, 0.14);
+            tigerState.timerRemainMs = Math.max(200, tigerState.timerRemainMs - 800);
+          } else {
+            playTone(820, 'triangle', 0.12, 0.18);
+            tigerState.timerRemainMs = Math.max(200, tigerState.timerRemainMs - 1000);
+          }
+          showTigerAlertToast(decoy.alertMsg);
+          updateTigerTimerDisplay();
+        } else {
+          playTone(320, 'triangle', 0.08, 0.08);
+          tigerState.timerRemainMs = Math.max(200, tigerState.timerRemainMs - 500);
+          updateTigerTimerDisplay();
+        }
       }
     }
 
@@ -4549,103 +4694,6 @@
       }, isFast ? 100 : 160);
     }
 
-    function renderTigerGrid(showHumanVision = false, targetContainerId = 'tigerGridContainer') {
-      const container = document.getElementById(targetContainerId);
-      if (!container) return;
-
-      const n = tigerState.gridSize;
-      container.style.display = 'grid';
-      container.style.gridTemplateColumns = `repeat(${n}, minmax(0, 1fr))`;
-      container.style.gridTemplateRows = `repeat(${n}, minmax(0, 1fr))`;
-      container.style.gap = n >= 10 ? '2px' : '3px';
-      container.innerHTML = '';
-
-      const tigerCells = new Set();
-      for (let r = 0; r < tigerState.tigerSize; r++) {
-        for (let c = 0; c < tigerState.tigerSize; c++) {
-          tigerCells.add(`${tigerState.tigerR + r},${tigerState.tigerC + c}`);
-        }
-      }
-
-      // Map decoys by coordinate
-      const decoyMap = new Map();
-      tigerState.decoys.forEach(d => {
-        decoyMap.set(`${d.r},${d.c}`, d);
-      });
-
-      for (let r = 0; r < n; r++) {
-        for (let c = 0; c < n; c++) {
-          const coordKey = `${r},${c}`;
-          const isTiger = tigerCells.has(coordKey);
-          const decoy = decoyMap.get(coordKey);
-
-          const btn = document.createElement('button');
-          btn.type = 'button';
-          btn.className = 'w-full h-full rounded-md sm:rounded-lg transition-all duration-75 relative overflow-hidden select-none border border-black/10';
-          btn.style.aspectRatio = '1 / 1';
-
-          if (showHumanVision) {
-            // Human Trichromat Vision
-            if (isTiger) {
-              btn.style.backgroundColor = 'rgb(249, 115, 22)';
-              btn.classList.add('ring-2', 'ring-orange-400');
-              btn.innerHTML = '<span class="absolute inset-0 flex items-center justify-center text-[10px] sm:text-sm font-black text-white drop-shadow">🐅</span>';
-            } else if (decoy) {
-              btn.style.backgroundColor = decoy.humanBg;
-              btn.innerHTML = `<span class="absolute inset-0 flex items-center justify-center text-[10px] sm:text-xs drop-shadow">${decoy.emoji}</span>`;
-            } else {
-              btn.style.backgroundColor = 'rgb(34, 150, 60)';
-            }
-          } else {
-            // Deer Dichromat Vision: All blend into subtle variations of olive khaki!
-            if (isTiger) {
-              btn.style.backgroundColor = 'rgb(134, 127, 56)';
-            } else if (decoy) {
-              btn.style.backgroundColor = decoy.deerBg;
-            } else {
-              const noise = ((r * 7 + c * 13) % 7) - 3;
-              btn.style.backgroundColor = `rgb(${126 + noise}, ${124 + noise}, ${68 + noise})`;
-            }
-          }
-
-          if (targetContainerId === 'tigerGridContainer' && tigerState.status === 'playing') {
-            btn.classList.add('cursor-pointer', 'active:scale-90', 'touch-manipulation');
-            btn.onclick = () => onTigerCellClick(r, c, isTiger, decoy);
-          } else {
-            btn.disabled = true;
-          }
-
-          container.appendChild(btn);
-        }
-      }
-    }
-
-    function onTigerCellClick(r, c, isTiger, decoy) {
-      if (tigerState.status !== 'playing') return;
-
-      if (isTiger) {
-        // Player successfully spotted and touched the tiger!
-        clearTigerGameTimers();
-        onTigerSurvived();
-      } else if (decoy) {
-        // False Alarm! Player touched a harmless decoy (rabbit, squirrel, wind)
-        if (decoy.type === 'wind') {
-          playTone(280, 'sine', 0.1, 0.14);
-          tigerState.timerRemainMs = Math.max(200, tigerState.timerRemainMs - 800);
-        } else {
-          playTone(820, 'triangle', 0.12, 0.18);
-          tigerState.timerRemainMs = Math.max(200, tigerState.timerRemainMs - 1000);
-        }
-        showTigerAlertToast(decoy.alertMsg);
-        updateTigerTimerDisplay();
-      } else {
-        // Player touched empty grass: 0.5s penalty
-        playTone(320, 'triangle', 0.08, 0.08);
-        tigerState.timerRemainMs = Math.max(200, tigerState.timerRemainMs - 500);
-        updateTigerTimerDisplay();
-      }
-    }
-
     function showTigerAlertToast(msg) {
       const toast = document.getElementById('tigerAlertToast');
       if (!toast) return;
@@ -4665,8 +4713,8 @@
       tigerState.survivedDays++;
       playSuccessChord();
 
-      // Immediately transform colors on the spot to Human Vision!
-      renderTigerGrid(true);
+      // Immediately transform colors on the spot to Human Vision
+      renderTigerGridStyles(true);
 
       // Reveal inline Next Step bar
       showTigerInlineReview(true);
@@ -4678,8 +4726,8 @@
       tigerState.lastOutcome = 'caught';
       playTone(160, 'sawtooth', 0.4, 0.3);
 
-      // Immediately transform colors on the spot to Human Vision!
-      renderTigerGrid(true);
+      // Immediately transform colors on the spot to Human Vision
+      renderTigerGridStyles(true);
 
       // Reveal inline Next Step bar
       showTigerInlineReview(false);
@@ -4715,7 +4763,6 @@
 
       if (reviewBar) {
         reviewBar.classList.remove('hidden');
-        // Smoothly scroll review bar into view
         reviewBar.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
       }
     }
