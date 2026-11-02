@@ -208,17 +208,24 @@
   </header>
 
     <!-- Top Main Navigation Bar -->
-  <nav class="w-full max-w-xl mx-auto px-4 pt-3 pb-1 flex justify-center select-none z-20">
-    <div class="inline-flex p-1 bg-white/80 backdrop-blur-md rounded-2xl border border-white/80 shadow-xs gap-1 text-xs sm:text-sm font-bold">
-      <button type="button" onclick="switchNavTab('test')" id="navTabTest" class="px-3.5 py-1.5 rounded-xl transition-all bg-indigo-600 text-white shadow-xs flex items-center gap-1.5 touch-manipulation cursor-pointer">
+  <nav class="w-full max-w-2xl mx-auto px-3 sm:px-4 pt-3 pb-1 flex justify-center select-none z-20">
+    <div class="inline-flex flex-wrap sm:flex-nowrap justify-center p-1 bg-white/85 backdrop-blur-md rounded-2xl border border-white/80 shadow-xs gap-1 text-xs sm:text-sm font-bold">
+      <button type="button" onclick="switchNavTab('test')" id="navTabTest" class="px-2.5 sm:px-3 py-1.5 rounded-xl transition-all bg-indigo-600 text-white shadow-xs flex items-center gap-1.5 touch-manipulation cursor-pointer">
         <span>🎯</span>
         <span>색감 테스트</span>
       </button>
-      <button type="button" onclick="switchNavTab('sandbox')" id="navTabSandbox" class="px-3.5 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
+      <button type="button" onclick="switchNavTab('memory')" id="navTabMemory" class="px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
+        <span>🧠</span>
+        <span class="flex items-center gap-1">
+          <span>기억력 테스트</span>
+          <span class="text-[9px] font-black px-1 py-0.2 rounded bg-purple-100 text-purple-700 hidden sm:inline">NEW</span>
+        </span>
+      </button>
+      <button type="button" onclick="switchNavTab('sandbox')" id="navTabSandbox" class="px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
         <span>🎨</span>
         <span>자유 조색</span>
       </button>
-      <button type="button" onclick="switchNavTab('trivia')" id="navTabTrivia" class="px-3.5 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
+      <button type="button" onclick="switchNavTab('trivia')" id="navTabTrivia" class="px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
         <span>🐾</span>
         <span>토막상식</span>
       </button>
@@ -332,19 +339,29 @@
     </div>
 
         <!-- Mode Discovery Shortcut Cards -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 mb-4">
-      <button type="button" onclick="switchNavTab('sandbox')" class="p-3.5 rounded-2xl bg-white/75 hover:bg-white border border-slate-200/90 hover:border-indigo-300 text-left transition-all shadow-xs flex items-center gap-3 group touch-manipulation cursor-pointer">
-        <div class="w-10 h-10 rounded-xl bg-indigo-50 group-hover:bg-indigo-100 text-indigo-600 flex items-center justify-center text-xl transition-all shrink-0">🎨</div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 mb-4">
+      <button type="button" onclick="switchNavTab('memory')" class="p-3 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/90 hover:border-purple-300 text-left transition-all shadow-xs flex items-center gap-2.5 group touch-manipulation cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-purple-50 group-hover:bg-purple-100 text-purple-600 flex items-center justify-center text-lg transition-all shrink-0">🧠</div>
         <div>
-          <div class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-indigo-600 transition-colors">자유 조색 샌드박스</div>
-          <div class="text-[11px] text-slate-500">문제 없이 마음껏 색을 배합해보기</div>
+          <div class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-purple-600 transition-colors flex items-center gap-1">
+            <span>순간기억 테스트</span>
+            <span class="text-[9px] font-black px-1 py-0.2 rounded bg-purple-100 text-purple-700">NEW</span>
+          </div>
+          <div class="text-[11px] text-slate-500">5초 기억 후 4지선다 맞추기</div>
         </div>
       </button>
-      <button type="button" onclick="switchNavTab('trivia')" class="p-3.5 rounded-2xl bg-white/75 hover:bg-white border border-slate-200/90 hover:border-emerald-300 text-left transition-all shadow-xs flex items-center gap-3 group touch-manipulation cursor-pointer">
-        <div class="w-10 h-10 rounded-xl bg-emerald-50 group-hover:bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl transition-all shrink-0">🐾</div>
+      <button type="button" onclick="switchNavTab('sandbox')" class="p-3 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/90 hover:border-indigo-300 text-left transition-all shadow-xs flex items-center gap-2.5 group touch-manipulation cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-indigo-50 group-hover:bg-indigo-100 text-indigo-600 flex items-center justify-center text-lg transition-all shrink-0">🎨</div>
+        <div>
+          <div class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-indigo-600 transition-colors">자유 조색 샌드박스</div>
+          <div class="text-[11px] text-slate-500">문제 없이 마음껏 배합해보기</div>
+        </div>
+      </button>
+      <button type="button" onclick="switchNavTab('trivia')" class="p-3 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/90 hover:border-emerald-300 text-left transition-all shadow-xs flex items-center gap-2.5 group touch-manipulation cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-emerald-50 group-hover:bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg transition-all shrink-0">🐾</div>
         <div>
           <div class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-emerald-600 transition-colors">동물 색채 토막상식</div>
-          <div class="text-[11px] text-slate-500">15가지 동물들의 신비한 시각 이야기</div>
+          <div class="text-[11px] text-slate-500">15가지 동물들의 시각 도감</div>
         </div>
       </button>
     </div>
@@ -820,6 +837,292 @@
 
   </main>
 
+  <!-- SCREEN 6: Color Memory Test (순간기억 색감 테스트) -->
+  <main id="screenMemory" class="hidden w-full max-w-2xl mx-auto px-4 py-6 sm:py-8 flex-1 flex flex-col justify-center gap-5">
+    
+    <!-- SUB-VIEW 1: Memory Mode Lobby (난이도 선택 및 시작) -->
+    <div id="memoryViewLobby" class="flex flex-col gap-5">
+      <div class="text-center">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-purple-100 text-purple-800 border border-purple-200/80 text-xs font-semibold mb-2 shadow-xs">
+          <span>🧠 순간기억 색감 챌린지</span>
+          <span class="px-1.5 py-0.2 rounded-full bg-purple-600 text-white text-[10px] font-black">NEW</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">
+          색채 순간기억력 테스트
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1.5 max-w-md mx-auto leading-relaxed">
+          목표 색상이 <span class="font-extrabold text-purple-600">5초간</span> 화면에 노출된 뒤 사라집니다.<br class="hidden sm:inline">
+          사라진 후 제시되는 4개의 보기 중 진짜 색상을 찾아내세요!
+        </p>
+      </div>
+
+      <!-- Difficulty Selector Cards (쉬움, 보통, 어려움, 헬) -->
+      <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-3xl p-4 sm:p-6 shadow-sm space-y-3">
+        <div class="flex items-center justify-between mb-1">
+          <label class="text-xs sm:text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
+            <span>🎯 난이도 선택</span>
+            <span class="text-[11px] text-slate-500 font-normal">(오차 변동폭)</span>
+          </label>
+          <span id="memoryDiffSelectedBadge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-200">
+            🟡 보통 (5~10%)
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5" id="memoryDiffButtonsGrid">
+          <!-- Easy -->
+          <button type="button" onclick="setMemoryDifficulty('easy')" id="memDiffBtn_easy" class="p-3.5 rounded-2xl border text-left transition-all active:scale-98 flex items-start gap-3 bg-white/70 hover:bg-white border-slate-200/90 shadow-2xs touch-manipulation cursor-pointer">
+            <span class="text-2xl">🟢</span>
+            <div>
+              <div class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-1.5">
+                <span>쉬움</span>
+                <span class="text-[10px] font-extrabold px-1.5 py-0.2 rounded bg-emerald-100 text-emerald-700">10~15%</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">색 차이가 확연해 가볍게 즐기기 좋은 입문용</p>
+            </div>
+          </button>
+
+          <!-- Normal (Default) -->
+          <button type="button" onclick="setMemoryDifficulty('normal')" id="memDiffBtn_normal" class="p-3.5 rounded-2xl border text-left transition-all active:scale-98 flex items-start gap-3 bg-amber-50/70 border-amber-400 ring-2 ring-amber-400/30 shadow-xs touch-manipulation cursor-pointer">
+            <span class="text-2xl">🟡</span>
+            <div>
+              <div class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-1.5">
+                <span>보통</span>
+                <span class="text-[10px] font-extrabold px-1.5 py-0.2 rounded bg-amber-100 text-amber-700">5~10%</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">평균적인 시각 기억력과 집중력을 시험하는 표준</p>
+            </div>
+          </button>
+
+          <!-- Hard -->
+          <button type="button" onclick="setMemoryDifficulty('hard')" id="memDiffBtn_hard" class="p-3.5 rounded-2xl border text-left transition-all active:scale-98 flex items-start gap-3 bg-white/70 hover:bg-white border-slate-200/90 shadow-2xs touch-manipulation cursor-pointer">
+            <span class="text-2xl">🔴</span>
+            <div>
+              <div class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-1.5">
+                <span>어려움</span>
+                <span class="text-[10px] font-extrabold px-1.5 py-0.2 rounded bg-rose-100 text-rose-700">3~5%</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">미묘한 색조 뉘앙스까지 또렷이 외워야 하는 상급자</p>
+            </div>
+          </button>
+
+          <!-- Hell -->
+          <button type="button" onclick="setMemoryDifficulty('hell')" id="memDiffBtn_hell" class="p-3.5 rounded-2xl border text-left transition-all active:scale-98 flex items-start gap-3 bg-white/70 hover:bg-white border-slate-200/90 shadow-2xs touch-manipulation cursor-pointer">
+            <span class="text-2xl">😈</span>
+            <div>
+              <div class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-1.5">
+                <span>헬 (HELL)</span>
+                <span class="text-[10px] font-extrabold px-1.5 py-0.2 rounded bg-purple-100 text-purple-700">1%</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">단 1%의 극한 차이! 신의 색각 기억자 영역</p>
+            </div>
+          </button>
+        </div>
+
+        <!-- Rules Info Box -->
+        <div class="bg-purple-50/70 border border-purple-200 rounded-2xl p-3.5 text-xs text-purple-900 space-y-1 mt-3">
+          <div class="font-bold flex items-center gap-1.5 text-purple-800">
+            <span>💡 룰 안내</span>
+          </div>
+          <p class="text-[11.5px] text-purple-700 leading-relaxed">
+            • 총 <strong>5문제</strong>로 구성되며, 각 라운드마다 <strong>5초 카운트다운</strong>이 주어집니다.<br>
+            • 5초 후 색상이 가려지며, 4개의 보기 중 <strong>완벽히 동일한 1개</strong>를 찾아내야 합니다.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Start Button -->
+      <button type="button" onclick="startMemoryGame()" class="w-full py-4 rounded-2xl font-black text-base sm:text-lg bg-gradient-to-r from-purple-600 via-indigo-600 to-rose-500 hover:brightness-105 active:scale-98 text-white shadow-xl shadow-purple-300/40 transition-all flex items-center justify-center gap-2 touch-manipulation cursor-pointer">
+        <span>기억력 테스트 시작하기 (5문제)</span>
+        <span>🚀</span>
+      </button>
+    </div>
+
+    <!-- SUB-VIEW 2: In-Game Active Round (기억 & 4지선다 선택) -->
+    <div id="memoryViewGame" class="hidden flex flex-col gap-4">
+      
+      <!-- In-Game Header / Status Bar -->
+      <div class="flex items-center justify-between text-xs bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-2.5 shadow-sm">
+        <div class="flex items-center gap-2">
+          <span id="memInGameDiffBadge" class="px-2.5 py-0.5 rounded-full font-bold bg-amber-100 text-amber-800 border border-amber-200">
+            🟡 보통
+          </span>
+          <span id="memInGameRoundBadge" class="px-2.5 py-0.5 rounded-full font-bold bg-purple-100 text-purple-800 border border-purple-200">
+            문제 <span id="memCurrentRoundNum">1</span> / 5
+          </span>
+        </div>
+        <div class="flex items-center gap-1.5 font-bold text-slate-700">
+          <span>맞춘 개수:</span>
+          <span id="memCurrentScoreNum" class="text-purple-600 mono font-extrabold text-sm">0</span>
+          <span class="text-slate-400">/ 5</span>
+        </div>
+      </div>
+
+      <!-- Stage 1: Memorize Stage UI -->
+      <div id="memPhaseMemorize" class="bg-white/85 backdrop-blur-md border border-white/80 rounded-3xl p-5 sm:p-6 shadow-sm text-center flex flex-col items-center gap-4">
+        
+        <div class="space-y-1">
+          <div class="inline-flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-rose-100 text-rose-700 text-xs font-black animate-pulse">
+            <span>👁️ 5초간 집중하여 기억하세요!</span>
+          </div>
+          <h3 class="text-base sm:text-lg font-black text-slate-800">
+            아래 목표 색상을 머릿속에 기억하세요
+          </h3>
+        </div>
+
+        <!-- Target Swatch Box -->
+        <div class="w-full max-w-xs h-36 sm:h-44 rounded-2xl border-2 border-white shadow-xl relative overflow-hidden transition-all transform hover:scale-[1.01]" id="memTargetColorBox" style="background-color: #7c3aed;">
+          <div class="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/20 pointer-events-none"></div>
+        </div>
+
+        <!-- 5s Countdown Timer Bar & Counter -->
+        <div class="w-full max-w-xs space-y-1.5">
+          <div class="flex justify-between items-center text-xs font-bold">
+            <span class="text-purple-700 flex items-center gap-1">
+              <span>⏱️ 남은 기억 시간</span>
+            </span>
+            <span id="memTimerSecText" class="mono text-sm font-black text-purple-700">5.0초</span>
+          </div>
+          <!-- Progress bar -->
+          <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200">
+            <div id="memTimerProgressBar" class="h-full bg-gradient-to-r from-purple-500 to-rose-500 rounded-full transition-all duration-100 ease-linear" style="width: 100%;"></div>
+          </div>
+        </div>
+
+        <!-- Skip Button -->
+        <button type="button" onclick="skipMemoryTimer()" class="text-xs font-bold text-slate-500 hover:text-purple-600 py-1.5 px-3 rounded-xl hover:bg-purple-50 border border-transparent hover:border-purple-200 transition-all active:scale-95 touch-manipulation cursor-pointer flex items-center gap-1">
+          <span>⚡ 이미 다 외웠어요 (바로 맞추기)</span>
+        </button>
+
+      </div>
+
+      <!-- Stage 2: Question & 4 Choices UI (Shown after 5s or skip) -->
+      <div id="memPhaseQuestion" class="hidden flex flex-col gap-4">
+        
+        <!-- Masked Target Box -->
+        <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-3xl p-4 sm:p-5 shadow-sm text-center flex flex-col items-center gap-2">
+          <div class="text-xs font-black px-2.5 py-0.5 rounded-full bg-slate-100 text-slate-700 border border-slate-200">
+            🕶️ 목표 색상이 가려졌습니다!
+          </div>
+          <div id="memMaskedBox" class="w-full max-w-xs h-16 sm:h-20 rounded-2xl bg-slate-200/90 border border-slate-300/80 flex items-center justify-center text-slate-400 font-black text-2xl tracking-widest shadow-inner select-none">
+            ? ? ?
+          </div>
+          <p id="memQuestionPrompt" class="text-xs sm:text-sm font-bold text-slate-800">
+            다음 4개의 보기 중 방금 기억한 색상은 무엇일까요?
+          </p>
+        </div>
+
+        <!-- 4 Options Grid -->
+        <div class="grid grid-cols-2 gap-3 sm:gap-4" id="memOptionsContainer">
+          <!-- 4 option cards generated by JS -->
+        </div>
+
+        <!-- Feedback & Comparison Card (Revealed after clicking an option) -->
+        <div id="memFeedbackCard" class="hidden bg-white/90 backdrop-blur-md border border-white/80 rounded-3xl p-4 sm:p-5 shadow-md space-y-3">
+          
+          <div class="flex items-center justify-between">
+            <div id="memFeedbackBadge" class="text-base sm:text-lg font-black text-emerald-600 flex items-center gap-1.5">
+              <span>✅ 정답입니다! (+1점)</span>
+            </div>
+            <span id="memFeedbackDeltaText" class="text-xs font-bold text-slate-500">
+              오차: 0%
+            </span>
+          </div>
+
+          <!-- Color Comparison Box -->
+          <div class="grid grid-cols-2 gap-3 bg-slate-50 rounded-2xl p-3 border border-slate-200/80">
+            <div class="flex flex-col items-center text-center">
+              <span class="text-[11px] font-bold text-slate-500 mb-1">🎯 목표 색상</span>
+              <div id="memFeedbackTargetBox" class="w-full h-12 rounded-xl border border-slate-300 shadow-inner"></div>
+              <span id="memFeedbackTargetRgb" class="mono text-[11px] font-bold text-slate-700 mt-1">RGB(100, 100, 100)</span>
+            </div>
+            <div class="flex flex-col items-center text-center">
+              <span class="text-[11px] font-bold text-slate-500 mb-1">👆 내가 고른 색상</span>
+              <div id="memFeedbackUserBox" class="w-full h-12 rounded-xl border border-slate-300 shadow-inner"></div>
+              <span id="memFeedbackUserRgb" class="mono text-[11px] font-bold text-slate-700 mt-1">RGB(100, 100, 100)</span>
+            </div>
+          </div>
+
+          <!-- Next Button -->
+          <button type="button" onclick="nextMemoryRound()" id="memNextRoundBtn" class="w-full py-3.5 rounded-xl font-black text-sm sm:text-base bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white shadow-md shadow-indigo-300/40 transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
+            <span id="memNextRoundBtnText">다음 문제로 이동 (2/5) ➔</span>
+          </button>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SUB-VIEW 3: Final Result Report -->
+    <div id="memoryViewResult" class="hidden flex flex-col gap-5">
+      
+      <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-3xl p-6 sm:p-8 shadow-sm text-center flex flex-col items-center">
+        
+        <div id="memResultTierBadge" class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black shadow-xs mb-3 border bg-purple-100 text-purple-800 border-purple-200">
+          👑 신의 시각 기억자
+        </div>
+
+        <!-- Big Score Circle -->
+        <div class="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full bg-gradient-to-tr from-purple-500 to-rose-500 p-1.5 shadow-xl shadow-purple-300/40 flex items-center justify-center mb-3">
+          <div class="w-full h-full rounded-full bg-white flex flex-col items-center justify-center">
+            <span class="text-3xl sm:text-4xl font-black text-slate-900 mono" id="memFinalScoreText">5 / 5</span>
+            <span class="text-[10px] sm:text-[11px] font-extrabold text-purple-600" id="memFinalPctText">100% 정답률</span>
+          </div>
+        </div>
+
+        <h3 class="text-xl sm:text-2xl font-black text-slate-800 tracking-tight" id="memFinalPersonaTitle">
+          포토그래픽 메모리의 신!
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-sm leading-relaxed" id="memFinalPersonaDesc">
+          단 1%의 미세한 색차마저 5초 만에 뇌리에 각인하는 초월적 색각 기억의 소유자입니다.
+        </p>
+
+        <!-- Condition Tags -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-4">
+          <span id="memResultDiffTag" class="px-3 py-1 rounded-full text-xs font-extrabold bg-slate-100 text-slate-700 border border-slate-200">
+            난이도: 보통 (5~10%)
+          </span>
+          <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-purple-50 text-purple-700 border border-purple-200">
+            총 5라운드 완주
+          </span>
+        </div>
+
+      </div>
+
+      <!-- 5 Rounds Summary Review Cards -->
+      <div class="space-y-2">
+        <h4 class="text-xs font-extrabold text-slate-700 ml-1">📋 라운드별 선택 결과</h4>
+        <div id="memRoundsReviewContainer" class="space-y-2">
+          <!-- 5 review cards rendered by JS -->
+        </div>
+      </div>
+
+      <!-- Result Action Buttons -->
+      <div class="space-y-2.5">
+        <button type="button" onclick="shareMemoryResult()" id="memShareBtn" class="w-full py-4 rounded-xl font-black text-sm sm:text-base bg-gradient-to-r from-purple-600 via-indigo-600 to-rose-500 hover:brightness-105 active:scale-98 text-white shadow-xl shadow-purple-300/40 transition-all flex items-center justify-center gap-2 touch-manipulation cursor-pointer">
+          <span>기억력 테스트 결과 공유하기</span>
+          <span>📢</span>
+        </button>
+
+        <div class="grid grid-cols-2 gap-2.5">
+          <button type="button" onclick="restartMemoryGame()" class="py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 shadow-xs touch-manipulation cursor-pointer">
+            <span>🔄 다시 풀기</span>
+          </button>
+          <button type="button" onclick="goToMemoryLobby()" class="py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 shadow-xs touch-manipulation cursor-pointer">
+            <span>⚙️ 난이도 변경</span>
+          </button>
+        </div>
+
+        <button type="button" onclick="switchNavTab('test')" class="w-full py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
+          <span>🎯 본 게임(색감 감각 테스트) 하러 가기</span>
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
   <!-- MODAL 1: Round Result Popup Modal -->
   <div id="roundResultModal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white/95 border border-white/80 rounded-3xl p-5 sm:p-6 w-full max-w-sm sm:max-w-md shadow-2xl text-center transform transition-all animate-in fade-in zoom-in duration-200">
@@ -1213,7 +1516,7 @@
     let triviaViewerInitialized = false;
 
     // --- Screen Navigation & Tabs ---
-    const allScreenIds = ['screenLobby', 'screenGame', 'screenReport', 'screenSandbox', 'screenTrivia'];
+    const allScreenIds = ['screenLobby', 'screenGame', 'screenReport', 'screenSandbox', 'screenTrivia', 'screenMemory'];
 
     function showScreen(screenId) {
       allScreenIds.forEach(id => {
@@ -1235,30 +1538,25 @@
 
     function updateNavTabUI(screenId) {
       const tabTest = document.getElementById('navTabTest');
+      const tabMemory = document.getElementById('navTabMemory');
       const tabSandbox = document.getElementById('navTabSandbox');
       const tabTrivia = document.getElementById('navTabTrivia');
       if (!tabTest || !tabSandbox || !tabTrivia) return;
 
-      const activeClass = 'px-3.5 py-1.5 rounded-xl transition-all bg-indigo-600 text-white shadow-xs flex items-center gap-1.5 touch-manipulation cursor-pointer';
-      const inactiveClass = 'px-3.5 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer';
+      const activeClass = 'px-2.5 sm:px-3 py-1.5 rounded-xl transition-all bg-indigo-600 text-white shadow-xs flex items-center gap-1.5 touch-manipulation cursor-pointer';
+      const inactiveClass = 'px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer';
 
-      if (screenId === 'screenSandbox') {
-        tabTest.className = inactiveClass;
-        tabSandbox.className = activeClass;
-        tabTrivia.className = inactiveClass;
-      } else if (screenId === 'screenTrivia') {
-        tabTest.className = inactiveClass;
-        tabSandbox.className = inactiveClass;
-        tabTrivia.className = activeClass;
-      } else {
-        tabTest.className = activeClass;
-        tabSandbox.className = inactiveClass;
-        tabTrivia.className = inactiveClass;
-      }
+      if (tabTest) tabTest.className = (screenId === 'screenLobby' || screenId === 'screenGame' || screenId === 'screenReport') ? activeClass : inactiveClass;
+      if (tabMemory) tabMemory.className = (screenId === 'screenMemory') ? activeClass : inactiveClass;
+      if (tabSandbox) tabSandbox.className = (screenId === 'screenSandbox') ? activeClass : inactiveClass;
+      if (tabTrivia) tabTrivia.className = (screenId === 'screenTrivia') ? activeClass : inactiveClass;
     }
 
     function switchNavTab(tab) {
       playTone(500, 'sine', 0.04);
+      if (tab !== 'memory') {
+        clearMemoryTimer();
+      }
       if (tab === 'test') {
         const gameEl = document.getElementById('screenGame');
         const reportEl = document.getElementById('screenReport');
@@ -1269,6 +1567,9 @@
         } else {
           showScreen('screenLobby');
         }
+      } else if (tab === 'memory') {
+        initMemoryMode();
+        showScreen('screenMemory');
       } else if (tab === 'sandbox') {
         initSandbox();
         showScreen('screenSandbox');
@@ -1648,6 +1949,7 @@
     });
 
     function goToLobby() {
+      clearMemoryTimer();
       sharedAnimalIndex = null;
       document.getElementById('roundResultModal').classList.add('hidden');
       document.getElementById('shareCardModal').classList.add('hidden');
@@ -3139,6 +3441,563 @@
         showScreen('screenLobby');
       }
     };
+
+    // ============================================================
+    // --- COLOR MEMORY TEST MODE (순간기억 색감 테스트) ---
+    // ============================================================
+    const MEMORY_DIFFICULTIES = {
+      easy: {
+        id: 'easy',
+        name: '쉬움',
+        badge: '🟢 쉬움 (10~15%)',
+        pctMin: 0.10,
+        pctMax: 0.15,
+        desc: '눈으로 쉽게 구분 가능한 오차 범위 (10~15%)',
+        btnActive: 'bg-emerald-50/80 border-emerald-400 ring-2 ring-emerald-400/30 shadow-xs',
+        badgeClass: 'bg-emerald-100 text-emerald-800 border-emerald-200'
+      },
+      normal: {
+        id: 'normal',
+        name: '보통',
+        badge: '🟡 보통 (5~10%)',
+        pctMin: 0.05,
+        pctMax: 0.10,
+        desc: '평균 색채 기억력 테스트 (5~10%)',
+        btnActive: 'bg-amber-50/80 border-amber-400 ring-2 ring-amber-400/30 shadow-xs',
+        badgeClass: 'bg-amber-100 text-amber-800 border-amber-200'
+      },
+      hard: {
+        id: 'hard',
+        name: '어려움',
+        badge: '🔴 어려움 (3~5%)',
+        pctMin: 0.03,
+        pctMax: 0.05,
+        desc: '미세한 뉘앙스를 기억해야 하는 상급자용 (3~5%)',
+        btnActive: 'bg-rose-50/80 border-rose-400 ring-2 ring-rose-400/30 shadow-xs',
+        badgeClass: 'bg-rose-100 text-rose-800 border-rose-200'
+      },
+      hell: {
+        id: 'hell',
+        name: '헬 (HELL)',
+        badge: '😈 헬 (1%)',
+        pctMin: 0.01,
+        pctMax: 0.015,
+        desc: '오직 1%의 미세 차이! 신의 색각 기억자 (1%)',
+        btnActive: 'bg-purple-50/80 border-purple-400 ring-2 ring-purple-400/30 shadow-xs',
+        badgeClass: 'bg-purple-100 text-purple-800 border-purple-200'
+      }
+    };
+
+    let memoryState = {
+      difficulty: 'normal',
+      totalRounds: 5,
+      currentRound: 1,
+      score: 0,
+      timerInterval: null,
+      timerRemainMs: 5000,
+      phase: 'lobby', // 'lobby' | 'memorize' | 'question' | 'feedback' | 'result'
+      targetColor: null, // { r, g, b }
+      options: [], // [{ id, r, g, b, isCorrect }]
+      selectedOptionIdx: null,
+      history: []
+    };
+
+    function initMemoryMode() {
+      clearMemoryTimer();
+      goToMemoryLobby();
+    }
+
+    function goToMemoryLobby() {
+      clearMemoryTimer();
+      memoryState.phase = 'lobby';
+      document.getElementById('memoryViewLobby').classList.remove('hidden');
+      document.getElementById('memoryViewGame').classList.add('hidden');
+      document.getElementById('memoryViewResult').classList.add('hidden');
+      updateMemoryDiffUI();
+    }
+
+    function setMemoryDifficulty(diffKey) {
+      if (!MEMORY_DIFFICULTIES[diffKey]) return;
+      memoryState.difficulty = diffKey;
+      playTone(520, 'sine', 0.04);
+      updateMemoryDiffUI();
+    }
+
+    function updateMemoryDiffUI() {
+      const diffKeys = ['easy', 'normal', 'hard', 'hell'];
+      const current = MEMORY_DIFFICULTIES[memoryState.difficulty];
+      
+      const badge = document.getElementById('memoryDiffSelectedBadge');
+      if (badge) {
+        badge.innerText = current.badge;
+        badge.className = `text-xs font-bold px-2.5 py-0.5 rounded-full border ${current.badgeClass}`;
+      }
+
+      diffKeys.forEach(k => {
+        const btn = document.getElementById('memDiffBtn_' + k);
+        if (!btn) return;
+        if (k === memoryState.difficulty) {
+          btn.className = `p-3.5 rounded-2xl border text-left transition-all active:scale-98 flex items-start gap-3 ${MEMORY_DIFFICULTIES[k].btnActive} touch-manipulation cursor-pointer`;
+        } else {
+          btn.className = 'p-3.5 rounded-2xl border text-left transition-all active:scale-98 flex items-start gap-3 bg-white/70 hover:bg-white border-slate-200/90 shadow-2xs touch-manipulation cursor-pointer';
+        }
+      });
+    }
+
+    function startMemoryGame() {
+      clearMemoryTimer();
+      memoryState.currentRound = 1;
+      memoryState.score = 0;
+      memoryState.history = [];
+      
+      document.getElementById('memoryViewLobby').classList.add('hidden');
+      document.getElementById('memoryViewGame').classList.remove('hidden');
+      document.getElementById('memoryViewResult').classList.add('hidden');
+
+      const diff = MEMORY_DIFFICULTIES[memoryState.difficulty];
+      const diffBadge = document.getElementById('memInGameDiffBadge');
+      if (diffBadge) {
+        diffBadge.innerText = diff.badge;
+        diffBadge.className = `px-2.5 py-0.5 rounded-full font-bold border ${diff.badgeClass}`;
+      }
+
+      setupMemoryRound();
+    }
+
+    function setupMemoryRound() {
+      clearMemoryTimer();
+      memoryState.selectedOptionIdx = null;
+
+      // Update In-game Status
+      document.getElementById('memCurrentRoundNum').innerText = memoryState.currentRound;
+      document.getElementById('memCurrentScoreNum').innerText = memoryState.score;
+
+      // Pick random vibrant target color with safe margin (50 ~ 210) so jitter won't clip
+      memoryState.targetColor = {
+        r: Math.floor(50 + Math.random() * 160),
+        g: Math.floor(50 + Math.random() * 160),
+        b: Math.floor(50 + Math.random() * 160)
+      };
+
+      // Generate 4 options (1 exact match + 3 jittered distractors)
+      memoryState.options = generateMemoryDistractors(memoryState.targetColor, memoryState.difficulty);
+
+      // Start Memorize Phase (5 seconds)
+      startMemoryMemorizePhase();
+    }
+
+    function generateMemoryDistractors(target, diffKey) {
+      const diff = MEMORY_DIFFICULTIES[diffKey];
+      const { pctMin, pctMax } = diff;
+
+      const correctOpt = {
+        r: target.r,
+        g: target.g,
+        b: target.b,
+        isCorrect: true
+      };
+
+      const distractors = [];
+      const dirSets = [
+        [1, -1, 1],
+        [-1, 1, -1],
+        [1, 1, -1],
+        [-1, -1, 1]
+      ];
+
+      for (let i = 0; i < 3; i++) {
+        const dirs = dirSets[i % dirSets.length];
+        let dR, dG, dB;
+        let attempts = 0;
+
+        do {
+          attempts++;
+          const pR = pctMin + Math.random() * (pctMax - pctMin);
+          const pG = pctMin + Math.random() * (pctMax - pctMin);
+          const pB = pctMin + Math.random() * (pctMax - pctMin);
+
+          // Jitter proportional to each channel (base minimum 70)
+          // For target 100 100 100 in normal (5~10%), delta is 5~10 (options 90~110)
+          const baseR = Math.max(70, target.r);
+          const baseG = Math.max(70, target.g);
+          const baseB = Math.max(70, target.b);
+
+          const deltaR = Math.max(1, Math.round(baseR * pR));
+          const deltaG = Math.max(1, Math.round(baseG * pG));
+          const deltaB = Math.max(1, Math.round(baseB * pB));
+
+          dR = Math.min(255, Math.max(0, target.r + (dirs[0] * deltaR)));
+          dG = Math.min(255, Math.max(0, target.g + (dirs[1] * deltaG)));
+          dB = Math.min(255, Math.max(0, target.b + (dirs[2] * deltaB)));
+
+          if (dR === target.r && dG === target.g && dB === target.b) {
+            dR = target.r > 128 ? target.r - deltaR : target.r + deltaR;
+          }
+        } while (attempts < 12 && distractors.some(d => d.r === dR && d.g === dG && d.b === dB));
+
+        distractors.push({
+          r: dR,
+          g: dG,
+          b: dB,
+          isCorrect: false
+        });
+      }
+
+      // Combine and shuffle
+      const combined = [correctOpt, ...distractors];
+      for (let i = combined.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [combined[i], combined[j]] = [combined[j], combined[i]];
+      }
+
+      return combined.map((item, idx) => ({ ...item, id: idx }));
+    }
+
+    function startMemoryMemorizePhase() {
+      memoryState.phase = 'memorize';
+      
+      const phaseMemorize = document.getElementById('memPhaseMemorize');
+      const phaseQuestion = document.getElementById('memPhaseQuestion');
+      const feedbackCard = document.getElementById('memFeedbackCard');
+      
+      phaseMemorize.classList.remove('hidden');
+      phaseQuestion.classList.add('hidden');
+      feedbackCard.classList.add('hidden');
+
+      const targetBox = document.getElementById('memTargetColorBox');
+      const targetRgbStr = `rgb(${memoryState.targetColor.r}, ${memoryState.targetColor.g}, ${memoryState.targetColor.b})`;
+      targetBox.style.backgroundColor = targetRgbStr;
+
+      // 5-second countdown timer
+      memoryState.timerRemainMs = 5000;
+      updateMemoryTimerDisplay();
+      playTone(580, 'sine', 0.08);
+
+      const intervalStepMs = 100;
+      let lastSecondBeep = 5;
+
+      memoryState.timerInterval = setInterval(() => {
+        memoryState.timerRemainMs -= intervalStepMs;
+
+        const currentSecInt = Math.ceil(memoryState.timerRemainMs / 1000);
+        if (currentSecInt > 0 && currentSecInt !== lastSecondBeep) {
+          lastSecondBeep = currentSecInt;
+          playTone(600, 'sine', 0.04, 0.06);
+        }
+
+        if (memoryState.timerRemainMs <= 0) {
+          clearMemoryTimer();
+          transitionToMemoryQuestion();
+        } else {
+          updateMemoryTimerDisplay();
+        }
+      }, intervalStepMs);
+    }
+
+    function updateMemoryTimerDisplay() {
+      const secText = document.getElementById('memTimerSecText');
+      const bar = document.getElementById('memTimerProgressBar');
+      const remainSec = Math.max(0, memoryState.timerRemainMs / 1000).toFixed(1);
+      
+      if (secText) secText.innerText = remainSec + '초';
+      if (bar) {
+        const pct = Math.max(0, Math.min(100, (memoryState.timerRemainMs / 5000) * 100));
+        bar.style.width = pct + '%';
+      }
+    }
+
+    function skipMemoryTimer() {
+      clearMemoryTimer();
+      playTone(720, 'sine', 0.06);
+      transitionToMemoryQuestion();
+    }
+
+    function clearMemoryTimer() {
+      if (memoryState.timerInterval) {
+        clearInterval(memoryState.timerInterval);
+        memoryState.timerInterval = null;
+      }
+    }
+
+    function transitionToMemoryQuestion() {
+      clearMemoryTimer();
+      memoryState.phase = 'question';
+      playTone(480, 'triangle', 0.15);
+
+      const phaseMemorize = document.getElementById('memPhaseMemorize');
+      const phaseQuestion = document.getElementById('memPhaseQuestion');
+      const feedbackCard = document.getElementById('memFeedbackCard');
+
+      phaseMemorize.classList.add('hidden');
+      phaseQuestion.classList.remove('hidden');
+      feedbackCard.classList.add('hidden');
+
+      renderMemoryOptions();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function renderMemoryOptions() {
+      const container = document.getElementById('memOptionsContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      memoryState.options.forEach((opt, idx) => {
+        const rgbStr = `rgb(${opt.r}, ${opt.g}, ${opt.b})`;
+        const btn = document.createElement('button');
+        btn.type = 'button';
+        btn.id = 'memOptionBtn_' + idx;
+        btn.onclick = () => selectMemoryOption(idx);
+        btn.className = 'group relative p-3 sm:p-4 rounded-3xl bg-white/90 hover:bg-white border-2 border-slate-200/90 hover:border-purple-400 transition-all duration-150 active:scale-95 shadow-sm text-center flex flex-col items-center gap-2 select-none touch-manipulation cursor-pointer';
+
+        btn.innerHTML = `
+          <div class="w-full h-24 sm:h-28 rounded-2xl shadow-inner border border-black/10 relative overflow-hidden transition-transform group-hover:scale-[1.02]" style="background-color: ${rgbStr};">
+            <span class="absolute top-2 left-2 w-6 h-6 rounded-full bg-black/40 backdrop-blur-xs text-white text-xs font-black flex items-center justify-center">
+              ${idx + 1}
+            </span>
+            <div id="memOptBadge_${idx}" class="hidden absolute inset-0 flex items-center justify-center font-black text-xs sm:text-sm text-white backdrop-blur-xs"></div>
+          </div>
+          <div class="flex items-center gap-1.5 text-xs font-bold text-slate-700">
+            <span>${idx + 1}번 보기</span>
+          </div>
+        `;
+
+        container.appendChild(btn);
+      });
+    }
+
+    function selectMemoryOption(chosenIdx) {
+      if (memoryState.phase !== 'question') return;
+      memoryState.phase = 'feedback';
+      memoryState.selectedOptionIdx = chosenIdx;
+
+      const chosenOpt = memoryState.options[chosenIdx];
+      const isCorrect = chosenOpt.isCorrect;
+      if (isCorrect) {
+        memoryState.score++;
+        playSuccessChord();
+      } else {
+        playTone(260, 'sawtooth', 0.25);
+      }
+
+      // Record round history
+      memoryState.history.push({
+        round: memoryState.currentRound,
+        target: { ...memoryState.targetColor },
+        selected: { ...chosenOpt },
+        isCorrect: isCorrect,
+        options: memoryState.options
+      });
+
+      // Update In-Game score display
+      document.getElementById('memCurrentScoreNum').innerText = memoryState.score;
+
+      // Reveal visual borders & badges on all 4 options
+      memoryState.options.forEach((opt, idx) => {
+        const btn = document.getElementById('memOptionBtn_' + idx);
+        const badge = document.getElementById('memOptBadge_' + idx);
+        if (!btn || !badge) return;
+
+        btn.disabled = true;
+        btn.classList.remove('cursor-pointer', 'active:scale-95', 'hover:border-purple-400');
+
+        if (opt.isCorrect) {
+          btn.className += ' border-emerald-500 ring-4 ring-emerald-300/50 bg-emerald-50/60';
+          badge.classList.remove('hidden');
+          badge.className = 'absolute inset-0 bg-emerald-900/60 flex items-center justify-center font-black text-xs sm:text-sm text-white';
+          badge.innerHTML = '<span>⭐ 정답</span>';
+        } else if (idx === chosenIdx) {
+          btn.className += ' border-rose-500 ring-4 ring-rose-300/50 bg-rose-50/60';
+          badge.classList.remove('hidden');
+          badge.className = 'absolute inset-0 bg-rose-900/60 flex items-center justify-center font-black text-xs sm:text-sm text-white';
+          badge.innerHTML = '<span>❌ 오답</span>';
+        } else {
+          btn.className += ' opacity-50';
+        }
+      });
+
+      // Reveal feedback card
+      const feedbackCard = document.getElementById('memFeedbackCard');
+      const feedbackBadge = document.getElementById('memFeedbackBadge');
+      const deltaText = document.getElementById('memFeedbackDeltaText');
+      const targetBox = document.getElementById('memFeedbackTargetBox');
+      const userBox = document.getElementById('memFeedbackUserBox');
+      const targetRgbText = document.getElementById('memFeedbackTargetRgb');
+      const userRgbText = document.getElementById('memFeedbackUserRgb');
+      const nextBtnText = document.getElementById('memNextRoundBtnText');
+
+      const target = memoryState.targetColor;
+      const dist = Math.sqrt(
+        Math.pow(target.r - chosenOpt.r, 2) +
+        Math.pow(target.g - chosenOpt.g, 2) +
+        Math.pow(target.b - chosenOpt.b, 2)
+      );
+      const accuracyPct = Math.max(0, Math.round(100 * (1 - (dist / 441.6729))));
+
+      if (isCorrect) {
+        feedbackBadge.className = 'text-base sm:text-lg font-black text-emerald-600 flex items-center gap-1.5';
+        feedbackBadge.innerHTML = '<span>✅ 완벽한 정답입니다! (+1점)</span>';
+        deltaText.innerText = '오차: 0% (100% 일치)';
+      } else {
+        feedbackBadge.className = 'text-base sm:text-lg font-black text-rose-600 flex items-center gap-1.5';
+        feedbackBadge.innerHTML = '<span>❌ 아쉽네요! 오답입니다.</span>';
+        deltaText.innerText = `일치율: ${accuracyPct}%`;
+      }
+
+      targetBox.style.backgroundColor = `rgb(${target.r}, ${target.g}, ${target.b})`;
+      userBox.style.backgroundColor = `rgb(${chosenOpt.r}, ${chosenOpt.g}, ${chosenOpt.b})`;
+      targetRgbText.innerText = `RGB(${target.r}, ${target.g}, ${target.b})`;
+      userRgbText.innerText = `RGB(${chosenOpt.r}, ${chosenOpt.g}, ${chosenOpt.b})`;
+
+      if (memoryState.currentRound < memoryState.totalRounds) {
+        nextBtnText.innerText = `다음 문제로 이동 (${memoryState.currentRound + 1}/${memoryState.totalRounds}) ➔`;
+      } else {
+        nextBtnText.innerText = '최종 결과 리포트 확인하기 🏆';
+      }
+
+      feedbackCard.classList.remove('hidden');
+    }
+
+    function nextMemoryRound() {
+      playTone(550, 'sine', 0.05);
+      if (memoryState.currentRound < memoryState.totalRounds) {
+        memoryState.currentRound++;
+        setupMemoryRound();
+      } else {
+        showMemoryResult();
+      }
+    }
+
+    function showMemoryResult() {
+      clearMemoryTimer();
+      memoryState.phase = 'result';
+
+      document.getElementById('memoryViewLobby').classList.add('hidden');
+      document.getElementById('memoryViewGame').classList.add('hidden');
+      document.getElementById('memoryViewResult').classList.remove('hidden');
+
+      playFanfare();
+
+      const score = memoryState.score;
+      const total = memoryState.totalRounds;
+      const pct = Math.round((score / total) * 100);
+
+      document.getElementById('memFinalScoreText').innerText = `${score} / ${total}`;
+      document.getElementById('memFinalPctText').innerText = `${pct}% 정답률`;
+
+      const diff = MEMORY_DIFFICULTIES[memoryState.difficulty];
+      document.getElementById('memResultDiffTag').innerText = `난이도: ${diff.name} (${Math.round(diff.pctMin * 100)}~${Math.round(diff.pctMax * 100)}% 오차)`;
+
+      // Determine Persona / Title
+      let title = '';
+      let desc = '';
+      let badge = '';
+
+      if (score === 5) {
+        if (memoryState.difficulty === 'hell') {
+          badge = '👑 신의 시각 기억자 (Photographic Eye)';
+          title = '단 1%도 놓치지 않는 신의 기억력!';
+          desc = '단 1%의 미세한 색차마저 5초 만에 뇌리에 영구 각인하는 초월적 색각 기억의 절대자입니다.';
+        } else if (memoryState.difficulty === 'hard') {
+          badge = '🦅 예리한 매의 눈 (Falcon Eye)';
+          title = '극미세 뉘앙스를 간파하는 초정밀 기억력!';
+          desc = '3~5%의 까다로운 톤 차이를 완벽히 포착해 기억해낸 상위 1%의 색채 감각입니다.';
+        } else {
+          badge = '🐱 명탐정 고양이 (Sharp Memorizer)';
+          title = '티끌 하나 놓치지 않는 또렷한 눈썰미!';
+          desc = '5초 동안 색상을 머릿속에 또렷하게 보존하여 만점을 달성했습니다. 상위 난이도에도 도전해보세요!';
+        }
+      } else if (score >= 3) {
+        badge = '🦉 감각적인 올빼미 (Sensory Owl)';
+        title = '높은 집중력의 뛰어난 색채 기억자!';
+        desc = '비슷한 보기들의 교묘한 유혹 속에서도 높은 확률로 진짜 색상을 짚어냈습니다!';
+      } else if (score >= 1) {
+        badge = '🦔 탐색하는 고슴도치 (Curious Hedgehog)';
+        title = '감각을 예리하게 벼리는 중!';
+        desc = '찰나의 색채 착시에 아쉽게 속았지만, 몇 번 더 집중해보면 기억력이 빠르게 상승할 것입니다.';
+      } else {
+        badge = '🙈 깜빡하는 아기원숭이 (Playful Monkey)';
+        title = '색이 사라지자 뇌도 함께 리셋?!';
+        desc = '5초 동안 색의 밝기와 채도를 한 번 더 마음속으로 읊어보세요! 다시 도전해보시겠어요?';
+      }
+
+      document.getElementById('memResultTierBadge').innerText = badge;
+      document.getElementById('memFinalPersonaTitle').innerText = title;
+      document.getElementById('memFinalPersonaDesc').innerText = desc;
+
+      // Render 5 review cards
+      const reviewContainer = document.getElementById('memRoundsReviewContainer');
+      reviewContainer.innerHTML = '';
+
+      memoryState.history.forEach((h, idx) => {
+        const row = document.createElement('div');
+        row.className = 'p-3 rounded-2xl bg-white border border-slate-200/90 shadow-2xs flex items-center justify-between gap-3 text-xs';
+
+        const statusTag = h.isCorrect
+          ? '<span class="px-2 py-0.5 rounded-full font-black bg-emerald-100 text-emerald-800 border border-emerald-200">✅ 정답</span>'
+          : '<span class="px-2 py-0.5 rounded-full font-black bg-rose-100 text-rose-800 border border-rose-200">❌ 오답</span>';
+
+        row.innerHTML = `
+          <div class="flex items-center gap-2.5">
+            <span class="font-extrabold text-slate-700 w-5">${idx + 1}번</span>
+            <div class="flex items-center gap-1.5">
+              <div class="flex flex-col items-center">
+                <div class="w-8 h-8 rounded-lg border border-slate-300 shadow-inner" style="background-color: rgb(${h.target.r},${h.target.g},${h.target.b});" title="목표 색상"></div>
+                <span class="text-[9px] text-slate-500 font-semibold mt-0.5">목표</span>
+              </div>
+              <span class="text-slate-400">vs</span>
+              <div class="flex flex-col items-center">
+                <div class="w-8 h-8 rounded-lg border border-slate-300 shadow-inner" style="background-color: rgb(${h.selected.r},${h.selected.g},${h.selected.b});" title="선택한 색상"></div>
+                <span class="text-[9px] text-slate-500 font-semibold mt-0.5">선택</span>
+              </div>
+            </div>
+          </div>
+          <div>${statusTag}</div>
+        `;
+        reviewContainer.appendChild(row);
+      });
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function restartMemoryGame() {
+      playTone(520, 'sine', 0.05);
+      startMemoryGame();
+    }
+
+    function shareMemoryResult() {
+      const diffCfg = MEMORY_DIFFICULTIES[memoryState.difficulty];
+      const title = document.getElementById('memFinalPersonaTitle').innerText;
+      const score = `${memoryState.score} / ${memoryState.totalRounds}`;
+      const pct = Math.round((memoryState.score / memoryState.totalRounds) * 100);
+      const url = window.location.origin + window.location.pathname;
+
+      const shareText = `🧠 [색채 순간기억력 테스트: Color Memory]\n칭호: ${title}\n난이도: ${diffCfg.name} (오차범위 ${Math.round(diffCfg.pctMin * 100)}~${Math.round(diffCfg.pctMax * 100)}%)\n정답률: ${score} (${pct}%)\n\n👉 5초간 색을 외우고 당신의 색채 기억력을 시험해보세요:\n${url}`;
+
+      if (navigator.share) {
+        navigator.share({
+          title: '[색채 순간기억력 테스트] 내 결과',
+          text: shareText,
+          url: url
+        }).catch(() => {});
+      } else {
+        const t = document.createElement('textarea');
+        t.value = shareText;
+        document.body.appendChild(t);
+        t.select();
+        try {
+          document.execCommand('copy');
+          playTone(700, 'sine', 0.1);
+          const btn = document.getElementById('memShareBtn');
+          if (btn) {
+            const old = btn.innerHTML;
+            btn.innerHTML = '<span>✅ 결과 텍스트가 복사되었습니다!</span>';
+            setTimeout(() => { btn.innerHTML = old; }, 2000);
+          }
+        } catch (e) {}
+        document.body.removeChild(t);
+      }
+    }
+
   </script>
 </body>
 </html>
