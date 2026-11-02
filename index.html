@@ -285,6 +285,28 @@
           <span class="block text-[10px] font-normal opacity-75 mt-0.5">0~10</span>
         </button>
       </div>
+
+      <!-- Blind Mode Toggle Card -->
+      <div class="mt-4 pt-3.5 border-t border-slate-200/80">
+        <label for="lobbyFullBlindCheck" class="flex items-center justify-between p-3.5 rounded-xl border border-slate-200/90 bg-white/80 hover:bg-white hover:border-slate-300 transition-all cursor-pointer shadow-xs select-none">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">🕶️</span>
+            <div>
+              <div class="text-xs sm:text-sm font-bold text-slate-800 flex items-center gap-1.5">
+                <span>완전 블라인드 모드 (Full Blind)</span>
+                <span class="text-[10px] font-black px-1.5 py-0.5 rounded-full bg-rose-100 text-rose-700 border border-rose-200">HARD</span>
+              </div>
+              <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">
+                10문제 전체 실시간 미리보기 차단! (미체크 시: 1~7번 미리보기 + <strong>마지막 3문제 자동 블라인드</strong>)
+              </p>
+            </div>
+          </div>
+          <div class="relative flex-shrink-0 ml-3">
+            <input type="checkbox" id="lobbyFullBlindCheck" class="sr-only peer" onchange="toggleLobbyBlindMode()">
+            <div class="w-11 h-6 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-rose-500"></div>
+          </div>
+        </label>
+      </div>
     </div>
 
     <!-- Start Button -->
@@ -302,16 +324,20 @@
       <div class="flex items-center gap-2">
         <span id="gameModeBadge" class="px-2.5 py-0.5 rounded-full font-bold bg-indigo-100 text-indigo-700 border border-indigo-200">💡 빛 모드 (RGB)</span>
         <span id="gameDiffBadge" class="px-2.5 py-0.5 rounded-full font-bold bg-slate-100 text-slate-700 border border-slate-200">초보 (0~3)</span>
+        <span id="gameBlindBadge" class="hidden px-2.5 py-0.5 rounded-full font-bold bg-rose-100 text-rose-700 border border-rose-200">🕶️ 블라인드</span>
       </div>
       <!-- Real-time Preview Toggle -->
       <label class="flex items-center gap-2 cursor-pointer select-none">
-        <span class="text-slate-600 font-medium">실시간 미리보기</span>
+        <span id="previewToggleLabel" class="text-slate-600 font-medium">실시간 미리보기</span>
         <div class="relative">
           <input type="checkbox" id="previewToggle" checked class="sr-only peer" onchange="togglePreview()">
           <div class="w-8 h-4 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-indigo-600"></div>
         </div>
       </label>
     </div>
+
+    <!-- Dynamic Blind Alert Banner -->
+    <div id="blindRoundAlert" class="hidden p-3 sm:p-3.5 rounded-2xl bg-gradient-to-r from-rose-50 via-orange-50 to-amber-50 border border-rose-200 text-rose-800 text-xs sm:text-sm font-semibold shadow-xs transition-all"></div>
 
     <!-- Dual Swatches Canvas Display -->
     <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-4 sm:p-5 shadow-lg shadow-slate-200/50">
@@ -329,9 +355,10 @@
           <div id="currentColorBox" class="w-full aspect-[4/3] rounded-2xl border-2 border-slate-200 shadow-inner flex flex-col items-center justify-center transition-all duration-300 relative overflow-hidden">
             <span class="absolute top-2 left-2 text-[11px] font-bold tracking-wider uppercase px-2 py-0.5 rounded-full bg-slate-900/70 text-white backdrop-blur-md shadow-xs">My Mix</span>
             <!-- Blind Mask Overlay -->
-            <div id="blindMask" class="hidden absolute inset-0 bg-slate-100/95 flex flex-col items-center justify-center text-slate-500 backdrop-blur-sm">
-              <span class="text-2xl mb-1">🙈</span>
-              <span class="text-xs font-bold text-slate-600">블라인드 조색 중</span>
+            <div id="blindMask" class="hidden absolute inset-0 bg-slate-100/95 flex flex-col items-center justify-center text-slate-500 backdrop-blur-sm select-none">
+              <span class="text-3xl mb-1">🕶️</span>
+              <span class="text-xs font-black text-slate-800">블라인드 조색 중</span>
+              <span class="text-[10px] text-slate-500 font-medium mt-0.5">머릿속 감각으로 슬라이더를 맞추세요!</span>
             </div>
           </div>
           <span class="text-xs font-bold text-slate-700 mt-2">내가 만든 색</span>
@@ -436,8 +463,21 @@
       <div class="absolute -top-12 -right-12 w-44 h-44 bg-rose-200/40 rounded-full blur-2xl pointer-events-none"></div>
       <div class="absolute -bottom-12 -left-12 w-44 h-44 bg-indigo-200/40 rounded-full blur-2xl pointer-events-none"></div>
       
+      <!-- Test Settings & Conditions Bar (Mode, Difficulty, Blind Mode) -->
+      <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-3.5 relative z-10">
+        <span id="reportModeBadge" class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 border border-indigo-200 text-indigo-700 shadow-2xs">
+          💡 빛 모드 (RGB)
+        </span>
+        <span id="reportDiffBadge" class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 border border-slate-200 text-slate-700 shadow-2xs">
+          초보 (0~3 배율)
+        </span>
+        <span id="reportBlindBadge" class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-extrabold border shadow-2xs bg-rose-50 border-rose-200 text-rose-700">
+          🕶️ 완전 블라인드
+        </span>
+      </div>
+
       <!-- Tier Badge -->
-      <div id="reportTierBadge" class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black shadow-xs mb-3 border bg-indigo-50 border-indigo-200 text-indigo-700">
+      <div id="reportTierBadge" class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black shadow-xs mb-3.5 border bg-indigo-50 border-indigo-200 text-indigo-700">
         👑 1티어 (상위 ~2%)
       </div>
 
@@ -544,6 +584,11 @@
   <div id="roundResultModal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white/95 border border-white/80 rounded-3xl p-5 sm:p-6 w-full max-w-sm sm:max-w-md shadow-2xl text-center transform transition-all animate-in fade-in zoom-in duration-200">
       
+      <!-- Blind Round Indicator -->
+      <div id="modalBlindIndicator" class="hidden inline-block px-2.5 py-0.5 rounded-full text-[10px] font-black bg-rose-100 text-rose-700 border border-rose-200 mb-2">
+        🕶️ 블라인드 문제 채점 결과
+      </div>
+
       <div id="modalScoreBadge" class="text-3xl sm:text-4xl font-black mb-1 text-emerald-600">
         100% 일치!
       </div>
@@ -626,7 +671,10 @@
               <div class="text-[9px] text-slate-500 font-medium leading-tight">Color Perception Lab</div>
             </div>
           </div>
-          <span id="cardModeBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 border border-indigo-200/80 shadow-xs">빛 모드 (RGB)</span>
+          <div class="flex items-center gap-1.5">
+            <span id="cardModeBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 border border-indigo-200/80 shadow-xs">빛 모드 (RGB)</span>
+            <span id="cardBlindBadge" class="text-[9px] font-black px-1.5 py-0.5 rounded-md bg-rose-100 text-rose-800 border border-rose-200 shadow-2xs">🕶️ 완전 블라인드</span>
+          </div>
         </div>
 
         <!-- Tier & Percentile Spotlight -->
@@ -907,6 +955,7 @@
     let currentAssignedAnimal = null;
     let lastAssignedAnimal = null;
     let sharedAnimalIndex = null;
+    let isFullBlindMode = false;
 
     let targetColor = { c1: 0, c2: 0, c3: 0 };
     let userColor = { c1: 0, c2: 0, c3: 0 };
@@ -935,7 +984,15 @@
         const cleanUrl = window.location.origin + window.location.pathname;
         window.history.replaceState(null, '', cleanUrl);
       } catch (e) {}
+      const chk = document.getElementById('lobbyFullBlindCheck');
+      if (chk) isFullBlindMode = chk.checked;
       showScreen('screenLobby');
+    }
+
+    function toggleLobbyBlindMode() {
+      const chk = document.getElementById('lobbyFullBlindCheck');
+      isFullBlindMode = chk ? chk.checked : false;
+      playTone(isFullBlindMode ? 560 : 440, 'sine', 0.05);
     }
 
     // --- Lobby Selections ---
@@ -993,6 +1050,9 @@
 
     // --- Start Test ---
     function startGameTest() {
+      const chk = document.getElementById('lobbyFullBlindCheck');
+      isFullBlindMode = chk ? chk.checked : false;
+
       playTone(600, 'triangle', 0.15, 0.15);
       currentRoundIndex = 1;
       totalHintsUsed = 0;
@@ -1007,6 +1067,16 @@
       document.getElementById('gameModeBadge').innerText = modeCfg.badge;
       document.getElementById('gameDiffBadge').innerText = `${diffConfigs[selectedMax].name} (0~${selectedMax})`;
       document.getElementById('headerSubtitle').innerText = modeCfg.headerSub;
+
+      const gameBlindBadge = document.getElementById('gameBlindBadge');
+      if (gameBlindBadge) {
+        if (isFullBlindMode) {
+          gameBlindBadge.classList.remove('hidden');
+          gameBlindBadge.innerText = '🕶️ 완전 블라인드';
+        } else {
+          gameBlindBadge.classList.add('hidden');
+        }
+      }
 
       applyChannelThemes();
       renderControlChips();
@@ -1061,6 +1131,8 @@
       roundStartTime = Date.now();
       dismissHintToast();
 
+      const isBlindRound = isFullBlindMode || (roundIdx >= 8);
+
       // Generate random target
       targetColor = {
         c1: Math.floor(Math.random() * (selectedMax + 1)),
@@ -1078,6 +1150,71 @@
       // Update Swatches
       const targetRgb = computeRgb(targetColor, selectedMax, selectedMode);
       document.getElementById('targetColorBox').style.backgroundColor = formatRgbStr(targetRgb);
+
+      // Handle Blind Mode UI for this round
+      const previewToggle = document.getElementById('previewToggle');
+      const previewToggleLabel = document.getElementById('previewToggleLabel');
+      const blindMask = document.getElementById('blindMask');
+      const blindRoundAlert = document.getElementById('blindRoundAlert');
+      const gameBlindBadge = document.getElementById('gameBlindBadge');
+
+      if (isBlindRound) {
+        blindMask.classList.remove('hidden');
+        if (previewToggle) {
+          previewToggle.checked = false;
+          previewToggle.disabled = true;
+        }
+        if (previewToggleLabel) {
+          previewToggleLabel.innerHTML = '<span class="text-rose-600 font-extrabold flex items-center gap-1">🔒 블라인드 ON</span>';
+        }
+        if (gameBlindBadge) {
+          gameBlindBadge.classList.remove('hidden');
+          gameBlindBadge.innerText = isFullBlindMode ? '🕶️ 완전 블라인드' : '🕶️ 블라인드 라운드';
+        }
+
+        // Show Alert Banner
+        if (roundIdx === 8 && !isFullBlindMode) {
+          if (blindRoundAlert) {
+            blindRoundAlert.classList.remove('hidden');
+            blindRoundAlert.innerHTML = `
+              <div class="flex items-center gap-2">
+                <span class="text-xl">🕶️</span>
+                <div>
+                  <span class="font-extrabold text-rose-700 block">마지막 3문제 [블라인드 모드] 발동!</span>
+                  <span class="text-[11px] text-rose-600">실시간 미리보기가 잠깁니다. 머릿속 색채 감각과 배합 공식만으로 맞춰보세요!</span>
+                </div>
+              </div>
+            `;
+            playTone(480, 'sawtooth', 0.2);
+          }
+        } else if (isFullBlindMode && roundIdx === 1) {
+          if (blindRoundAlert) {
+            blindRoundAlert.classList.remove('hidden');
+            blindRoundAlert.innerHTML = `
+              <div class="flex items-center gap-2">
+                <span class="text-xl">🕶️</span>
+                <div>
+                  <span class="font-extrabold text-rose-700 block">완전 블라인드 모드 진행 중!</span>
+                  <span class="text-[11px] text-rose-600">10문제 전체 미리보기 없이 순수 색채 감각으로만 조색합니다.</span>
+                </div>
+              </div>
+            `;
+          }
+        }
+      } else {
+        blindMask.classList.add('hidden');
+        if (blindRoundAlert) blindRoundAlert.classList.add('hidden');
+        if (previewToggle) {
+          previewToggle.disabled = false;
+          previewToggle.checked = true;
+        }
+        if (previewToggleLabel) {
+          previewToggleLabel.innerText = '실시간 미리보기';
+        }
+        if (gameBlindBadge) {
+          gameBlindBadge.classList.add('hidden');
+        }
+      }
 
       updateUserColorDisplay();
       highlightActiveChips();
@@ -1123,6 +1260,12 @@
     }
 
     function togglePreview() {
+      const isBlindRound = isFullBlindMode || (currentRoundIndex >= 8);
+      if (isBlindRound) {
+        document.getElementById('previewToggle').checked = false;
+        document.getElementById('blindMask').classList.remove('hidden');
+        return;
+      }
       const isChecked = document.getElementById('previewToggle').checked;
       const mask = document.getElementById('blindMask');
       if (isChecked) {
@@ -1194,12 +1337,14 @@
       );
       const accuracy = Math.max(0, Math.round(100 * (1 - (dist / 441.6729))));
       const isPerfect = (userColor.c1 === targetColor.c1 && userColor.c2 === targetColor.c2 && userColor.c3 === targetColor.c3);
+      const isBlindRound = isFullBlindMode || (currentRoundIndex >= 8);
 
       // Save round data
       roundsData.push({
         round: currentRoundIndex,
         accuracy: accuracy,
         isPerfect: isPerfect,
+        isBlind: isBlindRound,
         target: { ...targetColor },
         user: { ...userColor },
         targetRgb,
@@ -1211,6 +1356,14 @@
       const scoreBadge = document.getElementById('modalScoreBadge');
       const subtext = document.getElementById('modalSubtext');
       const diffDetails = document.getElementById('modalDiffBreakdown');
+      const blindIndicator = document.getElementById('modalBlindIndicator');
+      if (blindIndicator) {
+        if (isBlindRound) {
+          blindIndicator.classList.remove('hidden');
+        } else {
+          blindIndicator.classList.add('hidden');
+        }
+      }
       const cfg = modeConfigs[selectedMode];
 
       document.getElementById('modalTargetBox').style.backgroundColor = formatRgbStr(targetRgb);
@@ -1451,9 +1604,11 @@
           h: totalHintsUsed,
           t: totalSeconds,
           a: currentAssignedAnimal ? currentAssignedAnimal.animalIdx : 0,
+          b: isFullBlindMode ? 1 : 0,
           q: roundsData.map(r => [
             r.target.c1, r.target.c2, r.target.c3,
-            r.user.c1, r.user.c2, r.user.c3
+            r.user.c1, r.user.c2, r.user.c3,
+            r.isBlind ? 1 : 0
           ])
         };
         const jsonStr = JSON.stringify(payload);
@@ -1496,10 +1651,12 @@
         const elapsedSecs = data.t || 60;
         testStartTime = Date.now() - (elapsedSecs * 1000);
         sharedAnimalIndex = (typeof data.a === 'number') ? data.a : null;
+        isFullBlindMode = (data.b === 1);
 
         roundsData = data.q.map((row, idx) => {
           const target = { c1: row[0], c2: row[1], c3: row[2] };
           const user = { c1: row[3], c2: row[4], c3: row[5] };
+          const isBlind = row.length > 6 ? (row[6] === 1) : (isFullBlindMode || idx >= 7);
           const targetRgb = computeRgb(target, selectedMax, selectedMode);
           const userRgb = computeRgb(user, selectedMax, selectedMode);
 
@@ -1515,6 +1672,7 @@
             round: idx + 1,
             accuracy,
             isPerfect,
+            isBlind,
             target,
             user,
             targetRgb,
@@ -1626,6 +1784,31 @@
         } catch (e) {}
       }
 
+      // Render Mode, Difficulty, and Blind Badges on Report Screen
+      const modeCfg = modeConfigs[selectedMode];
+      const diffCfg = diffConfigs[selectedMax];
+
+      const reportModeBadge = document.getElementById('reportModeBadge');
+      if (reportModeBadge) {
+        reportModeBadge.innerText = modeCfg.badge;
+      }
+
+      const reportDiffBadge = document.getElementById('reportDiffBadge');
+      if (reportDiffBadge) {
+        reportDiffBadge.innerText = `난이도: ${diffCfg.name} (0~${selectedMax} 배율)`;
+      }
+
+      const reportBlindBadge = document.getElementById('reportBlindBadge');
+      if (reportBlindBadge) {
+        if (isFullBlindMode) {
+          reportBlindBadge.className = 'inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-extrabold border shadow-2xs bg-rose-50 border-rose-300 text-rose-700';
+          reportBlindBadge.innerText = '🕶️ 완전 블라인드 (10문제 전체)';
+        } else {
+          reportBlindBadge.className = 'inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold border shadow-2xs bg-slate-50 border-slate-300 text-slate-600';
+          reportBlindBadge.innerText = '🎯 기본 모드 (마지막 3문제 블라인드)';
+        }
+      }
+
       // Render Animal Persona Card Elements
       const tierBadgeEl = document.getElementById('reportTierBadge');
       if (tierBadgeEl) {
@@ -1657,21 +1840,23 @@
       summaryGrid.innerHTML = '';
       roundsData.forEach(r => {
         const item = document.createElement('div');
-        item.className = 'bg-slate-50 border border-slate-200/90 rounded-xl p-2.5 text-center flex flex-col justify-between shadow-xs';
+        item.className = 'bg-slate-50 border border-slate-200/90 rounded-xl p-2.5 text-center flex flex-col justify-between shadow-xs relative overflow-hidden';
         item.innerHTML = `
           <div class="flex items-center justify-between text-[11px] text-slate-500 mb-1">
-            <span>Q${r.round}</span>
+            <span class="flex items-center gap-1 font-bold">
+              Q${r.round}
+              ${r.isBlind ? '<span title="블라인드 문제" class="text-[10px] text-rose-600 font-extrabold">🕶️</span>' : ''}
+            </span>
             <span class="font-bold ${r.isPerfect ? 'text-emerald-600' : 'text-slate-700'}">${r.accuracy}%</span>
           </div>
           <div class="flex h-5 rounded-md overflow-hidden border border-slate-300 my-1 shadow-inner">
             <div class="w-1/2 h-full" style="background-color: ${formatRgbStr(r.targetRgb)}" title="목표"></div>
             <div class="w-1/2 h-full" style="background-color: ${formatRgbStr(r.userRgb)}" title="내 제출"></div>
           </div>
-          <span class="text-[10px] mono text-slate-500 font-semibold">${r.isPerfect ? '⭐ 퍼펙트' : '오차 있음'}</span>
+          <span class="text-[10px] mono text-slate-500 font-semibold">${r.isPerfect ? '⭐ 퍼펙트' : (r.isBlind ? '🕶️ 블라인드' : '오차 있음')}</span>
         `;
         summaryGrid.appendChild(item);
       });
-
       // Draw Bell Curve Canvas
       drawBellCurveChart(effectiveScore, topPercentileVal);
 
@@ -1843,9 +2028,13 @@
       const subtitle = animal ? animal.subtitle : '';
       const btnText = document.getElementById('unifiedShareBtnText');
 
+      const modeText = selectedMode === 'rgb' ? '빛 (RGB)' : '물감 (CMY)';
+      const diffText = diffConfigs[selectedMax].name;
+      const blindText = isFullBlindMode ? '🕶️ 완전 블라인드 (10문제 전체)' : '마지막 3문제 블라인드';
+
       const shareData = {
         title: `[색감 테스트] 내 색각 동물: ${animalEmoji} ${animalName}`,
-        text: `내 색 인지 감각은 상위 ${rank}! 🐾\n동물 유형: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n\n결과 확인하고 나도 테스트해보기:\n${shareUrl}`,
+        text: `내 색 인지 감각은 상위 ${rank}! 🐾\n동물 유형: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n\n📌 난이도: ${diffText} (0~${selectedMax}배율) | 모드: ${modeText} | ${blindText}\n\n결과 확인하고 나도 테스트해보기:\n${shareUrl}`,
         url: shareUrl
       };
 
@@ -1892,7 +2081,19 @@
       if (!modal) return;
 
       const modeCfg = modeConfigs[selectedMode];
-      document.getElementById('cardModeBadge').innerText = `${modeCfg.badge.split(' ')[1]} (${selectedMode.toUpperCase()}) • ${diffConfigs[selectedMax].name}`;
+      const diffCfg = diffConfigs[selectedMax];
+      document.getElementById('cardModeBadge').innerText = `${modeCfg.badge.split(' ')[1]} (${selectedMode.toUpperCase()}) • ${diffCfg.name} (0~${selectedMax})`;
+
+      const cardBlindBadge = document.getElementById('cardBlindBadge');
+      if (cardBlindBadge) {
+        if (isFullBlindMode) {
+          cardBlindBadge.className = 'text-[9px] font-black px-1.5 py-0.5 rounded-md bg-rose-100 text-rose-800 border border-rose-200 shadow-2xs';
+          cardBlindBadge.innerText = '🕶️ 완전 블라인드';
+        } else {
+          cardBlindBadge.className = 'text-[9px] font-semibold px-1.5 py-0.5 rounded-md bg-slate-100 text-slate-600 border border-slate-200 shadow-2xs';
+          cardBlindBadge.innerText = '🎯 3문제 블라인드';
+        }
+      }
 
       if (currentAssignedAnimal) {
         const cardTierBadge = document.getElementById('cardTierBadge');
@@ -1923,13 +2124,15 @@
       paletteGrid.innerHTML = '';
       roundsData.forEach(r => {
         const item = document.createElement('div');
-        item.className = 'flex flex-col items-center bg-white rounded-lg p-1 border border-slate-200/80 shadow-xs';
+        item.className = 'flex flex-col items-center bg-white rounded-lg p-1 border border-slate-200/80 shadow-xs relative';
         item.innerHTML = `
           <div class="flex h-3 w-full rounded overflow-hidden border border-slate-300 shadow-inner">
             <div class="w-1/2 h-full" style="background-color: ${formatRgbStr(r.targetRgb)}" title="목표"></div>
             <div class="w-1/2 h-full" style="background-color: ${formatRgbStr(r.userRgb)}" title="내 제출"></div>
           </div>
-          <span class="text-[9px] mono font-bold text-slate-700 mt-0.5 leading-none">${r.accuracy}%</span>
+          <span class="text-[9px] mono font-bold text-slate-700 mt-0.5 leading-none flex items-center gap-0.5">
+            ${r.accuracy}%${r.isBlind ? '<span class="text-[8px] text-rose-600">🕶️</span>' : ''}
+          </span>
         `;
         paletteGrid.appendChild(item);
       });
@@ -2004,10 +2207,12 @@
           const animalEmoji = currentAssignedAnimal ? currentAssignedAnimal.animal.emoji : '🎯';
           const tierBadge = currentAssignedAnimal ? currentAssignedAnimal.tier.tierBadge : '';
           const subtitle = currentAssignedAnimal ? currentAssignedAnimal.animal.subtitle : '';
+          const diffText = diffConfigs[selectedMax].name;
+          const blindText = isFullBlindMode ? '🕶️ 완전 블라인드' : '마지막 3문제 블라인드';
 
           const shareData = {
             title: `[색감 테스트] 내 색각 동물: ${animalEmoji} ${animalName}`,
-            text: `[색감 감각 테스트: Color Lab]\n동물 페르소나: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n색감 순위: 상위 ${document.getElementById('cardPercentile').innerText}!\n\n내 결과 확인하기:\n${shareUrl}`,
+            text: `[색감 감각 테스트: Color Lab]\n동물 페르소나: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n난이도: ${diffText} (0~${selectedMax}배율) | ${blindText}\n색감 순위: 상위 ${document.getElementById('cardPercentile').innerText}!\n\n내 결과 확인하기:\n${shareUrl}`,
             files: [file]
           };
 
@@ -2059,9 +2264,11 @@
       const subtitle = currentAssignedAnimal ? currentAssignedAnimal.animal.subtitle : '';
       const hints = document.getElementById('statTotalHints').innerText;
       const mode = selectedMode === 'rgb' ? '빛 모드 (RGB)' : '물감 모드 (CMY)';
+      const diffText = diffConfigs[selectedMax].name;
+      const blindText = isFullBlindMode ? '🕶️ 완전 블라인드 (10문제 전체)' : '기본 모드 (마지막 3문제 블라인드)';
       const shareUrl = encodeResultsToUrl();
 
-      const text = `🎨 [색감 감각 테스트: Color Lab]\n동물 페르소나: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n모드: ${mode} (${diffConfigs[selectedMax].name})\n평균 일치율: ${avg} | 상위 ${rank}\n힌트 사용: ${hints}\n\n👉 내 결과 확인 & 나도 도전하기:\n${shareUrl}`;
+      const text = `🎨 [색감 감각 테스트: Color Lab]\n동물 페르소나: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n난이도: ${diffText} (0~${selectedMax}배율) | 모드: ${mode} | ${blindText}\n평균 일치율: ${avg} | 상위 ${rank}\n힌트 사용: ${hints}\n\n👉 내 결과 확인 & 나도 도전하기:\n${shareUrl}`;
 
       // Fallback-safe clipboard copy
       const tempInput = document.createElement('textarea');
