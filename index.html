@@ -266,7 +266,7 @@
             <span class="text-xl">💡</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-indigo-200/80 text-indigo-800 font-bold">디지털/화면</span>
           </div>
-          <div class="font-bold text-slate-800 text-base mb-1">빛 모드 (RGB)</div>
+          <div class="font-bold text-slate-800 text-base mb-1">빛 모드</div>
           <p class="text-xs text-slate-600 leading-relaxed mb-2">가산혼합: 빨강·초록·파랑 빛을 더해 흰색을 만듭니다.</p>
           <div class="text-[11px] mono text-slate-500 flex justify-between pt-2 border-t border-slate-200/80">
             <span>0: 검은색</span>
@@ -280,7 +280,7 @@
             <span class="text-xl">🎨</span>
             <span class="text-[10px] px-2 py-0.5 rounded-full bg-fuchsia-100 text-fuchsia-800 font-bold">물감/인쇄</span>
           </div>
-          <div class="font-bold text-slate-800 text-base mb-1">물감 모드 (CMY)</div>
+          <div class="font-bold text-slate-800 text-base mb-1">물감 모드</div>
           <p class="text-xs text-slate-600 leading-relaxed mb-2">감산혼합: 청록·자홍·노랑 잉크를 섞어 검정을 만듭니다.</p>
           <div class="text-[11px] mono text-slate-500 flex justify-between pt-2 border-t border-slate-200/80">
             <span>0: 흰 도화지</span>
@@ -297,7 +297,7 @@
           <span class="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">2</span>
           난이도 배율 선택
         </label>
-        <span id="lobbyDiffDetail" class="text-xs text-indigo-600 font-semibold">0 ~ 3 배율 (4단계, 64가지 조합)</span>
+        <span id="lobbyDiffDetail" class="text-xs text-indigo-600 font-semibold">0 ~ 3 배율 · 4단계</span>
       </div>
       <div class="grid grid-cols-5 gap-1.5 sm:gap-2">
         <button type="button" onclick="selectLobbyDiff(1)" id="lobbyDiff-1" class="lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white shadow-xs">
@@ -329,7 +329,7 @@
             <span class="text-2xl">🕶️</span>
             <div>
               <div class="text-xs sm:text-sm font-bold text-slate-800 flex items-center gap-1.5">
-                <span>완전 블라인드 모드 (Full Blind)</span>
+                <span>완전 블라인드 모드</span>
                 <span class="text-[10px] font-black px-1.5 py-0.5 rounded-full bg-rose-100 text-rose-700 border border-rose-200">HARD</span>
               </div>
               <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">
@@ -385,7 +385,7 @@
 
     <!-- Start Button -->
     <button onclick="startGameTest()" class="w-full py-4 rounded-xl font-black text-lg bg-gradient-to-r from-rose-500 via-purple-500 to-indigo-600 hover:brightness-105 active:scale-[0.99] text-white shadow-xl shadow-indigo-300/40 transition-all flex items-center justify-center gap-2">
-      <span>테스트 시작하기 (총 10문제)</span>
+      <span>테스트 시작하기</span>
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
     </button>
   </main>
@@ -396,8 +396,8 @@
     <!-- Game Progress & Metadata Bar -->
     <div class="flex items-center justify-between text-xs bg-white/80 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-2.5 shadow-sm">
       <div class="flex items-center gap-2">
-        <span id="gameModeBadge" class="px-2.5 py-0.5 rounded-full font-bold bg-indigo-100 text-indigo-700 border border-indigo-200">💡 빛 모드 (RGB)</span>
-        <span id="gameDiffBadge" class="px-2.5 py-0.5 rounded-full font-bold bg-slate-100 text-slate-700 border border-slate-200">초보 (0~3)</span>
+        <span id="gameModeBadge" class="px-2.5 py-0.5 rounded-full font-bold bg-indigo-100 text-indigo-700 border border-indigo-200">💡 빛 모드</span>
+        <span id="gameDiffBadge" class="px-2.5 py-0.5 rounded-full font-bold bg-slate-100 text-slate-700 border border-slate-200">초보 · 0~3</span>
       </div>
       <span id="gameBlindBadge" class="hidden px-2.5 py-0.5 rounded-full font-bold bg-rose-100 text-rose-700 border border-rose-200">🕶️ 블라인드</span>
     </div>
@@ -448,7 +448,7 @@
         <div class="flex justify-between items-center text-xs sm:text-sm">
           <span id="ch1Label" class="font-bold flex items-center gap-1.5 text-rose-600">
             <span id="ch1Dot" class="w-3 h-3 rounded-full bg-rose-500 shadow-xs"></span>
-            <span id="ch1Title">RED (빨강)</span>
+            <span id="ch1Title">RED</span>
           </span>
           <span class="mono font-bold text-sm sm:text-base text-slate-700" id="ch1ValueDisplay">0</span>
         </div>
@@ -464,7 +464,7 @@
         <div class="flex justify-between items-center text-xs sm:text-sm">
           <span id="ch2Label" class="font-bold flex items-center gap-1.5 text-emerald-600">
             <span id="ch2Dot" class="w-3 h-3 rounded-full bg-emerald-500 shadow-xs"></span>
-            <span id="ch2Title">GREEN (초록)</span>
+            <span id="ch2Title">GREEN</span>
           </span>
           <span class="mono font-bold text-sm sm:text-base text-slate-700" id="ch2ValueDisplay">0</span>
         </div>
@@ -480,7 +480,7 @@
         <div class="flex justify-between items-center text-xs sm:text-sm">
           <span id="ch3Label" class="font-bold flex items-center gap-1.5 text-blue-600">
             <span id="ch3Dot" class="w-3 h-3 rounded-full bg-blue-500 shadow-xs"></span>
-            <span id="ch3Title">BLUE (파랑)</span>
+            <span id="ch3Title">BLUE</span>
           </span>
           <span class="mono font-bold text-sm sm:text-base text-slate-700" id="ch3ValueDisplay">0</span>
         </div>
@@ -532,10 +532,10 @@
       <!-- Test Settings & Conditions Bar (Mode, Difficulty, Blind Mode) -->
       <div class="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2 mb-3.5 relative z-10">
         <span id="reportModeBadge" class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-indigo-50 border border-indigo-200 text-indigo-700 shadow-2xs">
-          💡 빛 모드 (RGB)
+          💡 빛 모드
         </span>
         <span id="reportDiffBadge" class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold bg-slate-100 border border-slate-200 text-slate-700 shadow-2xs">
-          초보 (0~3 배율)
+          초보 · 0~3 배율
         </span>
         <span id="reportBlindBadge" class="inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-extrabold border shadow-2xs bg-rose-50 border-rose-200 text-rose-700">
           🕶️ 완전 블라인드
@@ -544,7 +544,7 @@
 
       <!-- Tier Badge -->
       <div id="reportTierBadge" class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black shadow-xs mb-3.5 border bg-indigo-50 border-indigo-200 text-indigo-700">
-        👑 1티어 (상위 ~2%)
+        👑 1티어 · 상위 2%
       </div>
 
       <!-- Animal Emoji Avatar -->
@@ -590,7 +590,7 @@
         <span id="statPerfectCount" class="mono text-xl sm:text-2xl font-black text-amber-600">4 / 10</span>
       </div>
       <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 text-center shadow-sm">
-        <span class="text-[11px] text-slate-500 block mb-1">총 조작(클릭) 횟수</span>
+        <span class="text-[11px] text-slate-500 block mb-1">총 조작 횟수</span>
         <span id="statTotalClicks" class="mono text-xl sm:text-2xl font-black text-violet-600">0회</span>
       </div>
       <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 text-center shadow-sm">
@@ -612,7 +612,7 @@
         <span class="text-[11px] text-slate-500 mono">모집단 μ=72%, σ=12%</span>
       </div>
       <p class="text-xs text-slate-500 mb-3 leading-relaxed">
-        일반인 표본 데이터를 정규분포(Bell Curve)로 모델링하여 계산했습니다. 힌트 사용 시 페널티(-1.5%/회)가 보정되어 최종 점수에 반영됩니다.
+        일반인 표본 데이터를 정규분포로 모델링하여 계산했습니다. 힌트 사용 시 페널티(-1.5%/회)가 보정되어 최종 점수에 반영됩니다.
       </p>
 
       <!-- Chart Canvas Container -->
@@ -675,11 +675,11 @@
         <div class="grid grid-cols-2 gap-2.5">
           <button type="button" onclick="setSandboxMode('rgb')" id="sandboxModeBtnRgb" class="py-2.5 px-3 rounded-xl border-2 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 border-indigo-500 bg-indigo-50 text-indigo-800 shadow-xs touch-manipulation cursor-pointer">
             <span class="text-base">💡</span>
-            <span>빛 모드 (RGB)</span>
+            <span>빛 모드</span>
           </button>
           <button type="button" onclick="setSandboxMode('cmy')" id="sandboxModeBtnCmy" class="py-2.5 px-3 rounded-xl border-2 font-bold text-xs sm:text-sm transition-all flex items-center justify-center gap-1.5 border-slate-200 bg-white text-slate-600 hover:bg-slate-50 touch-manipulation cursor-pointer">
             <span class="text-base">🎨</span>
-            <span>물감 모드 (CMY)</span>
+            <span>물감 모드</span>
           </button>
         </div>
       </div>
@@ -687,8 +687,8 @@
       <!-- 2. Difficulty (Steps) Switch -->
       <div>
         <div class="flex items-center justify-between mb-2">
-          <label class="text-xs font-bold uppercase tracking-wider text-slate-500">난이도 배율 (단계)</label>
-          <span id="sandboxDiffDesc" class="text-xs text-indigo-600 font-semibold">0 ~ 3 배율 (4단계, 총 64가지 조합)</span>
+          <label class="text-xs font-bold uppercase tracking-wider text-slate-500">난이도 배율</label>
+          <span id="sandboxDiffDesc" class="text-xs text-indigo-600 font-semibold">0 ~ 3 배율 · 4단계</span>
         </div>
         <div class="grid grid-cols-5 gap-1.5">
           <button type="button" onclick="setSandboxMax(1)" id="sandboxDiff-1" class="py-2.5 px-1 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer">0~1</button>
@@ -726,7 +726,7 @@
         <div class="flex justify-between items-center text-xs sm:text-sm">
           <span id="sbCh1Label" class="font-bold flex items-center gap-1.5 text-rose-600">
             <span id="sbCh1Dot" class="w-3 h-3 rounded-full bg-rose-500 shadow-xs"></span>
-            <span id="sbCh1Title">RED (빨강)</span>
+            <span id="sbCh1Title">RED</span>
           </span>
           <span class="mono font-bold text-sm sm:text-base text-slate-700" id="sbCh1ValDisplay">0 / 3</span>
         </div>
@@ -742,7 +742,7 @@
         <div class="flex justify-between items-center text-xs sm:text-sm">
           <span id="sbCh2Label" class="font-bold flex items-center gap-1.5 text-emerald-600">
             <span id="sbCh2Dot" class="w-3 h-3 rounded-full bg-emerald-500 shadow-xs"></span>
-            <span id="sbCh2Title">GREEN (초록)</span>
+            <span id="sbCh2Title">GREEN</span>
           </span>
           <span class="mono font-bold text-sm sm:text-base text-slate-700" id="sbCh2ValDisplay">0 / 3</span>
         </div>
@@ -758,7 +758,7 @@
         <div class="flex justify-between items-center text-xs sm:text-sm">
           <span id="sbCh3Label" class="font-bold flex items-center gap-1.5 text-blue-600">
             <span id="sbCh3Dot" class="w-3 h-3 rounded-full bg-blue-500 shadow-xs"></span>
-            <span id="sbCh3Title">BLUE (파랑)</span>
+            <span id="sbCh3Title">BLUE</span>
           </span>
           <span class="mono font-bold text-sm sm:text-base text-slate-700" id="sbCh3ValDisplay">0 / 3</span>
         </div>
@@ -878,10 +878,10 @@
         <div class="flex items-center justify-between mb-1">
           <label class="text-xs sm:text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
             <span>🎯 난이도 선택</span>
-            <span class="text-[11px] text-slate-500 font-normal">(오차 변동폭)</span>
+            <span class="text-[11px] text-slate-500 font-normal"></span>
           </label>
           <span id="memoryDiffSelectedBadge" class="text-xs font-bold px-2.5 py-0.5 rounded-full bg-amber-100 text-amber-800 border border-amber-200">
-            🟡 보통 (5~10%)
+            🟡 보통
           </span>
         </div>
 
@@ -927,7 +927,7 @@
             <span class="text-2xl">😈</span>
             <div>
               <div class="font-bold text-slate-800 text-xs sm:text-sm flex items-center gap-1.5">
-                <span>헬 (HELL)</span>
+                <span>헬</span>
                 <span class="text-[10px] font-extrabold px-1.5 py-0.2 rounded bg-purple-100 text-purple-700">1%</span>
               </div>
               <p class="text-[11px] text-slate-500 mt-0.5 leading-snug">단 1%의 극한 차이! 신의 색각 기억자 영역</p>
@@ -950,7 +950,7 @@
 
       <!-- Start Button -->
       <button type="button" onclick="startMemoryGame()" class="w-full py-4 rounded-2xl font-black text-base sm:text-lg bg-gradient-to-r from-purple-600 via-indigo-600 to-rose-500 hover:brightness-105 active:scale-98 text-white shadow-xl shadow-purple-300/40 transition-all flex items-center justify-center gap-2 touch-manipulation cursor-pointer">
-        <span>기억력 테스트 시작하기 (5문제)</span>
+        <span>기억력 테스트 시작하기</span>
         <span>🚀</span>
       </button>
     </div>
@@ -1008,7 +1008,7 @@
 
         <!-- Skip Button -->
         <button type="button" onclick="skipMemoryTimer()" class="text-xs font-bold text-slate-500 hover:text-purple-600 py-1.5 px-3 rounded-xl hover:bg-purple-50 border border-transparent hover:border-purple-200 transition-all active:scale-95 touch-manipulation cursor-pointer flex items-center gap-1">
-          <span>⚡ 이미 다 외웠어요 (바로 맞추기)</span>
+          <span>⚡ 바로 맞추기</span>
         </button>
 
       </div>
@@ -1132,7 +1132,7 @@
         </div>
 
         <button type="button" onclick="switchNavTab('test')" class="w-full py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
-          <span>🎯 본 게임(색감 감각 테스트) 하러 가기</span>
+          <span>🎯 본 게임 하러 가기</span>
         </button>
       </div>
 
@@ -1154,9 +1154,9 @@
           사슴의 눈: 호랑이를 찾아라!
         </h2>
         <p class="text-xs sm:text-sm text-slate-600 mt-2 max-w-md mx-auto leading-relaxed">
-          사슴은 빨간색을 보지 못하는 <strong>2색각(적록색각이상)</strong> 시야를 가지고 있습니다.<br class="hidden sm:inline">
+          사슴은 빨간색을 보지 못하는 <strong>적록색맹</strong> 시야를 가지고 있습니다.<br class="hidden sm:inline">
           초록 풀숲과 주황색 호랑이가 <strong>똑같은 황토색</strong>으로 보이지만,<br class="hidden sm:inline">
-          호랑이의 은밀한 움직임(동체시력)을 간파해 <strong>5초 안에</strong> 터치해야 살아남습니다!
+          호랑이의 은밀한 움직임을 간파해 <strong>5초 안에</strong> 터치해야 살아남습니다!
         </p>
       </div>
 
@@ -1164,7 +1164,7 @@
       <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-3xl p-5 sm:p-6 shadow-sm space-y-3">
         <div class="flex items-center justify-between mb-1">
           <span class="text-xs sm:text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
-            <span>🗺️ 5일간의 생존 스테이지 (Day 1 ~ Day 5)</span>
+            <span>🗺️ 5일간의 생존 스테이지</span>
           </span>
           <span class="text-xs font-bold text-amber-700 bg-amber-50 border border-amber-200 px-2.5 py-0.5 rounded-full">
             총 5라운드
@@ -1174,22 +1174,22 @@
         <div class="space-y-2 text-xs">
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
             <span class="font-bold text-slate-700">🌱 Day 1: 촘촘한 풀숲</span>
-            <span class="text-slate-500">8×8 (64칸) / 2×2 호랑이 (정지)</span>
+            <span class="text-slate-500">8×8 · 2×2 호랑이 · 정지</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
             <span class="font-bold text-slate-700">🐇 Day 2: 토끼의 출현</span>
-            <span class="text-slate-500">8×8 / 2×2 호랑이 + 산토끼 1마리</span>
+            <span class="text-slate-500">8×8 · 2×2 호랑이 + 토끼 1마리</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
             <span class="font-bold text-slate-700">🐿️ Day 3: 분주한 대나무 숲</span>
-            <span class="text-slate-500">9×9 (81칸) / 토끼 1마리 + 다람쥐 1마리</span>
+            <span class="text-slate-500">9×9 · 토끼 1마리 + 다람쥐 1마리</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
             <span class="font-bold text-slate-700">🍃 Day 4: 착시의 안개 언덕</span>
-            <span class="text-slate-500">10×10 (100칸) / 동물 3마리 + 바람 2곳</span>
+            <span class="text-slate-500">10×10 · 동물 3마리 + 바람 2곳</span>
           </div>
           <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-between">
-            <span class="font-black text-amber-900">🔥 Day 5: 황혼의 아수라장 (FINAL)</span>
+            <span class="font-black text-amber-900">🔥 Day 5: 황혼의 아수라장</span>
             <span class="font-bold text-amber-700">10×10 / 1×1 호랑이 + 동물·바람 6곳!</span>
           </div>
         </div>
@@ -1206,7 +1206,7 @@
 
       <!-- Start Button -->
       <button type="button" onclick="startTigerGame()" class="w-full py-4 rounded-2xl font-black text-base sm:text-lg bg-gradient-to-r from-amber-500 via-orange-500 to-rose-600 hover:brightness-105 active:scale-98 text-white shadow-xl shadow-orange-300/40 transition-all flex items-center justify-center gap-2 touch-manipulation cursor-pointer">
-        <span>사슴의 생존 챌린지 시작 (Day 1)</span>
+        <span>사슴의 생존 챌린지 시작</span>
         <span>🦌💨</span>
       </button>
     </div>
@@ -1245,7 +1245,7 @@
         
         <!-- Floating False Alarm Alert Toast -->
         <div id="tigerAlertToast" class="hidden transition-all duration-200 py-1 px-3 rounded-full bg-rose-100 text-rose-800 border border-rose-300 font-black text-xs shadow-xs inline-block animate-bounce">
-          깜짝이야! 토끼였습니다! 🐇💨 (-1초)
+          깜짝이야! 토끼였습니다! 🐇💨 -1초
         </div>
 
         <p class="text-[11px] text-slate-500 font-medium">
@@ -1262,7 +1262,7 @@
 
       <!-- Human Vision Preview Floating Hint (During Play) -->
       <div id="tigerDeerHint" class="text-center text-[11px] text-slate-500">
-        👀 현재는 사슴 시야(적록색각이상)로 플레이 중입니다.
+        👀 현재는 사슴 시야로 플레이 중입니다.
       </div>
 
       <!-- INLINE Round Outcome & Next Step Bar (Revealed instantly on click/timeout) -->
@@ -1325,7 +1325,7 @@
             총 5일 생존 완주
           </span>
           <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-slate-100 text-slate-700 border border-slate-200">
-            사슴 시야(2색각) 돌파
+            사슴 시야 돌파
           </span>
         </div>
 
@@ -1354,7 +1354,7 @@
         </div>
 
         <button type="button" onclick="switchNavTab('test')" class="w-full py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
-          <span>🎯 본 게임(색감 감각 테스트) 하러 가기</span>
+          <span>🎯 본 게임 하러 가기</span>
         </button>
       </div>
 
@@ -1454,7 +1454,7 @@
             </div>
           </div>
           <div class="flex items-center gap-1.5">
-            <span id="cardModeBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 border border-indigo-200/80 shadow-xs">빛 모드 (RGB)</span>
+            <span id="cardModeBadge" class="text-[10px] font-bold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-700 border border-indigo-200/80 shadow-xs">빛 모드</span>
             <span id="cardBlindBadge" class="text-[9px] font-black px-1.5 py-0.5 rounded-md bg-rose-100 text-rose-800 border border-rose-200 shadow-2xs">🕶️ 완전 블라인드</span>
           </div>
         </div>
@@ -1462,7 +1462,7 @@
         <!-- Tier & Percentile Spotlight -->
         <div class="mb-3.5 relative z-10">
           <div id="cardTierBadge" class="inline-block px-3 py-0.5 rounded-full text-[10px] font-bold mb-2 border border-amber-300 bg-amber-100 text-amber-800 shadow-2xs">
-            👑 1티어 (상위 ~2%)
+            👑 1티어 · 상위 2%
           </div>
 
           <div class="flex items-center justify-center gap-2 mb-1">
@@ -1526,7 +1526,7 @@
       <div class="grid grid-cols-2 gap-2.5">
         <button onclick="downloadShareCardImage()" id="downloadCardBtn" class="py-3 px-3 rounded-xl font-extrabold text-xs sm:text-sm bg-gradient-to-r from-rose-500 to-indigo-600 text-white shadow-md shadow-indigo-200 hover:brightness-105 active:scale-98 transition-all flex items-center justify-center gap-1.5">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
-          <span>이미지 저장 (PNG)</span>
+          <span>이미지 저장</span>
         </button>
 
         <button onclick="shareCardNative()" id="nativeShareCardBtn" class="py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 border border-slate-200">
@@ -1548,7 +1548,7 @@
     const themes = [
       {
         id: 'peach',
-        name: '선셋 피치 (Sunset Peach)',
+        name: '선셋 피치',
         bodyBg: '#fef7f2',
         blobs: ['bg-rose-300/40', 'bg-amber-300/35', 'bg-pink-300/35'],
         heroBadge: 'bg-rose-100 text-rose-700 border-rose-200/80',
@@ -1556,7 +1556,7 @@
       },
       {
         id: 'mint',
-        name: '민트 브리즈 (Mint & Emerald)',
+        name: '민트 브리즈',
         bodyBg: '#f2fbf7',
         blobs: ['bg-emerald-300/35', 'bg-teal-300/35', 'bg-sky-200/40'],
         heroBadge: 'bg-emerald-100 text-emerald-800 border-emerald-200/80',
@@ -1564,7 +1564,7 @@
       },
       {
         id: 'sky',
-        name: '파스텔 오션 (Sky & Lavender)',
+        name: '파스텔 오션',
         bodyBg: '#f4f8fe',
         blobs: ['bg-sky-300/40', 'bg-indigo-300/30', 'bg-blue-300/35'],
         heroBadge: 'bg-sky-100 text-sky-800 border-sky-200/80',
@@ -1572,7 +1572,7 @@
       },
       {
         id: 'berry',
-        name: '베리 마카롱 (Berry & Lilac)',
+        name: '베리 마카롱',
         bodyBg: '#faf4fb',
         blobs: ['bg-fuchsia-300/35', 'bg-pink-300/40', 'bg-purple-300/35'],
         heroBadge: 'bg-purple-100 text-purple-800 border-purple-200/80',
@@ -1580,7 +1580,7 @@
       },
       {
         id: 'citrus',
-        name: '허니 레몬 (Honey & Lime)',
+        name: '허니 레몬',
         bodyBg: '#fdfbf1',
         blobs: ['bg-yellow-300/40', 'bg-lime-300/35', 'bg-amber-300/35'],
         heroBadge: 'bg-amber-100 text-amber-900 border-amber-200/80',
@@ -1588,7 +1588,7 @@
       },
       {
         id: 'lavender',
-        name: '라벤더 클라우드 (Lavender Cloud)',
+        name: '라벤더 클라우드',
         bodyBg: '#f7f5fd',
         blobs: ['bg-indigo-300/35', 'bg-violet-300/35', 'bg-rose-200/40'],
         heroBadge: 'bg-violet-100 text-violet-800 border-violet-200/80',
@@ -1702,23 +1702,23 @@
     let unusedTriviaPool = [];
 
     const diffConfigs = {
-      1: { name: '응애', desc: '0 ~ 1 배율 (2단계, 총 8가지 조합)', color: 'border-emerald-400 bg-emerald-100 text-emerald-800' },
-      3: { name: '초보', desc: '0 ~ 3 배율 (4단계, 총 64가지 조합)', color: 'border-indigo-400 bg-indigo-100 text-indigo-800' },
-      5: { name: '중수', desc: '0 ~ 5 배율 (6단계, 총 216가지 조합)', color: 'border-amber-400 bg-amber-100 text-amber-800' },
-      7: { name: '고수', desc: '0 ~ 7 배율 (8단계, 총 512가지 조합)', color: 'border-orange-400 bg-orange-100 text-orange-800' },
-      10: { name: '초고수', desc: '0 ~ 10 배율 (11단계, 총 1,331가지 조합)', color: 'border-rose-400 bg-rose-100 text-rose-800' }
+      1: { name: '응애', desc: '0 ~ 1 배율 · 2단계', color: 'border-emerald-400 bg-emerald-100 text-emerald-800' },
+      3: { name: '초보', desc: '0 ~ 3 배율 · 4단계', color: 'border-indigo-400 bg-indigo-100 text-indigo-800' },
+      5: { name: '중수', desc: '0 ~ 5 배율 · 6단계', color: 'border-amber-400 bg-amber-100 text-amber-800' },
+      7: { name: '고수', desc: '0 ~ 7 배율 · 8단계', color: 'border-orange-400 bg-orange-100 text-orange-800' },
+      10: { name: '초고수', desc: '0 ~ 10 배율 · 11단계', color: 'border-rose-400 bg-rose-100 text-rose-800' }
     };
 
     const modeConfigs = {
       rgb: {
-        badge: '💡 빛 모드 (RGB)',
+        badge: '💡 빛 모드',
         headerSub: 'RGB 가산혼합 모드',
         c1: { name: 'RED', kr: '빨강', colorClass: 'text-rose-600', dot: 'bg-rose-500', btnBg: 'bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200', chipActive: 'bg-rose-500 text-white border-rose-600 shadow-sm' },
         c2: { name: 'GREEN', kr: '초록', colorClass: 'text-emerald-600', dot: 'bg-emerald-500', btnBg: 'bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200', chipActive: 'bg-emerald-500 text-white border-emerald-600 shadow-sm' },
         c3: { name: 'BLUE', kr: '파랑', colorClass: 'text-blue-600', dot: 'bg-blue-500', btnBg: 'bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200', chipActive: 'bg-blue-500 text-white border-blue-600 shadow-sm' }
       },
       cmy: {
-        badge: '🎨 물감 모드 (CMY)',
+        badge: '🎨 물감 모드',
         headerSub: 'CMY 감산혼합 모드',
         c1: { name: 'CYAN', kr: '청록', colorClass: 'text-cyan-600', dot: 'bg-cyan-500', btnBg: 'bg-cyan-50 hover:bg-cyan-100 text-cyan-700 border-cyan-200', chipActive: 'bg-cyan-500 text-white border-cyan-600 shadow-sm' },
         c2: { name: 'MAGENTA', kr: '자홍', colorClass: 'text-fuchsia-600', dot: 'bg-fuchsia-500', btnBg: 'bg-fuchsia-50 hover:bg-fuchsia-100 text-fuchsia-700 border-fuchsia-200', chipActive: 'bg-fuchsia-500 text-white border-fuchsia-600 shadow-sm' },
@@ -1888,7 +1888,7 @@
         const dot = document.getElementById(`sbCh${idx}Dot`);
         if (dot) dot.className = `w-3 h-3 rounded-full ${ch.dot} shadow-xs`;
         const title = document.getElementById(`sbCh${idx}Title`);
-        if (title) title.innerText = `${ch.name} (${ch.kr})`;
+        if (title) title.innerText = `${ch.name}`;
 
         const minusBtn = document.getElementById(`sbCh${idx}Minus`);
         const plusBtn = document.getElementById(`sbCh${idx}Plus`);
@@ -2382,7 +2382,7 @@
         const label = document.getElementById(`ch${idx}Label`);
         label.className = `font-bold flex items-center gap-1.5 ${ch.colorClass}`;
         document.getElementById(`ch${idx}Dot`).className = `w-3 h-3 rounded-full ${ch.dot} shadow-xs`;
-        document.getElementById(`ch${idx}Title`).innerText = `${ch.name} (${ch.kr})`;
+        document.getElementById(`ch${idx}Title`).innerText = `${ch.name}`;
 
         const minusBtn = document.getElementById(`ch${idx}Minus`);
         const plusBtn = document.getElementById(`ch${idx}Plus`);
@@ -2640,9 +2640,9 @@
 
       const cfg = modeConfigs[selectedMode];
       const diffs = [
-        { ch: 1, name: `${cfg.c1.name}(${cfg.c1.kr})`, diff: userColor.c1 - targetColor.c1 },
-        { ch: 2, name: `${cfg.c2.name}(${cfg.c2.kr})`, diff: userColor.c2 - targetColor.c2 },
-        { ch: 3, name: `${cfg.c3.name}(${cfg.c3.kr})`, diff: userColor.c3 - targetColor.c3 }
+        { ch: 1, name: `${cfg.c1.name}`, diff: userColor.c1 - targetColor.c1 },
+        { ch: 2, name: `${cfg.c2.name}`, diff: userColor.c2 - targetColor.c2 },
+        { ch: 3, name: `${cfg.c3.name}`, diff: userColor.c3 - targetColor.c3 }
       ];
 
       // Filter only erroneous channels
@@ -2801,20 +2801,20 @@
       {
         tierLevel: 1,
         tierName: "초월적 색각자",
-        tierBadge: "👑 1티어 (상위 ~2%)",
+        tierBadge: "👑 1티어 · 상위 2%",
         themeGrad: "from-amber-500 via-rose-500 to-indigo-600",
         badgeClass: "bg-amber-100 text-amber-800 border-amber-300",
         animals: [
           {
-            name: "갯가재 (사마귀새우)",
+            name: "갯가재",
             emoji: "🦐",
-            title: "경이로운 분해능의 갯가재 (사마귀새우)",
+            title: "경이로운 분해능의 갯가재",
             subtitle: "색수용체 16개로 원편광·자외선까지 분해하는 바다의 신",
             cardDesc: "인간보다 5배 많은 16개의 색각 수용체를 지닌 바다의 초월적 시각 지배자! 미세한 1스텝 오차까지 꿰뚫어 보는 절대색감입니다.",
             desc: "인간(3개)보다 무려 5배 이상 많은 16개의 색각 수용체로 바닷속을 지배하는 초월적 시각의 신입니다.\n가시광선은 물론 자외선과 전자기파의 비틀림(원편광)까지 분해해 감지하는 우주급 시각 해상도를 자랑합니다.\n당신의 눈은 미세한 1스텝의 채도와 명도 오차까지 픽셀 단위로 정확히 꿰뚫어 보았습니다.\n인간의 한계를 아득히 넘어선 절대색감으로, 당장 초정밀 디스플레이 검수나 조색 장인에 비견되는 눈입니다!"
           },
           {
-            name: "금붕어 / 잉어",
+            name: "금붕어",
             emoji: "🐠",
             title: "4색각 시각 천재 금붕어",
             subtitle: "4색각으로 적외선 영역까지 엿보는 어류계의 시각 천재",
@@ -2834,7 +2834,7 @@
       {
         tierLevel: 2,
         tierName: "초정밀 색각자",
-        tierBadge: "🦋 2티어 (상위 2~10%)",
+        tierBadge: "🦋 2티어 · 상위 2~10%",
         themeGrad: "from-purple-600 via-indigo-600 to-blue-600",
         badgeClass: "bg-purple-100 text-purple-800 border-purple-300",
         animals: [
@@ -2867,12 +2867,12 @@
       {
         tierLevel: 3,
         tierName: "영장류 우등생",
-        tierBadge: "🐒 3티어 (상위 10~40%)",
+        tierBadge: "🐒 3티어 · 상위 10~40%",
         themeGrad: "from-emerald-600 via-teal-600 to-cyan-600",
         badgeClass: "bg-emerald-100 text-emerald-800 border-emerald-300",
         animals: [
           {
-            name: "침팬지 / 오랑우탄",
+            name: "침팬지",
             emoji: "🐒",
             title: "잘 익은 열매를 찾는 침팬지",
             subtitle: "3원색(RGB)으로 숲속의 잘 익은 과일을 귀신같이 탐색",
@@ -2880,7 +2880,7 @@
             desc: "인간과 동일한 완전 3색각(RGB) 시각을 진화시켜 울창한 초록 숲에서도 붉게 익은 과일을 귀신같이 찾아냅니다.\n생존과 직결된 자연의 색채 질서를 온몸으로 이해하고 능숙하게 활용하는 자연계의 우등생입니다.\n당신은 빛과 물감의 기본 삼원색 메커니즘을 훌륭하게 이해하고 안정적인 고득점을 기록했습니다.\n일상생활과 패션 스타일링, 시각 디자인에서 뛰어난 색 감각과 센스를 뽐낼 수 있는 균형 잡힌 눈입니다!"
           },
           {
-            name: "투라코 (새)",
+            name: "투라코",
             emoji: "🦜",
             title: "고유 색소를 빚는 투라코",
             subtitle: "깃털 자체에 유일무이한 고유 녹색/적색 색소를 합성",
@@ -2900,7 +2900,7 @@
       {
         tierLevel: 4,
         tierName: "야간/동체시력 특화",
-        tierBadge: "🐅 4티어 (상위 40~75%)",
+        tierBadge: "🐅 4티어 · 상위 40~75%",
         themeGrad: "from-amber-600 via-orange-600 to-red-600",
         badgeClass: "bg-amber-100 text-amber-900 border-amber-300",
         animals: [
@@ -2913,7 +2913,7 @@
             desc: "녹색과 붉은색을 뚜렷이 구별하지 못하는 2색각 시야지만, 이를 역이용해 초식동물의 눈을 완벽히 속입니다.\n초식동물 눈에는 주황색 호랑이가 풀숲과 똑같은 녹색 실루엣으로 보여 완벽한 위장 기습이 가능합니다.\n당신은 미세한 색조 뉘앙스 분별에선 약간 헷갈렸지만, 명도와 전체적 실루엣 파악에 강점을 보였습니다.\n색의 디테일보다 전체적인 분위기와 형태, 움직임을 캐치하는 직관력이 더욱 돋보이는 눈입니다!"
           },
           {
-            name: "시베리안 허스키 (개)",
+            name: "시베리안 허스키",
             emoji: "🐺",
             title: "눈보라를 뚫는 시베리안 허스키",
             subtitle: "빨강은 못 봐도 어둠 속 명암비와 눈보라 속 동체시력 최강",
@@ -2933,7 +2933,7 @@
       {
         tierLevel: 5,
         tierName: "형태·명암 몰빵형",
-        tierBadge: "🦈 5티어 (하위 25%)",
+        tierBadge: "🦈 5티어 · 하위 25%",
         themeGrad: "from-slate-700 via-cyan-800 to-slate-900",
         badgeClass: "bg-slate-100 text-slate-800 border-slate-300",
         animals: [
@@ -2946,7 +2946,7 @@
             desc: "원추세포가 1종류뿐이라 세상을 오직 흑백 명암과 실루엣으로만 바라보는 바다의 사냥꾼입니다.\n푸른 바다 아래서 알록달록한 색채는 사치일 뿐, 수면 위 먹잇감의 그림자 명암비 하나로 사냥합니다.\n당신의 눈은 알록달록한 색상 채도 차이보다는 명도와 형태 판별에 특화되어 있을 수 있습니다.\n빛의 가산혼합(RGB)과 물감의 감산혼합(CMY) 원리를 조금만 이해하고 재도전하면 극적인 반전이 가능합니다!"
           },
           {
-            name: "올빼미 / 부엉이",
+            name: "올빼미",
             emoji: "🦉",
             title: "달빛 사냥꾼 올빼미",
             subtitle: "색은 포기하고 막대세포(명암)에 올인해 달빛 한 줄기로 사냥",
@@ -2954,7 +2954,7 @@
             desc: "색을 감지하는 원추세포를 대폭 줄이고 명암을 감지하는 막대세포에 모든 스탯을 몰빵한 밤의 제왕입니다.\n달빛 한 줄기조차 없는 칠흑 같은 어둠 속에서도 100m 밖 쥐의 미세한 그림자 움직임을 낚아챕니다.\n당신은 색의 혼합 비율을 미세하게 맞추는 데 다소 어려움을 겪었지만, 이는 색에 둔감한 올빼미의 눈이기 때문입니다!\n색 감각은 훈련할수록 빠르게 진화하므로, 힌트를 활용해 다시 한번 도전해보세요!"
           },
           {
-            name: "바다사자 / 물개",
+            name: "바다사자",
             emoji: "🦭",
             title: "심해 탐험가 바다사자",
             subtitle: "빛이 닿지 않는 심해에서 색 대신 실루엣과 수염 감각으로 포착",
@@ -3175,10 +3175,10 @@
       if (reportBlindBadge) {
         if (isFullBlindMode) {
           reportBlindBadge.className = 'inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-extrabold border shadow-2xs bg-rose-50 border-rose-300 text-rose-700';
-          reportBlindBadge.innerText = '🕶️ 완전 블라인드 (10문제 전체)';
+          reportBlindBadge.innerText = '🕶️ 완전 블라인드';
         } else {
           reportBlindBadge.className = 'inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold border shadow-2xs bg-slate-50 border-slate-300 text-slate-600';
-          reportBlindBadge.innerText = '🎯 기본 모드 (마지막 1문제 블라인드)';
+          reportBlindBadge.innerText = '🎯 기본 모드 · 마지막 1문제 블라인드';
         }
       }
 
@@ -3342,7 +3342,7 @@
       ctx.fillStyle = '#64748b';
       ctx.font = '10px Pretendard, sans-serif';
       ctx.textAlign = 'center';
-      ctx.fillText('일반인 평균 (72%)', meanX, padding.top + chartH + 18);
+      ctx.fillText('일반인 평균 72%', meanX, padding.top + chartH + 18);
 
       // 4. Mark User Position Pin
       const clampedUserScore = Math.max(minX, Math.min(maxX, userScore));
@@ -3409,7 +3409,7 @@
 
       const modeText = selectedMode === 'rgb' ? '빛 (RGB)' : '물감 (CMY)';
       const diffText = diffConfigs[selectedMax].name;
-      const blindText = isFullBlindMode ? '🕶️ 완전 블라인드 (10문제 전체)' : '마지막 1문제 블라인드';
+      const blindText = isFullBlindMode ? '🕶️ 완전 블라인드' : '마지막 1문제 블라인드';
 
       const shareData = {
         title: `[색감 테스트] 내 색각 동물: ${animalEmoji} ${animalName}`,
@@ -3643,12 +3643,12 @@
       const subtitle = currentAssignedAnimal ? currentAssignedAnimal.animal.subtitle : '';
       const hints = document.getElementById('statTotalHints').innerText;
       const clicks = document.getElementById('statTotalClicks') ? document.getElementById('statTotalClicks').innerText : '';
-      const mode = selectedMode === 'rgb' ? '빛 모드 (RGB)' : '물감 모드 (CMY)';
+      const mode = selectedMode === 'rgb' ? '빛 모드' : '물감 모드';
       const diffText = diffConfigs[selectedMax].name;
-      const blindText = isFullBlindMode ? '🕶️ 완전 블라인드 (10문제 전체)' : '기본 모드 (마지막 1문제 블라인드)';
+      const blindText = isFullBlindMode ? '🕶️ 완전 블라인드' : '기본 모드 (마지막 1문제 블라인드)';
       const shareUrl = encodeResultsToUrl();
 
-      const text = `🎨 [색감 감각 테스트: Color Lab]\n동물 페르소나: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n난이도: ${diffText} (0~${selectedMax}배율) | 모드: ${mode} | ${blindText}\n평균 일치율: ${avg} | 상위 ${rank}\n조작(클릭): ${clicks} | 힌트 사용: ${hints}\n\n👉 내 결과 확인 & 나도 도전하기:\n${shareUrl}`;
+      const text = `🎨 [색감 감각 테스트: Color Lab]\n동물 페르소나: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n난이도: ${diffText} (0~${selectedMax}배율) | 모드: ${mode} | ${blindText}\n평균 일치율: ${avg} | 상위 ${rank}\n조작: ${clicks} | 힌트 사용: ${hints}\n\n👉 내 결과 확인 & 나도 도전하기:\n${shareUrl}`;
 
       // Fallback-safe clipboard copy
       const tempInput = document.createElement('textarea');
@@ -3697,40 +3697,40 @@
       easy: {
         id: 'easy',
         name: '쉬움',
-        badge: '🟢 쉬움 (10~15%)',
+        badge: '🟢 쉬움',
         pctMin: 0.10,
         pctMax: 0.15,
-        desc: '눈으로 쉽게 구분 가능한 오차 범위 (10~15%)',
+        desc: '눈으로 쉽게 구분 가능한 입문용',
         btnActive: 'bg-emerald-50/80 border-emerald-400 ring-2 ring-emerald-400/30 shadow-xs',
         badgeClass: 'bg-emerald-100 text-emerald-800 border-emerald-200'
       },
       normal: {
         id: 'normal',
         name: '보통',
-        badge: '🟡 보통 (5~10%)',
+        badge: '🟡 보통',
         pctMin: 0.05,
         pctMax: 0.10,
-        desc: '평균 색채 기억력 테스트 (5~10%)',
+        desc: '평균 색채 기억력을 시험하는 표준',
         btnActive: 'bg-amber-50/80 border-amber-400 ring-2 ring-amber-400/30 shadow-xs',
         badgeClass: 'bg-amber-100 text-amber-800 border-amber-200'
       },
       hard: {
         id: 'hard',
         name: '어려움',
-        badge: '🔴 어려움 (3~5%)',
+        badge: '🔴 어려움',
         pctMin: 0.03,
         pctMax: 0.05,
-        desc: '미세한 뉘앙스를 기억해야 하는 상급자용 (3~5%)',
+        desc: '미세한 뉘앙스까지 외우는 상급자용',
         btnActive: 'bg-rose-50/80 border-rose-400 ring-2 ring-rose-400/30 shadow-xs',
         badgeClass: 'bg-rose-100 text-rose-800 border-rose-200'
       },
       hell: {
         id: 'hell',
-        name: '헬 (HELL)',
-        badge: '😈 헬 (1%)',
+        name: '헬',
+        badge: '😈 헬',
         pctMin: 0.01,
         pctMax: 0.015,
-        desc: '오직 1%의 미세 차이! 신의 색각 기억자 (1%)',
+        desc: '오직 1%의 극한 차이, 신의 색각 기억자',
         btnActive: 'bg-purple-50/80 border-purple-400 ring-2 ring-purple-400/30 shadow-xs',
         badgeClass: 'bg-purple-100 text-purple-800 border-purple-200'
       }
@@ -4083,8 +4083,8 @@
 
       if (isCorrect) {
         feedbackBadge.className = 'text-base sm:text-lg font-black text-emerald-600 flex items-center gap-1.5';
-        feedbackBadge.innerHTML = '<span>✅ 완벽한 정답입니다! (+1점)</span>';
-        deltaText.innerText = '오차: 0% (100% 일치)';
+        feedbackBadge.innerHTML = '<span>✅ 정답입니다! +1점</span>';
+        deltaText.innerText = '오차: 0% · 100% 일치';
       } else {
         feedbackBadge.className = 'text-base sm:text-lg font-black text-rose-600 flex items-center gap-1.5';
         feedbackBadge.innerHTML = '<span>❌ 아쉽네요! 오답입니다.</span>';
@@ -4142,28 +4142,28 @@
 
       if (score === 5) {
         if (memoryState.difficulty === 'hell') {
-          badge = '👑 신의 시각 기억자 (Photographic Eye)';
+          badge = '👑 신의 시각 기억자';
           title = '단 1%도 놓치지 않는 신의 기억력!';
           desc = '단 1%의 미세한 색차마저 5초 만에 뇌리에 영구 각인하는 초월적 색각 기억의 절대자입니다.';
         } else if (memoryState.difficulty === 'hard') {
-          badge = '🦅 예리한 매의 눈 (Falcon Eye)';
+          badge = '🦅 예리한 매의 눈';
           title = '극미세 뉘앙스를 간파하는 초정밀 기억력!';
           desc = '3~5%의 까다로운 톤 차이를 완벽히 포착해 기억해낸 상위 1%의 색채 감각입니다.';
         } else {
-          badge = '🐱 명탐정 고양이 (Sharp Memorizer)';
+          badge = '🐱 명탐정 고양이';
           title = '티끌 하나 놓치지 않는 또렷한 눈썰미!';
           desc = '5초 동안 색상을 머릿속에 또렷하게 보존하여 만점을 달성했습니다. 상위 난이도에도 도전해보세요!';
         }
       } else if (score >= 3) {
-        badge = '🦉 감각적인 올빼미 (Sensory Owl)';
+        badge = '🦉 감각적인 올빼미';
         title = '높은 집중력의 뛰어난 색채 기억자!';
         desc = '비슷한 보기들의 교묘한 유혹 속에서도 높은 확률로 진짜 색상을 짚어냈습니다!';
       } else if (score >= 1) {
-        badge = '🦔 탐색하는 고슴도치 (Curious Hedgehog)';
+        badge = '🦔 탐색하는 고슴도치';
         title = '감각을 예리하게 벼리는 중!';
         desc = '찰나의 색채 착시에 아쉽게 속았지만, 몇 번 더 집중해보면 기억력이 빠르게 상승할 것입니다.';
       } else {
-        badge = '🙈 깜빡하는 아기원숭이 (Playful Monkey)';
+        badge = '🙈 깜빡하는 아기원숭이';
         title = '색이 사라지자 뇌도 함께 리셋?!';
         desc = '5초 동안 색의 밝기와 채도를 한 번 더 마음속으로 읊어보세요! 다시 도전해보시겠어요?';
       }
@@ -4299,7 +4299,7 @@
       },
       {
         day: 5,
-        name: '황혼의 아수라장 (FINAL)',
+        name: '황혼의 아수라장',
         grid: 10,
         tigerSize: 1,
         moveMs: 600,
@@ -4322,7 +4322,7 @@
         emoji: '🐇',
         humanBg: 'rgb(225, 185, 140)',
         deerBg: 'rgb(138, 134, 82)',
-        alertMsg: '깜짝이야! 토끼였습니다! 🐇💨 (-1초)'
+        alertMsg: '깜짝이야! 토끼였습니다! 🐇💨 -1초'
       },
       squirrel: {
         type: 'squirrel',
@@ -4330,7 +4330,7 @@
         emoji: '🐿️',
         humanBg: 'rgb(165, 85, 42)',
         deerBg: 'rgb(112, 108, 50)',
-        alertMsg: '도토리 먹던 다람쥐였습니다! 🐿️ (-1초)'
+        alertMsg: '도토리 먹던 다람쥐였습니다! 🐿️ -1초'
       },
       wind: {
         type: 'wind',
@@ -4338,7 +4338,7 @@
         emoji: '🍃',
         humanBg: 'rgb(80, 200, 100)',
         deerBg: 'rgb(142, 140, 72)',
-        alertMsg: '그냥 바람 소리였습니다! 🍃 휘잉~ (-0.8초)'
+        alertMsg: '그냥 바람 소리였습니다! 🍃 -0.8초'
       }
     };
 
@@ -4758,17 +4758,17 @@
 
       if (days >= 5) {
         emojiEl.innerText = '🦌🏆';
-        badgeEl.innerText = '👑 전설의 생존 사슴 (Miracle Survivor)';
+        badgeEl.innerText = '👑 전설의 생존 사슴';
         titleEl.innerText = '5일간의 극한 생존 완주 성공!';
         descEl.innerText = '토끼, 다람쥐, 바람의 교란 속에서도 오직 호랑이의 살기만을 간파해 살아남았습니다!';
       } else if (days >= 3) {
         emojiEl.innerText = '🦌💨';
-        badgeEl.innerText = '🐆 날렵한 노루 (Agile Roe Deer)';
+        badgeEl.innerText = '🐆 날렵한 노루';
         titleEl.innerText = '뛰어난 감각으로 위기를 돌파!';
         descEl.innerText = '미세한 풀숲의 움직임을 날카롭게 캐치해 맹수의 영역을 벗어났습니다!';
       } else {
         emojiEl.innerText = '🌿🦌';
-        badgeEl.innerText = '🌸 풀 뜯던 꽃사슴 (Peaceful Fawn)';
+        badgeEl.innerText = '🌸 풀 뜯던 꽃사슴';
         titleEl.innerText = '아쉬운 탈락, 다시 감각을 깨워보세요!';
         descEl.innerText = '토끼와 바람 소리에 낚이지 말고 침착하게 호랑이 덩치를 찾아보세요!';
       }
