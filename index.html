@@ -509,8 +509,8 @@
       </div>
     </div>
 
-    <!-- Summary 4 Statistics Cards -->
-    <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+    <!-- Summary Statistics Cards -->
+    <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-2.5">
       <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 text-center shadow-sm">
         <span class="text-[11px] text-slate-500 block mb-1">평균 일치율</span>
         <span id="statAvgAccuracy" class="mono text-xl sm:text-2xl font-black text-emerald-600">92.4%</span>
@@ -520,10 +520,14 @@
         <span id="statPerfectCount" class="mono text-xl sm:text-2xl font-black text-amber-600">4 / 10</span>
       </div>
       <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 text-center shadow-sm">
+        <span class="text-[11px] text-slate-500 block mb-1">총 조작(클릭) 횟수</span>
+        <span id="statTotalClicks" class="mono text-xl sm:text-2xl font-black text-violet-600">0회</span>
+      </div>
+      <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 text-center shadow-sm">
         <span class="text-[11px] text-slate-500 block mb-1">힌트 사용 횟수</span>
         <span id="statTotalHints" class="mono text-xl sm:text-2xl font-black text-indigo-600">3회</span>
       </div>
-      <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 text-center shadow-sm">
+      <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl p-3.5 text-center shadow-sm col-span-2 sm:col-span-1">
         <span class="text-[11px] text-slate-500 block mb-1">소요 시간</span>
         <span id="statTimeSpent" class="mono text-xl sm:text-2xl font-black text-slate-800">1분 42초</span>
       </div>
@@ -946,6 +950,7 @@
     let currentRoundIndex = 1;
     let totalHintsUsed = 0;
     let roundStartTime = 0;
+    let roundActionCount = 0;
     let testStartTime = 0;
     let roundsData = []; // Array of round results
     let currentAssignedAnimal = null;
@@ -1207,6 +1212,7 @@
 
     function attachSteppedSliderEvents(container, chNum) {
       let isDragging = false;
+      let dragStartVal = userColor[`c${chNum}`];
 
       function getValFromPointerEvent(e) {
         // 1. Direct hit on button inside track
@@ -1225,6 +1231,7 @@
 
       container.onpointerdown = (e) => {
         isDragging = true;
+        dragStartVal = userColor[`c${chNum}`];
         try { container.setPointerCapture(e.pointerId); } catch(err) {}
         const val = getValFromPointerEvent(e);
         setChannelValue(chNum, val, true);
@@ -1242,6 +1249,9 @@
         if (isDragging) {
           isDragging = false;
           try { container.releasePointerCapture(e.pointerId); } catch(err) {}
+          if (userColor[`c${chNum}`] !== dragStartVal) {
+            roundActionCount++;
+          }
         }
       };
 
@@ -1249,6 +1259,9 @@
         if (isDragging) {
           isDragging = false;
           try { container.releasePointerCapture(e.pointerId); } catch(err) {}
+          if (userColor[`c${chNum}`] !== dragStartVal) {
+            roundActionCount++;
+          }
         }
       };
 
@@ -1268,6 +1281,7 @@
     // Setup Round
     function setupRound(roundIdx) {
       roundStartTime = Date.now();
+      roundActionCount = 0;
       dismissHintToast();
 
       const isBlindRound = isFullBlindMode || (roundIdx >= 8);
@@ -1361,7 +1375,11 @@
     }
 
     function stepChannel(chNum, delta) {
-      setChannelValue(chNum, userColor[`c${chNum}`] + delta, true);
+      const prev = userColor[`c${chNum}`];
+      setChannelValue(chNum, prev + delta, true);
+      if (userColor[`c${chNum}`] !== prev) {
+        roundActionCount++;
+      }
     }
 
     function highlightActiveChips() {
@@ -1468,7 +1486,8 @@
         target: { ...targetColor },
         user: { ...userColor },
         targetRgb,
-        userRgb
+        userRgb,
+        actions: roundActionCount
       });
 
       // Show Popup Modal
@@ -1500,7 +1519,18 @@
       const d3 = userColor.c3 - targetColor.c3;
       const fmt = (d) => (d === 0 ? '일치' : (d > 0 ? `+${d}` : `${d}`));
 
-      diffDetails.innerHTML = `오차 분석: <span class="font-mono text-slate-800 font-bold">${labels[0]}(${fmt(d1)}), ${labels[1]}(${fmt(d2)}), ${labels[2]}(${fmt(d3)})</span>`;
+      diffDetails.innerHTML = `
+        <div class="flex items-center justify-between gap-2">
+          <div>
+            <span class="text-slate-500 font-semibold">오차 분석:</span>
+            <span class="font-mono text-slate-800 font-bold ml-1">${labels[0]}(${fmt(d1)}), ${labels[1]}(${fmt(d2)}), ${labels[2]}(${fmt(d3)})</span>
+          </div>
+          <div class="shrink-0 px-2.5 py-0.5 rounded-lg bg-white border border-slate-200/90 text-slate-700 font-bold text-[11px] flex items-center gap-1 shadow-2xs">
+            <span>👆</span>
+            <span>조작 <strong>${roundActionCount}</strong>회</span>
+          </div>
+        </div>
+      `;
 
       // Pick a non-repeating Animal Color Trivia for this round
       if (unusedTriviaPool.length === 0) {
@@ -1730,7 +1760,8 @@
           q: roundsData.map(r => [
             r.target.c1, r.target.c2, r.target.c3,
             r.user.c1, r.user.c2, r.user.c3,
-            r.isBlind ? 1 : 0
+            r.isBlind ? 1 : 0,
+            r.actions || 0
           ])
         };
         const jsonStr = JSON.stringify(payload);
@@ -1798,7 +1829,8 @@
             target,
             user,
             targetRgb,
-            userRgb
+            userRgb,
+            actions: row.length > 7 ? (row[7] || 0) : 0
           };
         });
 
@@ -1954,6 +1986,9 @@
 
       document.getElementById('statAvgAccuracy').innerText = `${avgAccuracy}%`;
       document.getElementById('statPerfectCount').innerText = `${perfectHits} / ${TOTAL_ROUNDS}`;
+      const totalActions = roundsData.reduce((acc, r) => acc + (r.actions || 0), 0);
+      const statTotalClicks = document.getElementById('statTotalClicks');
+      if (statTotalClicks) statTotalClicks.innerText = `${totalActions}회`;
       document.getElementById('statTotalHints').innerText = `${totalHintsUsed}회`;
       document.getElementById('statTimeSpent').innerText = timeSpentStr;
 
@@ -1975,7 +2010,10 @@
             <div class="w-1/2 h-full" style="background-color: ${formatRgbStr(r.targetRgb)}" title="목표"></div>
             <div class="w-1/2 h-full" style="background-color: ${formatRgbStr(r.userRgb)}" title="내 제출"></div>
           </div>
-          <span class="text-[10px] mono text-slate-500 font-semibold">${r.isPerfect ? '⭐ 퍼펙트' : (r.isBlind ? '🕶️ 블라인드' : '오차 있음')}</span>
+          <div class="flex items-center justify-between text-[10px] mono text-slate-500 font-semibold mt-0.5">
+            <span>${r.isPerfect ? '⭐ 퍼펙트' : (r.isBlind ? '🕶️ 블라인드' : '오차 있음')}</span>
+            <span class="text-slate-400">👆 ${r.actions || 0}회</span>
+          </div>
         `;
         summaryGrid.appendChild(item);
       });
@@ -2385,12 +2423,13 @@
       const tierBadge = currentAssignedAnimal ? currentAssignedAnimal.tier.tierBadge : '';
       const subtitle = currentAssignedAnimal ? currentAssignedAnimal.animal.subtitle : '';
       const hints = document.getElementById('statTotalHints').innerText;
+      const clicks = document.getElementById('statTotalClicks') ? document.getElementById('statTotalClicks').innerText : '';
       const mode = selectedMode === 'rgb' ? '빛 모드 (RGB)' : '물감 모드 (CMY)';
       const diffText = diffConfigs[selectedMax].name;
       const blindText = isFullBlindMode ? '🕶️ 완전 블라인드 (10문제 전체)' : '기본 모드 (마지막 3문제 블라인드)';
       const shareUrl = encodeResultsToUrl();
 
-      const text = `🎨 [색감 감각 테스트: Color Lab]\n동물 페르소나: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n난이도: ${diffText} (0~${selectedMax}배율) | 모드: ${mode} | ${blindText}\n평균 일치율: ${avg} | 상위 ${rank}\n힌트 사용: ${hints}\n\n👉 내 결과 확인 & 나도 도전하기:\n${shareUrl}`;
+      const text = `🎨 [색감 감각 테스트: Color Lab]\n동물 페르소나: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n난이도: ${diffText} (0~${selectedMax}배율) | 모드: ${mode} | ${blindText}\n평균 일치율: ${avg} | 상위 ${rank}\n조작(클릭): ${clicks} | 힌트 사용: ${hints}\n\n👉 내 결과 확인 & 나도 도전하기:\n${shareUrl}`;
 
       // Fallback-safe clipboard copy
       const tempInput = document.createElement('textarea');
