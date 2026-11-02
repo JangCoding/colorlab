@@ -52,6 +52,10 @@
     body {
       font-family: 'Pretendard', sans-serif;
     }
+    button, [role="button"], [role="slider"] {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
     .mono {
       font-family: 'JetBrains Mono', monospace;
     }
@@ -387,9 +391,9 @@
           <span class="mono font-bold text-sm sm:text-base text-slate-700" id="ch1ValueDisplay">0</span>
         </div>
         <div class="flex items-center gap-2">
-          <button onclick="stepChannel(1, -1)" id="ch1Minus" class="w-9 sm:w-10 h-9 sm:h-10 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg sm:text-xl border bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200 shadow-xs select-none">-</button>
-          <div id="ch1ChipsContainer" class="flex-1 relative flex items-stretch h-9 sm:h-10 p-1 bg-slate-100/90 rounded-xl border border-slate-200/90 gap-0.5 sm:gap-1 select-none touch-none shadow-inner cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400" role="slider" aria-label="빨강 채널 슬라이더"></div>
-          <button onclick="stepChannel(1, 1)" id="ch1Plus" class="w-9 sm:w-10 h-9 sm:h-10 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg sm:text-xl border bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200 shadow-xs select-none">+</button>
+          <button type="button" onclick="stepChannel(1, -1)" id="ch1Minus" class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200 shadow-xs select-none touch-manipulation cursor-pointer">-</button>
+          <div id="ch1ChipsContainer" class="flex-1 relative flex items-stretch h-10 sm:h-11 p-1 bg-slate-100/90 rounded-xl border border-slate-200/90 gap-0.5 sm:gap-1 select-none touch-none shadow-inner cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400" role="slider" aria-label="빨강 채널 슬라이더"></div>
+          <button type="button" onclick="stepChannel(1, 1)" id="ch1Plus" class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border bg-rose-50 hover:bg-rose-100 text-rose-700 border-rose-200 shadow-xs select-none touch-manipulation cursor-pointer">+</button>
         </div>
       </div>
 
@@ -403,9 +407,9 @@
           <span class="mono font-bold text-sm sm:text-base text-slate-700" id="ch2ValueDisplay">0</span>
         </div>
         <div class="flex items-center gap-2">
-          <button onclick="stepChannel(2, -1)" id="ch2Minus" class="w-9 sm:w-10 h-9 sm:h-10 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg sm:text-xl border bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200 shadow-xs select-none">-</button>
-          <div id="ch2ChipsContainer" class="flex-1 relative flex items-stretch h-9 sm:h-10 p-1 bg-slate-100/90 rounded-xl border border-slate-200/90 gap-0.5 sm:gap-1 select-none touch-none shadow-inner cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400" role="slider" aria-label="초록 채널 슬라이더"></div>
-          <button onclick="stepChannel(2, 1)" id="ch2Plus" class="w-9 sm:w-10 h-9 sm:h-10 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg sm:text-xl border bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200 shadow-xs select-none">+</button>
+          <button type="button" onclick="stepChannel(2, -1)" id="ch2Minus" class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200 shadow-xs select-none touch-manipulation cursor-pointer">-</button>
+          <div id="ch2ChipsContainer" class="flex-1 relative flex items-stretch h-10 sm:h-11 p-1 bg-slate-100/90 rounded-xl border border-slate-200/90 gap-0.5 sm:gap-1 select-none touch-none shadow-inner cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400" role="slider" aria-label="초록 채널 슬라이더"></div>
+          <button type="button" onclick="stepChannel(2, 1)" id="ch2Plus" class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border bg-emerald-50 hover:bg-emerald-100 text-emerald-700 border-emerald-200 shadow-xs select-none touch-manipulation cursor-pointer">+</button>
         </div>
       </div>
 
@@ -419,9 +423,9 @@
           <span class="mono font-bold text-sm sm:text-base text-slate-700" id="ch3ValueDisplay">0</span>
         </div>
         <div class="flex items-center gap-2">
-          <button onclick="stepChannel(3, -1)" id="ch3Minus" class="w-9 sm:w-10 h-9 sm:h-10 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg sm:text-xl border bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200 shadow-xs select-none">-</button>
-          <div id="ch3ChipsContainer" class="flex-1 relative flex items-stretch h-9 sm:h-10 p-1 bg-slate-100/90 rounded-xl border border-slate-200/90 gap-0.5 sm:gap-1 select-none touch-none shadow-inner cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400" role="slider" aria-label="파랑 채널 슬라이더"></div>
-          <button onclick="stepChannel(3, 1)" id="ch3Plus" class="w-9 sm:w-10 h-9 sm:h-10 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg sm:text-xl border bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200 shadow-xs select-none">+</button>
+          <button type="button" onclick="stepChannel(3, -1)" id="ch3Minus" class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200 shadow-xs select-none touch-manipulation cursor-pointer">-</button>
+          <div id="ch3ChipsContainer" class="flex-1 relative flex items-stretch h-10 sm:h-11 p-1 bg-slate-100/90 rounded-xl border border-slate-200/90 gap-0.5 sm:gap-1 select-none touch-none shadow-inner cursor-pointer focus:outline-none focus:ring-2 focus:ring-indigo-400" role="slider" aria-label="파랑 채널 슬라이더"></div>
+          <button type="button" onclick="stepChannel(3, 1)" id="ch3Plus" class="w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border bg-blue-50 hover:bg-blue-100 text-blue-700 border-blue-200 shadow-xs select-none touch-manipulation cursor-pointer">+</button>
         </div>
       </div>
     </div>
@@ -1166,12 +1170,12 @@
 
         const minusBtn = document.getElementById(`ch${idx}Minus`);
         const plusBtn = document.getElementById(`ch${idx}Plus`);
-        minusBtn.className = `w-9 sm:w-10 h-9 sm:h-10 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg sm:text-xl border ${ch.btnBg} shadow-xs select-none`;
-        plusBtn.className = `w-9 sm:w-10 h-9 sm:h-10 rounded-xl font-bold active:scale-95 transition-all flex items-center justify-center text-lg sm:text-xl border ${ch.btnBg} shadow-xs select-none`;
+        minusBtn.className = `w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border ${ch.btnBg} shadow-xs select-none touch-manipulation cursor-pointer`;
+        plusBtn.className = `w-10 sm:w-11 h-10 sm:h-11 rounded-xl font-bold active:scale-90 transition-all flex items-center justify-center text-xl border ${ch.btnBg} shadow-xs select-none touch-manipulation cursor-pointer`;
       });
     }
 
-    // Render stepped slider bar with discrete cells filling the width
+    // Render stepped slider bar with discrete interactive cells filling the width
     function renderControlChips() {
       const cfg = modeConfigs[selectedMode];
       const fontSizeClass = selectedMax > 5 ? 'text-[11px] sm:text-xs' : 'text-xs sm:text-sm';
@@ -1187,15 +1191,22 @@
         const activeStyles = cfg[`c${chNum}`].chipActive;
 
         for (let i = 0; i <= selectedMax; i++) {
-          const cell = document.createElement('div');
-          cell.id = `chip-c${chNum}-${i}`;
-          cell.innerText = i;
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.id = `chip-c${chNum}-${i}`;
+          btn.dataset.step = i;
+          btn.innerText = i;
           if (userColor[`c${chNum}`] === i) {
-            cell.className = `flex-1 h-full rounded-md sm:rounded-lg flex items-center justify-center font-black ${fontSizeClass} transition-all pointer-events-none shadow-sm ${activeStyles} scale-[1.02] z-10`;
+            btn.className = `flex-1 h-full rounded-md sm:rounded-lg flex items-center justify-center font-black ${fontSizeClass} transition-all shadow-sm ${activeStyles} scale-[1.02] z-10 touch-manipulation cursor-pointer select-none active:scale-95`;
           } else {
-            cell.className = `flex-1 h-full rounded-md sm:rounded-lg flex items-center justify-center font-bold ${fontSizeClass} transition-all pointer-events-none text-slate-400 bg-white/70 hover:bg-white hover:text-slate-700`;
+            btn.className = `flex-1 h-full rounded-md sm:rounded-lg flex items-center justify-center font-bold ${fontSizeClass} transition-all text-slate-500 bg-white/80 hover:bg-white hover:text-slate-800 shadow-2xs touch-manipulation cursor-pointer select-none active:scale-95`;
           }
-          container.appendChild(cell);
+          // Direct tap/click on cell: bulletproof, instant response with exact index
+          btn.onclick = (e) => {
+            e.stopPropagation();
+            setChannelValue(chNum, i, true);
+          };
+          container.appendChild(btn);
         }
 
         attachSteppedSliderEvents(container, chNum);
@@ -1205,26 +1216,33 @@
     function attachSteppedSliderEvents(container, chNum) {
       let isDragging = false;
 
-      function getValFromEvent(e) {
+      function getValFromPointerEvent(e) {
+        // 1. Direct hit on button inside track
+        const targetBtn = e.target.closest('[data-step]');
+        if (targetBtn && targetBtn.parentElement === container) {
+          return parseInt(targetBtn.dataset.step, 10);
+        }
+        // 2. Uniform equal-width mathematical division across track
         const rect = container.getBoundingClientRect();
         if (rect.width <= 0) return 0;
         const x = e.clientX - rect.left;
-        const ratio = Math.max(0, Math.min(1, x / rect.width));
-        return Math.round(ratio * selectedMax);
+        const ratio = Math.max(0, Math.min(0.9999, x / rect.width));
+        const totalCells = selectedMax + 1;
+        return Math.max(0, Math.min(selectedMax, Math.floor(ratio * totalCells)));
       }
 
       container.onpointerdown = (e) => {
         isDragging = true;
         try { container.setPointerCapture(e.pointerId); } catch(err) {}
-        const val = getValFromEvent(e);
-        setChannelValue(chNum, val);
+        const val = getValFromPointerEvent(e);
+        setChannelValue(chNum, val, true);
       };
 
       container.onpointermove = (e) => {
         if (!isDragging) return;
-        const val = getValFromEvent(e);
+        const val = getValFromPointerEvent(e);
         if (val !== userColor[`c${chNum}`]) {
-          setChannelValue(chNum, val);
+          setChannelValue(chNum, val, true);
         }
       };
 
@@ -1353,18 +1371,21 @@
       highlightActiveChips();
     }
 
-    function setChannelValue(chNum, val) {
+    function setChannelValue(chNum, val, forceSound = false) {
       if (val < 0) val = 0;
       if (val > selectedMax) val = selectedMax;
+      const prevVal = userColor[`c${chNum}`];
       userColor[`c${chNum}`] = val;
 
-      playTone(280 + (val * 35), 'sine', 0.04, 0.04);
+      if (forceSound || val !== prevVal) {
+        playTone(280 + (val * 35), 'sine', 0.04, 0.04);
+      }
       updateUserColorDisplay();
       highlightActiveChips();
     }
 
     function stepChannel(chNum, delta) {
-      setChannelValue(chNum, userColor[`c${chNum}`] + delta);
+      setChannelValue(chNum, userColor[`c${chNum}`] + delta, true);
     }
 
     function highlightActiveChips() {
@@ -1381,9 +1402,9 @@
           const chip = document.getElementById(`chip-c${chNum}-${i}`);
           if (!chip) continue;
           if (userColor[`c${chNum}`] === i) {
-            chip.className = `flex-1 h-full rounded-md sm:rounded-lg flex items-center justify-center font-black ${fontSizeClass} transition-all pointer-events-none shadow-sm ${activeStyles} scale-[1.02] z-10`;
+            chip.className = `flex-1 h-full rounded-md sm:rounded-lg flex items-center justify-center font-black ${fontSizeClass} transition-all shadow-sm ${activeStyles} scale-[1.02] z-10 touch-manipulation cursor-pointer select-none active:scale-95`;
           } else {
-            chip.className = `flex-1 h-full rounded-md sm:rounded-lg flex items-center justify-center font-bold ${fontSizeClass} transition-all pointer-events-none text-slate-400 bg-white/70 hover:bg-white hover:text-slate-700`;
+            chip.className = `flex-1 h-full rounded-md sm:rounded-lg flex items-center justify-center font-bold ${fontSizeClass} transition-all text-slate-500 bg-white/80 hover:bg-white hover:text-slate-800 shadow-2xs touch-manipulation cursor-pointer select-none active:scale-95`;
           }
         }
       });
