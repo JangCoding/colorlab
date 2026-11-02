@@ -328,16 +328,8 @@
       <div class="flex items-center gap-2">
         <span id="gameModeBadge" class="px-2.5 py-0.5 rounded-full font-bold bg-indigo-100 text-indigo-700 border border-indigo-200">💡 빛 모드 (RGB)</span>
         <span id="gameDiffBadge" class="px-2.5 py-0.5 rounded-full font-bold bg-slate-100 text-slate-700 border border-slate-200">초보 (0~3)</span>
-        <span id="gameBlindBadge" class="hidden px-2.5 py-0.5 rounded-full font-bold bg-rose-100 text-rose-700 border border-rose-200">🕶️ 블라인드</span>
       </div>
-      <!-- Real-time Preview Toggle -->
-      <label class="flex items-center gap-2 cursor-pointer select-none">
-        <span id="previewToggleLabel" class="text-slate-600 font-medium">실시간 미리보기</span>
-        <div class="relative">
-          <input type="checkbox" id="previewToggle" checked class="sr-only peer" onchange="togglePreview()">
-          <div class="w-8 h-4 bg-slate-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-slate-300 after:border after:rounded-full after:h-3 after:w-3 after:transition-all peer-checked:bg-indigo-600"></div>
-        </div>
-      </label>
+      <span id="gameBlindBadge" class="hidden px-2.5 py-0.5 rounded-full font-bold bg-rose-100 text-rose-700 border border-rose-200">🕶️ 블라인드</span>
     </div>
 
     <!-- Dynamic Blind Alert Banner -->
@@ -1303,21 +1295,12 @@
       document.getElementById('targetColorBox').style.backgroundColor = formatRgbStr(targetRgb);
 
       // Handle Blind Mode UI for this round
-      const previewToggle = document.getElementById('previewToggle');
-      const previewToggleLabel = document.getElementById('previewToggleLabel');
       const blindMask = document.getElementById('blindMask');
       const blindRoundAlert = document.getElementById('blindRoundAlert');
       const gameBlindBadge = document.getElementById('gameBlindBadge');
 
       if (isBlindRound) {
         blindMask.classList.remove('hidden');
-        if (previewToggle) {
-          previewToggle.checked = false;
-          previewToggle.disabled = true;
-        }
-        if (previewToggleLabel) {
-          previewToggleLabel.innerHTML = '<span class="text-rose-600 font-extrabold flex items-center gap-1">🔒 블라인드 ON</span>';
-        }
         if (gameBlindBadge) {
           gameBlindBadge.classList.remove('hidden');
           gameBlindBadge.innerText = isFullBlindMode ? '🕶️ 완전 블라인드' : '🕶️ 블라인드 라운드';
@@ -1332,7 +1315,7 @@
                 <span class="text-xl">🕶️</span>
                 <div>
                   <span class="font-extrabold text-rose-700 block">마지막 3문제 [블라인드 모드] 발동!</span>
-                  <span class="text-[11px] text-rose-600">실시간 미리보기가 잠깁니다. 머릿속 색채 감각과 배합 공식만으로 맞춰보세요!</span>
+                  <span class="text-[11px] text-rose-600">미리보기가 가려집니다. 머릿속 색채 감각과 배합 공식만으로 맞춰보세요!</span>
                 </div>
               </div>
             `;
@@ -1355,13 +1338,6 @@
       } else {
         blindMask.classList.add('hidden');
         if (blindRoundAlert) blindRoundAlert.classList.add('hidden');
-        if (previewToggle) {
-          previewToggle.disabled = false;
-          previewToggle.checked = true;
-        }
-        if (previewToggleLabel) {
-          previewToggleLabel.innerText = '실시간 미리보기';
-        }
         if (gameBlindBadge) {
           gameBlindBadge.classList.add('hidden');
         }
@@ -1419,22 +1395,6 @@
       document.getElementById('currentColorBox').style.backgroundColor = formatRgbStr(userRgb);
     }
 
-    function togglePreview() {
-      const isBlindRound = isFullBlindMode || (currentRoundIndex >= 8);
-      if (isBlindRound) {
-        document.getElementById('previewToggle').checked = false;
-        document.getElementById('blindMask').classList.remove('hidden');
-        return;
-      }
-      const isChecked = document.getElementById('previewToggle').checked;
-      const mask = document.getElementById('blindMask');
-      if (isChecked) {
-        mask.classList.add('hidden');
-      } else {
-        mask.classList.remove('hidden');
-      }
-    }
-
     // --- Dynamic Hint System ---
     function requestHint() {
       totalHintsUsed += 1;
@@ -1455,7 +1415,7 @@
       const textElem = document.getElementById('hintToastText');
 
       if (wrongChannels.length === 0) {
-        textElem.innerHTML = `현재 <strong>모든 색상이 완벽하게 일치</strong>합니다! 바로 [정답 확인]을 누르세요.`;
+        textElem.innerHTML = '<strong>목표 색상과 일치합니다!</strong>';
       } else {
         const pick = wrongChannels[Math.floor(Math.random() * wrongChannels.length)];
         const isLight = selectedMode === 'rgb';
@@ -1551,13 +1511,15 @@
       document.getElementById('triviaFactText').innerText = roundTrivia.fact;
 
       if (isPerfect) {
-        scoreBadge.className = 'text-3xl sm:text-4xl font-black mb-1 text-emerald-600';
+        scoreBadge.className = 'text-3xl sm:text-4xl font-black mb-3 text-emerald-600';
         scoreBadge.innerText = '🎉 100% 퍼펙트!';
-        subtext.innerText = '목표 색상과 한 치의 오차도 없이 일치합니다!';
+        subtext.innerText = '';
+        subtext.classList.add('hidden');
         playSuccessChord();
       } else {
         scoreBadge.className = `text-3xl sm:text-4xl font-black mb-1 ${accuracy >= 85 ? 'text-amber-600' : 'text-rose-600'}`;
         scoreBadge.innerText = `${accuracy}% 일치`;
+        subtext.classList.remove('hidden');
         subtext.innerText = accuracy >= 85 ? '아주 근접했습니다! 훌륭한 색감각입니다.' : '조금 아쉽네요! 다음 문제에서 만회해 보세요.';
         playTone(280, 'sawtooth', 0.1);
       }
