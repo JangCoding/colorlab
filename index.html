@@ -4375,7 +4375,7 @@
       tigerState.status = 'intro';
       document.getElementById('tigerViewIntro').classList.remove('hidden');
       document.getElementById('tigerViewGame').classList.add('hidden');
-      document.getElementById('tigerRoundModal')?.classList.add('hidden');
+      document.getElementById('tigerRoundReviewBar')?.classList.add('hidden');
       document.getElementById('tigerRoundReviewBar')?.classList.add('hidden');
       document.getElementById('tigerDeerHint')?.classList.remove('hidden');
       document.getElementById('tigerViewFinalResult').classList.add('hidden');
@@ -4438,7 +4438,8 @@
       // Update UI elements
       document.getElementById('tigerViewIntro').classList.add('hidden');
       document.getElementById('tigerViewGame').classList.remove('hidden');
-      document.getElementById('tigerRoundModal').classList.add('hidden');
+      document.getElementById('tigerRoundReviewBar')?.classList.add('hidden');
+      document.getElementById('tigerDeerHint')?.classList.remove('hidden');
       document.getElementById('tigerViewFinalResult').classList.add('hidden');
 
       const toast = document.getElementById('tigerAlertToast');
@@ -4560,6 +4561,7 @@
       const n = tigerState.gridSize;
       container.style.display = 'grid';
       container.style.gridTemplateColumns = `repeat(${n}, minmax(0, 1fr))`;
+      container.style.gridTemplateRows = `repeat(${n}, minmax(0, 1fr))`;
       container.style.gap = n >= 10 ? '2px' : '3px';
       container.innerHTML = '';
 
@@ -4585,6 +4587,7 @@
           const btn = document.createElement('button');
           btn.type = 'button';
           btn.className = 'w-full h-full rounded-md sm:rounded-lg transition-all duration-75 relative overflow-hidden select-none border border-black/10';
+          btn.style.aspectRatio = '1 / 1';
 
           if (showHumanVision) {
             // Human Trichromat Vision
@@ -4744,7 +4747,7 @@
 
       document.getElementById('tigerViewIntro').classList.add('hidden');
       document.getElementById('tigerViewGame').classList.add('hidden');
-      document.getElementById('tigerRoundModal').classList.add('hidden');
+      document.getElementById('tigerRoundReviewBar')?.classList.add('hidden');
       document.getElementById('tigerViewFinalResult').classList.remove('hidden');
 
       playFanfare();
