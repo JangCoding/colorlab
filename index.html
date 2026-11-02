@@ -1173,24 +1173,24 @@
 
         <div class="space-y-2 text-xs">
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
-            <span class="font-bold text-slate-700">🌱 Day 1: 평온한 풀숲</span>
-            <span class="text-slate-500">5×5 그리드 / 2×2 호랑이 (정지)</span>
+            <span class="font-bold text-slate-700">🌱 Day 1: 촘촘한 풀숲</span>
+            <span class="text-slate-500">8×8 (64칸) / 2×2 호랑이 (정지)</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
-            <span class="font-bold text-slate-700">🌾 Day 2: 바람 부는 언덕</span>
-            <span class="text-slate-500">5×5 그리드 / 2×2 호랑이 (느린 이동)</span>
+            <span class="font-bold text-slate-700">🐇 Day 2: 토끼의 출현</span>
+            <span class="text-slate-500">8×8 / 2×2 호랑이 + 산토끼 1마리</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
-            <span class="font-bold text-slate-700">🎋 Day 3: 깊은 대나무 숲</span>
-            <span class="text-slate-500">6×6 그리드 / 2×2 호랑이 (보통 이동)</span>
+            <span class="font-bold text-slate-700">🐿️ Day 3: 분주한 대나무 숲</span>
+            <span class="text-slate-500">9×9 (81칸) / 토끼 1마리 + 다람쥐 1마리</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
-            <span class="font-bold text-slate-700">🌫️ Day 4: 안개 낀 습지</span>
-            <span class="text-slate-500">6×6 그리드 / 2×2 호랑이 (빠른 이동)</span>
+            <span class="font-bold text-slate-700">🍃 Day 4: 착시의 안개 언덕</span>
+            <span class="text-slate-500">10×10 (100칸) / 동물 3마리 + 바람 2곳</span>
           </div>
           <div class="p-2.5 rounded-xl bg-amber-50 border border-amber-200 flex items-center justify-between">
-            <span class="font-black text-amber-900">🔥 Day 5: 황혼의 기습 (FINAL)</span>
-            <span class="font-bold text-amber-700">7×7 그리드 / 1×1 호랑이 (초고속 이동)</span>
+            <span class="font-black text-amber-900">🔥 Day 5: 황혼의 아수라장 (FINAL)</span>
+            <span class="font-bold text-amber-700">10×10 / 1×1 호랑이 + 동물·바람 6곳!</span>
           </div>
         </div>
 
@@ -1242,8 +1242,14 @@
         <div class="w-full h-3.5 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200">
           <div id="tigerTimerProgressBar" class="h-full bg-gradient-to-r from-amber-400 via-orange-500 to-rose-600 rounded-full transition-all duration-100 ease-linear" style="width: 100%;"></div>
         </div>
+        
+        <!-- Floating False Alarm Alert Toast -->
+        <div id="tigerAlertToast" class="hidden transition-all duration-200 py-1 px-3 rounded-full bg-rose-100 text-rose-800 border border-rose-300 font-black text-xs shadow-xs inline-block animate-bounce">
+          깜짝이야! 토끼였습니다! 🐇💨 (-1초)
+        </div>
+
         <p class="text-[11px] text-slate-500 font-medium">
-          풀숲이 미세하게 흔들리거나 이동하는 곳을 찾아 터치하세요!
+          풀숲의 미세한 움직임을 찾되, 토끼나 바람에 낚이지 마세요!
         </p>
       </div>
 
@@ -4269,27 +4275,113 @@
     // --- DEER VS TIGER CAMOUFLAGE SURVIVAL MINI-GAME ---
     // ============================================================
     const TIGER_DAYS = [
-      { day: 1, name: '평온한 풀숲', grid: 5, tigerSize: 2, moveMs: 0, desc: '움직이지 않고 숨어있는 호랑이' },
-      { day: 2, name: '바람 부는 언덕', grid: 5, tigerSize: 2, moveMs: 1200, desc: '바람에 실려 1.2초마다 살금살금 이동' },
-      { day: 3, name: '깊은 대나무 숲', grid: 6, tigerSize: 2, moveMs: 950, desc: '넓어진 숲에서 0.95초마다 빠르게 이동' },
-      { day: 4, name: '안개 낀 습지', grid: 6, tigerSize: 2, moveMs: 750, desc: '안개 속에서 0.75초마다 기습 이동' },
-      { day: 5, name: '황혼의 기습', grid: 7, tigerSize: 1, moveMs: 600, desc: '단 1칸! 0.6초마다 번개처럼 기어오는 맹수' }
+      {
+        day: 1,
+        name: '촘촘한 풀숲',
+        grid: 8,
+        tigerSize: 2,
+        moveMs: 0,
+        decoys: [{ type: 'wind', moveMs: 800 }],
+        desc: '8×8 촘촘한 풀숲에 숨은 호랑이'
+      },
+      {
+        day: 2,
+        name: '토끼의 출현',
+        grid: 8,
+        tigerSize: 2,
+        moveMs: 1100,
+        decoys: [{ type: 'rabbit', moveMs: 950 }],
+        desc: '슬그머니 기어오는 호랑이와 깡총대는 산토끼'
+      },
+      {
+        day: 3,
+        name: '분주한 대나무 숲',
+        grid: 9,
+        tigerSize: 2,
+        moveMs: 950,
+        decoys: [
+          { type: 'rabbit', moveMs: 900 },
+          { type: 'squirrel', moveMs: 800 },
+          { type: 'wind', moveMs: 700 }
+        ],
+        desc: '9×9 넓어진 숲에서 토끼와 다람쥐의 교란'
+      },
+      {
+        day: 4,
+        name: '착시의 안개 언덕',
+        grid: 10,
+        tigerSize: 2,
+        moveMs: 750,
+        decoys: [
+          { type: 'rabbit', moveMs: 850 },
+          { type: 'rabbit', moveMs: 900 },
+          { type: 'squirrel', moveMs: 750 },
+          { type: 'wind', moveMs: 650 },
+          { type: 'wind', moveMs: 700 }
+        ],
+        desc: '10×10 그리드 속 사방에서 일렁이는 풀숲!'
+      },
+      {
+        day: 5,
+        name: '황혼의 아수라장 (FINAL)',
+        grid: 10,
+        tigerSize: 1,
+        moveMs: 600,
+        decoys: [
+          { type: 'rabbit', moveMs: 750 },
+          { type: 'rabbit', moveMs: 800 },
+          { type: 'squirrel', moveMs: 700 },
+          { type: 'squirrel', moveMs: 750 },
+          { type: 'wind', moveMs: 600 },
+          { type: 'wind', moveMs: 650 }
+        ],
+        desc: '단 1칸! 맹수의 살기를 낚아채야 살아남는다!'
+      }
     ];
+
+    const DECOY_TEMPLATES = {
+      rabbit: {
+        type: 'rabbit',
+        name: '산토끼',
+        emoji: '🐇',
+        humanBg: 'rgb(225, 185, 140)',
+        deerBg: 'rgb(138, 134, 82)',
+        alertMsg: '깜짝이야! 토끼였습니다! 🐇💨 (-1초)'
+      },
+      squirrel: {
+        type: 'squirrel',
+        name: '다람쥐',
+        emoji: '🐿️',
+        humanBg: 'rgb(165, 85, 42)',
+        deerBg: 'rgb(112, 108, 50)',
+        alertMsg: '도토리 먹던 다람쥐였습니다! 🐿️ (-1초)'
+      },
+      wind: {
+        type: 'wind',
+        name: '바람에 이는 풀',
+        emoji: '🍃',
+        humanBg: 'rgb(80, 200, 100)',
+        deerBg: 'rgb(142, 140, 72)',
+        alertMsg: '그냥 바람 소리였습니다! 🍃 휘잉~ (-0.8초)'
+      }
+    };
 
     let tigerState = {
       currentDay: 1,
       survivedDays: 0,
       timerInterval: null,
       moveInterval: null,
-      heartbeatInterval: null,
+      decoyIntervals: [],
       timerRemainMs: 5000,
-      gridSize: 5,
+      gridSize: 8,
       tigerSize: 2,
       tigerR: 1,
       tigerC: 1,
+      decoys: [], // [{ id, type, r, c, name, emoji, humanBg, deerBg, moveMs }]
       isHumanVision: false,
-      lastOutcome: 'survived', // 'survived' | 'caught'
-      status: 'intro' // 'intro' | 'playing' | 'roundOver' | 'finalResult'
+      lastOutcome: 'survived',
+      toastTimeout: null,
+      status: 'intro'
     };
 
     function initTigerGame() {
@@ -4327,11 +4419,47 @@
       tigerState.tigerR = Math.floor(Math.random() * (maxAnchor + 1));
       tigerState.tigerC = Math.floor(Math.random() * (maxAnchor + 1));
 
+      // Spawn Decoys
+      tigerState.decoys = [];
+      const occupiedCoords = new Set();
+      for (let r = 0; r < cfg.tigerSize; r++) {
+        for (let c = 0; c < cfg.tigerSize; c++) {
+          occupiedCoords.add(`${tigerState.tigerR + r},${tigerState.tigerC + c}`);
+        }
+      }
+
+      cfg.decoys.forEach((dConf, idx) => {
+        const tmpl = DECOY_TEMPLATES[dConf.type];
+        let dr, dc, tries = 0;
+        do {
+          dr = Math.floor(Math.random() * cfg.grid);
+          dc = Math.floor(Math.random() * cfg.grid);
+          tries++;
+        } while (tries < 50 && occupiedCoords.has(`${dr},${dc}`));
+
+        occupiedCoords.add(`${dr},${dc}`);
+        tigerState.decoys.push({
+          id: `decoy_${idx}`,
+          type: dConf.type,
+          r: dr,
+          c: dc,
+          name: tmpl.name,
+          emoji: tmpl.emoji,
+          humanBg: tmpl.humanBg,
+          deerBg: tmpl.deerBg,
+          alertMsg: tmpl.alertMsg,
+          moveMs: dConf.moveMs
+        });
+      });
+
       // Update UI elements
       document.getElementById('tigerViewIntro').classList.add('hidden');
       document.getElementById('tigerViewGame').classList.remove('hidden');
       document.getElementById('tigerRoundModal').classList.add('hidden');
       document.getElementById('tigerViewFinalResult').classList.add('hidden');
+
+      const toast = document.getElementById('tigerAlertToast');
+      if (toast) toast.classList.add('hidden');
 
       document.getElementById('tigerDayBadge').innerText = `📅 Day ${dayNum} / 5`;
       document.getElementById('tigerStageTitle').innerText = cfg.name;
@@ -4353,7 +4481,6 @@
         const remainSec = Math.ceil(tigerState.timerRemainMs / 1000);
         if (remainSec > 0 && remainSec !== lastBeepSec) {
           lastBeepSec = remainSec;
-          // Heartbeat sound (faster when under 2s)
           playHeartbeatSound(tigerState.timerRemainMs <= 2000);
         }
 
@@ -4365,12 +4492,22 @@
         }
       }, intervalStepMs);
 
-      // Start Tiger Movement if enabled for this day
+      // Start Tiger Movement
       if (cfg.moveMs > 0) {
         tigerState.moveInterval = setInterval(() => {
           moveTigerStep();
         }, cfg.moveMs);
       }
+
+      // Start Decoys Movement
+      tigerState.decoys.forEach(decoy => {
+        if (decoy.moveMs > 0) {
+          const dInterval = setInterval(() => {
+            moveDecoyStep(decoy);
+          }, decoy.moveMs);
+          tigerState.decoyIntervals.push(dInterval);
+        }
+      });
     }
 
     function moveTigerStep() {
@@ -4391,6 +4528,24 @@
         const [dr, dc] = valid[Math.floor(Math.random() * valid.length)];
         tigerState.tigerR += dr;
         tigerState.tigerC += dc;
+        renderTigerGrid(false);
+      }
+    }
+
+    function moveDecoyStep(decoy) {
+      if (tigerState.status !== 'playing') return;
+      const n = tigerState.gridSize;
+      const dirs = [[-1, 0], [1, 0], [0, -1], [0, 1]];
+      const valid = dirs.filter(([dr, dc]) => {
+        const nr = decoy.r + dr;
+        const nc = decoy.c + dc;
+        return nr >= 0 && nr < n && nc >= 0 && nc < n;
+      });
+
+      if (valid.length > 0) {
+        const [dr, dc] = valid[Math.floor(Math.random() * valid.length)];
+        decoy.r += dr;
+        decoy.c += dc;
         renderTigerGrid(false);
       }
     }
@@ -4422,7 +4577,7 @@
       const n = tigerState.gridSize;
       container.style.display = 'grid';
       container.style.gridTemplateColumns = `repeat(${n}, minmax(0, 1fr))`;
-      container.style.gap = n >= 7 ? '3px' : '5px';
+      container.style.gap = n >= 10 ? '2px' : '3px';
       container.innerHTML = '';
 
       const tigerCells = new Set();
@@ -4432,37 +4587,49 @@
         }
       }
 
+      // Map decoys by coordinate
+      const decoyMap = new Map();
+      tigerState.decoys.forEach(d => {
+        decoyMap.set(`${d.r},${d.c}`, d);
+      });
+
       for (let r = 0; r < n; r++) {
         for (let c = 0; c < n; c++) {
-          const isTiger = tigerCells.has(`${r},${c}`);
+          const coordKey = `${r},${c}`;
+          const isTiger = tigerCells.has(coordKey);
+          const decoy = decoyMap.get(coordKey);
+
           const btn = document.createElement('button');
           btn.type = 'button';
-          btn.className = 'w-full h-full rounded-xl sm:rounded-2xl transition-all duration-100 relative overflow-hidden select-none border border-black/10';
+          btn.className = 'w-full h-full rounded-md sm:rounded-lg transition-all duration-75 relative overflow-hidden select-none border border-black/10';
 
           if (showHumanVision) {
-            // Human Trichromat Vision: Vivid contrast between green grass & blazing tiger orange!
+            // Human Trichromat Vision
             if (isTiger) {
               btn.style.backgroundColor = 'rgb(249, 115, 22)';
               btn.classList.add('ring-2', 'ring-orange-400');
-              btn.innerHTML = '<span class="absolute inset-0 flex items-center justify-center text-xs sm:text-base font-black text-white drop-shadow">🐅</span>';
+              btn.innerHTML = '<span class="absolute inset-0 flex items-center justify-center text-[10px] sm:text-sm font-black text-white drop-shadow">🐅</span>';
+            } else if (decoy) {
+              btn.style.backgroundColor = decoy.humanBg;
+              btn.innerHTML = `<span class="absolute inset-0 flex items-center justify-center text-[10px] sm:text-xs drop-shadow">${decoy.emoji}</span>`;
             } else {
               btn.style.backgroundColor = 'rgb(34, 150, 60)';
             }
           } else {
-            // Deer Dichromat Vision: Grass & Tiger fur collapse into identical olive-khaki shades!
+            // Deer Dichromat Vision: All blend into subtle variations of olive khaki!
             if (isTiger) {
-              // Tiger in deer vision (subtly warmer khaki)
-              btn.style.backgroundColor = 'rgb(133, 126, 56)';
+              btn.style.backgroundColor = 'rgb(134, 127, 56)';
+            } else if (decoy) {
+              btn.style.backgroundColor = decoy.deerBg;
             } else {
-              // Grass in deer vision (khaki with subtle natural micro-variance)
               const noise = ((r * 7 + c * 13) % 7) - 3;
-              btn.style.backgroundColor = `rgb(${125 + noise}, ${123 + noise}, ${68 + noise})`;
+              btn.style.backgroundColor = `rgb(${126 + noise}, ${124 + noise}, ${68 + noise})`;
             }
           }
 
           if (targetContainerId === 'tigerGridContainer' && tigerState.status === 'playing') {
-            btn.classList.add('cursor-pointer', 'active:scale-95', 'touch-manipulation');
-            btn.onclick = () => onTigerCellClick(r, c, isTiger);
+            btn.classList.add('cursor-pointer', 'active:scale-90', 'touch-manipulation');
+            btn.onclick = () => onTigerCellClick(r, c, isTiger, decoy);
           } else {
             btn.disabled = true;
           }
@@ -4472,19 +4639,42 @@
       }
     }
 
-    function onTigerCellClick(r, c, isTiger) {
+    function onTigerCellClick(r, c, isTiger, decoy) {
       if (tigerState.status !== 'playing') return;
 
       if (isTiger) {
         // Player successfully spotted and touched the tiger!
         clearTigerGameTimers();
         onTigerSurvived();
+      } else if (decoy) {
+        // False Alarm! Player touched a harmless decoy (rabbit, squirrel, wind)
+        if (decoy.type === 'wind') {
+          playTone(280, 'sine', 0.1, 0.14);
+          tigerState.timerRemainMs = Math.max(200, tigerState.timerRemainMs - 800);
+        } else {
+          playTone(820, 'triangle', 0.12, 0.18);
+          tigerState.timerRemainMs = Math.max(200, tigerState.timerRemainMs - 1000);
+        }
+        showTigerAlertToast(decoy.alertMsg);
+        updateTigerTimerDisplay();
       } else {
-        // Player touched empty grass: 0.8s penalty and sound rustle
+        // Player touched empty grass: 0.5s penalty
         playTone(320, 'triangle', 0.08, 0.08);
-        tigerState.timerRemainMs = Math.max(200, tigerState.timerRemainMs - 800);
+        tigerState.timerRemainMs = Math.max(200, tigerState.timerRemainMs - 500);
         updateTigerTimerDisplay();
       }
+    }
+
+    function showTigerAlertToast(msg) {
+      const toast = document.getElementById('tigerAlertToast');
+      if (!toast) return;
+      toast.innerText = msg;
+      toast.classList.remove('hidden');
+
+      if (tigerState.toastTimeout) clearTimeout(tigerState.toastTimeout);
+      tigerState.toastTimeout = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 1600);
     }
 
     function onTigerSurvived() {
@@ -4499,7 +4689,6 @@
     function onTigerCaught() {
       tigerState.status = 'roundOver';
       tigerState.lastOutcome = 'caught';
-      // Caught roar
       playTone(160, 'sawtooth', 0.4, 0.3);
 
       showTigerRoundModal(false);
@@ -4520,7 +4709,7 @@
         icon.innerText = '🦌💨';
         title.className = 'text-xl sm:text-2xl font-black text-emerald-600 tracking-tight';
         title.innerText = `Day ${tigerState.currentDay} 생존 성공!`;
-        desc.innerText = '호랑이가 덮치기 전에 재빨리 발견하고 무사히 도망쳤습니다!';
+        desc.innerText = '토끼와 바람의 교란을 뚫고 진짜 호랑이를 포착했습니다!';
         if (tigerState.currentDay < 5) {
           actionBtnText.innerText = `다음 날로 생존 계속하기 (Day ${tigerState.currentDay + 1}) ➔`;
         } else {
@@ -4530,13 +4719,11 @@
         icon.innerText = '🐅💥';
         title.className = 'text-xl sm:text-2xl font-black text-rose-600 tracking-tight';
         title.innerText = `Day ${tigerState.currentDay} 사냥당했습니다!`;
-        desc.innerText = '호랑이의 완벽한 보호색에 속아 기습을 허용했습니다...';
+        desc.innerText = '주변 움직임에 현혹되어 호랑이의 기습을 허용했습니다...';
         actionBtnText.innerText = '🔄 Day 1부터 다시 도전하기';
       }
 
-      // Render mini snapshot in deer vision initially
       renderTigerGrid(false, 'tigerModalSnapshotContainer');
-
       modal.classList.remove('hidden');
     }
 
@@ -4560,7 +4747,6 @@
           showTigerFinalResult();
         }
       } else {
-        // Restart from Day 1
         startTigerGame();
       }
     }
@@ -4589,7 +4775,7 @@
         emojiEl.innerText = '🦌🏆';
         badgeEl.innerText = '👑 전설의 생존 사슴 (Miracle Survivor)';
         titleEl.innerText = '5일간의 극한 생존 완주 성공!';
-        descEl.innerText = '호랑이의 은밀한 카무플라주를 동체시력만으로 간파하고 5일을 모두 살아남았습니다!';
+        descEl.innerText = '토끼, 다람쥐, 바람의 교란 속에서도 오직 호랑이의 살기만을 간파해 살아남았습니다!';
       } else if (days >= 3) {
         emojiEl.innerText = '🦌💨';
         badgeEl.innerText = '🐆 날렵한 노루 (Agile Roe Deer)';
@@ -4599,7 +4785,7 @@
         emojiEl.innerText = '🌿🦌';
         badgeEl.innerText = '🌸 풀 뜯던 꽃사슴 (Peaceful Fawn)';
         titleEl.innerText = '아쉬운 탈락, 다시 감각을 깨워보세요!';
-        descEl.innerText = '색채 대신 풀숲의 흔들림을 주시하며 다시 한번 생존에 도전해보세요!';
+        descEl.innerText = '토끼와 바람 소리에 낚이지 말고 침착하게 호랑이 덩치를 찾아보세요!';
       }
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
@@ -4610,7 +4796,7 @@
       const title = document.getElementById('tigerFinalTitle').innerText;
       const url = window.location.origin + window.location.pathname;
 
-      const shareText = `🦌 [사슴의 눈: 호랑이를 찾아라!]\n${title}\n생존 기록: ${days}일 / 5일 생존 완주\n\n👀 적록색맹 시야 속 숨겨진 호랑이를 5초 안에 찾아보세요!\n${url}`;
+      const shareText = `🦌 [사슴의 눈: 호랑이를 찾아라!]\n${title}\n생존 기록: ${days}일 / 5일 생존 완주\n\n👀 토끼와 바람의 교란을 뚫고 5초 안에 숨은 호랑이를 찾아보세요!\n${url}`;
 
       if (navigator.share) {
         navigator.share({
@@ -4646,12 +4832,15 @@
         clearInterval(tigerState.moveInterval);
         tigerState.moveInterval = null;
       }
-      if (tigerState.heartbeatInterval) {
-        clearInterval(tigerState.heartbeatInterval);
-        tigerState.heartbeatInterval = null;
+      if (tigerState.decoyIntervals && tigerState.decoyIntervals.length > 0) {
+        tigerState.decoyIntervals.forEach(interval => clearInterval(interval));
+        tigerState.decoyIntervals = [];
+      }
+      if (tigerState.toastTimeout) {
+        clearTimeout(tigerState.toastTimeout);
+        tigerState.toastTimeout = null;
       }
     }
 
   </script>
 </body>
-</html>
