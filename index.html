@@ -1953,7 +1953,7 @@
       roundActionCount = 0;
       dismissHintToast();
 
-      const isBlindRound = isFullBlindMode || (roundIdx >= 8);
+      const isBlindRound = isFullBlindMode || (roundIdx >= TOTAL_ROUNDS);
 
       // Pick pre-generated non-repeating diverse target color
       if (testTargetColors && testTargetColors[roundIdx - 1]) {
@@ -1990,14 +1990,14 @@
         }
 
         // Show Alert Banner
-        if (roundIdx === 8 && !isFullBlindMode) {
+        if (roundIdx === TOTAL_ROUNDS && !isFullBlindMode) {
           if (blindRoundAlert) {
             blindRoundAlert.classList.remove('hidden');
             blindRoundAlert.innerHTML = `
               <div class="flex items-center gap-2">
                 <span class="text-xl">🕶️</span>
                 <div>
-                  <span class="font-extrabold text-rose-700 block">마지막 3문제 [블라인드 모드] 발동!</span>
+                  <span class="font-extrabold text-rose-700 block">마지막 10번 [블라인드 문제] 발동!</span>
                   <span class="text-[11px] text-rose-600">미리보기가 가려집니다. 머릿속 색채 감각과 배합 공식만으로 맞춰보세요!</span>
                 </div>
               </div>
@@ -2144,7 +2144,7 @@
       );
       const accuracy = Math.max(0, Math.round(100 * (1 - (dist / 441.6729))));
       const isPerfect = (userColor.c1 === targetColor.c1 && userColor.c2 === targetColor.c2 && userColor.c3 === targetColor.c3);
-      const isBlindRound = isFullBlindMode || (currentRoundIndex >= 8);
+      const isBlindRound = isFullBlindMode || (currentRoundIndex >= TOTAL_ROUNDS);
 
       // Save round data
       roundsData.push({
@@ -2478,7 +2478,7 @@
         roundsData = data.q.map((row, idx) => {
           const target = { c1: row[0], c2: row[1], c3: row[2] };
           const user = { c1: row[3], c2: row[4], c3: row[5] };
-          const isBlind = row.length > 6 ? (row[6] === 1) : (isFullBlindMode || idx >= 7);
+          const isBlind = row.length > 6 ? (row[6] === 1) : (isFullBlindMode || idx >= (TOTAL_ROUNDS - 1));
           const targetRgb = computeRgb(target, selectedMax, selectedMode);
           const userRgb = computeRgb(user, selectedMax, selectedMode);
 
@@ -2628,7 +2628,7 @@
           reportBlindBadge.innerText = '🕶️ 완전 블라인드 (10문제 전체)';
         } else {
           reportBlindBadge.className = 'inline-flex items-center gap-1 px-3 py-1 rounded-full text-xs font-bold border shadow-2xs bg-slate-50 border-slate-300 text-slate-600';
-          reportBlindBadge.innerText = '🎯 기본 모드 (마지막 3문제 블라인드)';
+          reportBlindBadge.innerText = '🎯 기본 모드 (마지막 1문제 블라인드)';
         }
       }
 
@@ -2859,7 +2859,7 @@
 
       const modeText = selectedMode === 'rgb' ? '빛 (RGB)' : '물감 (CMY)';
       const diffText = diffConfigs[selectedMax].name;
-      const blindText = isFullBlindMode ? '🕶️ 완전 블라인드 (10문제 전체)' : '마지막 3문제 블라인드';
+      const blindText = isFullBlindMode ? '🕶️ 완전 블라인드 (10문제 전체)' : '마지막 1문제 블라인드';
 
       const shareData = {
         title: `[색감 테스트] 내 색각 동물: ${animalEmoji} ${animalName}`,
@@ -2920,7 +2920,7 @@
           cardBlindBadge.innerText = '🕶️ 완전 블라인드';
         } else {
           cardBlindBadge.className = 'text-[9px] font-semibold px-1.5 py-0.5 rounded-md bg-slate-100 text-slate-600 border border-slate-200 shadow-2xs';
-          cardBlindBadge.innerText = '🎯 3문제 블라인드';
+          cardBlindBadge.innerText = '🎯 마지막 문제 블라인드';
         }
       }
 
@@ -3037,7 +3037,7 @@
           const tierBadge = currentAssignedAnimal ? currentAssignedAnimal.tier.tierBadge : '';
           const subtitle = currentAssignedAnimal ? currentAssignedAnimal.animal.subtitle : '';
           const diffText = diffConfigs[selectedMax].name;
-          const blindText = isFullBlindMode ? '🕶️ 완전 블라인드' : '마지막 3문제 블라인드';
+          const blindText = isFullBlindMode ? '🕶️ 완전 블라인드' : '마지막 1문제 블라인드';
 
           const shareData = {
             title: `[색감 테스트] 내 색각 동물: ${animalEmoji} ${animalName}`,
@@ -3095,7 +3095,7 @@
       const clicks = document.getElementById('statTotalClicks') ? document.getElementById('statTotalClicks').innerText : '';
       const mode = selectedMode === 'rgb' ? '빛 모드 (RGB)' : '물감 모드 (CMY)';
       const diffText = diffConfigs[selectedMax].name;
-      const blindText = isFullBlindMode ? '🕶️ 완전 블라인드 (10문제 전체)' : '기본 모드 (마지막 3문제 블라인드)';
+      const blindText = isFullBlindMode ? '🕶️ 완전 블라인드 (10문제 전체)' : '기본 모드 (마지막 1문제 블라인드)';
       const shareUrl = encodeResultsToUrl();
 
       const text = `🎨 [색감 감각 테스트: Color Lab]\n동물 페르소나: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n난이도: ${diffText} (0~${selectedMax}배율) | 모드: ${mode} | ${blindText}\n평균 일치율: ${avg} | 상위 ${rank}\n조작(클릭): ${clicks} | 힌트 사용: ${hints}\n\n👉 내 결과 확인 & 나도 도전하기:\n${shareUrl}`;
