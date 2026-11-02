@@ -412,6 +412,20 @@
   <!-- SCREEN 3: Comprehensive Final Report Screen -->
   <main id="screenReport" class="hidden w-full max-w-3xl mx-auto px-4 py-6 flex-1 flex flex-col gap-5">
     
+    <!-- Shared Result Notice Banner (Visible when visiting someone else's shared link) -->
+    <div id="sharedNoticeBanner" class="hidden p-4 rounded-2xl bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 text-white shadow-lg flex flex-col sm:flex-row items-center justify-between gap-3">
+      <div class="flex items-center gap-3 text-left">
+        <div class="w-10 h-10 rounded-xl bg-white/20 backdrop-blur-md flex items-center justify-center text-xl shrink-0">💌</div>
+        <div>
+          <div class="font-black text-sm sm:text-base leading-tight">친구가 공유한 색 인지능력 결과입니다!</div>
+          <div class="text-xs text-white/90 mt-0.5">빛(RGB)과 물감(CMY) 조색으로 나의 색 감각 역량을 측정해보세요.</div>
+        </div>
+      </div>
+      <button onclick="goToLobby()" class="w-full sm:w-auto px-5 py-2.5 rounded-xl font-black text-xs sm:text-sm bg-white text-indigo-700 hover:bg-slate-50 shadow-md active:scale-95 transition-all whitespace-nowrap">
+        👉 나도 테스트해보기
+      </button>
+    </div>
+
     <!-- Report Top Header Card -->
     <div class="bg-white/90 backdrop-blur-md border border-white/80 rounded-3xl p-6 text-center relative overflow-hidden shadow-xl shadow-slate-200/60">
       <div class="absolute -top-12 -right-12 w-44 h-44 bg-rose-200/40 rounded-full blur-2xl pointer-events-none"></div>
@@ -481,23 +495,23 @@
       </div>
     </div>
 
-    <!-- Final Action Buttons: Image Card Share, Text Copy, Retest -->
+    <!-- Final Action Buttons: Link Copy, Card Share, Retest -->
     <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5 pb-4">
-      <!-- 1. Instagram / Kakao Card Share (Hero Action) -->
-      <button onclick="openShareCardModal()" id="cardShareBtn" class="py-3.5 px-3 rounded-xl font-extrabold text-sm bg-gradient-to-r from-rose-500 via-purple-500 to-indigo-600 hover:brightness-105 active:scale-98 text-white shadow-lg shadow-indigo-300/40 transition-all flex items-center justify-center gap-2">
-        <span>📸 인스타/카톡 카드 저장</span>
+      <!-- 1. Copy Direct Result Link (Primary Viral Action) -->
+      <button onclick="copyResultLink()" id="copyLinkBtn" class="py-3.5 px-3 rounded-xl font-extrabold text-sm bg-gradient-to-r from-rose-500 via-purple-500 to-indigo-600 hover:brightness-105 active:scale-98 text-white shadow-lg shadow-indigo-300/40 transition-all flex items-center justify-center gap-2">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"></path></svg>
+        <span id="copyLinkBtnText">결과 링크 복사하기</span>
       </button>
 
-      <!-- 2. Clipboard Text Copy -->
-      <button onclick="copyShareText()" id="shareBtn" class="py-3.5 px-3 rounded-xl font-bold text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-2 shadow-sm">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"></path></svg>
-        <span id="shareBtnText">텍스트 결과 복사</span>
+      <!-- 2. Instagram / Kakao Card Share -->
+      <button onclick="openShareCardModal()" id="cardShareBtn" class="py-3.5 px-3 rounded-xl font-bold text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-2 shadow-sm">
+        <span>📸 인스타 카드 저장</span>
       </button>
 
       <!-- 3. Retest / Lobby -->
-      <button onclick="goToLobby()" class="py-3.5 px-3 rounded-xl font-bold text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-2 shadow-sm">
+      <button onclick="goToLobby()" id="reportLobbyBtn" class="py-3.5 px-3 rounded-xl font-bold text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-2 shadow-sm">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-        <span>다시 도전하기</span>
+        <span id="reportLobbyBtnText">다시 도전하기</span>
       </button>
     </div>
   </main>
@@ -646,14 +660,18 @@
       </div>
 
       <!-- Action Buttons inside Share Modal -->
-      <div class="grid grid-cols-2 gap-2.5">
-        <button onclick="downloadShareCardImage()" id="downloadCardBtn" class="py-3 px-3 rounded-xl font-extrabold text-xs sm:text-sm bg-gradient-to-r from-rose-500 to-indigo-600 text-white shadow-md shadow-indigo-200 hover:brightness-105 active:scale-98 transition-all flex items-center justify-center gap-1.5">
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-2">
+        <button onclick="downloadShareCardImage()" id="downloadCardBtn" class="py-3 px-3 rounded-xl font-extrabold text-xs bg-gradient-to-r from-rose-500 to-indigo-600 text-white shadow-md shadow-indigo-200 hover:brightness-105 active:scale-98 transition-all flex items-center justify-center gap-1.5">
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
           <span>이미지 저장 (PNG)</span>
         </button>
 
-        <button onclick="shareCardNative()" id="nativeShareCardBtn" class="py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 border border-slate-200">
-          <span>📱 바로 공유하기</span>
+        <button onclick="copyResultLink()" class="py-3 px-3 rounded-xl font-bold text-xs bg-white hover:bg-slate-50 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 border border-slate-200 shadow-xs">
+          <span>🔗 링크 복사</span>
+        </button>
+
+        <button onclick="shareCardNative()" id="nativeShareCardBtn" class="py-3 px-3 rounded-xl font-bold text-xs bg-slate-100 hover:bg-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 border border-slate-200">
+          <span>📱 바로 공유</span>
         </button>
       </div>
 
@@ -880,6 +898,10 @@
     function goToLobby() {
       document.getElementById('roundResultModal').classList.add('hidden');
       document.getElementById('shareCardModal').classList.add('hidden');
+      try {
+        const cleanUrl = window.location.origin + window.location.pathname;
+        window.history.replaceState(null, '', cleanUrl);
+      } catch (e) {}
       showScreen('screenLobby');
     }
 
@@ -1213,13 +1235,114 @@
         currentRoundIndex += 1;
         setupRound(currentRoundIndex);
       } else {
-        showFinalReport();
+        showFinalReport(false);
+      }
+    }
+
+    // --- Shareable URL Encoding & Decoding ---
+    function encodeResultsToUrl() {
+      try {
+        const totalSeconds = Math.max(1, Math.round((Date.now() - testStartTime) / 1000));
+        const payload = {
+          m: selectedMode === 'rgb' ? 'r' : 'c',
+          d: selectedMax,
+          h: totalHintsUsed,
+          t: totalSeconds,
+          q: roundsData.map(r => [
+            r.target.c1, r.target.c2, r.target.c3,
+            r.user.c1, r.user.c2, r.user.c3
+          ])
+        };
+        const jsonStr = JSON.stringify(payload);
+        const base64 = btoa(unescape(encodeURIComponent(jsonStr)))
+          .replace(/\+/g, '-')
+          .replace(/\//g, '_')
+          .replace(/=+$/, '');
+
+        const url = new URL(window.location.href);
+        url.search = `?res=${base64}`;
+        url.hash = '';
+        return url.toString();
+      } catch (e) {
+        console.error('Failed to encode results:', e);
+        return window.location.href;
+      }
+    }
+
+    function decodeResultsFromUrl() {
+      try {
+        const urlParams = new URLSearchParams(window.location.search);
+        let resParam = urlParams.get('res');
+        if (!resParam && window.location.hash.includes('res=')) {
+          resParam = window.location.hash.split('res=')[1];
+        }
+        if (!resParam) return false;
+
+        let base64 = resParam.replace(/-/g, '+').replace(/_/g, '/');
+        while (base64.length % 4) {
+          base64 += '=';
+        }
+        const jsonStr = decodeURIComponent(escape(atob(base64)));
+        const data = JSON.parse(jsonStr);
+
+        if (!data.q || !Array.isArray(data.q) || data.q.length === 0) return false;
+
+        selectedMode = data.m === 'c' ? 'cmy' : 'rgb';
+        selectedMax = data.d || 3;
+        totalHintsUsed = data.h || 0;
+        const elapsedSecs = data.t || 60;
+        testStartTime = Date.now() - (elapsedSecs * 1000);
+
+        roundsData = data.q.map((row, idx) => {
+          const target = { c1: row[0], c2: row[1], c3: row[2] };
+          const user = { c1: row[3], c2: row[4], c3: row[5] };
+          const targetRgb = computeRgb(target, selectedMax, selectedMode);
+          const userRgb = computeRgb(user, selectedMax, selectedMode);
+
+          const dist = Math.sqrt(
+            Math.pow(targetRgb.r - userRgb.r, 2) +
+            Math.pow(targetRgb.g - userRgb.g, 2) +
+            Math.pow(targetRgb.b - userRgb.b, 2)
+          );
+          const accuracy = Math.max(0, Math.round(100 * (1 - (dist / 441.6729))));
+          const isPerfect = (user.c1 === target.c1 && user.c2 === target.c2 && user.c3 === target.c3);
+
+          return {
+            round: idx + 1,
+            accuracy,
+            isPerfect,
+            target,
+            user,
+            targetRgb,
+            userRgb
+          };
+        });
+
+        return true;
+      } catch (e) {
+        console.error('Failed to decode results:', e);
+        return false;
       }
     }
 
     // --- Final Report & Normal Distribution Calculation ---
-    function showFinalReport() {
+    function showFinalReport(isSharedView = false) {
       showScreen('screenReport');
+
+      // Shared vs Own Test UI handling
+      if (!isSharedView) {
+        document.getElementById('sharedNoticeBanner').classList.add('hidden');
+        document.getElementById('reportLobbyBtnText').innerText = '다시 도전하기';
+        document.getElementById('copyLinkBtnText').innerText = '결과 링크 복사하기';
+        try {
+          const shareUrl = encodeResultsToUrl();
+          window.history.replaceState(null, '', shareUrl);
+        } catch (e) {}
+      } else {
+        document.getElementById('sharedNoticeBanner').classList.remove('hidden');
+        document.getElementById('reportLobbyBtnText').innerText = '👉 나도 테스트해보기';
+        document.getElementById('copyLinkBtnText').innerText = '이 결과 링크 복사하기';
+      }
 
       // 1. Calculate Statistics
       const totalAccuracy = roundsData.reduce((acc, r) => acc + r.accuracy, 0);
@@ -1304,18 +1427,20 @@
       // Draw Bell Curve Canvas
       drawBellCurveChart(effectiveScore, topPercentileVal);
 
-      // Celebration
-      if (effectiveScore >= 77) {
-        playFanfare();
-        try {
-          confetti({
-            particleCount: 120,
-            spread: 90,
-            origin: { y: 0.5 }
-          });
-        } catch (e) {}
-      } else {
-        playTone(380, 'sine', 0.25, 0.15);
+      // Celebration (only for personal test completion, not view only)
+      if (!isSharedView) {
+        if (effectiveScore >= 77) {
+          playFanfare();
+          try {
+            confetti({
+              particleCount: 120,
+              spread: 90,
+              origin: { y: 0.5 }
+            });
+          } catch (e) {}
+        } else {
+          playTone(380, 'sine', 0.25, 0.15);
+        }
       }
     }
 
@@ -1457,6 +1582,31 @@
       ctx.fillText(labelText, badgeX, pillY + 15);
     }
 
+    // --- Copy Direct Shareable Result Link ---
+    function copyResultLink() {
+      const shareUrl = encodeResultsToUrl();
+      const btnText = document.getElementById('copyLinkBtnText');
+
+      const tempInput = document.createElement('textarea');
+      tempInput.value = shareUrl;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      try {
+        document.execCommand('copy');
+        if (btnText) btnText.innerText = '✅ 링크 복사 완료!';
+        playSuccessChord();
+        setTimeout(() => {
+          if (btnText) btnText.innerText = '결과 링크 복사하기';
+        }, 2500);
+      } catch (e) {
+        if (btnText) btnText.innerText = '❌ 복사 실패';
+        setTimeout(() => {
+          if (btnText) btnText.innerText = '결과 링크 복사하기';
+        }, 2000);
+      }
+      document.body.removeChild(tempInput);
+    }
+
     // --- Instagram Story & Feed Share Card Logic ---
     function openShareCardModal() {
       const modal = document.getElementById('shareCardModal');
@@ -1553,10 +1703,11 @@
         canvas.toBlob(async (blob) => {
           if (!blob) throw new Error('Blob conversion failed');
           const file = new File([blob], 'ColorLab_Result.png', { type: 'image/png' });
+          const shareUrl = encodeResultsToUrl();
 
           const shareData = {
             title: '나의 색 인지능력 테스트 결과',
-            text: `[색감 감각 테스트: Color Lab]\n결과: ${document.getElementById('cardTierTitle').innerText} (상위 ${document.getElementById('cardPercentile').innerText})\n나의 색 인지능력을 테스트해보세요!`,
+            text: `[색감 감각 테스트: Color Lab]\n결과: ${document.getElementById('cardTierTitle').innerText} (상위 ${document.getElementById('cardPercentile').innerText})\n내 결과 확인하기:\n${shareUrl}`,
             files: [file]
           };
 
@@ -1567,19 +1718,19 @@
             await navigator.share({
               title: shareData.title,
               text: shareData.text,
-              url: window.location.href
+              url: shareUrl
             });
             btn.innerHTML = origHtml;
           } else {
-            // Desktop fallback: copy text
-            copyShareText();
-            btn.innerHTML = '<span>✅ 텍스트 복사됨!</span>';
+            // Desktop fallback: copy direct link
+            copyResultLink();
+            btn.innerHTML = '<span>✅ 링크 복사됨!</span>';
             setTimeout(() => { btn.innerHTML = origHtml; }, 2000);
           }
         }, 'image/png');
       } catch (err) {
-        copyShareText();
-        btn.innerHTML = '<span>✅ 텍스트 복사됨!</span>';
+        copyResultLink();
+        btn.innerHTML = '<span>✅ 링크 복사됨!</span>';
         setTimeout(() => { btn.innerHTML = origHtml; }, 2000);
       }
     }
@@ -1591,8 +1742,9 @@
       const tier = document.getElementById('reportTierTitle').innerText;
       const hints = document.getElementById('statTotalHints').innerText;
       const mode = selectedMode === 'rgb' ? '빛 모드 (RGB)' : '물감 모드 (CMY)';
+      const shareUrl = encodeResultsToUrl();
 
-      const text = `🎨 [색감 감각 테스트: Color Lab]\n모드: ${mode} (${diffConfigs[selectedMax].name})\n결과: ${tier}\n평균 일치율: ${avg} | 상위 ${rank}\n힌트 사용: ${hints}\n👉 지금 바로 도전해보세요: ${window.location.href}`;
+      const text = `🎨 [색감 감각 테스트: Color Lab]\n모드: ${mode} (${diffConfigs[selectedMax].name})\n결과: ${tier}\n평균 일치율: ${avg} | 상위 ${rank}\n힌트 사용: ${hints}\n\n👉 내 결과 확인 & 나도 도전하기:\n${shareUrl}`;
 
       // Fallback-safe clipboard copy
       const tempInput = document.createElement('textarea');
@@ -1601,11 +1753,7 @@
       tempInput.select();
       try {
         document.execCommand('copy');
-        document.getElementById('shareBtnText').innerText = '✅ 복사 완료!';
         playTone(700, 'sine', 0.1);
-        setTimeout(() => {
-          document.getElementById('shareBtnText').innerText = '텍스트 결과 복사';
-        }, 2000);
       } catch (e) {}
       document.body.removeChild(tempInput);
     }
@@ -1621,14 +1769,21 @@
       }
     });
 
-    // Initial Load - Random light theme selected every time page opens
+    // Initial Load - Check if shared link or fresh test
     window.onload = function() {
       const randTheme = Math.floor(Math.random() * themes.length);
       applyTheme(randTheme);
 
-      selectLobbyMode('rgb');
-      selectLobbyDiff(3);
-      showScreen('screenLobby');
+      if (decodeResultsFromUrl()) {
+        // Shared result detected from URL!
+        applyChannelThemes();
+        renderControlChips();
+        showFinalReport(true);
+      } else {
+        selectLobbyMode('rgb');
+        selectLobbyDiff(3);
+        showScreen('screenLobby');
+      }
     };
   </script>
 </body>
