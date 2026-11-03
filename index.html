@@ -6606,7 +6606,7 @@
     function recalcChameleonMatches() {
       const { userR, userG, userB } = chameleonState;
 
-      let highestPct = 0;
+      let highestPct = -1;
       let highestDir = '';
       let highestColor = null;
 
@@ -6633,9 +6633,9 @@
       });
 
       chameleonState.bestMatch = {
-        pct: highestPct,
+        pct: Math.max(0, highestPct),
         dir: highestDir,
-        color: highestColor
+        color: highestColor || (chameleonState.neighbors[0] ? chameleonState.neighbors[0].color : { r: 0, g: 0, b: 0 })
       };
     }
 
@@ -6719,10 +6719,17 @@
           chameleonState.bestStreak = chameleonState.streak;
         }
 
-        const timeBonus = Math.floor(chameleonState.timerRemainMs / 50);
-        const matchBonus = (pct - 80) * 10;
-        const roundGain = 150 + matchBonus + timeBonus;
+        // 점수 계산: 싱크로율이 가장 낮은 칸을 제외한 나머지 칸 모두와의 평균 싱크로율만큼 증가
+        const sortedNbrs = [...chameleonState.neighbors].sort((a, b) => a.matchPct - b.matchPct);
+        const remainingNbrs = sortedNbrs.slice(1);
+        const roundGain = remainingNbrs.length > 0
+          ? Math.round(remainingNbrs.reduce((sum, n) => sum + n.matchPct, 0) / remainingNbrs.length)
+          : (sortedNbrs[0] ? sortedNbrs[0].matchPct : pct);
+
         chameleonState.score += roundGain;
+
+        const hudScore = document.getElementById('chamScoreText');
+        if (hudScore) hudScore.innerText = `🎯 ${chameleonState.score}점`;
 
         showChameleonAlertToast(`🎉 위장 성공! +${roundGain}점`);
 
