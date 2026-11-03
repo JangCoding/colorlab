@@ -5111,9 +5111,10 @@
       trapsEncountered: 0,
       predatorEncounters: 0,
       gridSize: 10,
-      preyList: [], // Always 3 active 1x2 or 2x1 items crossing screen
+      preyList: [], // Always 3 active 1x2 items crossing screen
       hazardList: [], // 3 sinking debris + 3 swimming traps
       giantPredator: null, // 1 giant orca (2x2) cruising
+      reveals: [], // In-place full color reveals on click: { cells, icon, name, color, borderColor, expiresAt }
       gameLoopInterval: null,
       animalMoveInterval: null,
       debrisMoveInterval: null,
@@ -5226,7 +5227,7 @@
         type: d.type,
         name: d.name,
         icon: d.icon,
-        r: Math.floor(Math.random() * 3), // starts high up
+        r: Math.floor(Math.random() * 3), // starts near the surface
         c: Math.floor(Math.random() * n),
         bottomCount: 0,
         penaltyH: d.penaltyH,
@@ -5272,6 +5273,7 @@
       sharkState.debrisEncountered = 0;
       sharkState.trapsEncountered = 0;
       sharkState.predatorEncounters = 0;
+      sharkState.reveals = [];
 
       // Views toggle
       const intro = document.getElementById('sharkViewIntro');
@@ -5283,9 +5285,9 @@
 
       const visionHint = document.getElementById('sharkVisionHint');
       const gridOuter = document.getElementById('sharkGridOuter');
-      if (visionHint) visionHint.innerText = '👀 현재는 상어 시야로 플레이 중입니다. 1×2 실루엣을 노려 산소를 유지하세요!';
+      if (visionHint) visionHint.innerText = '👀 현재는 상어 시야(완전 무채색 흑백)로 플레이 중입니다. 터치 시 그 자리에서 정체가 공개됩니다!';
       if (gridOuter) {
-        gridOuter.className = 'w-full max-w-sm sm:max-w-md aspect-square p-2 sm:p-2.5 bg-[#080d16] rounded-3xl backdrop-blur-md border border-cyan-900/40 shadow-2xl select-none transition-all duration-300';
+        gridOuter.className = 'w-full max-w-sm sm:max-w-md aspect-square p-2 sm:p-2.5 bg-[#0a0a0c] rounded-3xl backdrop-blur-md border border-neutral-700/50 shadow-2xl select-none transition-all duration-300';
       }
 
       // Initialize Entity Pools:
@@ -5333,6 +5335,16 @@
         // Depth slowly increases over time
         if (sharkState.survivalMs % 1000 === 0) {
           sharkState.depthMeters += 5;
+        }
+
+        // Clean up expired in-place reveals
+        if (sharkState.reveals && sharkState.reveals.length > 0) {
+          const now = Date.now();
+          const oldLen = sharkState.reveals.length;
+          sharkState.reveals = sharkState.reveals.filter(rev => now < rev.expiresAt);
+          if (sharkState.reveals.length !== oldLen) {
+            updateSharkGridColors(false);
+          }
         }
 
         if (sharkState.oxygenRemainMs <= 0) {
@@ -5545,43 +5557,50 @@
         const hazard = hazardMap.get(key);
         const isGiant = giantCells.has(key);
 
-        if (!isHumanVision) {
-          // SHARK VISION (흐릿한 전색맹 심해 명암 - 확연히 식별 가능한 부드러운 실루엣)
+        // Check active in-place color reveal on click
+        const activeReveal = !isHumanVision && sharkState.reveals && sharkState.reveals.find(rev => rev.cells.some(crd => crd.r === r && crd.c === c));
+
+        if (activeReveal) {
+          // IN-PLACE COLOR REVEAL: Touched object bursts into full human color and shows icon!
+          btn.style.backgroundColor = activeReveal.color;
+          btn.style.borderColor = activeReveal.borderColor;
+          btn.style.boxShadow = '0 0 10px ' + activeReveal.borderColor;
+          btn.innerHTML = `<span class="text-xs sm:text-sm font-black text-white leading-none animate-pulse">${activeReveal.icon}</span>`;
+        } else if (!isHumanVision) {
+          // SHARK VISION: PURE 100% COLORLESS MONOCHROMACY (완전 무채색 흑백 명암)
           btn.innerHTML = '';
 
           if (prey) {
-            // 1x2 Prey Silhouette: Sleek dark slate blue with inner depth glow
-            btn.style.backgroundColor = '#253c58';
-            btn.style.borderColor = 'rgba(56, 189, 248, 0.35)';
-            btn.style.boxShadow = 'inset 0 0 6px rgba(56, 189, 248, 0.2)';
+            // 1x2 Prey: Clearly visible silvery-gray silhouette
+            btn.style.backgroundColor = '#52525b'; // zinc-600 neutral gray
+            btn.style.borderColor = 'rgba(255, 255, 255, 0.35)';
+            btn.style.boxShadow = 'inset 0 0 4px rgba(255, 255, 255, 0.2)';
           } else if (isGiant) {
-            // Giant Predator: Heavy apex black block
-            btn.style.backgroundColor = '#0c141f';
-            btn.style.borderColor = 'rgba(244, 63, 94, 0.3)';
+            // Giant Predator: Pitch dark apex black block
+            btn.style.backgroundColor = '#09090b'; // zinc-950 deep black
+            btn.style.borderColor = 'rgba(255, 255, 255, 0.25)';
             btn.style.boxShadow = 'none';
           } else if (hazard) {
             if (hazard.category === 'debris') {
-              // Debris: Dull crinkled gray/slate
-              btn.style.backgroundColor = '#1c2836';
-              btn.style.borderColor = 'rgba(255, 255, 255, 0.08)';
+              // Debris: Dull dark gray
+              btn.style.backgroundColor = '#27272a'; // zinc-800 dull gray
+              btn.style.borderColor = 'rgba(255, 255, 255, 0.12)';
             } else {
-              // Poisonous Trap: Murky dark dot
-              btn.style.backgroundColor = '#232b38';
-              btn.style.borderColor = 'rgba(234, 179, 8, 0.15)';
+              // Trap: Mid gray
+              btn.style.backgroundColor = '#3f3f46'; // zinc-700 mid gray
+              btn.style.borderColor = 'rgba(255, 255, 255, 0.18)';
             }
             btn.style.boxShadow = 'none';
           } else {
-            // Ambient ocean water with natural micro-noise
+            // Ambient deep ocean water with natural micro-noise
             const noise = ((r * 7 + c * 13) % 5) - 2;
-            const wr = Math.max(6, 10 + noise);
-            const wg = Math.max(12, 18 + noise);
-            const wb = Math.max(20, 28 + noise);
-            btn.style.backgroundColor = `rgb(${wr}, ${wg}, ${wb})`;
-            btn.style.borderColor = 'rgba(255, 255, 255, 0.03)';
+            const gray = Math.max(8, 18 + noise);
+            btn.style.backgroundColor = `rgb(${gray}, ${gray}, ${gray})`;
+            btn.style.borderColor = 'rgba(255, 255, 255, 0.04)';
             btn.style.boxShadow = 'none';
           }
         } else {
-          // HUMAN VISION (총천연색 청명한 바다 + 정체 즉시 공개)
+          // HUMAN VISION (GAME OVER): 총천연색 청명한 바다 + 정체 즉시 공개
           btn.style.boxShadow = 'none';
           if (prey) {
             btn.style.backgroundColor = '#0284c7';
@@ -5620,10 +5639,28 @@
           sharkState.health = Math.max(0, sharkState.health - g.penaltyH);
           sharkState.oxygenRemainMs = Math.max(200, sharkState.oxygenRemainMs - g.penaltyT);
           sharkState.predatorEncounters++;
+
+          // In-place color reveal for giant predator
+          const orcaCells = [];
+          for (let dr = 0; dr < g.size; dr++) {
+            for (let dc = 0; dc < g.size; dc++) {
+              orcaCells.push({ r: g.r + dr, c: g.c + dc });
+            }
+          }
+          sharkState.reveals.push({
+            cells: orcaCells,
+            icon: '🐋',
+            name: '범고래',
+            color: '#0f172a',
+            borderColor: '#f43f5e',
+            expiresAt: Date.now() + 850
+          });
+
           playSharkPredatorSound();
           triggerSharkScreenShake();
           showSharkAlertToast(g.msg);
           updateSharkStatusUI();
+          updateSharkGridColors(false);
 
           if (sharkState.health <= 0) {
             endSharkSurvival('health0');
@@ -5638,6 +5675,17 @@
         const hazard = sharkState.hazardList[hazardIdx];
         sharkState.health = Math.max(0, sharkState.health - hazard.penaltyH);
         sharkState.oxygenRemainMs = Math.max(200, sharkState.oxygenRemainMs - hazard.penaltyT);
+
+        // In-place color reveal for hazard / debris
+        sharkState.reveals.push({
+          cells: [{ r: hazard.r, c: hazard.c }],
+          icon: hazard.icon,
+          name: hazard.name,
+          color: hazard.category === 'debris' ? '#be123c' : '#d97706',
+          borderColor: hazard.category === 'debris' ? '#fb7185' : '#fcd34d',
+          expiresAt: Date.now() + 750
+        });
+
         if (hazard.category === 'debris') {
           sharkState.debrisEncountered++;
           // Replace consumed debris with a fresh one dropping from top
@@ -5646,6 +5694,7 @@
           sharkState.trapsEncountered++;
           sharkState.hazardList[hazardIdx] = spawnSingleTrap();
         }
+
         playSharkHazardSound();
         showSharkAlertToast(hazard.msg);
         updateSharkStatusUI();
@@ -5667,10 +5716,20 @@
         sharkState.health = Math.min(100, sharkState.health + 8);
         sharkState.oxygenRemainMs = Math.min(sharkState.oxygenMaxMs, sharkState.oxygenRemainMs + 3000); // +3.0s Oxygen!
 
+        // In-place color reveal for prey (both cells light up in vivid emerald + emoji)
+        sharkState.reveals.push({
+          cells: [...eatenPrey.cells],
+          icon: eatenPrey.icon,
+          name: eatenPrey.name,
+          color: '#059669',
+          borderColor: '#34d399',
+          expiresAt: Date.now() + 750
+        });
+
         playSharkChompSound();
         showSharkAlertToast(`${eatenPrey.name} 사냥 성공! 🐟 콰직! +30점 (산소 +3.0초 충전)`);
 
-        // Immediately spawn a new prey at screen edge!
+        // Immediately spawn replacement prey at screen edge!
         sharkState.preyList[preyIdx] = spawnSinglePrey();
 
         updateSharkStatusUI();
@@ -5742,7 +5801,7 @@
 
       playTone(160, 'sawtooth', 0.45, 0.35);
 
-      // In-Place Human Vision Reveal
+      // In-Place Human Vision Reveal on Game Over
       updateSharkGridColors(true);
 
       const visionHint = document.getElementById('sharkVisionHint');
