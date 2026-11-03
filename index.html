@@ -1553,7 +1553,7 @@
         </span>
       </div>
       <div class="flex items-center gap-3 font-extrabold">
-        <span id="chamTimerText" class="mono text-rose-600">⏱️ 8.0초</span>
+        <span id="chamTimerText" class="mono text-rose-600">⏱️ 12.0초</span>
         <span id="chamScoreText" class="text-indigo-600">🎯 0점</span>
       </div>
     </div>
@@ -1587,12 +1587,9 @@
 
     <!-- 10x10 Natural Environment Grid Container -->
     <div class="w-full flex justify-center items-center relative overflow-hidden">
-      <!-- Animated Eagle Shadow Fly-by Overlay -->
-      <div id="chamEagleShadow" class="hidden absolute pointer-events-none z-30 text-5xl transition-all duration-700 transform -translate-x-full -translate-y-full opacity-90 drop-shadow-2xl">
-        🦅💨
-      </div>
-
-      <div id="chamGridOuter" class="w-full max-w-sm sm:max-w-md aspect-square p-2.5 bg-slate-900/60 rounded-3xl backdrop-blur-md border border-white/40 shadow-2xl select-none relative">
+      <div id="chamGridOuter" class="w-full max-w-sm sm:max-w-md aspect-square p-2.5 bg-slate-900/60 rounded-3xl backdrop-blur-md border border-white/40 shadow-2xl select-none relative transition-all duration-300">
+        <!-- Flash Overlay when camouflage wave spreads completely -->
+        <div id="chamFlashOverlay" class="pointer-events-none absolute inset-0 rounded-3xl bg-white opacity-0 transition-opacity duration-200 z-20"></div>
         <div id="chamGridContainer" class="w-full h-full select-none" style="display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); grid-template-rows: repeat(10, minmax(0, 1fr)); gap: 3px; aspect-ratio: 1 / 1;">
           <!-- 100 Dynamic natural tiles rendered by JS -->
         </div>
@@ -6076,7 +6073,7 @@
     // ==========================================
 
     let chameleonState = {
-      status: 'playing', // 'playing', 'evaluating', 'roundResult'
+      status: 'playing', // 'playing', 'evaluating', 'wave', 'roundResult'
       score: 0,
       streak: 0,
       bestStreak: 0,
@@ -6090,64 +6087,119 @@
       gridColors: [], // 100 RGB items
       neighbors: [], // adjacent targets { dir, name, r, c, color: {r,g,b}, matchPct: 0 }
       bestMatch: { pct: 0, dir: '', color: null },
-      timerRemainMs: 8000,
-      timerMaxMs: 8000,
+      timerRemainMs: 12000,
+      timerMaxMs: 12000,
       timerInterval: null,
       toastTimeout: null,
       biomes: [
         {
-          name: '🌱 열대우림 수풀',
-          badgeBg: 'bg-emerald-100 text-emerald-800 border-emerald-300',
+          name: '🪵 고목과 나뭇결',
+          badgeBg: 'bg-stone-200 text-stone-800 border-stone-400',
           variations: [
-            { r: 46, g: 155, b: 67 },
-            { r: 28, g: 115, b: 35 },
-            { r: 76, g: 175, b: 80 },
-            { r: 102, g: 187, b: 106 },
-            { r: 56, g: 142, b: 60 }
+            { r: 78, g: 52, b: 46 },
+            { r: 109, g: 76, b: 65 },
+            { r: 141, g: 110, b: 99 },
+            { r: 62, g: 39, b: 35 },
+            { r: 93, g: 64, b: 55 }
           ]
         },
         {
-          name: '🍁 가을 단풍 숲',
-          badgeBg: 'bg-amber-100 text-amber-800 border-amber-300',
+          name: '🪨 화강암과 도시 회색',
+          badgeBg: 'bg-slate-200 text-slate-800 border-slate-400',
           variations: [
-            { r: 216, g: 67, b: 21 },
-            { r: 239, g: 108, b: 0 },
-            { r: 245, g: 124, b: 0 },
+            { r: 71, g: 85, b: 105 },
+            { r: 100, g: 116, b: 139 },
+            { r: 148, g: 163, b: 184 },
+            { r: 51, g: 65, b: 85 },
+            { r: 30, g: 41, b: 59 }
+          ]
+        },
+        {
+          name: '🔮 신비로운 보라 자수정',
+          badgeBg: 'bg-purple-100 text-purple-900 border-purple-300',
+          variations: [
+            { r: 106, g: 27, b: 154 },
+            { r: 142, g: 36, b: 170 },
+            { r: 171, g: 71, b: 188 },
+            { r: 74, g: 20, b: 140 },
+            { r: 123, g: 31, b: 162 }
+          ]
+        },
+        {
+          name: '🌅 황혼의 붉은 노을',
+          badgeBg: 'bg-rose-100 text-rose-900 border-rose-300',
+          variations: [
+            { r: 198, g: 40, b: 40 },
+            { r: 211, g: 47, b: 47 },
+            { r: 229, g: 57, b: 53 },
             { r: 183, g: 28, b: 28 },
-            { r: 230, g: 81, b: 0 }
+            { r: 216, g: 67, b: 21 }
           ]
         },
         {
-          name: '🪸 열대 산호초',
-          badgeBg: 'bg-cyan-100 text-cyan-800 border-cyan-300',
+          name: '🌊 빙하와 코발트 블루',
+          badgeBg: 'bg-sky-100 text-sky-900 border-sky-300',
           variations: [
-            { r: 0, g: 188, b: 212 },
-            { r: 38, g: 198, b: 218 },
-            { r: 233, g: 30, b: 99 },
-            { r: 255, g: 64, b: 129 },
-            { r: 0, g: 137, b: 123 }
+            { r: 21, g: 101, b: 192 },
+            { r: 25, g: 118, b: 210 },
+            { r: 2, g: 136, b: 209 },
+            { r: 13, g: 71, b: 161 },
+            { r: 0, g: 131, b: 143 }
           ]
         },
         {
-          name: '🏜️ 황금빛 사막',
-          badgeBg: 'bg-yellow-100 text-yellow-800 border-yellow-300',
+          name: '🌸 벚꽃과 코랄 핑크',
+          badgeBg: 'bg-pink-100 text-pink-900 border-pink-300',
           variations: [
-            { r: 224, g: 160, b: 48 },
-            { r: 210, g: 140, b: 36 },
-            { r: 235, g: 175, b: 60 },
-            { r: 195, g: 120, b: 30 },
-            { r: 240, g: 190, b: 80 }
+            { r: 236, g: 72, b: 153 },
+            { r: 244, g: 63, b: 94 },
+            { r: 251, g: 113, b: 133 },
+            { r: 219, g: 39, b: 119 },
+            { r: 249, g: 168, b: 212 }
           ]
         },
         {
-          name: '🪻 라벤더 언덕',
-          badgeBg: 'bg-purple-100 text-purple-800 border-purple-300',
+          name: '🌿 열대 정글 에메랄드',
+          badgeBg: 'bg-emerald-100 text-emerald-900 border-emerald-300',
           variations: [
-            { r: 126, g: 87, b: 194 },
-            { r: 92, g: 107, b: 192 },
-            { r: 149, g: 117, b: 205 },
-            { r: 179, g: 157, b: 219 },
-            { r: 103, g: 58, b: 183 }
+            { r: 22, g: 163, b: 74 },
+            { r: 34, g: 197, b: 94 },
+            { r: 21, g: 128, b: 61 },
+            { r: 20, g: 83, b: 45 },
+            { r: 74, g: 222, b: 128 }
+          ]
+        },
+        {
+          name: '🏜️ 사막의 테라코타',
+          badgeBg: 'bg-orange-100 text-orange-900 border-orange-300',
+          variations: [
+            { r: 234, g: 88, b: 12 },
+            { r: 249, g: 115, b: 22 },
+            { r: 217, g: 119, b: 6 },
+            { r: 194, g: 65, b: 12 },
+            { r: 124, g: 45, b: 18 }
+          ]
+        },
+        {
+          name: '🌑 현무암과 흑요석',
+          badgeBg: 'bg-zinc-200 text-zinc-900 border-zinc-400',
+          variations: [
+            { r: 39, g: 39, b: 42 },
+            { r: 63, g: 63, b: 70 },
+            { r: 82, g: 82, b: 91 },
+            { r: 24, g: 24, b: 27 },
+            { r: 113, g: 113, b: 122 }
+          ]
+        },
+        {
+          name: '🍁 가을 단풍과 황금 들판',
+          badgeBg: 'bg-amber-100 text-amber-900 border-amber-300',
+          variations: [
+            { r: 217, g: 119, b: 6 },
+            { r: 245, g: 158, b: 11 },
+            { r: 180, g: 83, b: 9 },
+            { r: 234, g: 88, b: 12 },
+            { r: 251, g: 191, b: 36 }
           ]
         }
       ]
@@ -6165,11 +6217,15 @@
       clearChameleonTimer();
       chameleonState.round++;
       chameleonState.status = 'playing';
-      chameleonState.biomeIndex = (chameleonState.round - 1) % chameleonState.biomes.length;
+      if (chameleonState.round === 1) {
+        chameleonState.biomeIndex = Math.floor(Math.random() * chameleonState.biomes.length);
+      } else {
+        chameleonState.biomeIndex = (chameleonState.biomeIndex + 1 + Math.floor(Math.random() * (chameleonState.biomes.length - 1))) % chameleonState.biomes.length;
+      }
       const biome = chameleonState.biomes[chameleonState.biomeIndex];
 
-      // Reset timer (decreases slightly as streak increases)
-      const baseMs = Math.max(5000, 8000 - Math.min(3000, chameleonState.streak * 300));
+      // Reset timer (1.5x longer base: 12.0s, decreases very gently: -150ms per streak, min 7.5s)
+      const baseMs = Math.max(7500, 12000 - Math.min(4500, chameleonState.streak * 150));
       chameleonState.timerRemainMs = baseMs;
       chameleonState.timerMaxMs = baseMs;
 
@@ -6451,9 +6507,6 @@
       const pct = chameleonState.bestMatch.pct;
       const isSuccess = pct >= 80;
 
-      // Eagle swoops across screen
-      triggerEagleFlyby();
-
       if (isSuccess) {
         // CAMOUFLAGE SUCCESS!
         playSuccessChord();
@@ -6467,12 +6520,12 @@
         const roundGain = 150 + matchBonus + timeBonus;
         chameleonState.score += roundGain;
 
-        showChameleonAlertToast(`🎉 위장 성공! 독수리가 그냥 지나쳤습니다! (일치도: ${pct}%) +${roundGain}점`);
+        showChameleonAlertToast(`🎉 위장 성공! (일치도 ${pct}%) +${roundGain}점`);
 
-        // After 1.2s: Auto proceed to NEW MAP & NEW PLACEMENT!
-        setTimeout(() => {
+        // Trigger ripple wave propagation from chameleon across entire grid, flash, then proceed!
+        triggerCamouflageWave(chameleonState.userR, chameleonState.userG, chameleonState.userB, () => {
           setupChameleonRound();
-        }, 1200);
+        });
 
       } else {
         // CAMOUFLAGE FAILED!
@@ -6494,21 +6547,73 @@
       }
     }
 
-    function triggerEagleFlyby() {
-      const eagle = document.getElementById('chamEagleShadow');
-      if (!eagle) return;
-      eagle.classList.remove('hidden');
-      eagle.style.left = '0%';
-      eagle.style.top = '0%';
-      eagle.style.transform = 'translate(-50px, -50px) scale(0.6)';
+    function triggerCamouflageWave(userR, userG, userB, onComplete) {
+      chameleonState.status = 'wave';
+      const chamR = chameleonState.r;
+      const chamC = chameleonState.c;
+      const camouColor = `rgb(${userR}, ${userG}, ${userB})`;
 
-      setTimeout(() => {
-        eagle.style.transform = 'translate(350px, 350px) scale(1.4)';
-      }, 50);
+      // Calculate max Manhattan distance from chameleon
+      const maxDist = Math.max(
+        chamR + chamC,
+        chamR + (9 - chamC),
+        (9 - chamR) + chamC,
+        (9 - chamR) + (9 - chamC)
+      );
 
-      setTimeout(() => {
-        eagle.classList.add('hidden');
-      }, 750);
+      const distBuckets = [];
+      for (let d = 0; d <= maxDist; d++) distBuckets[d] = [];
+
+      for (let r = 0; r < 10; r++) {
+        for (let c = 0; c < 10; c++) {
+          const d = Math.abs(r - chamR) + Math.abs(c - chamC);
+          const cell = document.getElementById(`chamCell_${r}_${c}`);
+          if (cell) distBuckets[d].push(cell);
+        }
+      }
+
+      let currentDist = 0;
+      const waveInterval = setInterval(() => {
+        if (currentDist <= maxDist) {
+          const cells = distBuckets[currentDist];
+          if (cells) {
+            cells.forEach(cell => {
+              cell.style.transition = 'background-color 0.22s ease-out, transform 0.15s ease-out';
+              cell.style.backgroundColor = camouColor;
+              cell.style.border = 'none';
+              cell.style.boxShadow = 'none';
+              cell.style.transform = 'scale(1.08)';
+              setTimeout(() => {
+                if (cell) cell.style.transform = 'scale(1)';
+              }, 120);
+            });
+          }
+          if (currentDist % 2 === 0) {
+            playTone(320 + currentDist * 35, 'sine', 0.08, 0.08);
+          }
+          currentDist++;
+        } else {
+          clearInterval(waveInterval);
+
+          // Flash effect when full map is covered
+          const flash = document.getElementById('chamFlashOverlay');
+          const outer = document.getElementById('chamGridOuter');
+
+          playTone(880, 'triangle', 0.25, 0.18);
+          setTimeout(() => playTone(1174, 'sine', 0.35, 0.2), 80);
+
+          if (flash) flash.style.opacity = '0.9';
+          if (outer) outer.style.boxShadow = '0 0 50px rgba(255, 255, 255, 0.95), 0 0 80px rgba(52, 211, 153, 0.8)';
+
+          setTimeout(() => {
+            if (flash) flash.style.opacity = '0';
+            if (outer) outer.style.boxShadow = '';
+            setTimeout(() => {
+              if (typeof onComplete === 'function') onComplete();
+            }, 200);
+          }, 260);
+        }
+      }, 30);
     }
 
     function showChameleonAlertToast(msg) {
