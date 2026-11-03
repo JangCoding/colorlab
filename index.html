@@ -1524,9 +1524,7 @@
         <div class="w-16 h-16 mx-auto rounded-3xl bg-emerald-100 border border-emerald-300 text-3xl flex items-center justify-center mb-2 shadow-inner">
           🦎🍃
         </div>
-        <div class="inline-flex items-center gap-1 px-3 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-300 text-[11px] font-black mb-1.5 shadow-2xs">
-          <span>생태 기반 위장 서바이벌</span>
-        </div>
+        
         <h2 class="text-xl sm:text-2xl font-black text-slate-800 tracking-tight">
           카멜레온의 위장술
         </h2>
@@ -1556,16 +1554,8 @@
         <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
           <span class="w-5 h-5 rounded-full bg-rose-500 text-white font-black flex items-center justify-center text-[10px] shrink-0 mt-0.5">3</span>
           <div>
-            <span class="font-extrabold text-slate-800 block">사냥꾼 피하기 & 생존</span>
-            <span class="text-slate-500 text-[11px] leading-tight">사냥꾼이 오기 전(12초) 80%를 넘겨 <strong>"위장 완료!"</strong>를 누르면 생존합니다.</span>
-          </div>
-        </div>
-
-        <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-start gap-2.5">
-          <span class="w-5 h-5 rounded-full bg-amber-500 text-white font-black flex items-center justify-center text-[10px] shrink-0 mt-0.5">4</span>
-          <div>
-            <span class="font-extrabold text-slate-800 block">전체 맵 파동 확산</span>
-            <span class="text-slate-500 text-[11px] leading-tight">위장 성공 시 내 색상이 맵 전체로 물결치며 새로운 무대로 전환됩니다.</span>
+            <span class="font-extrabold text-slate-800 block">사냥꾼 피하기</span>
+            <span class="text-slate-500 text-[11px] leading-tight">주변색과 80% 이상 비슷한 색이 되면 <strong>"위장 완료!"</strong></span>
           </div>
         </div>
       </div>
@@ -1581,19 +1571,15 @@
       <!-- Status & Info Header -->
       <div class="flex items-center justify-between text-xs bg-white/85 backdrop-blur-md border border-white/80 rounded-xl px-3 py-1.5 sm:py-2 shadow-xs">
         <div class="flex items-center gap-2">
-          <span id="chamBiomeBadge" class="px-2.5 py-0.5 rounded-full font-black bg-stone-200 text-stone-800 border border-stone-400 text-[11px]">
-            🪵 고목과 나뭇결
-          </span>
+          <!-- Hidden biome badge so JS does not error, but text is removed -->
+          <span id="chamBiomeBadge" class="hidden"></span>
           <span class="font-bold text-slate-700 text-xs">
             연속: <span id="chamStreakText" class="font-black text-emerald-600">0회</span>
           </span>
         </div>
-        <div class="flex items-center gap-2 font-extrabold text-xs">
+        <div class="flex items-center gap-2.5 font-extrabold text-xs">
           <span id="chamTimerText" class="mono text-rose-600 font-black">⏱️ 12.0초</span>
           <span id="chamScoreText" class="text-indigo-600 font-black">🎯 0점</span>
-          <button type="button" onclick="goToChameleonIntro()" class="px-2 py-0.5 rounded-lg bg-slate-100 hover:bg-slate-200 text-slate-600 flex items-center justify-center text-[11px] font-bold transition-all ml-0.5" title="설명 페이지로 이동">
-            📋 설명
-          </button>
         </div>
       </div>
 
@@ -1605,7 +1591,7 @@
             <span>사냥꾼이 오고있어요 !</span>
           </span>
           <span id="chamMatchStatusText" class="font-black text-amber-700">
-            최고 일치도: 0% · 80% 이상 필요
+            최고 일치도: 0%
           </span>
         </div>
 
@@ -6747,7 +6733,7 @@
         const targetLabel = document.getElementById('chamModalTargetLabel');
 
         if (modalTitle) modalTitle.innerText = '위장 실패! 사냥꾼의 눈에 들켰습니다!';
-        if (modalSubtitle) modalSubtitle.innerText = `최고 일치도 ${pct}% (80% 이상 필요)`;
+        if (modalSubtitle) modalSubtitle.innerText = `최고 일치도 ${pct}%`;
         if (modalStreak) modalStreak.innerText = `${chameleonState.streak}회 연속 성공`;
         if (modalScore) modalScore.innerText = `${chameleonState.score}점`;
         if (modalBestPctBadge) {
