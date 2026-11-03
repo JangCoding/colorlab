@@ -1591,7 +1591,7 @@
             <span>사냥꾼이 오고있어요 !</span>
           </span>
           <span id="chamMatchStatusText" class="font-black text-amber-700">
-            최고 일치도: 0%
+            최고 싱크로율: 0%
           </span>
         </div>
 
@@ -1734,16 +1734,16 @@
           위장 실패! 사냥꾼의 눈에 들켰습니다!
         </h3>
         <p id="chamModalSubtitle" class="text-xs text-slate-500 mt-1">
-          주변 색상과 80% 이상 일치하지 못했습니다.
+          주변 색상과 80% 이상 싱크로율을 달성하지 못했습니다.
         </p>
       </div>
 
-      <!-- Color Comparison (내 조색 vs 최고 일치 주변 타겟) -->
+      <!-- Color Comparison (내 조색 vs 최고 싱크로율 주변 타겟) -->
       <div class="bg-slate-50 rounded-2xl p-3 border border-slate-200/80">
         <div class="flex items-center justify-between text-xs font-bold text-slate-600 mb-2">
           <span>색상 비교 분석</span>
           <span id="chamModalBestPctBadge" class="px-2 py-0.5 rounded-full text-[11px] font-black bg-rose-100 text-rose-700 border border-rose-200">
-            일치도 0%
+            최고 싱크로율 0%
           </span>
         </div>
         <div class="grid grid-cols-2 gap-2.5">
@@ -6653,9 +6653,9 @@
       const pct = chameleonState.bestMatch.pct;
       if (statusText) {
         if (pct >= 80) {
-          statusText.innerHTML = `<span class="text-emerald-700">최고 일치도: <strong>${pct}%</strong></span>`;
+          statusText.innerHTML = `<span class="text-emerald-700">최고 싱크로율: <strong>${pct}%</strong></span>`;
         } else {
-          statusText.innerHTML = `최고 일치도: <strong>${pct}%</strong>`;
+          statusText.innerHTML = `최고 싱크로율: <strong>${pct}%</strong>`;
         }
       }
 
@@ -6736,11 +6736,11 @@
         const targetLabel = document.getElementById('chamModalTargetLabel');
 
         if (modalTitle) modalTitle.innerText = '위장 실패! 사냥꾼의 눈에 들켰습니다!';
-        if (modalSubtitle) modalSubtitle.innerText = `최고 일치도 ${pct}%`;
+        if (modalSubtitle) modalSubtitle.innerText = `최고 싱크로율 ${pct}%`;
         if (modalStreak) modalStreak.innerText = `${chameleonState.streak}회 연속 성공`;
         if (modalScore) modalScore.innerText = `${chameleonState.score}점`;
         if (modalBestPctBadge) {
-          modalBestPctBadge.innerText = `최고 일치도 ${pct}%`;
+          modalBestPctBadge.innerText = `최고 싱크로율 ${pct}%`;
         }
 
         if (userBox) {
