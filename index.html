@@ -1055,7 +1055,7 @@
           
           <div class="flex items-center justify-between">
             <div id="memFeedbackBadge" class="text-base sm:text-lg font-black text-emerald-600 flex items-center gap-1.5">
-              <span>✅ 정답입니다! (+1점)</span>
+              <span>✅ 정답입니다! +1점</span>
             </div>
             <span id="memFeedbackDeltaText" class="text-xs font-bold text-slate-500">
               오차: 0%
@@ -1078,7 +1078,7 @@
 
           <!-- Next Button -->
           <button type="button" onclick="nextMemoryRound()" id="memNextRoundBtn" class="w-full py-3.5 rounded-xl font-black text-sm sm:text-base bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white shadow-md shadow-indigo-300/40 transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
-            <span id="memNextRoundBtnText">다음 문제로 이동 (2/5) ➔</span>
+            <span id="memNextRoundBtnText">다음 문제로 이동 2/5 ➔</span>
           </button>
 
         </div>
@@ -1114,7 +1114,7 @@
         <!-- Condition Tags -->
         <div class="flex flex-wrap items-center justify-center gap-2 mt-4">
           <span id="memResultDiffTag" class="px-3 py-1 rounded-full text-xs font-extrabold bg-slate-100 text-slate-700 border border-slate-200">
-            난이도: 보통 (5~10%)
+            난이도: 보통 5~10%
           </span>
           <span class="px-3 py-1 rounded-full text-xs font-extrabold bg-purple-50 text-purple-700 border border-purple-200">
             총 5라운드 완주
@@ -1304,7 +1304,7 @@
         <!-- Next / Retry Buttons -->
         <div class="space-y-2 pt-1">
           <button type="button" onclick="nextTigerDayOrProceed()" id="tigerReviewNextBtn" class="w-full py-3.5 rounded-2xl font-black text-sm sm:text-base bg-gradient-to-r from-amber-500 via-orange-500 to-rose-600 hover:brightness-105 active:scale-98 text-white shadow-md shadow-orange-300/40 transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
-            <span id="tigerReviewNextBtnText">다음 날로 이동 (Day 2) ➔</span>
+            <span id="tigerReviewNextBtnText">다음 날로 이동 Day 2 ➔</span>
           </button>
           <button type="button" onclick="goToTigerIntro()" class="text-xs font-bold text-slate-500 hover:text-slate-800 py-1 transition-colors">
             미니게임 로비로 돌아가기
@@ -3658,7 +3658,7 @@
 
       const reportDiffBadge = document.getElementById('reportDiffBadge');
       if (reportDiffBadge) {
-        reportDiffBadge.innerText = `난이도: ${diffCfg.name} (0~${selectedMax} 배율)`;
+        reportDiffBadge.innerText = `난이도: ${diffCfg.name}`;
       }
 
       const reportBlindBadge = document.getElementById('reportBlindBadge');
@@ -4135,7 +4135,7 @@
       const clicks = document.getElementById('statTotalClicks') ? document.getElementById('statTotalClicks').innerText : '';
       const mode = selectedMode === 'rgb' ? '빛 모드' : '물감 모드';
       const diffText = diffConfigs[selectedMax].name;
-      const blindText = isFullBlindMode ? '🕶️ 완전 블라인드' : '기본 모드 (마지막 1문제 블라인드)';
+      const blindText = isFullBlindMode ? '🕶️ 완전 블라인드' : '기본 모드 - 마지막 1문제 블라인드';
       const shareUrl = encodeResultsToUrl();
 
       const text = `🎨 [색감 감각 테스트: Color Lab]\n동물 페르소나: ${tierBadge} [${animalEmoji} ${animalName}]\n"${subtitle}"\n난이도: ${diffText} (0~${selectedMax}배율) | 모드: ${mode} | ${blindText}\n평균 일치율: ${avg} | 상위 ${rank}\n조작: ${clicks} | 힌트 사용: ${hints}\n\n👉 내 결과 확인 & 나도 도전하기:\n${shareUrl}`;
@@ -4590,7 +4590,7 @@
       userRgbText.innerText = `RGB(${chosenOpt.r}, ${chosenOpt.g}, ${chosenOpt.b})`;
 
       if (memoryState.currentRound < memoryState.totalRounds) {
-        nextBtnText.innerText = `다음 문제로 이동 (${memoryState.currentRound + 1}/${memoryState.totalRounds}) ➔`;
+        nextBtnText.innerText = `다음 문제로 이동 ${memoryState.currentRound + 1}/${memoryState.totalRounds} ➔`;
       } else {
         nextBtnText.innerText = '최종 결과 리포트 확인하기 🏆';
       }
@@ -5237,7 +5237,7 @@
         title.innerText = `Day ${tigerState.currentDay} 생존 성공!`;
         subtitle.innerText = '토끼와 바람의 교란을 뚫고 진짜 호랑이를 포착했습니다!';
         if (tigerState.currentDay < 5) {
-          nextBtnText.innerText = `다음 날로 이동 (Day ${tigerState.currentDay + 1}) ➔`;
+          nextBtnText.innerText = `다음 날로 이동 Day ${tigerState.currentDay + 1} ➔`;
         } else {
           nextBtnText.innerText = '최종 탈출 성공 결과 확인 🏆';
         }
@@ -6653,9 +6653,9 @@
       const pct = chameleonState.bestMatch.pct;
       if (statusText) {
         if (pct >= 80) {
-          statusText.innerHTML = `<span class="text-emerald-700">최고 일치도: <strong>${pct}%</strong> (${chameleonState.bestMatch.dir} 타일과 위장 성공 가능!) 🦎</span>`;
+          statusText.innerHTML = `<span class="text-emerald-700">최고 일치도: <strong>${pct}%</strong></span>`;
         } else {
-          statusText.innerHTML = `최고 일치도: <strong>${pct}%</strong> · 80% 이상 필요`;
+          statusText.innerHTML = `최고 일치도: <strong>${pct}%</strong>`;
         }
       }
 
@@ -6712,7 +6712,7 @@
         const roundGain = 150 + matchBonus + timeBonus;
         chameleonState.score += roundGain;
 
-        showChameleonAlertToast(`🎉 위장 성공! (일치도 ${pct}%) +${roundGain}점`);
+        showChameleonAlertToast(`🎉 위장 성공! +${roundGain}점`);
 
         // Trigger ripple wave propagation from chameleon across entire grid, flash, then proceed!
         triggerCamouflageWave(chameleonState.userR, chameleonState.userG, chameleonState.userB, () => {
@@ -6756,7 +6756,7 @@
           const dirLabel = dirNames[chameleonState.bestMatch.dir] || '주변';
           if (targetBox) targetBox.style.backgroundColor = `rgb(${col.r}, ${col.g}, ${col.b})`;
           if (targetVals) targetVals.innerText = `R:${col.r} G:${col.g} B:${col.b}`;
-          if (targetLabel) targetLabel.innerText = `가장 가까운 타겟 (${dirLabel})`;
+          if (targetLabel) targetLabel.innerText = `가장 가까운 타겟 ${dirLabel}`;
         }
 
         if (modal) modal.classList.remove('hidden');
