@@ -221,6 +221,13 @@
           <span class="text-[9px] font-black px-1 py-0.2 rounded bg-amber-100 text-amber-700">HOT</span>
         </span>
       </button>
+      <button type="button" onclick="switchNavTab('shark')" id="navTabShark" class="px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
+        <span>🦈</span>
+        <span class="flex items-center gap-1">
+          <span>상어의 눈</span>
+          <span class="text-[9px] font-black px-1 py-0.2 rounded bg-cyan-100 text-cyan-800">NEW</span>
+        </span>
+      </button>
       <button type="button" onclick="switchNavTab('memory')" id="navTabMemory" class="px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
         <span>🧠</span>
         <span class="flex items-center gap-1">
@@ -347,6 +354,16 @@
 
         <!-- Mode Discovery Shortcut Cards (2x2 Grid) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
+      <button type="button" onclick="switchNavTab('shark')" class="p-3 rounded-2xl bg-cyan-50/80 hover:bg-cyan-100/90 border border-cyan-300/80 hover:border-cyan-400 text-left transition-all shadow-xs flex items-center gap-2.5 group touch-manipulation cursor-pointer">
+        <div class="w-9 h-9 rounded-xl bg-cyan-100 group-hover:bg-cyan-200 text-cyan-800 flex items-center justify-center text-lg transition-all shrink-0">🦈</div>
+        <div>
+          <div class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-cyan-800 transition-colors flex items-center gap-1">
+            <span>상어의 눈: 심해의 그림자</span>
+            <span class="text-[9px] font-black px-1.5 py-0.2 rounded bg-cyan-200 text-cyan-800">NEW</span>
+          </div>
+          <div class="text-[11px] text-slate-600">완전 전색맹 명암 시각으로 심해 사냥과 해양 보호</div>
+        </div>
+      </button>
       <button type="button" onclick="switchNavTab('tiger')" class="p-3 rounded-2xl bg-amber-50/80 hover:bg-amber-100/90 border border-amber-300/80 hover:border-amber-400 text-left transition-all shadow-xs flex items-center gap-2.5 group touch-manipulation cursor-pointer">
         <div class="w-9 h-9 rounded-xl bg-amber-100 group-hover:bg-amber-200 text-amber-700 flex items-center justify-center text-lg transition-all shrink-0">🦌</div>
         <div>
@@ -1362,7 +1379,269 @@
 
   </main>
 
-  <!-- MODAL 1: Round Result Popup Modal -->
+  <!-- SCREEN 8: Shark Monochromacy & Deep Sea Predator Mini-game (상어의 눈 미니게임) -->
+  <main id="screenShark" class="hidden w-full max-w-2xl mx-auto px-4 py-6 sm:py-8 flex-1 flex flex-col justify-center gap-5">
+    
+    <!-- SUB-VIEW 1: Shark Game Intro Lobby -->
+    <div id="sharkViewIntro" class="flex flex-col gap-5">
+      <div class="text-center">
+        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-100 text-cyan-800 border border-cyan-300 text-xs font-semibold mb-2 shadow-xs">
+          <span>🦈 완전 전색맹 심해 포식자 시각</span>
+          <span class="px-1.5 py-0.2 rounded-full bg-cyan-600 text-white text-[10px] font-black">NEW</span>
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">
+          상어의 눈: 심해의 그림자
+        </h2>
+        <p class="text-xs sm:text-sm text-slate-600 mt-2 max-w-md mx-auto leading-relaxed">
+          상어는 원추세포가 사실상 없어 색을 구분하지 못하는 <strong>완전 전색맹</strong>입니다.<br class="hidden sm:inline">
+          심해의 어둠 속에서 오직 <strong>흐릿한 명암과 실루엣 크기</strong>만으로 대상을 인지합니다.<br class="hidden sm:inline">
+          치명적인 거대 맹수와 쓰레기 함정을 피해 진짜 먹잇감을 사냥하세요!
+        </p>
+      </div>
+
+      <!-- Predator Survival Strategy Guide Card -->
+      <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-3xl p-5 sm:p-6 shadow-sm space-y-3">
+        <div class="flex items-center justify-between mb-1">
+          <span class="text-xs sm:text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
+            <span>🌊 5단계 심해 탐사 가이드</span>
+          </span>
+          <span class="text-xs font-bold text-cyan-700 bg-cyan-50 border border-cyan-200 px-2.5 py-0.5 rounded-full">
+            10×10 심해 격자
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
+          <div class="p-3 rounded-2xl bg-cyan-50/70 border border-cyan-200 flex flex-col gap-1">
+            <span class="font-extrabold text-cyan-900 flex items-center gap-1">
+              <span>🐟</span> <span>1×2 주 메뉴</span>
+            </span>
+            <p class="text-[11px] text-cyan-800 leading-snug">
+              참치, 바다거북 등 2칸짜리 실루엣! 터치하면 사냥 성공으로 점수와 체력을 얻습니다.
+            </p>
+          </div>
+          <div class="p-3 rounded-2xl bg-rose-50/70 border border-rose-200 flex flex-col gap-1">
+            <span class="font-extrabold text-rose-900 flex items-center gap-1">
+              <span>⚠️</span> <span>1×1 잔챙이와 쓰레기</span>
+            </span>
+            <p class="text-[11px] text-rose-800 leading-snug">
+              상어가 잔챙이를 안 먹는 이유! 독해파리, 복어, 낚싯바늘, 그리고 바다에 버려진 비닐봉지와 폐그물이 가득합니다.
+            </p>
+          </div>
+          <div class="p-3 rounded-2xl bg-slate-100 border border-slate-300 flex flex-col gap-1">
+            <span class="font-extrabold text-slate-900 flex items-center gap-1">
+              <span>🐋</span> <span>거대 실루엣: 피할 대상</span>
+            </span>
+            <p class="text-[11px] text-slate-700 leading-snug">
+              범고래 등 상어를 위협하는 바다의 최상위 포식자! 건드리면 심각한 역공 피해를 입습니다.
+            </p>
+          </div>
+        </div>
+
+        <!-- 5 Dive Depths Preview -->
+        <div class="space-y-1.5 text-xs pt-1">
+          <div class="p-2 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+            <span class="font-bold text-slate-700">🫧 Dive 1: 연안 산호초 · 수심 50m</span>
+            <span class="text-slate-500">목표 먹잇감 2마리 · 2×2 범고래</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+            <span class="font-bold text-slate-700">🌊 Dive 2: 대륙붕 절벽 · 수심 150m</span>
+            <span class="text-slate-500">목표 먹잇감 3마리 · 2×2 범고래</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+            <span class="font-bold text-slate-700">🌌 Dive 3: 황혼대 · 수심 300m</span>
+            <span class="text-slate-500">목표 먹잇감 3마리 · 미세 명암</span>
+          </div>
+          <div class="p-2 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
+            <span class="font-bold text-slate-700">🌑 Dive 4: 심해대 · 수심 600m</span>
+            <span class="text-slate-500">목표 먹잇감 4마리 · 3×3 거대 실루엣</span>
+          </div>
+          <div class="p-2 rounded-xl bg-indigo-50 border border-indigo-200 flex items-center justify-between">
+            <span class="font-black text-indigo-900">⚡ Dive 5: 초심해 해구 · 수심 1000m</span>
+            <span class="font-bold text-indigo-700">목표 먹잇감 4마리 · 극한의 흐릿한 명암</span>
+          </div>
+        </div>
+
+        <!-- Science Note Box -->
+        <div class="bg-cyan-50/70 border border-cyan-200 rounded-2xl p-3 text-xs text-cyan-900 mt-2 space-y-0.5">
+          <div class="font-bold text-cyan-800">💡 상어의 감각 팩트 체크</div>
+          <p class="text-[11.5px] text-cyan-800/90 leading-relaxed">
+            상어는 색을 전혀 보지 못하지만, 물속에서 빛을 두 번 반사하는 반사판 휘판을 통해 어둠 속에서도 희미한 명암을 기민하게 포착합니다.
+            하지만 바다에 버려진 투명한 비닐봉지와 폐그물은 상어에게도 치명적인 시각적 착각을 일으킵니다!
+          </p>
+        </div>
+      </div>
+
+      <!-- Start Button -->
+      <button type="button" onclick="startSharkGame()" class="w-full py-4 rounded-2xl font-black text-base sm:text-lg bg-gradient-to-r from-cyan-600 via-teal-600 to-indigo-700 hover:brightness-105 active:scale-98 text-white shadow-xl shadow-cyan-500/30 transition-all flex items-center justify-center gap-2 touch-manipulation cursor-pointer">
+        <span>심해 다이빙 사냥 시작</span>
+        <span>🦈🌊</span>
+      </button>
+    </div>
+
+    <!-- SUB-VIEW 2: In-Game Active Round (10x10 Deep Sea Grid) -->
+    <div id="sharkViewGame" class="hidden flex flex-col gap-4">
+      
+      <!-- In-Game Status Bar -->
+      <div class="flex items-center justify-between text-xs bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-2.5 shadow-sm">
+        <div class="flex items-center gap-2">
+          <span id="sharkDiveBadge" class="px-2.5 py-0.5 rounded-full font-black bg-cyan-100 text-cyan-800 border border-cyan-300">
+            🌊 Dive 1
+          </span>
+          <span id="sharkDepthTitle" class="font-bold text-slate-700">
+            수심 50m: 연안 산호초
+          </span>
+        </div>
+        <div class="flex items-center gap-3 font-extrabold">
+          <span id="sharkPreyCountText" class="text-cyan-700">🐟 목표: 2마리 남음</span>
+          <span id="sharkScoreText" class="text-indigo-600">🎯 0점</span>
+        </div>
+      </div>
+
+      <!-- Health Bar & Timer Bar -->
+      <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-3xl p-4 sm:p-5 shadow-sm space-y-2.5 text-center">
+        <!-- Health and Timer stats -->
+        <div class="grid grid-cols-2 gap-2 text-xs font-bold">
+          <div class="flex items-center justify-between px-2.5 py-1 rounded-xl bg-rose-50 border border-rose-200">
+            <span class="text-rose-700 flex items-center gap-1">
+              <span>❤️ 체력</span>
+            </span>
+            <span id="sharkHealthText" class="mono text-rose-800 font-black">100%</span>
+          </div>
+          <div class="flex items-center justify-between px-2.5 py-1 rounded-xl bg-amber-50 border border-amber-200">
+            <span class="text-amber-700 flex items-center gap-1">
+              <span>⏱️ 사냥 시간</span>
+            </span>
+            <span id="sharkTimerText" class="mono text-amber-800 font-black">18.0초</span>
+          </div>
+        </div>
+
+        <!-- Progress bar for Timer -->
+        <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200">
+          <div id="sharkTimerProgressBar" class="h-full bg-gradient-to-r from-teal-500 via-cyan-500 to-indigo-600 rounded-full transition-all duration-100 ease-linear" style="width: 100%;"></div>
+        </div>
+        
+        <!-- Floating Alert Toast -->
+        <div id="sharkAlertToast" class="hidden transition-all duration-200 py-1.5 px-3 rounded-full bg-rose-100 text-rose-800 border border-rose-300 font-black text-xs shadow-xs inline-block animate-bounce">
+          알림 메시지
+        </div>
+
+        <p class="text-[11px] text-slate-500 font-medium">
+          흐릿한 명암 속에서 1×2 먹잇감을 찾으세요. 거대한 실루엣과 작은 함정은 피해야 합니다!
+        </p>
+      </div>
+
+      <!-- 10x10 Grid Container -->
+      <div class="w-full flex justify-center items-center">
+        <div id="sharkGridOuter" class="w-full max-w-sm sm:max-w-md aspect-square p-2 sm:p-2.5 bg-[#080d16] rounded-3xl backdrop-blur-md border border-cyan-900/40 shadow-2xl select-none transition-all duration-300">
+          <div id="sharkGridContainer" class="grid grid-cols-10 gap-1 w-full h-full">
+            <!-- Dynamic 10x10 grid tiles rendered here -->
+          </div>
+        </div>
+      </div>
+
+      <!-- Vision Mode Hint Indicator -->
+      <div id="sharkVisionHint" class="text-center text-[11px] text-slate-500">
+        👀 현재는 상어 시야로 플레이 중입니다.
+      </div>
+
+      <!-- INLINE Round Outcome & Breakdown Bar -->
+      <div id="sharkRoundReviewBar" class="hidden bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-4 sm:p-5 shadow-xl text-center space-y-3 transform transition-all animate-in fade-in zoom-in-95 duration-200">
+        
+        <div class="flex items-center gap-2.5 text-left">
+          <span id="sharkReviewIcon" class="text-3xl sm:text-4xl">🦈✨</span>
+          <div>
+            <span id="sharkReviewTitle" class="text-base sm:text-lg font-black text-cyan-700 block">수심 50m 사냥 완료!</span>
+            <span id="sharkReviewSubtitle" class="text-xs text-slate-500">인간의 눈으로 본 심해의 총천연색 정체가 공개되었습니다!</span>
+          </div>
+        </div>
+
+        <!-- Entity Identity Breakdown & Environmental Message Box -->
+        <div class="p-3 rounded-2xl bg-cyan-50/80 border border-cyan-200/90 text-left text-xs text-cyan-950 leading-snug space-y-1.5">
+          <div class="font-extrabold text-cyan-800 flex items-center justify-between">
+            <span>💡 심해 생태와 해양 환경 리포트</span>
+            <span id="sharkRoundReviewScoreAdd" class="text-indigo-600 font-black">+50점</span>
+          </div>
+          <div id="sharkRoundReviewDetail" class="text-[11.5px] text-cyan-900/90 space-y-1">
+            <!-- Filled dynamically -->
+          </div>
+        </div>
+
+        <!-- Next / Retry Buttons -->
+        <div class="space-y-2 pt-1">
+          <button type="button" onclick="nextSharkDiveOrProceed()" id="sharkReviewNextBtn" class="w-full py-3.5 rounded-2xl font-black text-sm sm:text-base bg-gradient-to-r from-cyan-600 via-teal-600 to-indigo-700 hover:brightness-105 active:scale-98 text-white shadow-md shadow-cyan-400/30 transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
+            <span id="sharkReviewNextBtnText">다음 수심으로 잠수 ➔</span>
+          </button>
+          <button type="button" onclick="goToSharkIntro()" class="text-xs font-bold text-slate-500 hover:text-slate-800 py-1 transition-colors">
+            미니게임 로비로 돌아가기
+          </button>
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- SUB-VIEW 3: Final Results Report -->
+    <div id="sharkViewFinalResult" class="hidden flex flex-col gap-5">
+      
+      <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-3xl p-6 sm:p-8 shadow-sm text-center flex flex-col items-center">
+        
+        <div id="sharkFinalBadge" class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full text-xs font-black shadow-xs mb-3 border bg-cyan-100 text-cyan-800 border-cyan-300">
+          👑 심해의 패왕 백상아리
+        </div>
+
+        <!-- Score Icon & Title -->
+        <div class="text-5xl mb-2" id="sharkFinalEmoji">🦈🏆</div>
+        <h3 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight" id="sharkFinalTitle">
+          심해 1000m 완주 성공!
+        </h3>
+        <p class="text-xs sm:text-sm text-slate-600 mt-1 max-w-sm leading-relaxed" id="sharkFinalDesc">
+          빛 한 점 들지 않는 심해에서 오직 명암과 실루엣만으로 완벽한 사냥을 완수했습니다!
+        </p>
+
+        <!-- Stats Chips -->
+        <div class="flex flex-wrap items-center justify-center gap-2 mt-4 text-xs font-extrabold">
+          <span id="sharkFinalScoreTag" class="px-3 py-1 rounded-full bg-cyan-50 text-cyan-800 border border-cyan-300">
+            총 점수: 0점
+          </span>
+          <span id="sharkFinalPreyTag" class="px-3 py-1 rounded-full bg-teal-50 text-teal-800 border border-teal-300">
+            사냥 성공: 0마리
+          </span>
+          <span id="sharkFinalDebrisTag" class="px-3 py-1 rounded-full bg-rose-50 text-rose-800 border border-rose-300">
+            만난 바다쓰레기: 0개
+          </span>
+        </div>
+
+        <!-- Environmental Conservation Message -->
+        <div class="mt-5 p-3.5 bg-cyan-50/70 border border-cyan-200 rounded-2xl text-left text-xs text-cyan-950 leading-relaxed">
+          <div class="font-bold text-cyan-800 mb-1 flex items-center gap-1">
+            <span>🌊 해양 생태계와 우리의 바다:</span>
+          </div>
+          상어는 색을 보지 못해 비닐봉지를 해파리로 착각하거나, 버려진 폐그물에 걸려 매년 수많은 개체가 목숨을 잃고 있습니다. 바다의 최상위 포식자가 건강하게 헤엄칠 수 있도록 일회용 플라스틱 줄이기에 동참해 주세요!
+        </div>
+
+      </div>
+
+      <!-- Action Buttons -->
+      <div class="space-y-2">
+        <div class="grid grid-cols-2 gap-2">
+          <button type="button" onclick="startSharkGame()" class="py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-gradient-to-r from-cyan-600 to-indigo-600 hover:brightness-105 active:scale-98 text-white shadow-sm transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
+            <span>🔄 다시 사냥하기</span>
+          </button>
+          <button type="button" onclick="goToSharkIntro()" class="py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 shadow-xs touch-manipulation cursor-pointer">
+            <span>📖 다이브 선택</span>
+          </button>
+        </div>
+
+        <button type="button" onclick="switchNavTab('test')" class="w-full py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
+          <span>🎯 본 게임 하러 가기</span>
+        </button>
+      </div>
+
+    </div>
+
+  </main>
+
+    <!-- MODAL 1: Round Result Popup Modal -->
   <div id="roundResultModal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white/95 border border-white/80 rounded-3xl p-5 sm:p-6 w-full max-w-sm sm:max-w-md shadow-2xl text-center transform transition-all animate-in fade-in zoom-in duration-200">
       
@@ -1755,7 +2034,7 @@
     let triviaViewerInitialized = false;
 
     // --- Screen Navigation & Tabs ---
-    const allScreenIds = ['screenLobby', 'screenGame', 'screenReport', 'screenSandbox', 'screenTrivia', 'screenMemory', 'screenTiger'];
+    const allScreenIds = ['screenLobby', 'screenGame', 'screenReport', 'screenSandbox', 'screenTrivia', 'screenMemory', 'screenTiger', 'screenShark'];
 
     function showScreen(screenId) {
       allScreenIds.forEach(id => {
@@ -1778,6 +2057,7 @@
     function updateNavTabUI(screenId) {
       const tabTest = document.getElementById('navTabTest');
       const tabTiger = document.getElementById('navTabTiger');
+      const tabShark = document.getElementById('navTabShark');
       const tabMemory = document.getElementById('navTabMemory');
       const tabSandbox = document.getElementById('navTabSandbox');
       const tabTrivia = document.getElementById('navTabTrivia');
@@ -1788,6 +2068,7 @@
 
       if (tabTest) tabTest.className = (screenId === 'screenLobby' || screenId === 'screenGame' || screenId === 'screenReport') ? activeClass : inactiveClass;
       if (tabTiger) tabTiger.className = (screenId === 'screenTiger') ? activeClass : inactiveClass;
+      if (tabShark) tabShark.className = (screenId === 'screenShark') ? activeClass : inactiveClass;
       if (tabMemory) tabMemory.className = (screenId === 'screenMemory') ? activeClass : inactiveClass;
       if (tabSandbox) tabSandbox.className = (screenId === 'screenSandbox') ? activeClass : inactiveClass;
       if (tabTrivia) tabTrivia.className = (screenId === 'screenTrivia') ? activeClass : inactiveClass;
@@ -1800,6 +2081,9 @@
       }
       if (tab !== 'tiger') {
         clearTigerGameTimers();
+      }
+      if (tab !== 'shark') {
+        clearSharkGameTimers();
       }
       if (tab === 'test') {
         const gameEl = document.getElementById('screenGame');
@@ -1814,6 +2098,9 @@
       } else if (tab === 'tiger') {
         initTigerGame();
         showScreen('screenTiger');
+      } else if (tab === 'shark') {
+        initSharkGame();
+        showScreen('screenShark');
       } else if (tab === 'memory') {
         initMemoryMode();
         showScreen('screenMemory');
@@ -4852,6 +5139,716 @@
           }
         } catch (e) {}
         document.body.removeChild(t);
+      }
+    }
+
+    // ==========================================
+    // SCREEN 8: Shark Vision (상어의 눈) Mini-Game Logic
+    // ==========================================
+
+    let sharkState = {
+      status: 'intro', // 'intro', 'playing', 'roundOver', 'finalResult'
+      currentDive: 1, // 1 to 5
+      clearedDives: 0,
+      score: 0,
+      health: 100,
+      preyEatenTotal: 0,
+      debrisEncountered: 0,
+      trapsEncountered: 0,
+      predatorEncounters: 0,
+      gridSize: 10,
+      cells: [], // 10x10 cell definitions
+      preyList: [], // 1x2 items
+      hazardList: [], // 1x1 traps and marine debris
+      giantPredator: null, // 2x2 or 3x3 entity
+      timerRemainMs: 18000,
+      timerMaxMs: 18000,
+      timerInterval: null,
+      giantMoveInterval: null,
+      toastTimeout: null,
+      lastOutcome: null,
+      diveConfigs: [
+        { dive: 1, depth: 50, name: '수심 50m: 연안 산호초', timeMs: 18000, preyCount: 2, hazardCount: 4, giantSize: 2, giantMoveMs: 3000, contrast: 1 },
+        { dive: 2, depth: 150, name: '수심 150m: 대륙붕 절벽', timeMs: 16000, preyCount: 3, hazardCount: 6, giantSize: 2, giantMoveMs: 2600, contrast: 2 },
+        { dive: 3, depth: 300, name: '수심 300m: 황혼대', timeMs: 15000, preyCount: 3, hazardCount: 8, giantSize: 2, giantMoveMs: 2200, contrast: 3 },
+        { dive: 4, depth: 600, name: '수심 600m: 심해대', timeMs: 14000, preyCount: 4, hazardCount: 10, giantSize: 3, giantMoveMs: 2000, contrast: 4 },
+        { dive: 5, depth: 1000, name: '수심 1000m: 초심해 해구', timeMs: 13000, preyCount: 4, hazardCount: 12, giantSize: 3, giantMoveMs: 1600, contrast: 5 },
+      ]
+    };
+
+    function playSharkChompSound() {
+      playTone(280, 'triangle', 0.08, 0.2);
+      setTimeout(() => playTone(360, 'sine', 0.1, 0.22), 60);
+      setTimeout(() => playTone(540, 'triangle', 0.12, 0.25), 130);
+    }
+
+    function playSharkHazardSound() {
+      playTone(180, 'sawtooth', 0.18, 0.2);
+      setTimeout(() => playTone(120, 'sawtooth', 0.22, 0.22), 120);
+    }
+
+    function playSharkPredatorSound() {
+      playTone(85, 'sawtooth', 0.45, 0.35);
+      setTimeout(() => playTone(65, 'sine', 0.4, 0.4), 150);
+    }
+
+    function initSharkGame() {
+      clearSharkGameTimers();
+      sharkState.status = 'intro';
+      sharkState.currentDive = 1;
+      sharkState.clearedDives = 0;
+      sharkState.score = 0;
+      sharkState.health = 100;
+      sharkState.preyEatenTotal = 0;
+      sharkState.debrisEncountered = 0;
+      sharkState.trapsEncountered = 0;
+      sharkState.predatorEncounters = 0;
+      goToSharkIntro();
+    }
+
+    function goToSharkIntro() {
+      clearSharkGameTimers();
+      sharkState.status = 'intro';
+      const intro = document.getElementById('sharkViewIntro');
+      const game = document.getElementById('sharkViewGame');
+      const finalRes = document.getElementById('sharkViewFinalResult');
+      if (intro) intro.classList.remove('hidden');
+      if (game) game.classList.add('hidden');
+      if (finalRes) finalRes.classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function startSharkGame() {
+      clearSharkGameTimers();
+      sharkState.currentDive = 1;
+      sharkState.clearedDives = 0;
+      sharkState.score = 0;
+      sharkState.health = 100;
+      sharkState.preyEatenTotal = 0;
+      sharkState.debrisEncountered = 0;
+      sharkState.trapsEncountered = 0;
+      sharkState.predatorEncounters = 0;
+      setupSharkDive(1);
+    }
+
+    function setupSharkDive(diveNum) {
+      clearSharkGameTimers();
+      sharkState.currentDive = diveNum;
+      sharkState.status = 'playing';
+
+      const cfg = sharkState.diveConfigs[diveNum - 1] || sharkState.diveConfigs[0];
+      sharkState.timerRemainMs = cfg.timeMs;
+      sharkState.timerMaxMs = cfg.timeMs;
+
+      // Views toggle
+      const intro = document.getElementById('sharkViewIntro');
+      const game = document.getElementById('sharkViewGame');
+      const finalRes = document.getElementById('sharkViewFinalResult');
+      const reviewBar = document.getElementById('sharkRoundReviewBar');
+      if (intro) intro.classList.add('hidden');
+      if (game) game.classList.remove('hidden');
+      if (finalRes) finalRes.classList.add('hidden');
+      if (reviewBar) reviewBar.classList.add('hidden');
+
+      // Badges & Labels
+      const diveBadge = document.getElementById('sharkDiveBadge');
+      const depthTitle = document.getElementById('sharkDepthTitle');
+      const visionHint = document.getElementById('sharkVisionHint');
+      const gridOuter = document.getElementById('sharkGridOuter');
+      if (diveBadge) diveBadge.innerText = `🌊 Dive ${cfg.dive}`;
+      if (depthTitle) depthTitle.innerText = cfg.name;
+      if (visionHint) visionHint.innerText = '👀 현재는 상어 시야로 플레이 중입니다.';
+      if (gridOuter) {
+        gridOuter.className = 'w-full max-w-sm sm:max-w-md aspect-square p-2 sm:p-2.5 bg-[#080d16] rounded-3xl backdrop-blur-md border border-cyan-900/40 shadow-2xl select-none transition-all duration-300';
+      }
+
+      updateSharkStatusUI();
+
+      // Entity Generation
+      const n = sharkState.gridSize; // 10
+      const occupied = new Set();
+
+      // 1. Giant Predator (2x2 or 3x3)
+      const gSize = cfg.giantSize;
+      const maxAnchor = n - gSize;
+      const gR = Math.floor(Math.random() * (maxAnchor + 1));
+      const gC = Math.floor(Math.random() * (maxAnchor + 1));
+      sharkState.giantPredator = {
+        r: gR,
+        c: gC,
+        size: gSize,
+        name: '범고래',
+        icon: '🐋',
+        penaltyH: 35,
+        penaltyT: 3500
+      };
+      for (let r = 0; r < gSize; r++) {
+        for (let c = 0; c < gSize; c++) {
+          occupied.add(`${gR + r},${gC + c}`);
+        }
+      }
+
+      // 2. Main Prey (1x2 or 2x1 items)
+      sharkState.preyList = [];
+      const preyTypes = [
+        { type: 'tuna', name: '참치', icon: '🐟' },
+        { type: 'turtle', name: '바다거북', icon: '🐢' },
+        { type: 'squid', name: '대왕오징어', icon: '🦑' },
+        { type: 'mackerel', name: '고등어', icon: '🐟' },
+        { type: 'ray', name: '가오리', icon: '🐡' }
+      ];
+
+      for (let i = 0; i < cfg.preyCount; i++) {
+        let placed = false;
+        let attempts = 0;
+        const pInfo = preyTypes[i % preyTypes.length];
+        while (!placed && attempts < 100) {
+          attempts++;
+          const isH = Math.random() < 0.5;
+          const h = isH ? 1 : 2;
+          const w = isH ? 2 : 1;
+          const r = Math.floor(Math.random() * (n - h + 1));
+          const c = Math.floor(Math.random() * (n - w + 1));
+          const c1 = `${r},${c}`;
+          const c2 = isH ? `${r},${c + 1}` : `${r + 1},${c}`;
+
+          if (!occupied.has(c1) && !occupied.has(c2)) {
+            occupied.add(c1);
+            occupied.add(c2);
+            sharkState.preyList.push({
+              id: `prey_${i}`,
+              type: pInfo.type,
+              name: pInfo.name,
+              icon: pInfo.icon,
+              cells: [
+                { r, c },
+                isH ? { r, c: c + 1 } : { r: r + 1, c }
+              ],
+              eaten: false
+            });
+            placed = true;
+          }
+        }
+      }
+
+      // 3. 1x1 Hazards & Marine Debris ("상어가 잔챙이는 안 먹는 이유")
+      sharkState.hazardList = [];
+      const hazardTemplates = [
+        // Traps
+        { type: 'jellyfish', category: 'trap', name: '독해파리', icon: '🪼', penaltyH: 15, penaltyT: 2000, msg: '독해파리 촉수에 쏘였습니다! 🪼 찌릿! 체력 -15' },
+        { type: 'puffer', category: 'trap', name: '독복어', icon: '🐡', penaltyH: 15, penaltyT: 2000, msg: '가시 돋친 독복어였습니다! 🐡 체력 -15' },
+        { type: 'hook', category: 'trap', name: '낚싯바늘', icon: '🪝', penaltyH: 20, penaltyT: 2500, msg: '날카로운 낚싯바늘 미끼였습니다! 🪝 체력 -20' },
+        // Marine Debris
+        { type: 'bag', category: 'debris', name: '비닐봉지', icon: '🛍️', penaltyH: 20, penaltyT: 2500, msg: '비닐봉지 쓰레기였습니다! 🛍️ 해양 플라스틱 위험 체력 -20' },
+        { type: 'net', category: 'debris', name: '버려진 폐그물', icon: '🕸️', penaltyH: 20, penaltyT: 2500, msg: '폐그물에 지느러미가 걸렸습니다! 🕸️ 유령어업 위협 체력 -20' },
+        { type: 'bottle', category: 'debris', name: '페트병', icon: '🍾', penaltyH: 15, penaltyT: 2000, msg: '플라스틱 병 쓰레기였습니다! 🍾 체력 -15' }
+      ];
+
+      for (let i = 0; i < cfg.hazardCount; i++) {
+        let placed = false;
+        let attempts = 0;
+        const hTemplate = hazardTemplates[i % hazardTemplates.length];
+        while (!placed && attempts < 100) {
+          attempts++;
+          const r = Math.floor(Math.random() * n);
+          const c = Math.floor(Math.random() * n);
+          const coordKey = `${r},${c}`;
+          if (!occupied.has(coordKey)) {
+            occupied.add(coordKey);
+            sharkState.hazardList.push({
+              r, c,
+              type: hTemplate.type,
+              category: hTemplate.category,
+              name: hTemplate.name,
+              icon: hTemplate.icon,
+              penaltyH: hTemplate.penaltyH,
+              penaltyT: hTemplate.penaltyT,
+              msg: hTemplate.msg
+            });
+            placed = true;
+          }
+        }
+      }
+
+      // Render Grid DOM
+      renderSharkGridDOM();
+      updateSharkGridColors(false);
+
+      // Start Timers
+      playTone(480, 'sine', 0.08);
+
+      const intervalStepMs = 100;
+      sharkState.timerInterval = setInterval(() => {
+        sharkState.timerRemainMs -= intervalStepMs;
+        if (sharkState.timerRemainMs <= 0) {
+          sharkState.timerRemainMs = 0;
+          updateSharkStatusUI();
+          endSharkDive('timeout');
+          return;
+        }
+        updateSharkStatusUI();
+      }, intervalStepMs);
+
+      // Giant Predator subtle patrol movement
+      sharkState.giantMoveInterval = setInterval(() => {
+        moveGiantPredator();
+      }, cfg.giantMoveMs);
+    }
+
+    function renderSharkGridDOM() {
+      const container = document.getElementById('sharkGridContainer');
+      if (!container) return;
+      container.innerHTML = '';
+
+      const n = sharkState.gridSize;
+      const frag = document.createDocumentFragment();
+
+      for (let r = 0; r < n; r++) {
+        for (let c = 0; c < n; c++) {
+          const btn = document.createElement('button');
+          btn.type = 'button';
+          btn.dataset.r = r;
+          btn.dataset.c = c;
+          btn.className = 'shark-cell w-full h-full rounded-lg transition-all duration-150 flex items-center justify-center text-xs sm:text-sm select-none touch-manipulation cursor-pointer border border-white/[0.04]';
+          frag.appendChild(btn);
+        }
+      }
+      container.appendChild(frag);
+
+      // Attach event delegation on container
+      container.onpointerdown = (e) => {
+        if (sharkState.status !== 'playing') return;
+        const btn = e.target.closest('[data-r]');
+        if (!btn) return;
+        const r = parseInt(btn.dataset.r, 10);
+        const c = parseInt(btn.dataset.c, 10);
+        handleSharkCellClick(r, c);
+      };
+    }
+
+    function updateSharkGridColors(isHumanVision = false) {
+      const container = document.getElementById('sharkGridContainer');
+      if (!container) return;
+
+      const n = sharkState.gridSize;
+      const cfg = sharkState.diveConfigs[sharkState.currentDive - 1] || sharkState.diveConfigs[0];
+      const contrastLevel = cfg.contrast; // 1 to 5
+
+      // Lookup tables
+      const preyMap = new Map();
+      sharkState.preyList.forEach(p => {
+        p.cells.forEach(cell => {
+          preyMap.set(`${cell.r},${cell.c}`, p);
+        });
+      });
+
+      const hazardMap = new Map();
+      sharkState.hazardList.forEach(h => {
+        hazardMap.set(`${h.r},${h.c}`, h);
+      });
+
+      const giantCells = new Set();
+      if (sharkState.giantPredator) {
+        const { r: gr, c: gc, size: gs } = sharkState.giantPredator;
+        for (let dr = 0; dr < gs; dr++) {
+          for (let dc = 0; dc < gs; dc++) {
+            giantCells.add(`${gr + dr},${gc + dc}`);
+          }
+        }
+      }
+
+      // Shading formulas for Shark Vision (faint contrast)
+      // Background: Dive 1: #0c1522 -> Dive 5: #070b12
+      const bgBaseR = Math.max(7, 12 - (contrastLevel * 1));
+      const bgBaseG = Math.max(11, 21 - (contrastLevel * 2));
+      const bgBaseB = Math.max(18, 34 - (contrastLevel * 3));
+
+      // Contrast delta: very subtle difference (user requested: 흐릿하게 비교되도록)
+      // Prey delta: +12 in dive 1, +8 in dive 5
+      const preyDelta = Math.max(7, 13 - contrastLevel);
+      // Hazard delta: +8 in dive 1, +5 in dive 5 (slightly distinct from prey by size, not intensity)
+      const hazardDelta = Math.max(5, 9 - contrastLevel);
+      // Giant delta: +14 in dive 1, +9 in dive 5
+      const giantDelta = Math.max(8, 15 - contrastLevel);
+
+      const buttons = container.querySelectorAll('.shark-cell');
+      buttons.forEach(btn => {
+        const r = parseInt(btn.dataset.r, 10);
+        const c = parseInt(btn.dataset.c, 10);
+        const key = `${r},${c}`;
+
+        const prey = preyMap.get(key);
+        const hazard = hazardMap.get(key);
+        const isGiant = giantCells.has(key);
+
+        if (!isHumanVision) {
+          // SHARK VISION (흐릿한 전색맹 심해 명암)
+          if (prey && prey.eaten) {
+            // Devoured prey cell
+            btn.style.backgroundColor = 'rgba(13, 148, 136, 0.25)';
+            btn.style.borderColor = 'rgba(20, 184, 166, 0.4)';
+            btn.innerHTML = '<span class="text-[10px] text-teal-300/80 font-bold">✓</span>';
+          } else if (prey) {
+            // Prey silhouette (1x2)
+            const pr = bgBaseR + preyDelta;
+            const pg = bgBaseG + preyDelta + 1;
+            const pb = bgBaseB + preyDelta + 3;
+            btn.style.backgroundColor = `rgb(${pr}, ${pg}, ${pb})`;
+            btn.style.borderColor = 'rgba(255, 255, 255, 0.05)';
+            btn.innerHTML = '';
+          } else if (isGiant) {
+            // Giant predator silhouette (2x2 or 3x3)
+            const gr = bgBaseR + giantDelta;
+            const gg = bgBaseG + giantDelta + 1;
+            const gb = bgBaseB + giantDelta + 3;
+            btn.style.backgroundColor = `rgb(${gr}, ${gg}, ${gb})`;
+            btn.style.borderColor = 'rgba(255, 255, 255, 0.06)';
+            btn.innerHTML = '';
+          } else if (hazard) {
+            // Hazard silhouette (1x1)
+            const hr = bgBaseR + hazardDelta;
+            const hg = bgBaseG + hazardDelta + 1;
+            const hb = bgBaseB + hazardDelta + 2;
+            btn.style.backgroundColor = `rgb(${hr}, ${hg}, ${hb})`;
+            btn.style.borderColor = 'rgba(255, 255, 255, 0.04)';
+            btn.innerHTML = '';
+          } else {
+            // Murky Water background with subtle micro-noise
+            const noise = ((r * 7 + c * 13) % 5) - 2;
+            const wr = Math.max(5, bgBaseR + noise);
+            const wg = Math.max(9, bgBaseG + noise);
+            const wb = Math.max(15, bgBaseB + noise);
+            btn.style.backgroundColor = `rgb(${wr}, ${wg}, ${wb})`;
+            btn.style.borderColor = 'rgba(255, 255, 255, 0.03)';
+            btn.innerHTML = '';
+          }
+        } else {
+          // HUMAN VISION (총천연색 청명한 바다 + 정체 즉시 공개)
+          if (prey && prey.eaten) {
+            btn.style.backgroundColor = '#059669'; // Emerald
+            btn.style.borderColor = '#34d399';
+            btn.innerHTML = `<span class="text-xs sm:text-sm font-black text-white">${prey.icon}</span>`;
+          } else if (prey) {
+            btn.style.backgroundColor = '#0284c7'; // Vivid ocean blue
+            btn.style.borderColor = '#38bdf8';
+            btn.innerHTML = `<span class="text-xs sm:text-sm font-black text-white animate-pulse">${prey.icon}</span>`;
+          } else if (isGiant) {
+            btn.style.backgroundColor = '#0f172a'; // Apex Orca Dark
+            btn.style.borderColor = '#f43f5e';
+            btn.innerHTML = '<span class="text-xs sm:text-sm font-extrabold text-white animate-bounce">🐋</span>';
+          } else if (hazard) {
+            if (hazard.category === 'debris') {
+              btn.style.backgroundColor = '#be123c'; // Debris Rose Red
+              btn.style.borderColor = '#fb7185';
+              btn.innerHTML = `<span class="text-xs sm:text-sm font-black text-white">${hazard.icon}</span>`;
+            } else {
+              btn.style.backgroundColor = '#d97706'; // Trap Amber
+              btn.style.borderColor = '#fcd34d';
+              btn.innerHTML = `<span class="text-xs sm:text-sm font-black text-white">${hazard.icon}</span>`;
+            }
+          } else {
+            // Bright tropical/deep azure water
+            btn.style.backgroundColor = '#0369a1';
+            btn.style.borderColor = 'rgba(255, 255, 255, 0.15)';
+            btn.innerHTML = '';
+          }
+        }
+      });
+    }
+
+    function moveGiantPredator() {
+      if (sharkState.status !== 'playing' || !sharkState.giantPredator) return;
+      const n = sharkState.gridSize;
+      const g = sharkState.giantPredator;
+      const maxAnchor = n - g.size;
+
+      const directions = [
+        { dr: -1, dc: 0 },
+        { dr: 1, dc: 0 },
+        { dr: 0, dc: -1 },
+        { dr: 0, dc: 1 }
+      ].sort(() => Math.random() - 0.5);
+
+      for (let dir of directions) {
+        const nr = g.r + dir.dr;
+        const nc = g.c + dir.dc;
+        if (nr >= 0 && nr <= maxAnchor && nc >= 0 && nc <= maxAnchor) {
+          g.r = nr;
+          g.c = nc;
+          break;
+        }
+      }
+      updateSharkGridColors(false);
+    }
+
+    function handleSharkCellClick(r, c) {
+      if (sharkState.status !== 'playing') return;
+
+      const key = `${r},${c}`;
+
+      // 1. Check Giant Predator
+      if (sharkState.giantPredator) {
+        const g = sharkState.giantPredator;
+        if (r >= g.r && r < g.r + g.size && c >= g.c && c < g.c + g.size) {
+          sharkState.health = Math.max(0, sharkState.health - g.penaltyH);
+          sharkState.timerRemainMs = Math.max(200, sharkState.timerRemainMs - g.penaltyT);
+          sharkState.predatorEncounters++;
+          playSharkPredatorSound();
+          triggerSharkScreenShake();
+          showSharkAlertToast(g.msg);
+          updateSharkStatusUI();
+
+          if (sharkState.health <= 0) {
+            endSharkDive('health0');
+          }
+          return;
+        }
+      }
+
+      // 2. Check 1x1 Hazards & Marine Trash
+      const hazard = sharkState.hazardList.find(h => h.r === r && h.c === c);
+      if (hazard) {
+        sharkState.health = Math.max(0, sharkState.health - hazard.penaltyH);
+        sharkState.timerRemainMs = Math.max(200, sharkState.timerRemainMs - hazard.penaltyT);
+        if (hazard.category === 'debris') {
+          sharkState.debrisEncountered++;
+        } else {
+          sharkState.trapsEncountered++;
+        }
+        playSharkHazardSound();
+        showSharkAlertToast(hazard.msg);
+        updateSharkStatusUI();
+
+        if (sharkState.health <= 0) {
+          endSharkDive('health0');
+        }
+        return;
+      }
+
+      // 3. Check 1x2 Prey (Main Menu)
+      const prey = sharkState.preyList.find(p => p.cells.some(cell => cell.r === r && cell.c === c));
+      if (prey) {
+        if (prey.eaten) return; // already eaten
+
+        prey.eaten = true;
+        sharkState.score += 25;
+        sharkState.preyEatenTotal++;
+        sharkState.health = Math.min(100, sharkState.health + 10);
+        sharkState.timerRemainMs = Math.min(sharkState.timerMaxMs, sharkState.timerRemainMs + 2500);
+
+        playSharkChompSound();
+        showSharkAlertToast(`${prey.name} 사냥 성공! 🐟 콰직! +25점`);
+        updateSharkStatusUI();
+        updateSharkGridColors(false);
+
+        // Check if all prey eaten
+        const allEaten = sharkState.preyList.every(p => p.eaten);
+        if (allEaten) {
+          endSharkDive('cleared');
+        }
+        return;
+      }
+
+      // 4. Empty Ocean Water touched
+      playTone(320, 'sine', 0.04, 0.03);
+    }
+
+    function triggerSharkScreenShake() {
+      const gridOuter = document.getElementById('sharkGridOuter');
+      if (!gridOuter) return;
+      gridOuter.classList.add('animate-shake');
+      setTimeout(() => {
+        gridOuter.classList.remove('animate-shake');
+      }, 400);
+    }
+
+    function showSharkAlertToast(msg) {
+      const toast = document.getElementById('sharkAlertToast');
+      if (!toast) return;
+      toast.innerText = msg;
+      toast.classList.remove('hidden');
+
+      if (sharkState.toastTimeout) clearTimeout(sharkState.toastTimeout);
+      sharkState.toastTimeout = setTimeout(() => {
+        toast.classList.add('hidden');
+      }, 2500);
+    }
+
+    function updateSharkStatusUI() {
+      const healthText = document.getElementById('sharkHealthText');
+      const timerText = document.getElementById('sharkTimerText');
+      const progressBar = document.getElementById('sharkTimerProgressBar');
+      const preyCountText = document.getElementById('sharkPreyCountText');
+      const scoreText = document.getElementById('sharkScoreText');
+
+      if (healthText) healthText.innerText = `${Math.max(0, sharkState.health)}%`;
+
+      const remainSec = Math.max(0, sharkState.timerRemainMs / 1000).toFixed(1);
+      if (timerText) timerText.innerText = `${remainSec}초`;
+
+      if (progressBar) {
+        const pct = Math.max(0, Math.min(100, (sharkState.timerRemainMs / sharkState.timerMaxMs) * 100));
+        progressBar.style.width = `${pct}%`;
+      }
+
+      const remainingPrey = sharkState.preyList.filter(p => !p.eaten).length;
+      if (preyCountText) preyCountText.innerText = `🐟 목표: ${remainingPrey}마리 남음`;
+      if (scoreText) scoreText.innerText = `🎯 ${sharkState.score}점`;
+    }
+
+    function endSharkDive(outcome) {
+      clearSharkGameTimers();
+      sharkState.status = 'roundOver';
+      sharkState.lastOutcome = outcome;
+
+      if (outcome === 'cleared') {
+        sharkState.clearedDives++;
+        sharkState.score += 50; // dive clear bonus
+        playTone(660, 'triangle', 0.15, 0.2);
+        setTimeout(() => playTone(880, 'sine', 0.2, 0.25), 120);
+      } else {
+        playTone(160, 'sawtooth', 0.4, 0.3);
+      }
+
+      // Convert grid in-place to HUMAN VISION
+      updateSharkGridColors(true);
+
+      const visionHint = document.getElementById('sharkVisionHint');
+      const gridOuter = document.getElementById('sharkGridOuter');
+      if (visionHint) visionHint.innerText = '✨ 인간의 눈으로 심해의 정체와 색상이 완전히 밝혀졌습니다!';
+      if (gridOuter) {
+        gridOuter.className = 'w-full max-w-sm sm:max-w-md aspect-square p-2 sm:p-2.5 bg-[#0284c7] rounded-3xl backdrop-blur-md border-2 border-cyan-300 shadow-2xl select-none transition-all duration-300';
+      }
+
+      // Show inline review breakdown bar
+      const reviewBar = document.getElementById('sharkRoundReviewBar');
+      const icon = document.getElementById('sharkReviewIcon');
+      const title = document.getElementById('sharkReviewTitle');
+      const subtitle = document.getElementById('sharkReviewSubtitle');
+      const detail = document.getElementById('sharkRoundReviewDetail');
+      const scoreAdd = document.getElementById('sharkRoundReviewScoreAdd');
+      const nextBtnText = document.getElementById('sharkReviewNextBtnText');
+
+      if (reviewBar) reviewBar.classList.remove('hidden');
+
+      const cfg = sharkState.diveConfigs[sharkState.currentDive - 1] || sharkState.diveConfigs[0];
+
+      if (outcome === 'cleared') {
+        if (icon) icon.innerText = '🦈✨';
+        if (title) title.innerText = `${cfg.name} 사냥 완수!`;
+        if (subtitle) subtitle.innerText = '흐릿한 실루엣 속에서 먹잇감만을 완벽히 포식했습니다!';
+        if (scoreAdd) scoreAdd.innerText = '+50점 보너스';
+        if (nextBtnText) {
+          if (sharkState.currentDive < 5) {
+            nextBtnText.innerText = `다음 수심으로 잠수: Dive ${sharkState.currentDive + 1} ➔`;
+          } else {
+            nextBtnText.innerText = '최종 심해 원정 결과 보기 🏆';
+          }
+        }
+      } else if (outcome === 'health0') {
+        if (icon) icon.innerText = '💀⚠️';
+        if (title) title.innerText = `${cfg.name}에서 탈진했습니다!`;
+        if (subtitle) subtitle.innerText = '맹수의 역공이나 치명적인 트랩/해양 쓰레기를 견디지 못했습니다.';
+        if (scoreAdd) scoreAdd.innerText = '+0점';
+        if (nextBtnText) nextBtnText.innerText = '최종 원정 결과 보기 📊';
+      } else {
+        // timeout
+        if (icon) icon.innerText = '⏱️🌊';
+        if (title) title.innerText = `${cfg.name} 사냥 시간 종료!`;
+        if (subtitle) subtitle.innerText = '제한 시간 내에 먹잇감을 모두 포획하지 못하고 부상했습니다.';
+        if (scoreAdd) scoreAdd.innerText = '+0점';
+        if (nextBtnText) nextBtnText.innerText = '최종 원정 결과 보기 📊';
+      }
+
+      // Build breakdown detail text
+      const debrisCount = sharkState.hazardList.filter(h => h.category === 'debris').length;
+      const trapCount = sharkState.hazardList.filter(h => h.category === 'trap').length;
+      const eatenCount = sharkState.preyList.filter(p => p.eaten).length;
+
+      if (detail) {
+        detail.innerHTML = `
+          <div>• <strong>🐟 1×2 주 메뉴: ${eatenCount}/${sharkState.preyList.length} 포획 -</strong> 상어의 훌륭한 단백질 공급원이었습니다.</div>
+          <div>• <strong>🐋 거대 실루엣 ${cfg.giantSize}×${cfg.giantSize}:</strong> 상어의 유일한 천적 <strong>범고래</strong>였습니다! 피해야만 살아남습니다.</div>
+          <div>• <strong>⚠️ 1×1 잔챙이 ${trapCount}개와 바다쓰레기 ${debrisCount}개:</strong> 독해파리, 가시복어, 낚싯바늘, 그리고 인간이 버린 비닐봉지와 폐그물이었습니다!</div>
+          <div class="mt-1 pt-1 border-t border-cyan-200/60 text-cyan-900 font-semibold">
+            🌊 <em>해양 보호 팁: 비닐봉지는 물속에서 해파리처럼 보여 상어와 거북이가 삼켜 치명적입니다.</em>
+          </div>
+        `;
+      }
+    }
+
+    function nextSharkDiveOrProceed() {
+      if (sharkState.lastOutcome === 'cleared') {
+        if (sharkState.currentDive < 5) {
+          setupSharkDive(sharkState.currentDive + 1);
+          return;
+        }
+      }
+      showSharkFinalResult();
+    }
+
+    function showSharkFinalResult() {
+      clearSharkGameTimers();
+      sharkState.status = 'finalResult';
+
+      const intro = document.getElementById('sharkViewIntro');
+      const game = document.getElementById('sharkViewGame');
+      const finalRes = document.getElementById('sharkViewFinalResult');
+      if (intro) intro.classList.add('hidden');
+      if (game) game.classList.add('hidden');
+      if (finalRes) finalRes.classList.remove('hidden');
+
+      const emoji = document.getElementById('sharkFinalEmoji');
+      const badge = document.getElementById('sharkFinalBadge');
+      const title = document.getElementById('sharkFinalTitle');
+      const desc = document.getElementById('sharkFinalDesc');
+      const scoreTag = document.getElementById('sharkFinalScoreTag');
+      const preyTag = document.getElementById('sharkFinalPreyTag');
+      const debrisTag = document.getElementById('sharkFinalDebrisTag');
+
+      if (scoreTag) scoreTag.innerText = `총 점수: ${sharkState.score}점`;
+      if (preyTag) preyTag.innerText = `사냥 성공: ${sharkState.preyEatenTotal}마리`;
+      if (debrisTag) debrisTag.innerText = `만난 바다쓰레기: ${sharkState.debrisEncountered}개`;
+
+      const cleared = sharkState.clearedDives;
+
+      if (cleared >= 5) {
+        if (emoji) emoji.innerText = '🦈👑';
+        if (badge) badge.innerText = '👑 심해의 절대군주 백상아리';
+        if (title) title.innerText = '초심해 1000m 완전 정복 성공!';
+        if (desc) desc.innerText = '빛 한 점 없는 극한의 해구에서도 오직 흐릿한 명암과 실루엣만으로 완벽한 사냥을 마쳤습니다!';
+      } else if (cleared >= 3) {
+        if (emoji) emoji.innerText = '🦈⚡';
+        if (badge) badge.innerText = '⚡ 날렵한 심해 사냥꾼 청상아리';
+        if (title) title.innerText = `심해 ${cleared}단계 다이브 달성!`;
+        if (desc) desc.innerText = '어둠 속에서 먹잇감의 실루엣을 기민하게 포착하며 깊은 바다를 누볐습니다.';
+      } else if (sharkState.debrisEncountered > 0) {
+        if (emoji) emoji.innerText = '🛍️🦈';
+        if (badge) badge.innerText = '🩹 비닐봉지를 맛본 비운의 상어';
+        if (title) title.innerText = '해양 쓰레기의 위험을 체감하다';
+        if (desc) desc.innerText = '바다에 버려진 플라스틱 쓰레기는 상어에게도 치명적인 시각적 혼란을 줍니다.';
+      } else {
+        if (emoji) emoji.innerText = '🫧🦈';
+        if (badge) badge.innerText = '🌊 호기심 많은 아기 상어';
+        if (title) title.innerText = '심해 적응 훈련 중';
+        if (desc) desc.innerText = '심해의 희미한 명암에 더 익숙해지면 거대 맹수와 함정을 피해 대형 먹잇감을 낚아챌 수 있습니다!';
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function clearSharkGameTimers() {
+      if (sharkState.timerInterval) {
+        clearInterval(sharkState.timerInterval);
+        sharkState.timerInterval = null;
+      }
+      if (sharkState.giantMoveInterval) {
+        clearInterval(sharkState.giantMoveInterval);
+        sharkState.giantMoveInterval = null;
+      }
+      if (sharkState.toastTimeout) {
+        clearTimeout(sharkState.toastTimeout);
+        sharkState.toastTimeout = null;
       }
     }
 
