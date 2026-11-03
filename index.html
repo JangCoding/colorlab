@@ -187,9 +187,92 @@
         </div>
       </div>
 
-      <div class="flex items-center gap-2">
+      <div class="flex items-center gap-1.5 sm:gap-2">
+        <!-- Mode Selector Dropdown Button (모드 선택 버튼) -->
+        <div class="relative" id="modeDropdownWrapper">
+          <button type="button" onclick="toggleModeDropdown(event)" id="modeDropdownBtn" class="px-2.5 py-1.5 rounded-xl bg-indigo-50 hover:bg-indigo-100/90 border border-indigo-200 shadow-xs text-xs font-bold flex items-center gap-1 text-indigo-700 transition-all active:scale-95 touch-manipulation cursor-pointer" title="플레이할 모드를 선택합니다">
+            <span id="currentModeIcon">🎯</span>
+            <span id="currentModeName" class="text-[11px] sm:text-xs">모드 선택</span>
+            <svg class="w-3.5 h-3.5 text-indigo-500 transition-transform duration-200" id="modeDropdownArrow" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"></path></svg>
+          </button>
+
+          <!-- Dropdown Menu -->
+          <div id="modeDropdownMenu" class="hidden absolute right-0 mt-2 w-52 sm:w-56 bg-white/95 backdrop-blur-md border border-white/80 rounded-2xl shadow-xl shadow-slate-300/40 p-1.5 z-50 transition-all space-y-0.5">
+            <div class="px-2.5 py-1 text-[10px] font-black text-slate-400 uppercase tracking-wider">플레이 모드 선택</div>
+            
+            <button type="button" onclick="selectModeFromDropdown('test')" class="mode-item-btn w-full px-2.5 py-2 rounded-xl text-left text-xs font-bold transition-all flex items-center justify-between hover:bg-indigo-50 text-slate-700 cursor-pointer" data-mode="test">
+              <div class="flex items-center gap-2">
+                <span class="text-base">🎯</span>
+                <div>
+                  <span class="block text-slate-800 leading-tight">색감 테스트</span>
+                  <span class="text-[10px] text-slate-400 font-medium">정밀 10문제 측정</span>
+                </div>
+              </div>
+              <span id="modeActiveBadge_test" class="text-xs font-black text-indigo-600 hidden">✓</span>
+            </button>
+
+            <button type="button" onclick="selectModeFromDropdown('chameleon')" class="mode-item-btn w-full px-2.5 py-2 rounded-xl text-left text-xs font-bold transition-all flex items-center justify-between hover:bg-emerald-50 text-slate-700 cursor-pointer" data-mode="chameleon">
+              <div class="flex items-center gap-2">
+                <span class="text-base">🦎</span>
+                <div>
+                  <span class="block text-slate-800 leading-tight flex items-center gap-1">
+                    <span>카멜레온의 위장술</span>
+                    <span class="text-[9px] font-black px-1 rounded bg-emerald-100 text-emerald-800">HOT</span>
+                  </span>
+                  <span class="text-[10px] text-slate-400 font-medium">자연 속 위장 생존</span>
+                </div>
+              </div>
+              <span id="modeActiveBadge_chameleon" class="text-xs font-black text-emerald-600 hidden">✓</span>
+            </button>
+
+            <button type="button" onclick="selectModeFromDropdown('tiger')" class="mode-item-btn w-full px-2.5 py-2 rounded-xl text-left text-xs font-bold transition-all flex items-center justify-between hover:bg-amber-50 text-slate-700 cursor-pointer" data-mode="tiger">
+              <div class="flex items-center gap-2">
+                <span class="text-base">🦌</span>
+                <div>
+                  <span class="block text-slate-800 leading-tight">사슴과 호랑이</span>
+                  <span class="text-[10px] text-slate-400 font-medium">적록색맹 은신술</span>
+                </div>
+              </div>
+              <span id="modeActiveBadge_tiger" class="text-xs font-black text-amber-600 hidden">✓</span>
+            </button>
+
+            <button type="button" onclick="selectModeFromDropdown('memory')" class="mode-item-btn w-full px-2.5 py-2 rounded-xl text-left text-xs font-bold transition-all flex items-center justify-between hover:bg-purple-50 text-slate-700 cursor-pointer" data-mode="memory">
+              <div class="flex items-center gap-2">
+                <span class="text-base">🧠</span>
+                <div>
+                  <span class="block text-slate-800 leading-tight">색채 순간기억력</span>
+                  <span class="text-[10px] text-slate-400 font-medium">5초 기억 후 맞추기</span>
+                </div>
+              </div>
+              <span id="modeActiveBadge_memory" class="text-xs font-black text-purple-600 hidden">✓</span>
+            </button>
+
+            <button type="button" onclick="selectModeFromDropdown('sandbox')" class="mode-item-btn w-full px-2.5 py-2 rounded-xl text-left text-xs font-bold transition-all flex items-center justify-between hover:bg-indigo-50 text-slate-700 cursor-pointer" data-mode="sandbox">
+              <div class="flex items-center gap-2">
+                <span class="text-base">🎨</span>
+                <div>
+                  <span class="block text-slate-800 leading-tight">자유 조색 샌드박스</span>
+                  <span class="text-[10px] text-slate-400 font-medium">빛과 물감 배합 실험</span>
+                </div>
+              </div>
+              <span id="modeActiveBadge_sandbox" class="text-xs font-black text-indigo-600 hidden">✓</span>
+            </button>
+
+            <button type="button" onclick="selectModeFromDropdown('trivia')" class="mode-item-btn w-full px-2.5 py-2 rounded-xl text-left text-xs font-bold transition-all flex items-center justify-between hover:bg-emerald-50 text-slate-700 cursor-pointer" data-mode="trivia">
+              <div class="flex items-center gap-2">
+                <span class="text-base">🐾</span>
+                <div>
+                  <span class="block text-slate-800 leading-tight">동물 색채 토막상식</span>
+                  <span class="text-[10px] text-slate-400 font-medium">15가지 동물 시각 도감</span>
+                </div>
+              </div>
+              <span id="modeActiveBadge_trivia" class="text-xs font-black text-emerald-600 hidden">✓</span>
+            </button>
+          </div>
+        </div>
+
         <!-- Theme Switcher Button -->
-        <button onclick="cycleTheme()" class="px-2.5 py-1.5 rounded-xl bg-white/90 hover:bg-white border border-slate-200/90 shadow-xs text-xs font-semibold flex items-center gap-1.5 text-slate-700 transition-all active:scale-95 hover:border-slate-300" title="클릭할 때마다 다른 파스텔 그라데이션 테마로 변경됩니다">
+        <button onclick="cycleTheme()" class="px-2.5 py-1.5 rounded-xl bg-white/90 hover:bg-white border border-slate-200/90 shadow-xs text-xs font-semibold flex items-center gap-1 text-slate-700 transition-all active:scale-95 hover:border-slate-300" title="클릭할 때마다 다른 파스텔 그라데이션 테마로 변경됩니다">
           <span>🎨</span>
           <span id="themeNameTag" class="hidden sm:inline text-[11px] font-medium text-slate-600">테마 변경</span>
         </button>
@@ -214,52 +297,7 @@
     </div>
   </header>
 
-    <!-- Top Main Navigation Bar -->
-  <nav class="w-full max-w-3xl mx-auto px-2 sm:px-4 pt-1.5 sm:pt-2 pb-1 flex justify-center select-none z-20">
-    <div class="w-full max-w-full flex items-center justify-start sm:justify-center p-1 bg-white/85 backdrop-blur-md rounded-2xl border border-white/80 shadow-xs gap-1 text-xs sm:text-sm font-bold overflow-x-auto no-scrollbar scroll-smooth">
-      <button type="button" onclick="switchNavTab('test')" id="navTabTest" class="shrink-0 whitespace-nowrap px-2.5 sm:px-3 py-1.5 rounded-xl transition-all bg-indigo-600 text-white shadow-xs flex items-center gap-1.5 touch-manipulation cursor-pointer">
-        <span>🎯</span>
-        <span>색감 테스트</span>
-      </button>
-      <button type="button" onclick="switchNavTab('chameleon')" id="navTabChameleon" class="shrink-0 whitespace-nowrap px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
-        <span>🦎</span>
-        <span class="flex items-center gap-1">
-          <span>카멜레온</span>
-          <span class="text-[9px] font-black px-1 py-0.2 rounded bg-emerald-100 text-emerald-800">HOT</span>
-        </span>
-      </button>
-      <button type="button" onclick="switchNavTab('tiger')" id="navTabTiger" class="shrink-0 whitespace-nowrap px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
-        <span>🦌</span>
-        <span class="flex items-center gap-1">
-          <span>사슴과 호랑이</span>
-        </span>
-      </button>
-      <!-- [ARCHIVED / DISABLED: SHARK MODE NAV TAB]
-      <button type="button" onclick="switchNavTab('shark')" id="navTabShark" class="shrink-0 whitespace-nowrap px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
-        <span>🦈</span>
-        <span class="flex items-center gap-1">
-          <span>상어의 눈</span>
-        </span>
-      </button>
-      -->
-      <button type="button" onclick="switchNavTab('memory')" id="navTabMemory" class="shrink-0 whitespace-nowrap px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
-        <span>🧠</span>
-        <span class="flex items-center gap-1">
-          <span>기억력</span>
-        </span>
-      </button>
-      <button type="button" onclick="switchNavTab('sandbox')" id="navTabSandbox" class="shrink-0 whitespace-nowrap px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
-        <span>🎨</span>
-        <span>자유 조색</span>
-      </button>
-      <button type="button" onclick="switchNavTab('trivia')" id="navTabTrivia" class="shrink-0 whitespace-nowrap px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
-        <span>🐾</span>
-        <span>토막상식</span>
-      </button>
-    </div>
-  </nav>
-
-  <!-- SCREEN 1: Game Setup / Lobby -->
+    <!-- SCREEN 1: Game Setup / Lobby -->
   <main id="screenLobby" class="w-full max-w-xl mx-auto px-3 sm:px-4 py-3 sm:py-6 flex-1 flex flex-col justify-start sm:justify-center">
     <div class="text-center mb-4 sm:mb-6">
       <div id="heroBadge" class="inline-block px-3 py-1 rounded-full bg-rose-100 text-rose-700 border border-rose-200/80 text-xs font-semibold mb-3 shadow-xs">
@@ -704,7 +742,7 @@
         자유 조색 샌드박스
       </h2>
       <p class="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-        난이도와 모드를 자유롭게 바꾸며 빛과 물감의 배합 원리를 마음껏 실험해보세요.
+        색 단계와 모드를 자유롭게 바꾸며 빛과 물감의 배합 원리를 마음껏 실험해보세요.
       </p>
     </div>
 
@@ -1030,9 +1068,7 @@
         </div>
 
         <!-- Target Swatch Box -->
-        <div class="w-full max-w-xs h-28 sm:h-36 rounded-2xl border-2 border-white shadow-xl relative overflow-hidden transition-all transform hover:scale-[1.01]" id="memTargetColorBox" style="background-color: #7c3aed;">
-          <div class="absolute inset-0 bg-gradient-to-tr from-black/10 via-transparent to-white/20 pointer-events-none"></div>
-        </div>
+        <div class="w-full max-w-xs h-28 sm:h-36 rounded-2xl border-2 border-slate-300 shadow-sm relative overflow-hidden transition-all" id="memTargetColorBox" style="background-color: #7c3aed;"></div>
 
         <!-- 5s Countdown Timer Bar & Counter -->
         <div class="w-full max-w-xs space-y-1.5">
@@ -2199,24 +2235,73 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
+    let isModeDropdownOpen = false;
+
+    function toggleModeDropdown(e) {
+      if (e) e.stopPropagation();
+      isModeDropdownOpen = !isModeDropdownOpen;
+      const menu = document.getElementById('modeDropdownMenu');
+      const arrow = document.getElementById('modeDropdownArrow');
+      if (menu) {
+        if (isModeDropdownOpen) {
+          menu.classList.remove('hidden');
+          if (arrow) arrow.style.transform = 'rotate(180deg)';
+        } else {
+          menu.classList.add('hidden');
+          if (arrow) arrow.style.transform = 'rotate(0deg)';
+        }
+      }
+    }
+
+    function closeModeDropdown() {
+      isModeDropdownOpen = false;
+      const menu = document.getElementById('modeDropdownMenu');
+      const arrow = document.getElementById('modeDropdownArrow');
+      if (menu) menu.classList.add('hidden');
+      if (arrow) arrow.style.transform = 'rotate(0deg)';
+    }
+
+    document.addEventListener('click', (e) => {
+      const wrapper = document.getElementById('modeDropdownWrapper');
+      if (wrapper && !wrapper.contains(e.target)) {
+        closeModeDropdown();
+      }
+    });
+
+    function selectModeFromDropdown(mode) {
+      closeModeDropdown();
+      switchNavTab(mode);
+    }
+
     function updateNavTabUI(screenId) {
-      const tabTest = document.getElementById('navTabTest');
-      const tabTiger = document.getElementById('navTabTiger');
-      const tabChameleon = document.getElementById('navTabChameleon');
-      const tabMemory = document.getElementById('navTabMemory');
-      const tabSandbox = document.getElementById('navTabSandbox');
-      const tabTrivia = document.getElementById('navTabTrivia');
-      if (!tabTest || !tabSandbox || !tabTrivia) return;
+      const modeMap = {
+        screenLobby: { id: 'test', name: '색감 테스트', icon: '🎯' },
+        screenGame: { id: 'test', name: '색감 테스트', icon: '🎯' },
+        screenReport: { id: 'test', name: '테스트 결과', icon: '🎯' },
+        screenChameleon: { id: 'chameleon', name: '카멜레온', icon: '🦎' },
+        screenTiger: { id: 'tiger', name: '사슴과 호랑이', icon: '🦌' },
+        screenMemory: { id: 'memory', name: '순간기억', icon: '🧠' },
+        screenSandbox: { id: 'sandbox', name: '자유 조색', icon: '🎨' },
+        screenTrivia: { id: 'trivia', name: '토막상식', icon: '🐾' }
+      };
 
-      const activeClass = 'px-2.5 sm:px-3 py-1.5 rounded-xl transition-all bg-indigo-600 text-white shadow-xs flex items-center gap-1.5 touch-manipulation cursor-pointer';
-      const inactiveClass = 'px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer';
+      const info = modeMap[screenId] || { id: 'test', name: '모드 선택', icon: '🎮' };
+      const currentIcon = document.getElementById('currentModeIcon');
+      const currentName = document.getElementById('currentModeName');
+      if (currentIcon) currentIcon.innerText = info.icon;
+      if (currentName) currentName.innerText = info.name;
 
-      if (tabTest) tabTest.className = (screenId === 'screenLobby' || screenId === 'screenGame' || screenId === 'screenReport') ? activeClass : inactiveClass;
-      if (tabTiger) tabTiger.className = (screenId === 'screenTiger') ? activeClass : inactiveClass;
-      if (tabChameleon) tabChameleon.className = (screenId === 'screenChameleon') ? activeClass : inactiveClass;
-      if (tabMemory) tabMemory.className = (screenId === 'screenMemory') ? activeClass : inactiveClass;
-      if (tabSandbox) tabSandbox.className = (screenId === 'screenSandbox') ? activeClass : inactiveClass;
-      if (tabTrivia) tabTrivia.className = (screenId === 'screenTrivia') ? activeClass : inactiveClass;
+      // Update active checkmark in dropdown
+      ['test', 'chameleon', 'tiger', 'memory', 'sandbox', 'trivia'].forEach(m => {
+        const badge = document.getElementById('modeActiveBadge_' + m);
+        if (badge) {
+          if (m === info.id) {
+            badge.classList.remove('hidden');
+          } else {
+            badge.classList.add('hidden');
+          }
+        }
+      });
     }
 
     function switchNavTab(tab) {
@@ -4437,7 +4522,7 @@
         btn.className = 'group relative p-3 sm:p-4 rounded-3xl bg-white/90 hover:bg-white border-2 border-slate-200/90 hover:border-purple-400 transition-all duration-150 active:scale-95 shadow-sm text-center flex flex-col items-center gap-2 select-none touch-manipulation cursor-pointer';
 
         btn.innerHTML = `
-          <div class="w-full h-24 sm:h-28 rounded-2xl shadow-inner border border-black/10 relative overflow-hidden transition-transform group-hover:scale-[1.02]" style="background-color: ${rgbStr};">
+          <div class="w-full h-24 sm:h-28 rounded-2xl border border-slate-200 relative overflow-hidden transition-transform group-hover:scale-[1.02]" style="background-color: ${rgbStr};">
             <span class="absolute top-2 left-2 w-6 h-6 rounded-full bg-black/40 backdrop-blur-xs text-white text-xs font-black flex items-center justify-center">
               ${idx + 1}
             </span>
