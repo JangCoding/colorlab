@@ -251,7 +251,7 @@
               <div class="flex items-center gap-2">
                 <span class="text-base">🎨</span>
                 <div>
-                  <span class="block text-slate-800 leading-tight">자유 조색 샌드박스</span>
+                  <span class="block text-slate-800 leading-tight">자유 모드</span>
                   <span class="text-[10px] text-slate-400 font-medium">빛과 물감 배합 실험</span>
                 </div>
               </div>
@@ -303,11 +303,11 @@
       <div id="heroBadge" class="inline-block px-3 py-1 rounded-full bg-rose-100 text-rose-700 border border-rose-200/80 text-xs font-semibold mb-3 shadow-xs">
         🎨 나의 색 감각 역량 측정하기
       </div>
-      <h2 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight mb-2">
+      <h2 class="text-base xs:text-lg sm:text-2xl font-black text-slate-800 tracking-tight mb-2 whitespace-nowrap overflow-hidden text-ellipsis">
         당신의 색 인지 감각은 상위 몇 %일까요?
       </h2>
-      <p class="text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-        목표 색상과 똑같은 색을 조색해보세요. 총 10문제를 풀고 나면 실제 인구 통계 기반의 정규분포 곡선 분석 리포트를 제공합니다.
+      <p class="text-xs sm:text-sm font-medium text-slate-600 max-w-md mx-auto leading-relaxed">
+        총 10문제를 풀어보고 나의 색감을 알아보세요!
       </p>
     </div>
 
@@ -341,7 +341,7 @@
           <div class="font-bold text-slate-800 text-base mb-1">물감 모드</div>
           <p class="text-xs text-slate-600 leading-relaxed mb-2">감산혼합: 청록·자홍·노랑 잉크를 섞어 검정을 만듭니다.</p>
           <div class="text-[11px] mono text-slate-500 flex justify-between pt-2 border-t border-slate-200/80">
-            <span>0: 흰 도화지</span>
+            <span>0: 흰색</span>
             <span>Max: 검은색</span>
           </div>
         </button>
@@ -353,9 +353,9 @@
       <div class="flex items-center justify-between mb-3">
         <label class="text-xs font-bold uppercase tracking-wider text-slate-500 flex items-center gap-1.5">
           <span class="w-5 h-5 rounded-full bg-indigo-100 text-indigo-700 flex items-center justify-center text-xs font-bold">2</span>
-          난이도 배율 선택
+          색 단계 선택
         </label>
-        <span id="lobbyDiffDetail" class="text-xs text-indigo-600 font-semibold">0 ~ 3 배율 · 4단계</span>
+        <span id="lobbyDiffDetail" class="text-xs text-indigo-600 font-semibold">0 ~ 3 단계 · 4구간</span>
       </div>
       <div class="grid grid-cols-5 gap-1.5 sm:gap-2">
         <button type="button" onclick="selectLobbyDiff(1)" id="lobbyDiff-1" class="lobby-diff-btn py-3 px-1 rounded-xl text-center font-bold text-xs sm:text-sm border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white shadow-xs">
@@ -403,67 +403,7 @@
       </div>
     </div>
 
-        <!-- Mode Discovery Shortcut Cards (2x2 Grid) -->
-    <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
-      <button type="button" onclick="switchNavTab('chameleon')" class="p-3 rounded-2xl bg-emerald-50/80 hover:bg-emerald-100/90 border border-emerald-300/80 hover:border-emerald-400 text-left transition-all shadow-xs flex items-center gap-2.5 group touch-manipulation cursor-pointer">
-        <div class="w-9 h-9 rounded-xl bg-emerald-100 group-hover:bg-emerald-200 text-emerald-800 flex items-center justify-center text-lg transition-all shrink-0">🦎</div>
-        <div>
-          <div class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-emerald-800 transition-colors flex items-center gap-1">
-            <span>카멜레온의 위장술</span>
-            <span class="text-[9px] font-black px-1.5 py-0.2 rounded bg-emerald-200 text-emerald-800">NEW</span>
-          </div>
-          <div class="text-[11px] text-slate-600">주변색과 80% 이상 맞춰 포식자 따돌리기</div>
-        </div>
-      </button>
-      <!-- [ARCHIVED / DISABLED: SHARK MODE LOBBY CARD]
-      <button type="button" onclick="switchNavTab('shark')" class="p-3 rounded-2xl bg-cyan-50/80 hover:bg-cyan-100/90 border border-cyan-300/80 hover:border-cyan-400 text-left transition-all shadow-xs flex items-center gap-2.5 group touch-manipulation cursor-pointer">
-        <div class="w-9 h-9 rounded-xl bg-cyan-100 group-hover:bg-cyan-200 text-cyan-800 flex items-center justify-center text-lg transition-all shrink-0">🦈</div>
-        <div>
-          <div class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-cyan-800 transition-colors flex items-center gap-1">
-            <span>상어의 눈: 무한 심해 서바이벌</span>
-            <span class="text-[9px] font-black px-1.5 py-0.2 rounded bg-cyan-200 text-cyan-800">무한 모드</span>
-          </div>
-          <div class="text-[11px] text-slate-600">완전 전색맹 명암 시각으로 끝없이 잠수하는 생존 모드</div>
-        </div>
-      </button>
-      -->
-      <button type="button" onclick="switchNavTab('tiger')" class="p-3 rounded-2xl bg-amber-50/80 hover:bg-amber-100/90 border border-amber-300/80 hover:border-amber-400 text-left transition-all shadow-xs flex items-center gap-2.5 group touch-manipulation cursor-pointer">
-        <div class="w-9 h-9 rounded-xl bg-amber-100 group-hover:bg-amber-200 text-amber-700 flex items-center justify-center text-lg transition-all shrink-0">🦌</div>
-        <div>
-          <div class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-amber-800 transition-colors flex items-center gap-1">
-            <span>사슴의 눈: 호랑이를 찾아라!</span>
-            <span class="text-[9px] font-black px-1.5 py-0.2 rounded bg-amber-200 text-amber-800">HOT</span>
-          </div>
-          <div class="text-[11px] text-slate-600">적록색맹 시야로 5초 안에 숨은 호랑이 찾기</div>
-        </div>
-      </button>
-      <button type="button" onclick="switchNavTab('memory')" class="p-3 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/90 hover:border-purple-300 text-left transition-all shadow-xs flex items-center gap-2.5 group touch-manipulation cursor-pointer">
-        <div class="w-9 h-9 rounded-xl bg-purple-50 group-hover:bg-purple-100 text-purple-600 flex items-center justify-center text-lg transition-all shrink-0">🧠</div>
-        <div>
-          <div class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-purple-600 transition-colors flex items-center gap-1">
-            <span>순간기억 테스트</span>
-            <span class="text-[9px] font-black px-1 py-0.2 rounded bg-purple-100 text-purple-700">NEW</span>
-          </div>
-          <div class="text-[11px] text-slate-500">5초 기억 후 4지선다 맞추기</div>
-        </div>
-      </button>
-      <button type="button" onclick="switchNavTab('sandbox')" class="p-3 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/90 hover:border-indigo-300 text-left transition-all shadow-xs flex items-center gap-2.5 group touch-manipulation cursor-pointer">
-        <div class="w-9 h-9 rounded-xl bg-indigo-50 group-hover:bg-indigo-100 text-indigo-600 flex items-center justify-center text-lg transition-all shrink-0">🎨</div>
-        <div>
-          <div class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-indigo-600 transition-colors">자유 조색 샌드박스</div>
-          <div class="text-[11px] text-slate-500">문제 없이 마음껏 배합해보기</div>
-        </div>
-      </button>
-      <button type="button" onclick="switchNavTab('trivia')" class="p-3 rounded-2xl bg-white/80 hover:bg-white border border-slate-200/90 hover:border-emerald-300 text-left transition-all shadow-xs flex items-center gap-2.5 group touch-manipulation cursor-pointer">
-        <div class="w-9 h-9 rounded-xl bg-emerald-50 group-hover:bg-emerald-100 text-emerald-600 flex items-center justify-center text-lg transition-all shrink-0">🐾</div>
-        <div>
-          <div class="font-bold text-slate-800 text-xs sm:text-sm group-hover:text-emerald-600 transition-colors">동물 색채 토막상식</div>
-          <div class="text-[11px] text-slate-500">15가지 동물들의 시각 도감</div>
-        </div>
-      </button>
-    </div>
-
-    <!-- Start Button -->
+        <!-- Start Button -->
     <button onclick="startGameTest()" class="w-full py-4 rounded-xl font-black text-lg bg-gradient-to-r from-rose-500 via-purple-500 to-indigo-600 hover:brightness-105 active:scale-[0.99] text-white shadow-xl shadow-indigo-300/40 transition-all flex items-center justify-center gap-2">
       <span>테스트 시작하기</span>
       <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
@@ -736,13 +676,13 @@
     <!-- Sandbox Header -->
     <div class="text-center">
       <div class="inline-block px-3 py-1 rounded-full bg-indigo-100 text-indigo-700 border border-indigo-200/80 text-xs font-semibold mb-2 shadow-xs">
-        🎨 자유 조색 모드
+        🎨 자유 모드
       </div>
-      <h2 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight mb-1.5">
-        자유 조색 샌드박스
+      <h2 class="text-xl sm:text-2xl font-black text-slate-800 tracking-tight mb-1.5">
+        자유 모드
       </h2>
       <p class="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-        색 단계와 모드를 자유롭게 바꾸며 빛과 물감의 배합 원리를 마음껏 실험해보세요.
+        색 단계와 모드를 자유롭게 바꾸며 빛과 물감의 배합을 마음껏 실험해보세요.
       </p>
     </div>
 
@@ -767,15 +707,16 @@
       <!-- 2. Difficulty (Steps) Switch -->
       <div>
         <div class="flex items-center justify-between mb-2">
-          <label class="text-xs font-bold uppercase tracking-wider text-slate-500">난이도 배율</label>
+          <label class="text-xs font-bold uppercase tracking-wider text-slate-500">색 단계</label>
           <span id="sandboxDiffDesc" class="text-xs text-indigo-600 font-semibold">0 ~ 3 배율 · 4단계</span>
         </div>
-        <div class="grid grid-cols-5 gap-1.5">
-          <button type="button" onclick="setSandboxMax(1)" id="sandboxDiff-1" class="py-2.5 px-1 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer">0~1</button>
-          <button type="button" onclick="setSandboxMax(3)" id="sandboxDiff-3" class="py-2.5 px-1 rounded-xl text-center font-bold text-xs border transition-all border-indigo-400 bg-indigo-100 text-indigo-800 shadow-sm touch-manipulation cursor-pointer">0~3</button>
-          <button type="button" onclick="setSandboxMax(5)" id="sandboxDiff-5" class="py-2.5 px-1 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer">0~5</button>
-          <button type="button" onclick="setSandboxMax(7)" id="sandboxDiff-7" class="py-2.5 px-1 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer">0~7</button>
-          <button type="button" onclick="setSandboxMax(10)" id="sandboxDiff-10" class="py-2.5 px-1 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer">0~10</button>
+        <div class="grid grid-cols-6 gap-1">
+          <button type="button" onclick="setSandboxMax(1)" id="sandboxDiff-1" class="py-2 px-0.5 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer">0~1</button>
+          <button type="button" onclick="setSandboxMax(3)" id="sandboxDiff-3" class="py-2 px-0.5 rounded-xl text-center font-bold text-xs border transition-all border-indigo-400 bg-indigo-100 text-indigo-800 shadow-sm touch-manipulation cursor-pointer">0~3</button>
+          <button type="button" onclick="setSandboxMax(5)" id="sandboxDiff-5" class="py-2 px-0.5 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer">0~5</button>
+          <button type="button" onclick="setSandboxMax(7)" id="sandboxDiff-7" class="py-2 px-0.5 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer">0~7</button>
+          <button type="button" onclick="setSandboxMax(10)" id="sandboxDiff-10" class="py-2 px-0.5 rounded-xl text-center font-bold text-xs border transition-all border-slate-200 bg-white/70 text-slate-600 hover:bg-white touch-manipulation cursor-pointer">0~10</button>
+          <button type="button" onclick="setSandboxMax(255)" id="sandboxDiff-255" class="py-2 px-0.5 rounded-xl text-center font-black text-xs border transition-all border-slate-200 bg-white/70 text-indigo-700 hover:bg-white touch-manipulation cursor-pointer">255</button>
         </div>
       </div>
 
@@ -852,15 +793,12 @@
     </div>
 
     <!-- Quick Actions Bar -->
-    <div class="grid grid-cols-2 sm:grid-cols-3 gap-2.5">
+    <div class="grid grid-cols-2 gap-2.5">
       <button type="button" onclick="randomizeSandboxColor()" class="py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 shadow-xs touch-manipulation cursor-pointer">
         <span>🎲 랜덤 색상</span>
       </button>
       <button type="button" onclick="resetSandboxColor()" class="py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-white hover:bg-slate-50 border border-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 shadow-xs touch-manipulation cursor-pointer">
         <span>🔄 초기화</span>
-      </button>
-      <button type="button" onclick="startTestFromSandbox()" class="col-span-2 sm:col-span-1 py-3 px-3 rounded-xl font-extrabold text-xs sm:text-sm bg-gradient-to-r from-rose-500 via-purple-500 to-indigo-600 hover:brightness-105 active:scale-98 text-white shadow-md shadow-indigo-300/40 transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
-        <span>🎯 이 모드로 테스트</span>
       </button>
     </div>
 
@@ -872,13 +810,13 @@
     <!-- Trivia Header -->
     <div class="text-center">
       <div class="inline-block px-3 py-1 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200/80 text-xs font-semibold mb-2 shadow-xs">
-        🐾 신비한 동물의 시각 이야기
+        🎨 신비로운 색채 이야기
       </div>
-      <h2 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight mb-1.5">
-        동물 색채 토막상식 도감
+      <h2 class="text-xl sm:text-2xl font-black text-slate-800 tracking-tight mb-1.5">
+        색채 토막상식 도감
       </h2>
       <p class="text-xs sm:text-sm text-slate-600 max-w-md mx-auto leading-relaxed">
-        인간의 눈을 뛰어넘어 자외선·원편광·적외선까지 보는 동물들의 놀라운 눈 이야기!
+        동물의 놀라운 시각부터 역사, 과학, 예술 속 흥미진진한 색채 비하인드 스토리!
       </p>
     </div>
 
@@ -1209,9 +1147,7 @@
           </button>
         </div>
 
-        <button type="button" onclick="switchNavTab('test')" class="w-full py-3 px-3 rounded-xl font-bold text-xs sm:text-sm bg-slate-100 hover:bg-slate-200 text-slate-700 active:scale-98 transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
-          <span>🎯 본 게임 하러 가기</span>
-        </button>
+        
       </div>
 
     </div>
@@ -1252,11 +1188,11 @@
         <div class="space-y-2 text-xs">
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
             <span class="font-bold text-slate-700">🌱 Day 1: 촘촘한 풀숲</span>
-            <span class="text-slate-500">8×8 · 2×2 호랑이 · 0.5초마다 자주 이동</span>
+            <span class="text-slate-500">8×8 · 2×2 호랑이 · 1.1초마다 이동</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
             <span class="font-bold text-slate-700">🐇 Day 2: 토끼의 출현</span>
-            <span class="text-slate-500">8×8 · 2×2 호랑이 · 0.75초마다 이동 + 토끼</span>
+            <span class="text-slate-500">8×8 · 2×2 호랑이 · 1.4초마다 이동 + 토끼</span>
           </div>
           <div class="p-2.5 rounded-xl bg-slate-50 border border-slate-200/80 flex items-center justify-between">
             <span class="font-bold text-slate-700">🐿️ Day 3: 분주한 대나무 숲</span>
@@ -1614,8 +1550,8 @@
       </div>
 
       <!-- Match Progress Bar -->
-      <div class="w-full h-2 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200">
-        <div id="chamMatchProgressBar" class="h-full bg-gradient-to-r from-amber-400 to-orange-500 rounded-full transition-all duration-100 ease-linear" style="width: 0%;"></div>
+      <div class="w-full h-2.5 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200">
+        <div id="chamEagleCountdownBar" class="h-full bg-gradient-to-r from-emerald-500 via-amber-500 to-rose-600 rounded-full transition-all duration-100 ease-linear" style="width: 100%;"></div>
       </div>
 
       <!-- Feedback / Alert Toast -->
@@ -1673,7 +1609,7 @@
 
         <!-- Immediate Camouflage Button -->
         <button type="button" onclick="evaluateChameleonCamouflage(true)" id="chamHideNowBtn" class="px-3 py-1.5 sm:px-4 sm:py-2 rounded-xl font-black text-xs sm:text-sm bg-gradient-to-r from-emerald-600 to-teal-600 hover:brightness-105 active:scale-95 text-white shadow-xs transition-all flex items-center gap-1 touch-manipulation cursor-pointer">
-          <span>위장 잠복!</span>
+          <span>위장 완료!</span>
         </button>
       </div>
 
@@ -1702,7 +1638,48 @@
 
   </main>
 
-    <!-- MODAL 4: Chameleon Intro Guide Modal (게임 방법 설명 팝업) -->
+    <!-- MODAL 5: Memory Mode Round Feedback Modal (순간기억 결과 팝업) -->
+  <div id="memFeedbackModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
+    <div class="bg-white/95 border border-white/80 rounded-3xl p-5 sm:p-6 w-full max-w-sm shadow-2xl text-center transform transition-all animate-in fade-in zoom-in duration-200 space-y-4">
+      
+      <!-- Feedback Header Badge -->
+      <div>
+        <div id="memFeedbackIcon" class="w-16 h-16 mx-auto rounded-3xl bg-emerald-100 border border-emerald-300 text-3xl flex items-center justify-center mb-2 shadow-inner">
+          ⭐
+        </div>
+        <div id="memFeedbackBadge" class="text-lg sm:text-xl font-black text-emerald-600">
+          정답입니다! +1점
+        </div>
+        <p id="memFeedbackDeltaText" class="text-xs text-slate-500 font-bold mt-1">
+          오차: 0% · 100% 일치
+        </p>
+      </div>
+
+      <!-- Color Swatch Comparison -->
+      <div class="bg-slate-50 rounded-2xl p-3 border border-slate-200/80">
+        <div class="grid grid-cols-2 gap-3 text-center">
+          <div class="flex flex-col items-center">
+            <span class="text-[10px] font-bold text-slate-500 mb-1">목표 색상</span>
+            <div id="memFeedbackTargetBox" class="w-full h-14 rounded-xl border border-slate-300"></div>
+            <span id="memFeedbackTargetRgb" class="mono text-[10px] font-bold text-slate-600 mt-1">RGB(100, 100, 100)</span>
+          </div>
+          <div class="flex flex-col items-center">
+            <span class="text-[10px] font-bold text-slate-500 mb-1">내가 고른 색상</span>
+            <div id="memFeedbackUserBox" class="w-full h-14 rounded-xl border border-slate-300"></div>
+            <span id="memFeedbackUserRgb" class="mono text-[10px] font-bold text-slate-600 mt-1">RGB(100, 100, 100)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Next Button -->
+      <button type="button" onclick="nextMemoryRound()" id="memNextRoundBtn" class="w-full py-3.5 rounded-xl font-black text-sm sm:text-base bg-indigo-600 hover:bg-indigo-700 active:scale-98 text-white shadow-md shadow-indigo-300/40 transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
+        <span id="memNextRoundBtnText">다음 문제로 이동 (2/5) ➔</span>
+      </button>
+
+    </div>
+  </div>
+
+  <!-- MODAL 4: Chameleon Intro Guide Modal (게임 방법 설명 팝업) -->
   <div id="chamIntroModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-sm flex items-center justify-center p-4">
     <div class="bg-white/95 border border-white/80 rounded-3xl p-5 sm:p-6 w-full max-w-sm shadow-2xl text-center transform transition-all animate-in fade-in zoom-in duration-200 space-y-3.5">
       
@@ -1741,7 +1718,7 @@
           <span class="w-5 h-5 rounded-full bg-amber-500 text-white font-black flex items-center justify-center text-[10px] shrink-0 mt-0.5">3</span>
           <div>
             <span class="font-extrabold text-slate-800 block">독수리 피하기 & 생존</span>
-            <span class="text-slate-500 text-[11px] leading-tight">제한시간(12초) 안에 80%를 넘겨 <strong>"위장 잠복!"</strong>을 성공시키세요.</span>
+            <span class="text-slate-500 text-[11px] leading-tight">제한시간(12초) 안에 80%를 넘겨 <strong>"위장 완료!"</strong>를 누르세요.</span>
           </div>
         </div>
       </div>
@@ -2281,7 +2258,7 @@
         screenChameleon: { id: 'chameleon', name: '카멜레온', icon: '🦎' },
         screenTiger: { id: 'tiger', name: '사슴과 호랑이', icon: '🦌' },
         screenMemory: { id: 'memory', name: '순간기억', icon: '🧠' },
-        screenSandbox: { id: 'sandbox', name: '자유 조색', icon: '🎨' },
+        screenSandbox: { id: 'sandbox', name: '자유 모드', icon: '🎨' },
         screenTrivia: { id: 'trivia', name: '토막상식', icon: '🐾' }
       };
 
@@ -4430,7 +4407,7 @@
       
       const phaseMemorize = document.getElementById('memPhaseMemorize');
       const phaseQuestion = document.getElementById('memPhaseQuestion');
-      const feedbackCard = document.getElementById('memFeedbackCard');
+      const feedbackCard = document.getElementById('memFeedbackModal');
       
       phaseMemorize.classList.remove('hidden');
       phaseQuestion.classList.add('hidden');
@@ -4588,7 +4565,8 @@
       });
 
       // Reveal feedback card
-      const feedbackCard = document.getElementById('memFeedbackCard');
+      const feedbackModal = document.getElementById('memFeedbackModal');
+      const feedbackIcon = document.getElementById('memFeedbackIcon');
       const feedbackBadge = document.getElementById('memFeedbackBadge');
       const deltaText = document.getElementById('memFeedbackDeltaText');
       const targetBox = document.getElementById('memFeedbackTargetBox');
@@ -4606,13 +4584,15 @@
       const accuracyPct = Math.max(0, Math.round(100 * (1 - (dist / 441.6729))));
 
       if (isCorrect) {
-        feedbackBadge.className = 'text-base sm:text-lg font-black text-emerald-600 flex items-center gap-1.5';
-        feedbackBadge.innerHTML = '<span>✅ 정답입니다! +1점</span>';
-        deltaText.innerText = '오차: 0% · 100% 일치';
+        if (feedbackIcon) feedbackIcon.innerText = '🎉';
+        if (feedbackBadge) feedbackBadge.innerText = '정답입니다! +1점';
+        if (feedbackBadge) feedbackBadge.className = 'text-lg sm:text-xl font-black text-emerald-600';
+        if (deltaText) deltaText.innerText = '오차: 0% · 100% 일치';
       } else {
-        feedbackBadge.className = 'text-base sm:text-lg font-black text-rose-600 flex items-center gap-1.5';
-        feedbackBadge.innerHTML = '<span>❌ 아쉽네요! 오답입니다.</span>';
-        deltaText.innerText = `일치율: ${accuracyPct}%`;
+        if (feedbackIcon) feedbackIcon.innerText = '😱';
+        if (feedbackBadge) feedbackBadge.innerText = '아쉽네요! 오답입니다.';
+        if (feedbackBadge) feedbackBadge.className = 'text-lg sm:text-xl font-black text-rose-600';
+        if (deltaText) deltaText.innerText = `정답과의 일치율: ${accuracyPct}%`;
       }
 
       targetBox.style.backgroundColor = `rgb(${target.r}, ${target.g}, ${target.b})`;
@@ -4626,7 +4606,7 @@
         nextBtnText.innerText = '최종 결과 리포트 확인하기 🏆';
       }
 
-      feedbackCard.classList.remove('hidden');
+      const fModal = document.getElementById('memFeedbackModal'); if (fModal) fModal.classList.remove('hidden');
     }
 
     function nextMemoryRound() {
@@ -4780,62 +4760,57 @@
         name: '촘촘한 풀숲',
         grid: 8,
         shape: '2x2',
-        moveMs: 500, // Moves frequently so motion detection easily spots it
-        decoys: [{ type: 'wind', moveMs: 800 }],
-        desc: '8×8 풀숲 / 2×2 호랑이 (0.5초마다 자주 이동)'
+        moveMs: 1100, // Slower, comfortable motion detection
+        decoys: [{ type: 'boar', moveMs: 1500 }],
+        desc: '8×8 풀숲 / 2×2 호랑이 (1.1초마다 이동)'
       },
       {
         day: 2,
         name: '토끼의 출현',
         grid: 8,
         shape: '2x2',
-        moveMs: 750,
-        decoys: [{ type: 'rabbit', moveMs: 900 }],
-        desc: '8×8 풀숲 / 2×2 호랑이 (0.75초마다 이동) + 산토끼'
+        moveMs: 1400,
+        decoys: [{ type: 'rabbit', moveMs: 1600 }],
+        desc: '8×8 풀숲 / 2×2 호랑이 (1.4초마다 이동) + 산토끼'
       },
       {
         day: 3,
         name: '분주한 대나무 숲',
         grid: 9,
         shape: '1x2_or_2x1',
-        moveMs: 1100,
+        moveMs: 1800,
         decoys: [
-          { type: 'rabbit', moveMs: 900 },
-          { type: 'squirrel', moveMs: 800 },
-          { type: 'wind', moveMs: 700 }
+          { type: 'rabbit', moveMs: 1500 },
+          { type: 'squirrel', moveMs: 1400 },
+          { type: 'boar', moveMs: 1700 }
         ],
-        desc: '9×9 대나무 숲 / 2칸 호랑이 (1.1초마다 이동)'
+        desc: '9×9 대나무 숲 / 2칸 호랑이 (1.8초마다 이동)'
       },
       {
         day: 4,
         name: '착시의 안개 언덕',
         grid: 10,
         shape: '1x2_or_2x1',
-        moveMs: 1600,
+        moveMs: 2300,
         decoys: [
-          { type: 'rabbit', moveMs: 850 },
-          { type: 'rabbit', moveMs: 900 },
-          { type: 'squirrel', moveMs: 750 },
-          { type: 'wind', moveMs: 650 },
-          { type: 'wind', moveMs: 700 }
+          { type: 'rabbit', moveMs: 1600 },
+          { type: 'squirrel', moveMs: 1500 },
+          { type: 'boar', moveMs: 1800 }
         ],
-        desc: '10×10 언덕 / 2칸 호랑이 (1.6초마다 잠복 이동)'
+        desc: '10×10 언덕 / 2칸 호랑이 (2.3초마다 이동)'
       },
       {
         day: 5,
         name: '황혼의 아수라장',
         grid: 10,
         shape: '1x1',
-        moveMs: 2200, // Stealthy, moves rarely
+        moveMs: 2800, // Stealthy, deliberate movement
         decoys: [
-          { type: 'rabbit', moveMs: 750 },
-          { type: 'rabbit', moveMs: 800 },
-          { type: 'squirrel', moveMs: 700 },
-          { type: 'squirrel', moveMs: 750 },
-          { type: 'wind', moveMs: 600 },
-          { type: 'wind', moveMs: 650 }
+          { type: 'rabbit', moveMs: 1500 },
+          { type: 'squirrel', moveMs: 1400 },
+          { type: 'boar', moveMs: 1600 }
         ],
-        desc: '단 1칸! 2.2초마다 은밀하게 움직이는 최종 보스'
+        desc: '단 1칸! 2.8초마다 은밀하게 움직이는 최종 보스'
       }
     ];
 
@@ -6771,6 +6746,11 @@
       if (timerText) {
         const sec = Math.max(0, chameleonState.timerRemainMs / 1000).toFixed(1);
         timerText.innerText = `⏱️ ${sec}초`;
+      }
+      const countdownBar = document.getElementById('chamEagleCountdownBar');
+      if (countdownBar) {
+        const pct = Math.max(0, Math.min(100, (chameleonState.timerRemainMs / (chameleonState.timerMaxMs || 12000)) * 100));
+        countdownBar.style.width = pct + '%';
       }
     }
 
