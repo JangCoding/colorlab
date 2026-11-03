@@ -1382,93 +1382,8 @@
   <!-- SCREEN 8: Shark Monochromacy & Deep Sea Predator Mini-game (상어의 눈 미니게임) -->
   <main id="screenShark" class="hidden w-full max-w-2xl mx-auto px-4 py-6 sm:py-8 flex-1 flex flex-col justify-center gap-5">
     
-    <!-- SUB-VIEW 1: Shark Game Intro Lobby -->
-    <div id="sharkViewIntro" class="flex flex-col gap-5">
-      <div class="text-center">
-        <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-100 text-cyan-800 border border-cyan-300 text-xs font-semibold mb-2 shadow-xs">
-          <span>🦈 완전 전색맹 심해 무한 서바이벌</span>
-          <span class="px-1.5 py-0.2 rounded-full bg-cyan-600 text-white text-[10px] font-black">무한 모드</span>
-        </div>
-        <h2 class="text-2xl sm:text-3xl font-black text-slate-800 tracking-tight">
-          상어의 눈: 무한 심해 서바이벌
-        </h2>
-        <p class="text-xs sm:text-sm text-slate-600 mt-2 max-w-md mx-auto leading-relaxed">
-          상어는 원추세포가 사실상 없어 색을 구분하지 못하는 <strong>완전 전색맹</strong>입니다.<br class="hidden sm:inline">
-          산소가 다할 때까지 화면을 횡단하는 1×2 먹잇감을 사냥하며 <strong>끝없이 깊은 심해로 잠수</strong>하세요!<br class="hidden sm:inline">
-          사냥에 성공할 때마다 산소 시간이 충전되며, 가라앉는 쓰레기와 독해파리를 피해야 살아남습니다.
-        </p>
-      </div>
-
-      <!-- Predator Survival Strategy Guide Card -->
-      <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-3xl p-5 sm:p-6 shadow-sm space-y-3">
-        <div class="flex items-center justify-between mb-1">
-          <span class="text-xs sm:text-sm font-extrabold text-slate-800 flex items-center gap-1.5">
-            <span>🌊 끝없는 심해 생존 가이드</span>
-          </span>
-          <span class="text-xs font-bold text-cyan-700 bg-cyan-50 border border-cyan-200 px-2.5 py-0.5 rounded-full">
-            10×10 심해 격자
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 sm:grid-cols-3 gap-2 text-xs">
-          <div class="p-3 rounded-2xl bg-cyan-50/70 border border-cyan-200 flex flex-col gap-1">
-            <span class="font-extrabold text-cyan-900 flex items-center gap-1">
-              <span>🐟</span> <span>화면 횡단 1×2 먹잇감</span>
-            </span>
-            <p class="text-[11px] text-cyan-800 leading-snug">
-              참치, 바다거북 등이 끊임없이 화면을 가로질러 헤엄칩니다! 터치 시 <strong>산소 +3.0초 충전</strong> 및 체력 회복!
-            </p>
-          </div>
-          <div class="p-3 rounded-2xl bg-rose-50/70 border border-rose-200 flex flex-col gap-1">
-            <span class="font-extrabold text-rose-900 flex items-center gap-1">
-              <span>🛍️</span> <span>천천히 침강하는 바다쓰레기</span>
-            </span>
-            <p class="text-[11px] text-rose-800 leading-snug">
-              비닐봉지와 폐그물이 아래로 천천히 가라앉습니다. 성급히 찍다 삼키면 <strong>산소 -2.5초 급감</strong> 및 부상!
-            </p>
-          </div>
-          <div class="p-3 rounded-2xl bg-slate-100 border border-slate-300 flex flex-col gap-1">
-            <span class="font-extrabold text-slate-900 flex items-center gap-1">
-              <span>🐋</span> <span>순찰하는 거대 범고래</span>
-            </span>
-            <p class="text-[11px] text-slate-700 leading-snug">
-              2×2 거대 포식자 범고래가 심해를 횡단합니다. 건드리면 치명적인 역공 피해를 입습니다!
-            </p>
-          </div>
-        </div>
-
-        <!-- Survival Rules Box -->
-        <div class="p-3 rounded-2xl bg-slate-50 border border-slate-200 text-xs space-y-1.5">
-          <div class="font-bold text-slate-700 flex items-center justify-between">
-            <span>⏱️ 산소 시스템 규칙</span>
-            <span class="text-indigo-600 font-extrabold">초기 산소 15.0초</span>
-          </div>
-          <div class="text-[11.5px] text-slate-600 space-y-0.5">
-            <div>• <strong>먹잇감 사냥:</strong> 산소 +3.0초 회복, 체력 +8%, 점수 +30점, 더 깊은 수심으로 하강</div>
-            <div>• <strong>바다쓰레기 / 독해파리 접촉:</strong> 산소 -2.5초 차감, 체력 -15~20% 감소</div>
-            <div>• <strong>거대 범고래 접촉:</strong> 산소 -4.0초 급감, 체력 -35% 감소</div>
-          </div>
-        </div>
-
-        <!-- Science Note Box -->
-        <div class="bg-cyan-50/70 border border-cyan-200 rounded-2xl p-3 text-xs text-cyan-900 space-y-0.5">
-          <div class="font-bold text-cyan-800">💡 생태 팩트 체크</div>
-          <p class="text-[11.5px] text-cyan-800/90 leading-relaxed">
-            상어는 색을 보지 못하지만 흐릿한 명암과 실루엣의 크기로 사냥감을 파악합니다.
-            하지만 바다에 버려진 투명한 비닐봉지와 폐그물은 상어에게도 치명적인 시각적 착각을 일으킵니다!
-          </p>
-        </div>
-      </div>
-
-      <!-- Start Button -->
-      <button type="button" onclick="startSharkGame()" class="w-full py-4 rounded-2xl font-black text-base sm:text-lg bg-gradient-to-r from-cyan-600 via-teal-600 to-indigo-700 hover:brightness-105 active:scale-98 text-white shadow-xl shadow-cyan-500/30 transition-all flex items-center justify-center gap-2 touch-manipulation cursor-pointer">
-        <span>무한 심해 서바이벌 시작</span>
-        <span>🦈⏱️</span>
-      </button>
-    </div>
-
     <!-- SUB-VIEW 2: In-Game Active Round (10x10 Deep Sea Grid) -->
-    <div id="sharkViewGame" class="hidden flex flex-col gap-4">
+    <div id="sharkViewGame" class="flex flex-col gap-4">
       
       <!-- In-Game Status Bar -->
       <div class="flex items-center justify-between text-xs bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-2.5 shadow-sm">
@@ -1479,9 +1394,13 @@
           <span id="sharkSurvivalTimeText" class="mono font-bold text-slate-700">
             00:00.0
           </span>
+          <span id="sharkFrenzyBadge" class="hidden px-2 py-0.5 rounded-full font-black text-[10px] bg-rose-600 text-white animate-bounce shadow-xs">
+            🔥 광기 모드 (2배)!
+          </span>
         </div>
-        <div class="flex items-center gap-3 font-extrabold">
-          <span id="sharkPreyEatenText" class="text-cyan-700">🐟 사냥: 0마리</span>
+        <div class="flex items-center gap-2.5 font-extrabold">
+          <span id="sharkComboText" class="hidden text-rose-600 font-black">2 콤보!</span>
+          <span id="sharkPreyEatenText" class="text-cyan-700">🐟 0마리</span>
           <span id="sharkScoreText" class="text-indigo-600">🎯 0점</span>
         </div>
       </div>
@@ -2051,8 +1970,8 @@
         initTigerGame();
         showScreen('screenTiger');
       } else if (tab === 'shark') {
-        initSharkGame();
         showScreen('screenShark');
+        startSharkGame();
       } else if (tab === 'memory') {
         initMemoryMode();
         showScreen('screenMemory');
@@ -5099,7 +5018,7 @@
     // ==========================================
 
     let sharkState = {
-      status: 'intro', // 'intro', 'playing', 'roundOver'
+      status: 'playing', // 'playing', 'roundOver'
       score: 0,
       survivalMs: 0,
       depthMeters: 50,
@@ -5111,14 +5030,18 @@
       trapsEncountered: 0,
       predatorEncounters: 0,
       gridSize: 10,
-      preyList: [], // Always 3 active 1x2 items crossing screen
-      hazardList: [], // 3 sinking debris + 3 swimming traps
-      giantPredator: null, // 1 giant orca (2x2) cruising
-      reveals: [], // In-place full color reveals on click: { cells, icon, name, color, borderColor, expiresAt }
+      combo: 0,
+      frenzyRemainMs: 0, // Frenzy mode (피의 광기)
+      sensoryPulseActive: false, // Echolocation pulse
+      preyList: [], // Active 1x2 or 2x1 items crossing screen
+      hazardList: [], // Sinking debris + swimming traps
+      giantPredator: null, // 1 giant orca (2x2)
+      reveals: [], // In-place full color reveals on click
       gameLoopInterval: null,
       animalMoveInterval: null,
       debrisMoveInterval: null,
       orcaMoveInterval: null,
+      sensoryPulseInterval: null,
       toastTimeout: null,
       lastOutcome: null,
     };
@@ -5139,24 +5062,14 @@
       setTimeout(() => playTone(65, 'sine', 0.4, 0.4), 150);
     }
 
-    function playSharkDashSound() {
-      playTone(380, 'sine', 0.05, 0.06);
+    function playSharkSonarPing() {
+      playTone(720, 'sine', 0.06, 0.04);
     }
 
-    function initSharkGame() {
-      clearSharkGameTimers();
-      sharkState.status = 'intro';
-      goToSharkIntro();
-    }
-
-    function goToSharkIntro() {
-      clearSharkGameTimers();
-      sharkState.status = 'intro';
-      const intro = document.getElementById('sharkViewIntro');
-      const game = document.getElementById('sharkViewGame');
-      if (intro) intro.classList.remove('hidden');
-      if (game) game.classList.add('hidden');
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+    function playSharkFrenzySound() {
+      playTone(330, 'triangle', 0.15, 0.2);
+      setTimeout(() => playTone(440, 'triangle', 0.15, 0.25), 100);
+      setTimeout(() => playTone(550, 'sawtooth', 0.2, 0.3), 200);
     }
 
     function spawnSinglePrey(id) {
@@ -5174,24 +5087,24 @@
       let r = 0, c = 0, dr = 0, dc = 0;
 
       if (isH) {
-        if (edge % 2 === 0) { // from left edge heading right
+        if (edge % 2 === 0) { // left heading right
           r = Math.floor(Math.random() * n);
           c = 0;
           dc = 1;
           dr = Math.random() < 0.4 ? 0 : (Math.random() < 0.5 ? 1 : -1);
-        } else { // from right edge heading left
+        } else { // right heading left
           r = Math.floor(Math.random() * n);
           c = n - 2;
           dc = -1;
           dr = Math.random() < 0.4 ? 0 : (Math.random() < 0.5 ? 1 : -1);
         }
       } else {
-        if (edge % 2 === 0) { // from top edge heading down
+        if (edge % 2 === 0) { // top heading down
           r = 0;
           c = Math.floor(Math.random() * n);
           dr = 1;
           dc = Math.random() < 0.4 ? 0 : (Math.random() < 0.5 ? 1 : -1);
-        } else { // from bottom edge heading up
+        } else { // bottom heading up
           r = n - 2;
           c = Math.floor(Math.random() * n);
           dr = -1;
@@ -5227,7 +5140,7 @@
         type: d.type,
         name: d.name,
         icon: d.icon,
-        r: Math.floor(Math.random() * 3), // starts near the surface
+        r: Math.floor(Math.random() * 3), // starts high up
         c: Math.floor(Math.random() * n),
         bottomCount: 0,
         penaltyH: d.penaltyH,
@@ -5273,38 +5186,38 @@
       sharkState.debrisEncountered = 0;
       sharkState.trapsEncountered = 0;
       sharkState.predatorEncounters = 0;
+      sharkState.combo = 0;
+      sharkState.frenzyRemainMs = 0;
+      sharkState.sensoryPulseActive = false;
       sharkState.reveals = [];
 
-      // Views toggle
-      const intro = document.getElementById('sharkViewIntro');
       const game = document.getElementById('sharkViewGame');
       const reviewBar = document.getElementById('sharkRoundReviewBar');
-      if (intro) intro.classList.add('hidden');
       if (game) game.classList.remove('hidden');
       if (reviewBar) reviewBar.classList.add('hidden');
 
       const visionHint = document.getElementById('sharkVisionHint');
       const gridOuter = document.getElementById('sharkGridOuter');
-      if (visionHint) visionHint.innerText = '👀 현재는 상어 시야(완전 무채색 흑백)로 플레이 중입니다. 터치 시 그 자리에서 정체가 공개됩니다!';
+      if (visionHint) visionHint.innerText = '👀 상어의 시야(흐릿한 심해 명암)로 유영 중입니다. 물결 속 1×2 실루엣을 찾아 사냥하세요!';
       if (gridOuter) {
-        gridOuter.className = 'w-full max-w-sm sm:max-w-md aspect-square p-2 sm:p-2.5 bg-[#0a0a0c] rounded-3xl backdrop-blur-md border border-neutral-700/50 shadow-2xl select-none transition-all duration-300';
+        gridOuter.className = 'w-full max-w-sm sm:max-w-md aspect-square p-2 sm:p-2.5 bg-[#090b0e] rounded-3xl backdrop-blur-md border border-neutral-800 shadow-2xl select-none transition-all duration-300';
       }
 
       // Initialize Entity Pools:
-      // 1. 3 active swimming preys
+      // 3 active swimming preys (or 4 in frenzy)
       sharkState.preyList = [];
       for (let i = 0; i < 3; i++) {
         sharkState.preyList.push(spawnSinglePrey('prey_' + i));
       }
 
-      // 2. 3 sinking debris + 3 swimming traps
+      // 3 sinking debris + 3 swimming traps
       sharkState.hazardList = [];
       for (let i = 0; i < 3; i++) {
         sharkState.hazardList.push(spawnSingleDebris('debris_' + i));
         sharkState.hazardList.push(spawnSingleTrap('trap_' + i));
       }
 
-      // 3. 1 giant orca (2x2)
+      // 1 giant orca (2x2)
       sharkState.giantPredator = {
         r: 3,
         c: 0,
@@ -5337,6 +5250,18 @@
           sharkState.depthMeters += 5;
         }
 
+        // Frenzy mode countdown
+        if (sharkState.frenzyRemainMs > 0) {
+          sharkState.frenzyRemainMs -= intervalStepMs;
+          if (sharkState.frenzyRemainMs <= 0) {
+            sharkState.frenzyRemainMs = 0;
+            // Return to 3 preys
+            if (sharkState.preyList.length > 3) {
+              sharkState.preyList = sharkState.preyList.slice(0, 3);
+            }
+          }
+        }
+
         // Clean up expired in-place reveals
         if (sharkState.reveals && sharkState.reveals.length > 0) {
           const now = Date.now();
@@ -5357,7 +5282,7 @@
         updateSharkStatusUI();
       }, intervalStepMs);
 
-      // Fast Active Swimming Animals Loop (every 500ms)
+      // Active Swimming Animals Loop (every 500ms)
       sharkState.animalMoveInterval = setInterval(() => {
         tickEndlessAnimals();
       }, 500);
@@ -5371,6 +5296,25 @@
       sharkState.orcaMoveInterval = setInterval(() => {
         tickEndlessOrca();
       }, 1200);
+
+      // Echolocation / Sensory Pulse (every 2.5s)
+      sharkState.sensoryPulseInterval = setInterval(() => {
+        triggerSensoryPulse();
+      }, 2500);
+    }
+
+    function triggerSensoryPulse() {
+      if (sharkState.status !== 'playing') return;
+      playSharkSonarPing();
+      sharkState.sensoryPulseActive = true;
+      updateSharkGridColors(false);
+
+      setTimeout(() => {
+        if (sharkState.status === 'playing') {
+          sharkState.sensoryPulseActive = false;
+          updateSharkGridColors(false);
+        }
+      }, 350);
     }
 
     function renderSharkGridDOM() {
@@ -5410,19 +5354,14 @@
       };
     }
 
-    // Move preys and active traps across screen
     function tickEndlessAnimals() {
       if (sharkState.status !== 'playing') return;
       const n = sharkState.gridSize;
 
-      // 1. Move Preys
+      // 1. Move Preys across screen
       sharkState.preyList.forEach((p, idx) => {
-        const isBurst = Math.random() < 0.20; // 20% burst dash
+        const isBurst = Math.random() < 0.20;
         const steps = isBurst ? 2 : 1;
-
-        if (isBurst) {
-          playSharkDashSound();
-        }
 
         for (let s = 0; s < steps; s++) {
           p.r += p.dr;
@@ -5436,7 +5375,6 @@
           }
 
           if (outOfBounds) {
-            // Respawn from opposite edge to keep constant fish stream
             sharkState.preyList[idx] = spawnSinglePrey(p.id);
             break;
           }
@@ -5465,7 +5403,6 @@
       updateSharkGridColors(false);
     }
 
-    // Sink Marine Debris slowly downward
     function tickEndlessDebris() {
       if (sharkState.status !== 'playing') return;
       const n = sharkState.gridSize;
@@ -5480,7 +5417,6 @@
           } else {
             h.bottomCount = (h.bottomCount || 0) + 1;
             if (h.bottomCount >= 2) {
-              // Respawns at the surface
               sharkState.hazardList[idx] = spawnSingleDebris(h.id);
             }
           }
@@ -5490,7 +5426,6 @@
       updateSharkGridColors(false);
     }
 
-    // Move Giant Orca across screen
     function tickEndlessOrca() {
       if (sharkState.status !== 'playing' || !sharkState.giantPredator) return;
       const n = sharkState.gridSize;
@@ -5547,6 +5482,9 @@
         }
       }
 
+      const isFrenzy = sharkState.frenzyRemainMs > 0;
+      const isPulse = sharkState.sensoryPulseActive;
+
       const buttons = container.querySelectorAll('.shark-cell');
       buttons.forEach(btn => {
         const r = parseInt(btn.dataset.r, 10);
@@ -5557,50 +5495,50 @@
         const hazard = hazardMap.get(key);
         const isGiant = giantCells.has(key);
 
-        // Check active in-place color reveal on click
         const activeReveal = !isHumanVision && sharkState.reveals && sharkState.reveals.find(rev => rev.cells.some(crd => crd.r === r && crd.c === c));
 
         if (activeReveal) {
-          // IN-PLACE COLOR REVEAL: Touched object bursts into full human color and shows icon!
+          // In-Place Color Reveal: Real full human color on touch!
           btn.style.backgroundColor = activeReveal.color;
           btn.style.borderColor = activeReveal.borderColor;
           btn.style.boxShadow = '0 0 10px ' + activeReveal.borderColor;
           btn.innerHTML = `<span class="text-xs sm:text-sm font-black text-white leading-none animate-pulse">${activeReveal.icon}</span>`;
         } else if (!isHumanVision) {
-          // SHARK VISION: PURE 100% COLORLESS MONOCHROMACY (완전 무채색 흑백 명암)
+          // SHARK VISION: PURE GRAYSCALE WITH FAINT MURKY SILHOUETTE CONTRAST
           btn.innerHTML = '';
 
+          // Subtle natural murky water noise (-1 to +1)
+          const noise = ((r * 7 + c * 13) % 3) - 1;
+          const bgVal = Math.max(10, 14 + noise);
+
           if (prey) {
-            // 1x2 Prey: Clearly visible silvery-gray silhouette
-            btn.style.backgroundColor = '#52525b'; // zinc-600 neutral gray
-            btn.style.borderColor = 'rgba(255, 255, 255, 0.35)';
-            btn.style.boxShadow = 'inset 0 0 4px rgba(255, 255, 255, 0.2)';
+            // 1x2 Prey: Faint, murky shadow silhouette (only ~12-16 delta from background)
+            // squints and notices movement!
+            const pVal = bgVal + (isPulse ? 24 : 14);
+            btn.style.backgroundColor = `rgb(${pVal}, ${pVal}, ${pVal})`;
+            btn.style.borderColor = isPulse ? 'rgba(255, 255, 255, 0.22)' : 'rgba(255, 255, 255, 0.08)';
+            btn.style.boxShadow = isPulse ? 'inset 0 0 4px rgba(255, 255, 255, 0.2)' : 'none';
           } else if (isGiant) {
-            // Giant Predator: Pitch dark apex black block
-            btn.style.backgroundColor = '#09090b'; // zinc-950 deep black
-            btn.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+            // Giant Orca: Heavy looming dark shadow block
+            const gVal = Math.max(4, bgVal - 9);
+            btn.style.backgroundColor = `rgb(${gVal}, ${gVal}, ${gVal})`;
+            btn.style.borderColor = isPulse ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.03)';
             btn.style.boxShadow = 'none';
           } else if (hazard) {
-            if (hazard.category === 'debris') {
-              // Debris: Dull dark gray
-              btn.style.backgroundColor = '#27272a'; // zinc-800 dull gray
-              btn.style.borderColor = 'rgba(255, 255, 255, 0.12)';
-            } else {
-              // Trap: Mid gray
-              btn.style.backgroundColor = '#3f3f46'; // zinc-700 mid gray
-              btn.style.borderColor = 'rgba(255, 255, 255, 0.18)';
-            }
+            // Hazard / Trash: Almost indistinguishable from prey in value (~9-11 delta)
+            // Player must rely on size (1x1) and sinking motion!
+            const hVal = bgVal + (isPulse ? 18 : 9);
+            btn.style.backgroundColor = `rgb(${hVal}, ${hVal}, ${hVal})`;
+            btn.style.borderColor = isPulse ? 'rgba(255, 255, 255, 0.14)' : 'rgba(255, 255, 255, 0.05)';
             btn.style.boxShadow = 'none';
           } else {
-            // Ambient deep ocean water with natural micro-noise
-            const noise = ((r * 7 + c * 13) % 5) - 2;
-            const gray = Math.max(8, 18 + noise);
-            btn.style.backgroundColor = `rgb(${gray}, ${gray}, ${gray})`;
-            btn.style.borderColor = 'rgba(255, 255, 255, 0.04)';
+            // Empty murky ocean water
+            btn.style.backgroundColor = `rgb(${bgVal}, ${bgVal}, ${bgVal})`;
+            btn.style.borderColor = 'rgba(255, 255, 255, 0.025)';
             btn.style.boxShadow = 'none';
           }
         } else {
-          // HUMAN VISION (GAME OVER): 총천연색 청명한 바다 + 정체 즉시 공개
+          // HUMAN VISION (GAME OVER): Full vivid colors revealed
           btn.style.boxShadow = 'none';
           if (prey) {
             btn.style.backgroundColor = '#0284c7';
@@ -5639,8 +5577,8 @@
           sharkState.health = Math.max(0, sharkState.health - g.penaltyH);
           sharkState.oxygenRemainMs = Math.max(200, sharkState.oxygenRemainMs - g.penaltyT);
           sharkState.predatorEncounters++;
+          sharkState.combo = 0; // Combo reset!
 
-          // In-place color reveal for giant predator
           const orcaCells = [];
           for (let dr = 0; dr < g.size; dr++) {
             for (let dc = 0; dc < g.size; dc++) {
@@ -5675,8 +5613,8 @@
         const hazard = sharkState.hazardList[hazardIdx];
         sharkState.health = Math.max(0, sharkState.health - hazard.penaltyH);
         sharkState.oxygenRemainMs = Math.max(200, sharkState.oxygenRemainMs - hazard.penaltyT);
+        sharkState.combo = 0; // Combo reset!
 
-        // In-place color reveal for hazard / debris
         sharkState.reveals.push({
           cells: [{ r: hazard.r, c: hazard.c }],
           icon: hazard.icon,
@@ -5688,7 +5626,6 @@
 
         if (hazard.category === 'debris') {
           sharkState.debrisEncountered++;
-          // Replace consumed debris with a fresh one dropping from top
           sharkState.hazardList[hazardIdx] = spawnSingleDebris();
         } else {
           sharkState.trapsEncountered++;
@@ -5710,13 +5647,24 @@
       const preyIdx = sharkState.preyList.findIndex(p => p.cells.some(cell => cell.r === r && cell.c === c));
       if (preyIdx !== -1) {
         const eatenPrey = sharkState.preyList[preyIdx];
-        sharkState.score += 30;
+        sharkState.combo++;
         sharkState.preyEatenTotal++;
-        sharkState.depthMeters += 25; // Dive deeper!
+        sharkState.depthMeters += 25;
         sharkState.health = Math.min(100, sharkState.health + 8);
-        sharkState.oxygenRemainMs = Math.min(sharkState.oxygenMaxMs, sharkState.oxygenRemainMs + 3000); // +3.0s Oxygen!
 
-        // In-place color reveal for prey (both cells light up in vivid emerald + emoji)
+        // Frenzy trigger on 3 combo!
+        const isFrenzy = sharkState.frenzyRemainMs > 0;
+        if (sharkState.combo >= 3 && !isFrenzy) {
+          sharkState.frenzyRemainMs = 4000;
+          playSharkFrenzySound();
+          // Spawn an extra prey for frenzy feast!
+          sharkState.preyList.push(spawnSinglePrey());
+        }
+
+        const scoreGain = (sharkState.frenzyRemainMs > 0) ? 60 : 30;
+        sharkState.score += scoreGain;
+        sharkState.oxygenRemainMs = Math.min(sharkState.oxygenMaxMs, sharkState.oxygenRemainMs + 3200);
+
         sharkState.reveals.push({
           cells: [...eatenPrey.cells],
           icon: eatenPrey.icon,
@@ -5727,9 +5675,10 @@
         });
 
         playSharkChompSound();
-        showSharkAlertToast(`${eatenPrey.name} 사냥 성공! 🐟 콰직! +30점 (산소 +3.0초 충전)`);
+        const frenzyMsg = (sharkState.frenzyRemainMs > 0) ? '🔥 [광기 2배] ' : '';
+        showSharkAlertToast(`${frenzyMsg}${eatenPrey.name} 사냥 성공! 🐟 +${scoreGain}점 (+3.2초 산소)`);
 
-        // Immediately spawn replacement prey at screen edge!
+        // Spawn replacement
         sharkState.preyList[preyIdx] = spawnSinglePrey();
 
         updateSharkStatusUI();
@@ -5737,8 +5686,9 @@
         return;
       }
 
-      // 4. Empty Ocean Water touched (slight penalty to prevent blind spamming)
+      // 4. Empty Ocean Water touched
       sharkState.oxygenRemainMs = Math.max(200, sharkState.oxygenRemainMs - 200);
+      sharkState.combo = 0; // Combo reset on miss
       playTone(320, 'sine', 0.04, 0.03);
       updateSharkStatusUI();
     }
@@ -5772,6 +5722,8 @@
       const healthText = document.getElementById('sharkHealthText');
       const oxygenText = document.getElementById('sharkOxygenText');
       const progressBar = document.getElementById('sharkOxygenProgressBar');
+      const frenzyBadge = document.getElementById('sharkFrenzyBadge');
+      const comboText = document.getElementById('sharkComboText');
 
       if (depthText) depthText.innerText = `수심 ${sharkState.depthMeters}m`;
 
@@ -5781,12 +5733,37 @@
       const tenths = Math.floor((sharkState.survivalMs % 1000) / 100);
       if (timeText) timeText.innerText = `${mins}:${secs}.${tenths}`;
 
-      if (preyEatenText) preyEatenText.innerText = `🐟 사냥: ${sharkState.preyEatenTotal}마리`;
+      if (preyEatenText) preyEatenText.innerText = `🐟 ${sharkState.preyEatenTotal}마리`;
       if (scoreText) scoreText.innerText = `🎯 ${sharkState.score}점`;
       if (healthText) healthText.innerText = `${Math.max(0, sharkState.health)}%`;
 
       const remainSec = Math.max(0, sharkState.oxygenRemainMs / 1000).toFixed(1);
       if (oxygenText) oxygenText.innerText = `${remainSec}초`;
+
+      // Frenzy UI
+      if (sharkState.frenzyRemainMs > 0) {
+        if (frenzyBadge) frenzyBadge.classList.remove('hidden');
+        if (comboText) {
+          comboText.classList.remove('hidden');
+          comboText.innerText = `🔥 ${sharkState.combo} 콤보!`;
+        }
+        if (progressBar) {
+          progressBar.className = 'h-full bg-gradient-to-r from-rose-500 via-orange-500 to-amber-400 rounded-full transition-all duration-100 ease-linear shadow-sm shadow-rose-500/50';
+        }
+      } else {
+        if (frenzyBadge) frenzyBadge.classList.add('hidden');
+        if (comboText) {
+          if (sharkState.combo >= 2) {
+            comboText.classList.remove('hidden');
+            comboText.innerText = `⚡ ${sharkState.combo} 콤보`;
+          } else {
+            comboText.classList.add('hidden');
+          }
+        }
+        if (progressBar) {
+          progressBar.className = 'h-full bg-gradient-to-r from-teal-500 via-cyan-500 to-indigo-600 rounded-full transition-all duration-100 ease-linear';
+        }
+      }
 
       if (progressBar) {
         const pct = Math.max(0, Math.min(100, (sharkState.oxygenRemainMs / sharkState.oxygenMaxMs) * 100));
@@ -5801,7 +5778,6 @@
 
       playTone(160, 'sawtooth', 0.45, 0.35);
 
-      // In-Place Human Vision Reveal on Game Over
       updateSharkGridColors(true);
 
       const visionHint = document.getElementById('sharkVisionHint');
@@ -5842,7 +5818,7 @@
       } else {
         if (icon) icon.innerText = '🫧⏱️';
         if (title) title.innerText = '산소가 모두 고갈되었습니다!';
-        if (subtitle) subtitle.innerText = '먹잇감을 계속 사냥하지 못해 심해의 산소가 바닥났습니다.';
+        if (subtitle) subtitle.innerText = '흐릿한 어둠 속에서 먹잇감을 놓쳐 산소가 바닥났습니다.';
       }
 
       // Persona Badge
@@ -5884,6 +5860,10 @@
       if (sharkState.orcaMoveInterval) {
         clearInterval(sharkState.orcaMoveInterval);
         sharkState.orcaMoveInterval = null;
+      }
+      if (sharkState.sensoryPulseInterval) {
+        clearInterval(sharkState.sensoryPulseInterval);
+        sharkState.sensoryPulseInterval = null;
       }
       if (sharkState.toastTimeout) {
         clearTimeout(sharkState.toastTimeout);
