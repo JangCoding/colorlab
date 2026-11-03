@@ -221,6 +221,7 @@
           <span class="text-[9px] font-black px-1 py-0.2 rounded bg-amber-100 text-amber-700">HOT</span>
         </span>
       </button>
+      <!-- [ARCHIVED / DISABLED: SHARK MODE NAV TAB]
       <button type="button" onclick="switchNavTab('shark')" id="navTabShark" class="px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
         <span>🦈</span>
         <span class="flex items-center gap-1">
@@ -228,6 +229,7 @@
           <span class="text-[9px] font-black px-1 py-0.2 rounded bg-cyan-100 text-cyan-800">NEW</span>
         </span>
       </button>
+      -->
       <button type="button" onclick="switchNavTab('memory')" id="navTabMemory" class="px-2.5 sm:px-3 py-1.5 rounded-xl transition-all text-slate-600 hover:text-slate-900 hover:bg-slate-100 flex items-center gap-1.5 touch-manipulation cursor-pointer">
         <span>🧠</span>
         <span class="flex items-center gap-1">
@@ -354,6 +356,7 @@
 
         <!-- Mode Discovery Shortcut Cards (2x2 Grid) -->
     <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5 mb-4">
+      <!-- [ARCHIVED / DISABLED: SHARK MODE LOBBY CARD]
       <button type="button" onclick="switchNavTab('shark')" class="p-3 rounded-2xl bg-cyan-50/80 hover:bg-cyan-100/90 border border-cyan-300/80 hover:border-cyan-400 text-left transition-all shadow-xs flex items-center gap-2.5 group touch-manipulation cursor-pointer">
         <div class="w-9 h-9 rounded-xl bg-cyan-100 group-hover:bg-cyan-200 text-cyan-800 flex items-center justify-center text-lg transition-all shrink-0">🦈</div>
         <div>
@@ -364,6 +367,7 @@
           <div class="text-[11px] text-slate-600">완전 전색맹 명암 시각으로 끝없이 잠수하는 생존 모드</div>
         </div>
       </button>
+      -->
       <button type="button" onclick="switchNavTab('tiger')" class="p-3 rounded-2xl bg-amber-50/80 hover:bg-amber-100/90 border border-amber-300/80 hover:border-amber-400 text-left transition-all shadow-xs flex items-center gap-2.5 group touch-manipulation cursor-pointer">
         <div class="w-9 h-9 rounded-xl bg-amber-100 group-hover:bg-amber-200 text-amber-700 flex items-center justify-center text-lg transition-all shrink-0">🦌</div>
         <div>
@@ -1379,13 +1383,16 @@
 
   </main>
 
-  <!-- SCREEN 8: Shark Monochromacy & Deep Sea Predator Mini-game (상어의 눈 미니게임) -->
+  <!-- =========================================================================
+       [ARCHIVED / DISABLED: SHARK VISION MINI-GAME SCREEN]
+       =========================================================================
+<!- - SCREEN 8: Shark Monochromacy & Deep Sea Predator Mini-game (상어의 눈 미니게임) - ->
   <main id="screenShark" class="hidden w-full max-w-2xl mx-auto px-4 py-6 sm:py-8 flex-1 flex flex-col justify-center gap-5">
     
-    <!-- SUB-VIEW 2: In-Game Active Round (10x10 Deep Sea Grid) -->
+    <!- - SUB-VIEW 2: In-Game Active Round (10x10 Deep Sea Grid) - ->
     <div id="sharkViewGame" class="flex flex-col gap-4">
       
-      <!-- In-Game Status Bar -->
+      <!- - In-Game Status Bar - ->
       <div class="flex items-center justify-between text-xs bg-white/85 backdrop-blur-md border border-white/80 rounded-2xl px-4 py-2.5 shadow-sm">
         <div class="flex items-center gap-2">
           <span id="sharkDepthText" class="px-2.5 py-0.5 rounded-full font-black bg-cyan-100 text-cyan-800 border border-cyan-300">
@@ -1405,9 +1412,9 @@
         </div>
       </div>
 
-      <!-- Health Bar & Oxygen Timer Bar -->
+      <!- - Health Bar & Oxygen Timer Bar - ->
       <div class="bg-white/85 backdrop-blur-md border border-white/80 rounded-3xl p-4 sm:p-5 shadow-sm space-y-2.5 text-center">
-        <!-- Health and Oxygen stats -->
+        <!- - Health and Oxygen stats - ->
         <div class="grid grid-cols-2 gap-2 text-xs font-bold">
           <div class="flex items-center justify-between px-2.5 py-1 rounded-xl bg-rose-50 border border-rose-200">
             <span class="text-rose-700 flex items-center gap-1">
@@ -1423,12 +1430,12 @@
           </div>
         </div>
 
-        <!-- Progress bar for Oxygen -->
+        <!- - Progress bar for Oxygen - ->
         <div class="w-full h-3 bg-slate-100 rounded-full overflow-hidden p-0.5 border border-slate-200">
           <div id="sharkOxygenProgressBar" class="h-full bg-gradient-to-r from-teal-500 via-cyan-500 to-indigo-600 rounded-full transition-all duration-100 ease-linear" style="width: 100%;"></div>
         </div>
         
-        <!-- Floating Alert Toast -->
+        <!- - Floating Alert Toast - ->
         <div id="sharkAlertToast" class="hidden transition-all duration-200 py-1.5 px-3 rounded-full bg-rose-100 text-rose-800 border border-rose-300 font-black text-xs shadow-xs inline-block animate-bounce">
           알림 메시지
         </div>
@@ -1438,21 +1445,21 @@
         </p>
       </div>
 
-      <!-- 10x10 Grid Container with STRICT row & column constraints -->
+      <!- - 10x10 Grid Container with STRICT row & column constraints - ->
       <div class="w-full flex justify-center items-center">
         <div id="sharkGridOuter" class="w-full max-w-sm sm:max-w-md aspect-square p-2 sm:p-2.5 bg-[#080d16] rounded-3xl backdrop-blur-md border border-cyan-900/40 shadow-2xl select-none transition-all duration-300">
           <div id="sharkGridContainer" class="w-full h-full select-none" style="display: grid; grid-template-columns: repeat(10, minmax(0, 1fr)); grid-template-rows: repeat(10, minmax(0, 1fr)); gap: 3px; aspect-ratio: 1 / 1;">
-            <!-- Dynamic 10x10 grid tiles rendered here -->
+            <!- - Dynamic 10x10 grid tiles rendered here - ->
           </div>
         </div>
       </div>
 
-      <!-- Vision Mode Hint Indicator -->
+      <!- - Vision Mode Hint Indicator - ->
       <div id="sharkVisionHint" class="text-center text-[11px] text-slate-500">
         👀 현재는 상어 시야로 플레이 중입니다.
       </div>
 
-      <!-- INLINE Survival Results Bar (Revealed instantly on game over) -->
+      <!- - INLINE Survival Results Bar (Revealed instantly on game over) - ->
       <div id="sharkRoundReviewBar" class="hidden bg-white/95 backdrop-blur-md border border-white/80 rounded-3xl p-5 shadow-xl text-center space-y-3 transform transition-all animate-in fade-in zoom-in-95 duration-200">
         
         <div class="flex items-center gap-2.5 text-left">
@@ -1463,7 +1470,7 @@
           </div>
         </div>
 
-        <!-- Score & Stats Chips -->
+        <!- - Score & Stats Chips - ->
         <div class="grid grid-cols-2 sm:grid-cols-4 gap-2 text-xs font-bold">
           <div class="p-2 rounded-xl bg-slate-50 border border-slate-200">
             <span class="text-slate-500 block text-[10px]">생존 시간</span>
@@ -1483,7 +1490,7 @@
           </div>
         </div>
 
-        <!-- Entity Identity Breakdown & Environmental Message Box -->
+        <!- - Entity Identity Breakdown & Environmental Message Box - ->
         <div class="p-3.5 rounded-2xl bg-cyan-50/80 border border-cyan-200/90 text-left text-xs text-cyan-950 leading-snug space-y-1.5">
           <div class="font-extrabold text-cyan-800 flex items-center justify-between">
             <span>💡 심해 생태와 해양 환경 리포트</span>
@@ -1492,11 +1499,11 @@
             </span>
           </div>
           <div id="sharkRoundReviewDetail" class="text-[11.5px] text-cyan-900/90 space-y-1">
-            <!-- Filled dynamically -->
+            <!- - Filled dynamically - ->
           </div>
         </div>
 
-        <!-- Action Buttons -->
+        <!- - Action Buttons - ->
         <div class="space-y-2 pt-1">
           <button type="button" onclick="startSharkGame()" class="w-full py-3.5 rounded-2xl font-black text-sm sm:text-base bg-gradient-to-r from-cyan-600 via-teal-600 to-indigo-700 hover:brightness-105 active:scale-98 text-white shadow-md shadow-cyan-400/30 transition-all flex items-center justify-center gap-1.5 touch-manipulation cursor-pointer">
             <span>다시 생존 도전하기 🔄</span>
@@ -1511,6 +1518,9 @@
     </div>
 
   </main>
+
+  
+  -->
 
   <!-- MODAL 1: Round Result Popup Modal -->
   <div id="roundResultModal" class="hidden fixed inset-0 z-50 bg-slate-900/50 backdrop-blur-sm flex items-center justify-center p-4">
@@ -1905,7 +1915,7 @@
     let triviaViewerInitialized = false;
 
     // --- Screen Navigation & Tabs ---
-    const allScreenIds = ['screenLobby', 'screenGame', 'screenReport', 'screenSandbox', 'screenTrivia', 'screenMemory', 'screenTiger', 'screenShark'];
+    const allScreenIds = ['screenLobby', 'screenGame', 'screenReport', 'screenSandbox', 'screenTrivia', 'screenMemory', 'screenTiger']; // 'screenShark' archived
 
     function showScreen(screenId) {
       allScreenIds.forEach(id => {
@@ -1928,7 +1938,7 @@
     function updateNavTabUI(screenId) {
       const tabTest = document.getElementById('navTabTest');
       const tabTiger = document.getElementById('navTabTiger');
-      const tabShark = document.getElementById('navTabShark');
+      // const tabShark = document.getElementById('navTabShark'); // archived
       const tabMemory = document.getElementById('navTabMemory');
       const tabSandbox = document.getElementById('navTabSandbox');
       const tabTrivia = document.getElementById('navTabTrivia');
@@ -1939,7 +1949,7 @@
 
       if (tabTest) tabTest.className = (screenId === 'screenLobby' || screenId === 'screenGame' || screenId === 'screenReport') ? activeClass : inactiveClass;
       if (tabTiger) tabTiger.className = (screenId === 'screenTiger') ? activeClass : inactiveClass;
-      if (tabShark) tabShark.className = (screenId === 'screenShark') ? activeClass : inactiveClass;
+      // if (tabShark) tabShark.className = (screenId === 'screenShark') ? activeClass : inactiveClass; // archived
       if (tabMemory) tabMemory.className = (screenId === 'screenMemory') ? activeClass : inactiveClass;
       if (tabSandbox) tabSandbox.className = (screenId === 'screenSandbox') ? activeClass : inactiveClass;
       if (tabTrivia) tabTrivia.className = (screenId === 'screenTrivia') ? activeClass : inactiveClass;
@@ -1953,9 +1963,9 @@
       if (tab !== 'tiger') {
         clearTigerGameTimers();
       }
-      if (tab !== 'shark') {
-        clearSharkGameTimers();
-      }
+      // if (tab !== 'shark') {
+      //   clearSharkGameTimers();
+      // }
       if (tab === 'test') {
         const gameEl = document.getElementById('screenGame');
         const reportEl = document.getElementById('screenReport');
@@ -1969,9 +1979,9 @@
       } else if (tab === 'tiger') {
         initTigerGame();
         showScreen('screenTiger');
-      } else if (tab === 'shark') {
-        showScreen('screenShark');
-        startSharkGame();
+      // } else if (tab === 'shark') {
+      //   showScreen('screenShark');
+      //   startSharkGame();
       } else if (tab === 'memory') {
         initMemoryMode();
         showScreen('screenMemory');
@@ -5013,6 +5023,9 @@
       }
     }
 
+    /* =========================================================================
+       [ARCHIVED / DISABLED: SHARK VISION MINI-GAME LOGIC]
+       =========================================================================
     // ==========================================
     // SCREEN 8: Shark Vision (상어의 눈) Endless Survival Mode Logic
     // ==========================================
@@ -5870,6 +5883,12 @@
         sharkState.toastTimeout = null;
       }
     }
+
+
+    */
+
+    // Safe stub so any legacy calls do not throw
+    function clearSharkGameTimers() {}
 
     function clearTigerGameTimers() {
       if (tigerState.timerInterval) {
